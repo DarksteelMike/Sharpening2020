@@ -21,9 +21,15 @@ namespace Sharpening2020.Cards.Activatables.Presets
             MyCost.ActionParts.Add(new TapSelf(Host));
         }
 
-        public override bool CanActivate(Player act, Game g)
+        public override Boolean CanActivate(Player p, Game g)
         {
-            return act.Equals(Host.Value(g).Controller.Value(g)) && Host.Value(g).MyZone == ZoneType.Battlefield;
+            Boolean res = true;
+
+            res &= Host.Value(g).MyZone == ZoneType.Battlefield; //Only activate on the battlefield
+            res &= p.Equals(Host.Value(g).Controller); //Only it's controller can activate it
+            res &= !IsBeingActivated; //This isn't already in the process of being activated.
+
+            return res;
         }
 
         public override void Resolve(Game g)

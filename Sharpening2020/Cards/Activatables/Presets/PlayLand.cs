@@ -13,19 +13,16 @@ namespace Sharpening2020.Cards.Activatables.Presets
             Host = c;
         }
 
-        public override bool CanActivate(Player p, Game g)
+        public override Boolean CanActivate(Player p, Game g)
         {
-            if (Host.Value(g).MyZone != ZoneType.Hand)
-            {
-                return false;
-            }
+            Boolean res = true;
 
-            if (Activator.LandsPlayedThisTurn > 0)
-            {
-                return false;
-            }
+            res &= Host.Value(g).MyZone == ZoneType.Hand; //Only play from hand.
+            res &= p.Equals(Host.Value(g).Owner); //Only it's owner can play it.
+            res &= p.LandsPlayedThisTurn < 1; //Only play if no other lands have been played this turn.
+            res &= !IsBeingActivated; //This isn't already in the process of being cast.
 
-            return true;
+            return res;
         }
 
         public override void Resolve(Game g)

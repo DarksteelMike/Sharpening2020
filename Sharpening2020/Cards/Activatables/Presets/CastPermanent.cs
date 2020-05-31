@@ -16,7 +16,13 @@ namespace Sharpening2020.Cards.Activatables.Presets
 
         public override Boolean CanActivate(Player p, Game g)
         {
-            return false;
+            Boolean res = true;
+
+            res &= Host.Value(g).MyZone == ZoneType.Hand; //Only cast from hand
+            res &= p.Equals(Host.Value(g).Owner); //Only it's owner can cast it
+            res &= !IsBeingActivated; //This isn't already in the process of being cast.
+
+            return res;
         }
 
         public override void Resolve(Game g)

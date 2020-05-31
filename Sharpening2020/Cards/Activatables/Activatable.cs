@@ -11,6 +11,8 @@ namespace Sharpening2020.Cards.Activatables
 
         public Player Activator;
 
+        public Boolean IsBeingActivated = false;
+
         public Cost MyCost = new Cost();
 
         public abstract Boolean CanActivate(Player act, Game g);

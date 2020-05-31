@@ -82,7 +82,7 @@
     <Compile Include="Input\HavePriority.cs" />
     <Compile Include="Input\InputBase.cs" />
     <Compile Include="Input\InputHandler.cs" />
-    <Compile Include="Input\InputPayManaCost.cs" />
+    <Compile Include="Input\PayManaCost.cs" />
     <Compile Include="Input\WaitingForOpponent.cs" />
     <Compile Include="LazyGameObject.cs" />
     <Compile Include="Mana\ManaPoint.cs" />
