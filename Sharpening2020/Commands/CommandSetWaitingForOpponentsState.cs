@@ -5,7 +5,7 @@ using Sharpening2020.Input;
 
 namespace Sharpening2020.Commands
 {
-    class CommandSetWaitingForOpponentsState : ICommand
+    class CommandSetWaitingForOpponentsState : CommandBase
     {
         public readonly Int32 PlayerID;
 
@@ -14,7 +14,7 @@ namespace Sharpening2020.Commands
             PlayerID = pid;
         }
 
-        public void Do(Game g)
+        public override void Do(Game g)
         {
             prevState = g.InputHandlers[PlayerID].CurrentInputState;
 
@@ -23,9 +23,14 @@ namespace Sharpening2020.Commands
 
         private InputBase prevState;
 
-        public void Undo(Game g)
+        public override void Undo(Game g)
         {
             g.InputHandlers[PlayerID].CurrentInputState = prevState;
+        }
+
+        public override object Clone()
+        {
+            return new CommandSetWaitingForOpponentsState(PlayerID);
         }
     }
 }

@@ -5,7 +5,7 @@ using Sharpening2020.Players;
 
 namespace Sharpening2020.Commands
 {
-    public class CommandMoveCard : ICommand
+    public class CommandMoveCard : CommandBase
     {
         public readonly ZoneType Origin;
         public readonly ZoneType Destination;
@@ -18,18 +18,23 @@ namespace Sharpening2020.Commands
             Destination = dest;
         }
 
-        public void Do(Game g)
+        public override void Do(Game g)
         {
             Card c = (Card)g.GameObjects[CardID];
 
             c.MyZone = Destination;
         }
 
-        public void Undo(Game g)
+        public override void Undo(Game g)
         {
             Card c = (Card)g.GameObjects[CardID];
 
             c.MyZone = Origin;
+        }
+
+        public override object Clone()
+        {
+            return new CommandMoveCard(CardID, Origin, Destination);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
         {
             ZoneType curZ = Host.Value(g).MyZone;
 
-            ICommand com = new CommandMoveCard(Host.Value(g).ID, curZ, ZoneType.Battlefield);
+            CommandBase com = new CommandMoveCard(Host.Value(g).ID, curZ, ZoneType.Battlefield);
 
             g.MyExecutor.Do(com);
         }

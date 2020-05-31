@@ -7,11 +7,11 @@ namespace Sharpening2020
 {
     public class Executor
     {
-        public Stack<ICommand> UndoStack = new Stack<ICommand>();
+        public Stack<CommandBase> UndoStack = new Stack<CommandBase>();
 
         public Game MyGame;
 
-        public void Do(ICommand com)
+        public void Do(CommandBase com)
         {
             UndoStack.Push(com);
             com.Do(MyGame);            
@@ -19,7 +19,7 @@ namespace Sharpening2020
 
         public void Undo()
         {
-            ICommand com = UndoStack.Pop();
+            CommandBase com = UndoStack.Pop();
             com.Undo(MyGame);
         }
     }

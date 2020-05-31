@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 
 namespace Sharpening2020.Commands
 {
-    public class CommandAdvancePhase : ICommand
+    public class CommandAdvancePhase : CommandBase
     {
-        public void Do(Game g)
+        public override void Do(Game g)
         {
             g.MyPhaseHandler.CurrentPhaseIndex++;
         }
 
-        public void Undo(Game g)
+        public override void Undo(Game g)
         {
             g.MyPhaseHandler.CurrentPhaseIndex--;
+        }
+
+        public override object Clone()
+        {
+            return new CommandAdvancePhase();
         }
     }
 }

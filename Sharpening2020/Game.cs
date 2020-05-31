@@ -225,7 +225,6 @@ namespace Sharpening2020
                 ih.MyGame = this;
                 ih.CurrentInputState.MyGame = this;
             }
-                
         }
 
         public void InitGame(params KeyValuePair<InputBridge,List<String>>[] test)

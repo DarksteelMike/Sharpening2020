@@ -4,7 +4,7 @@ using Sharpening2020.Cards;
 
 namespace Sharpening2020.Commands
 {
-    class CommandRemoveGameObjectFromGame : ICommand
+    class CommandRemoveGameObjectFromGame : CommandBase
     {
         public readonly Int32 goID;
 
@@ -13,17 +13,22 @@ namespace Sharpening2020.Commands
             goID = id;
         }
 
-        public void Do(Game g)
+        public override void Do(Game g)
         {
-            token = g.GetGameObjectByID(goID);
-            g.GameObjects.Remove(token);
+            removedObject = g.GetGameObjectByID(goID);
+            g.GameObjects.Remove(removedObject);
         }
 
-        private GameObject token;
+        private GameObject removedObject;
 
-        public void Undo(Game g)
+        public override void Undo(Game g)
         {
-            g.GameObjects.Add(token);
+            g.GameObjects.Add(removedObject);
+        }
+
+        public override object Clone()
+        {
+            return new CommandRemoveGameObjectFromGame(goID);
         }
     }
 }

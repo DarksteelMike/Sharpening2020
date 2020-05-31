@@ -9,7 +9,7 @@ namespace Sharpening2020.Input
 {
     class HavePriority : InputBase
     {
-        Dictionary<Int32, ICommand> ActionCommandPairs = new Dictionary<Int32, ICommand>();
+        Dictionary<Int32, CommandBase> ActionCommandPairs = new Dictionary<Int32, CommandBase>();
         public override List<GameAction> GetActions()
         {
             List<GameAction> ret = new List<GameAction>();
@@ -21,6 +21,9 @@ namespace Sharpening2020.Input
             {
                 foreach(Activatable act in c.CurrentCharacteristics.Activatables)
                 {
+                    if (!act.CanActivate(MyPlayer, MyGame))
+                        continue;
+
                     GameAction a = new GameAction(i++, c.ID, act.ToString(MyGame));
 
                     //Instead of null, I should add an ICommand that starts off the process of activating the activatable.
@@ -40,7 +43,14 @@ namespace Sharpening2020.Input
 
         public override object Clone()
         {
-            return new HavePriority();
+            HavePriority ret = new HavePriority();
+
+            foreach(Int32 ga in ActionCommandPairs.Keys)
+            {
+                ret.ActionCommandPairs.Add(ga, (CommandBase)ActionCommandPairs[ga].Clone());
+            }
+
+            return ret;
         }
     }
 }

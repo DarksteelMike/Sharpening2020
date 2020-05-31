@@ -28,7 +28,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
 
         public override void Resolve(Game g)
         {
-            ICommand com = new CommandAddManaToPool(Activator.ID, Color);
+            CommandBase com = new CommandAddManaToPool(Activator.ID, Color);
         }
 
         public override object Clone()

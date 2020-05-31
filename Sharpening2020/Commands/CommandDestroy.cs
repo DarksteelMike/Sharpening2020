@@ -4,7 +4,7 @@ using Sharpening2020.Cards;
 
 namespace Sharpening2020.Commands
 {
-    class CommandDestroy : ICommand
+    class CommandDestroy : CommandBase
     {
         public readonly Int32 CardID;
 
@@ -13,7 +13,7 @@ namespace Sharpening2020.Commands
             CardID = cid;
         }
 
-        public void Do(Game g)
+        public override void Do(Game g)
         {
             Card c = (Card)g.GameObjects[CardID];
 
@@ -24,11 +24,16 @@ namespace Sharpening2020.Commands
 
         private ZoneType zt;
 
-        public void Undo(Game g)
+        public override void Undo(Game g)
         {
             Card c = (Card)g.GameObjects[CardID];
 
             c.MyZone = zt;
+        }
+
+        public override object Clone()
+        {
+            return new CommandDestroy(CardID);
         }
     }
 }

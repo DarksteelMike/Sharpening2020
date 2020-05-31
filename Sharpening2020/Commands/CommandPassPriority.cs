@@ -6,17 +6,21 @@ using System.Threading.Tasks;
 
 namespace Sharpening2020.Commands
 {
-    public class CommandPassPriority : ICommand
+    public class CommandPassPriority : CommandBase
     {
-
-        public void Do(Game g)
+        public override void Do(Game g)
         {
             g.PlayerWithPriorityIndex++;
         }
 
-        public void Undo(Game g)
+        public override void Undo(Game g)
         {
             g.PlayerWithPriorityIndex--;
+        }
+
+        public override object Clone()
+        {
+            return new CommandPassPriority();
         }
     }
 }

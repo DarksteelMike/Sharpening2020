@@ -5,7 +5,7 @@ using Sharpening2020.Players;
 
 namespace Sharpening2020.Commands
 {
-    class CommandAddManaToPool : ICommand
+    class CommandAddManaToPool : CommandBase
     {
         public readonly Int32 PlayerID;
         public readonly ManaColor Color;
@@ -16,7 +16,7 @@ namespace Sharpening2020.Commands
             Color = mc;
         }
 
-        public void Do(Game g)
+        public override void Do(Game g)
         {
             Player p = (Player)g.GameObjects[PlayerID];
             point = new ManaPoint();
@@ -29,12 +29,17 @@ namespace Sharpening2020.Commands
 
         private ManaPoint point;
 
-        public void Undo(Game g)
+        public override void Undo(Game g)
         {
             Player p = (Player)g.GameObjects[PlayerID];
             p.ManaPool.Remove(point);
             g.GameObjects.Remove(point);
             g.NextGameObjectID--;
+        }
+
+        public override object Clone()
+        {
+            return new CommandAddManaToPool(PlayerID, Color);
         }
     }
 }
