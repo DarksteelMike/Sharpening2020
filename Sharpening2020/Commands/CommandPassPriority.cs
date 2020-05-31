@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sharpening2020.Commands
+{
+    public class CommandPassPriority : ICommand
+    {
+
+        public void Do(Game g)
+        {
+            g.PlayerWithPriorityIndex++;
+        }
+
+        public void Undo(Game g)
+        {
+            g.PlayerWithPriorityIndex--;
+        }
+    }
+}

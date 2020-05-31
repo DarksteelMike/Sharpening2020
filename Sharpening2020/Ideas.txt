@@ -1,0 +1,3 @@
+﻿MCTS ai pool of possible cards for unknown -> Narrow down to current game format, 
+	narrow down further to cards the player can pay for? Deploy archetype/deck recognition to narrow it down further.
+Headless Mode AI v AI.
