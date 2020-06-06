@@ -28,6 +28,11 @@ namespace Sharpening2020.Phases
             }
         }
 
+        public PhaseBase CurrentPhase
+        {
+            get { return AllPhases[currentPhaseIndex]; }
+        }
+
         public PhaseHandler()
         {
             AllPhases.Add(new PhaseUntap());

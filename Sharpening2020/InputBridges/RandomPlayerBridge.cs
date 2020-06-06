@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 
 using Sharpening2020.Input;
+using Sharpening2020.Views;
 
 namespace Sharpening2020.InputBridges
 {
-    class RandomPlayerBridge : InputBridge
+    public class RandomPlayerBridge : InputBridge
     {
         Random rand = new Random();
+
         public override GameAction SelectActionFromList(List<GameAction> actions)
         {
             return actions[rand.Next(0, actions.Count)];
@@ -18,9 +20,9 @@ namespace Sharpening2020.InputBridges
             //Don't care
         }
 
-        public override void UpdateView()
+        public override void UpdateView(ViewObject view)
         {
-            //Don't care
+
         }
     }
 }

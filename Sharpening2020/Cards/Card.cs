@@ -5,6 +5,7 @@ using System.Linq;
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Cards.Static;
 using Sharpening2020.Players;
+using Sharpening2020.Views;
 
 namespace Sharpening2020.Cards
 {
@@ -56,6 +57,26 @@ namespace Sharpening2020.Cards
         public IEnumerable<Counter> GetAllCounters()
         {
             return MyCounters;
+        }
+
+        public override ViewObject GetView()
+        {
+            String txt = "";
+
+            foreach(Activatable act in CurrentCharacteristics.Activatables)
+            {
+                txt += act.ToString() + Environment.NewLine;
+            }
+
+            return new CardView(ID, 
+                CurrentCharacteristics.Name, 
+                CurrentCharacteristics.SuperTypes, 
+                CurrentCharacteristics.CardTypes, 
+                CurrentCharacteristics.SubTypes, 
+                txt, 
+                CurrentCharacteristics.Power, 
+                CurrentCharacteristics.Toughness, 
+                AssignedDamage);
         }
 
         public static void AddUniversalCharacteristics(Card c)

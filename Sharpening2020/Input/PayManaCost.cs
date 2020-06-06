@@ -18,7 +18,9 @@ namespace Sharpening2020.Input
         public override List<GameAction> GetActions()
         {
             List<GameAction> res = new List<GameAction>();
-            //Add CANCEL action.
+
+            GameAction cancel = new GameAction(-2, -2, "Cancel");
+            ActionCommandPairs.Add(-2, new CommandRemoveTopInputState(MyPlayer.ID));
 
             int i = 0;
             foreach(Card c in MyGame.GetCards())
@@ -46,6 +48,8 @@ namespace Sharpening2020.Input
                     if(mp.MyColor == mcp.Color)
                     {
                         GameAction ga = new GameAction(i++, mp.ID, "Pay " + mp.MyColor + "mana for " + mcp.ToString());
+
+                        ActionCommandPairs.Add(ga.ID, null);
                     }
                 }
             }
@@ -55,7 +59,7 @@ namespace Sharpening2020.Input
 
         public override void SelectAction(GameAction a)
         {
-            throw new NotImplementedException();
+            MyGame.MyExecutor.Do(ActionCommandPairs[a.ID]);
         }
 
         public override object Clone()

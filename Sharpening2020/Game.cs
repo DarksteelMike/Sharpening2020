@@ -10,6 +10,7 @@ using Sharpening2020.Input;
 using Sharpening2020.InputBridges;
 using Sharpening2020.Phases;
 using Sharpening2020.Players;
+using Sharpening2020.Views;
 
 namespace Sharpening2020
 {
@@ -129,6 +130,39 @@ namespace Sharpening2020
             return GameObjects.Where(x => { if (x is Card) { return ((Card)x).MyZone == zt && ((Card)x).Controller.Value(this).Equals(controller); } return false; }).Cast<Card>();
         }
 
+        public IEnumerable<Activatable> GetActivatables()
+        {
+            IEnumerable<Activatable> res = new List<Activatable>();
+            foreach(Card c in GetCards())
+            {
+                res = res.Concat(c.CurrentCharacteristics.Activatables);
+            }
+
+            return res;
+        }
+
+        public IEnumerable<Ability> GetAbilities()
+        {
+            IEnumerable<Ability> res = new List<Ability>();
+            foreach(Card c in GetCards())
+            {
+                res.Concat(c.CurrentCharacteristics.Activatables.Where(x => { return x is Ability; }));
+            }
+
+            return res;
+        }
+
+        public IEnumerable<Spell> GetSpells()
+        {
+            IEnumerable<Spell> res = new List<Spell>();
+            foreach (Card c in GetCards())
+            {
+                res.Concat(c.CurrentCharacteristics.Activatables.Where(x => { return x is Spell; }));
+            }
+
+            return res;
+        }
+
         public GameObject GetGameObjectByID(Int32 GOID)
         {
             return GameObjects.Where(x => { return x.ID == GOID; }).First();
@@ -229,23 +263,49 @@ namespace Sharpening2020
 
         public void InitGame(params KeyValuePair<InputBridge,List<String>>[] test)
         {
+            Random rand = new Random();
             foreach(KeyValuePair<InputBridge,List<String>> kvp in test)
             {
+                List<String> unshuf = kvp.Value;
+                List<String> shuf = new List<string>();
+
+                while(unshuf.Count > 0)
+                {
+                    Int32 index = rand.Next(unshuf.Count - 1);
+                    shuf.Add(unshuf[index]);
+                    unshuf.RemoveAt(index);
+                }
+
                 Player newPlayer = new Player();
 
                 RegisterGameObject(newPlayer);
 
                 InputHandlers.Add(newPlayer.ID, new InputHandler(this, new LazyGameObject<Player>(newPlayer), kvp.Key));
 
-                foreach(String s in kvp.Value)
+                foreach(String s in shuf)
                 {
                     Card c = CardCompiler.Compile(s);
+                    c.SuspendViewUpdates = true;
                     c.Owner = new LazyGameObject<Player>(newPlayer);
                     c.MyZone = ZoneType.Library;
                     c.CurrentCharacteristicName = CharacteristicName.FaceDown;
+                    c.SuspendViewUpdates = false;
 
                     RegisterGameObject(c);
                 }
+            }
+
+            foreach(GameObject go in GameObjects)
+            {
+                UpdateView(go.GetView());
+            }
+        }
+
+        public void UpdateView(ViewObject view)
+        {
+            foreach (InputHandler ih in InputHandlers.Values)
+            {
+                ih.Bridge.UpdateView(view);
             }
         }
     }

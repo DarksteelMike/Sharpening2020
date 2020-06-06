@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 using Sharpening2020.InputBridges;
 using Sharpening2020.Players;
@@ -15,17 +16,21 @@ namespace Sharpening2020.Input
 
         public Game MyGame;
         
-        public List<InputBase> InputStack = new List<InputBase>();
+        public List<InputBase> InputList = new List<InputBase>();
 
         private InputBase bottomState = new WaitingForOpponent();
 
         public InputBase CurrentInputState
         {
             get 
-                { return InputStack.Count == 0 ? bottomState : InputStack.Last(); }
+                { return InputList.Count == 0 ? bottomState : InputList.Last(); }
             set
             {
-                InputStack.Add(value);
+                InputList.Add(value);
+
+                //CurrentInputState.Enter();
+
+                Bridge.SelectActionFromList(CurrentInputState.GetActions());
             }
         }
 

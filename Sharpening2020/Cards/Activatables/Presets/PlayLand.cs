@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Sharpening2020.Commands;
+using Sharpening2020.Phases;
 using Sharpening2020.Players;
 
 namespace Sharpening2020.Cards.Activatables.Presets
@@ -20,6 +21,8 @@ namespace Sharpening2020.Cards.Activatables.Presets
             res &= Host.Value(g).MyZone == ZoneType.Hand; //Only play from hand.
             res &= p.Equals(Host.Value(g).Owner); //Only it's owner can play it.
             res &= p.LandsPlayedThisTurn < 1; //Only play if no other lands have been played this turn.
+            res &= g.SpellStack.Count == 0; //Only play if stack is empty.
+            res &= (g.MyPhaseHandler.CurrentPhase is PhasePreCombatMain || g.MyPhaseHandler.CurrentPhase is PhasePostCombatMain); //Only play on main phases.
             res &= !IsBeingActivated; //This isn't already in the process of being cast.
 
             return res;

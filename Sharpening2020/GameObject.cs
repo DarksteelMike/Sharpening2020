@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Sharpening2020.Views;
+
 namespace Sharpening2020
 {
     public abstract class GameObject : ICloneable,IEquatable<GameObject>
@@ -12,6 +14,8 @@ namespace Sharpening2020
 
         public Game MyGame;
 
+        public Boolean SuspendViewUpdates = false;
+
         public Boolean Equals(GameObject other)
         {
             if (other == null)
@@ -19,6 +23,8 @@ namespace Sharpening2020
 
             return this.ID == other.ID;
         }
+
+        public abstract ViewObject GetView();
 
         public abstract object Clone();
     }
