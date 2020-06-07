@@ -61,22 +61,7 @@ namespace Sharpening2020.Cards
 
         public override ViewObject GetView()
         {
-            String txt = "";
-
-            foreach(Activatable act in CurrentCharacteristics.Activatables)
-            {
-                txt += act.ToString() + Environment.NewLine;
-            }
-
-            return new CardView(ID, 
-                CurrentCharacteristics.Name, 
-                CurrentCharacteristics.SuperTypes, 
-                CurrentCharacteristics.CardTypes, 
-                CurrentCharacteristics.SubTypes, 
-                txt, 
-                CurrentCharacteristics.Power, 
-                CurrentCharacteristics.Toughness, 
-                AssignedDamage);
+            return new CardView(this);
         }
 
         public static void AddUniversalCharacteristics(Card c)

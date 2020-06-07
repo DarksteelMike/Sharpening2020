@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sharpening2020.Views;
 
 namespace Sharpening2020.Mana
 {
@@ -18,6 +19,11 @@ namespace Sharpening2020.Mana
             ret.MyColor = this.MyColor;
 
             return ret;
+        }
+
+        public override ViewObject GetView()
+        {
+            return new ManaPointView(ID,MyColor);
         }
     }
 }

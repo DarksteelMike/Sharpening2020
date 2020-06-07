@@ -15,6 +15,11 @@ namespace Sharpening2020.Input
 
         public Cost MyCost;
 
+        public override void Reset()
+        {
+            MyCost.ClearPaid();
+        }
+
         public override List<GameAction> GetActions()
         {
             List<GameAction> res = new List<GameAction>();
@@ -23,23 +28,6 @@ namespace Sharpening2020.Input
             ActionCommandPairs.Add(-2, new CommandRemoveTopInputState(MyPlayer.ID));
 
             int i = 0;
-            foreach(Card c in MyGame.GetCards())
-            {
-                foreach(Activatable act in c.CurrentCharacteristics.Activatables)
-                {
-                    if (!(act is Ability))
-                        continue;
-
-                    Ability ab = (Ability)act;
-
-                    if (!ab.IsManaAbility)
-                        continue;
-
-                    GameAction ga = new GameAction(i++, c.ID, ab.ToString(MyGame));
-
-                    ActionCommandPairs.Add(ga.ID, null);
-                }
-            }
 
             foreach(ManaPoint mp in MyPlayer.ManaPool)
             {
@@ -49,7 +37,7 @@ namespace Sharpening2020.Input
                     {
                         GameAction ga = new GameAction(i++, mp.ID, "Pay " + mp.MyColor + "mana for " + mcp.ToString());
 
-                        ActionCommandPairs.Add(ga.ID, null);
+                        ActionCommandPairs.Add(ga.ID, new CommandPayMana(MyPlayer.ID,mp.ID,MyCost.ManaParts.IndexOf(mcp)));
                     }
                 }
             }
@@ -59,7 +47,14 @@ namespace Sharpening2020.Input
 
         public override void SelectAction(GameAction a)
         {
+            if(a.ID == -2)
+            {
+                MyCost.ClearPaid();
+            }
+
             MyGame.MyExecutor.Do(ActionCommandPairs[a.ID]);
+
+            //TODO: See if cost is fully paid
         }
 
         public override object Clone()

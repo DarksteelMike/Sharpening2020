@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Sharpening2020.Cards;
+using Sharpening2020.Cards.Activatables;
 
 namespace Sharpening2020.Views
 {
@@ -26,17 +26,37 @@ namespace Sharpening2020.Views
 
         public readonly Int32 AssignedDamage;
 
-        public CardView(Int32 i, String n, List<String> st, List<String> ct, List<String> subt, String t, Int32 p, Int32 tough, Int32 ass)
+        public readonly IReadOnlyList<CounterView> Counters;
+
+        public CardView(Card crd)
         {
-            ID = i;
-            Name = n;
-            SuperTypes = st.AsReadOnly();
-            CardTypes = ct.AsReadOnly();
-            SubTypes = subt.AsReadOnly();
-            Text = t;
-            Power = p;
-            Toughness = tough;
-            AssignedDamage = ass;
+            ID = crd.ID;
+            Name = crd.CurrentCharacteristics.Name;
+            SuperTypes = crd.CurrentCharacteristics.SuperTypes.AsReadOnly();
+            CardTypes = crd.CurrentCharacteristics.CardTypes.AsReadOnly();
+            SubTypes = crd.CurrentCharacteristics.SubTypes.AsReadOnly();
+
+            String txt = "";
+
+            foreach (Activatable act in crd.CurrentCharacteristics.Activatables)
+            {
+                txt += act.ToString() + Environment.NewLine;
+            }
+
+            Text = txt;
+
+            Power = crd.CurrentCharacteristics.Power;
+            Toughness = crd.CurrentCharacteristics.Toughness;
+            AssignedDamage = crd.AssignedDamage;
+
+            List<CounterView> cts = new List<CounterView>();
+
+            foreach(Counter c in crd.MyCounters)
+            {
+                cts.Add((CounterView)c.GetView());
+            }
+
+            Counters = cts.AsReadOnly();
         }
     }
 }

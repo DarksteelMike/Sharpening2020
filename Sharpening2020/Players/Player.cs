@@ -5,6 +5,7 @@ using System.Linq;
 using Sharpening2020.Cards;
 using Sharpening2020.Mana;
 using Sharpening2020.Phases;
+using Sharpening2020.Views;
 
 namespace Sharpening2020.Players
 {
@@ -66,6 +67,9 @@ namespace Sharpening2020.Players
             return ret;
         }
 
-        
+        public override ViewObject GetView()
+        {
+            return new PlayerView(ID, Life, MyCounters, ManaPool);
+        }
     }
 }

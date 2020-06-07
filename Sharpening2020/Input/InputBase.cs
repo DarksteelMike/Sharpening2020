@@ -20,5 +20,7 @@ namespace Sharpening2020.Input
         }
 
         public abstract object Clone();
+
+        public virtual void Reset() { }
     }
 }

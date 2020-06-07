@@ -16,7 +16,7 @@ namespace DbgUI
 {
     public partial class Form1 : Form
     {
-        Game Model = new Game();
+        Game Model = Game.Construct();
 
         public Form1()
         {
