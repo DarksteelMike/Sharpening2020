@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Sharpening2020.Cards;
 using Sharpening2020.Input;
 using Sharpening2020.Views;
 
@@ -12,6 +13,12 @@ namespace Sharpening2020.InputBridges
 
         public abstract void Prompt(String message);
 
-        public abstract void UpdateView(ViewObject view);
+        public abstract void UpdateCardView(CardView view);
+
+        public abstract void UpdatePlayerView(PlayerView view);
+
+        public abstract void UpdateZoneView(ZoneType zt, Int32 PlayerID, List<CardView> views);
+
+        public abstract void UpdateStackView(List<StackInstanceView> views);
     }
 }

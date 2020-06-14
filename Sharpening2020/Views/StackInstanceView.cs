@@ -4,7 +4,7 @@ using Sharpening2020.Cards.Activatables;
 
 namespace Sharpening2020.Views
 {
-    class StackInstanceView : ViewObject
+    public class StackInstanceView : ViewObject
     {
         public readonly String Text;
 

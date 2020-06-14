@@ -6,9 +6,9 @@ using Sharpening2020.Mana;
 
 namespace Sharpening2020.Views
 {
-    class PlayerView : ViewObject
+    public class PlayerView : ViewObject
     {
-        public Int32 ID;
+        public readonly Int32 ID;
         public readonly Int32 Life;
         public readonly IReadOnlyList<CounterView> Counters;
         public readonly IReadOnlyList<ManaPointView> ManaPool;

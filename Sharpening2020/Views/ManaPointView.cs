@@ -4,7 +4,7 @@ using Sharpening2020.Mana;
 
 namespace Sharpening2020.Views
 {
-    class ManaPointView : ViewObject
+    public class ManaPointView : ViewObject
     {
         public readonly Int32 ID;
         public readonly ManaColor Color;

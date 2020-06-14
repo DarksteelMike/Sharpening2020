@@ -319,7 +319,19 @@ namespace Sharpening2020
         {
             foreach (InputHandler ih in InputHandlers.Values)
             {
-                ih.Bridge.UpdateView(view);
+                if (view is CardView)
+                    ih.Bridge.UpdateCardView((CardView)view);
+                else if (view is PlayerView)
+                    ih.Bridge.UpdatePlayerView((PlayerView)view);
+            }
+        }
+
+        public void UpdateZoneView(ZoneType zt, Int32 PlayerID)
+        {
+            List<CardView> list = GetCards(zt, (Player)GetGameObjectByID(PlayerID)).Select<Card,CardView>(x => { return (CardView)x.GetView(); }).ToList();
+            foreach(InputHandler ih in InputHandlers.Values)
+            {
+                ih.Bridge.UpdateZoneView(zt, PlayerID, list);
             }
         }
 
