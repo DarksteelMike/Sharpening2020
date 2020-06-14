@@ -20,7 +20,7 @@ namespace Sharpening2020.Commands
             g.InputHandlers[PlayerID].InputList.Remove(prevState);
         }
 
-        private InputBase prevState;
+        private InputStateBase prevState;
 
         public override void Undo(Game g)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sharpening2020.Input
 {
-    class WaitingForOpponent : InputBase
+    class WaitingForOpponent : InputStateBase
     {
         private List<GameAction> empty = new List<GameAction>();
         public override List<GameAction> GetActions()

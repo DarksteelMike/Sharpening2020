@@ -5,7 +5,7 @@ using Sharpening2020.Players;
 
 namespace Sharpening2020.Input
 {
-    public abstract class InputBase : ICloneable
+    public abstract class InputStateBase : ICloneable
     {
         public Player MyPlayer;
         public Game MyGame;
@@ -21,6 +21,8 @@ namespace Sharpening2020.Input
 
         public abstract object Clone();
 
-        public virtual void Reset() { }
+        public virtual void Enter() { }
+
+        public virtual void Leave() { }
     }
 }

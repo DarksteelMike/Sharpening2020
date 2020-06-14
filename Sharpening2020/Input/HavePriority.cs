@@ -7,7 +7,7 @@ using Sharpening2020.Commands;
 
 namespace Sharpening2020.Input
 {
-    class HavePriority : InputBase
+    class HavePriority : InputStateBase
     {
         Dictionary<Int32, CommandBase> ActionCommandPairs = new Dictionary<Int32, CommandBase>();
         public override List<GameAction> GetActions()

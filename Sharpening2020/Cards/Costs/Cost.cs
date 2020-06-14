@@ -16,9 +16,19 @@ namespace Sharpening2020.Cards.Costs
 
         public List<ManaCostPart> PaidMana = new List<ManaCostPart>();
 
+        public Boolean AreActionsPaid()
+        {
+            return ActionParts.Count == PaidActions.Count;
+        }
+
+        public Boolean IsManaPaid()
+        {
+            return ManaParts.Count == PaidMana.Count;
+        }
+
         public Boolean IsPaid()
         {
-            return ActionParts.Count == PaidActions.Count && ManaParts.Count == PaidMana.Count;
+            return AreActionsPaid() && IsManaPaid();
         }
 
         public void SetPaid(ActionCostPart acb)

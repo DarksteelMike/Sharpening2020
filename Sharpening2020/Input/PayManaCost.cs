@@ -9,15 +9,20 @@ using Sharpening2020.Mana;
 
 namespace Sharpening2020.Input
 {
-    class PayManaCost : InputBase
+    class PayManaCost : InputStateBase
     {
         public readonly Dictionary<Int32, CommandBase> ActionCommandPairs = new Dictionary<Int32, CommandBase>();
        
         public Activatable MyActivatable;
 
-        public override void Reset()
+        public PayManaCost(Activatable act)
         {
-            MyActivatable.MyCost.ClearPaid();
+            MyActivatable = act;
+        }
+
+        public override void Leave()
+        {
+            MyActivatable.MyCost.PaidMana.Clear();
         }
 
         public override List<GameAction> GetActions()
@@ -50,12 +55,14 @@ namespace Sharpening2020.Input
             if(a.ID == -2)
             {
                 MyActivatable.MyCost.ClearPaid();
+                //TODO: Cancel out.
             }
 
             MyGame.MyExecutor.Do(ActionCommandPairs[a.ID]);
 
-            if(MyActivatable.MyCost.IsPaid())
+            if(MyActivatable.MyCost.IsManaPaid())
             {
+                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
                 MyGame.PlayActivatable(MyActivatable);
             }
 
@@ -63,7 +70,7 @@ namespace Sharpening2020.Input
 
         public override object Clone()
         {
-            return new PayManaCost();
+            return new PayManaCost(MyActivatable);
         }
     }
 }

@@ -16,11 +16,11 @@ namespace Sharpening2020.Input
 
         public Game MyGame;
         
-        public List<InputBase> InputList = new List<InputBase>();
+        public List<InputStateBase> InputList = new List<InputStateBase>();
 
-        private InputBase bottomState = new WaitingForOpponent();
+        private InputStateBase bottomState = new WaitingForOpponent();
 
-        public InputBase CurrentInputState
+        public InputStateBase CurrentInputState
         {
             get 
                 { return InputList.Count == 0 ? bottomState : InputList.Last(); }

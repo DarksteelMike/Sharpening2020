@@ -80,10 +80,24 @@ namespace Sharpening2020
             {
                 playerWithPriorityIndex = value;
                 Int32 PlayerCount = GetPlayers().Count();
-                while (playerWithPriorityIndex > PlayerCount)
+                if(playerWithPriorityIndex > PlayerCount)
                 {
-                    playerWithPriorityIndex -= PlayerCount;
-                }
+                    while (playerWithPriorityIndex > PlayerCount)
+                    {
+                        playerWithPriorityIndex -= PlayerCount;
+                    }
+
+                    if(SpellStack.Count == 0)
+                    {
+                        MyExecutor.Do(new CommandAdvancePhase());
+                    }
+                    else
+                    {
+                        SpellStack.Pop().Resolve();
+                    }
+
+                    return;
+                }                
 
                 while (playerWithPriorityIndex < 0)
                 {

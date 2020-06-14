@@ -18,7 +18,7 @@ namespace Sharpening2020.Commands
             g.InputHandlers[PlayerID].CurrentInputState = new HavePriority();
         }
 
-        private InputBase prevState;
+        private InputStateBase prevState;
 
         public override void Undo(Game g)
         {

@@ -1,45 +1,41 @@
 ﻿using System;
 
-using Sharpening2020.Input;
-using Sharpening2020.Players;
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
+using Sharpening2020.Cards.Costs.ActionCosts;
 
 namespace Sharpening2020.Commands
 {
-    class CommandSetPayManaCostState : CommandBase
+    class CommandPerformActionCost : CommandBase
     {
-        public readonly Int32 PlayerID;
         public readonly Int32 CardID;
         public readonly Int32 ActivatableIndex;
+        public readonly Int32 CostPartIndex;
 
-        public CommandSetPayManaCostState(Int32 pid, Int32 cid, Int32 index)
+        public CommandPerformActionCost(Int32 cid, Int32 aind, Int32 cpind)
         {
-            PlayerID = pid;
             CardID = cid;
-            ActivatableIndex = index;
+            ActivatableIndex = aind;
+            CostPartIndex = cpind;
         }
 
         public override void Do(Game g)
         {
             Card c = (Card)g.GetGameObjectByID(CardID);
             Activatable act = c.CurrentCharacteristics.Activatables[ActivatableIndex];
+            ActionCostPart acp = act.MyCost.ActionParts[CostPartIndex];
 
-            pmc = new PayManaCost(act);
-
-            g.InputHandlers[PlayerID].CurrentInputState = pmc;
+            acp.Pay(g);
         }
-
-        PayManaCost pmc;
 
         public override void Undo(Game g)
         {
-            g.InputHandlers[PlayerID].InputList.Remove(pmc);
+            //No need to undo anything, as the Commands issued by the CostPart's Pay method should already be undone.
         }
 
         public override object Clone()
         {
-            return new CommandSetPayManaCostState(PlayerID, CardID, ActivatableIndex);
+            throw new NotImplementedException();
         }
     }
 }

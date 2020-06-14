@@ -16,6 +16,11 @@ namespace Sharpening2020.Cards.Activatables
             MyActivatable = act;
         }
 
+        public void Resolve()
+        {
+
+        }
+
         public override object Clone()
         {
             return new StackInstance(MyActivatable);

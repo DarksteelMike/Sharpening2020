@@ -62,9 +62,11 @@
     <Compile Include="Commands\CommandAddManaToPool.cs" />
     <Compile Include="Commands\CommandAdvancePhase.cs" />
     <Compile Include="Commands\CommandDestroy.cs" />
+    <Compile Include="Commands\CommandIncrementActionPartIndex.cs" />
     <Compile Include="Commands\CommandIncrementLandsPlayed.cs" />
     <Compile Include="Commands\CommandMoveCard.cs" />
     <Compile Include="Commands\CommandPayMana.cs" />
+    <Compile Include="Commands\CommandPerformActionCost.cs" />
     <Compile Include="Commands\CommandPutOnStack.cs" />
     <Compile Include="Commands\CommandRemoveCounter.cs" />
     <Compile Include="Commands\CommandRemoveGameObjectFromGame.cs" />
@@ -85,7 +87,7 @@
     <Compile Include="InputBridges\RandomPlayerBridge.cs" />
     <Compile Include="Input\GameAction.cs" />
     <Compile Include="Input\HavePriority.cs" />
-    <Compile Include="Input\InputBase.cs" />
+    <Compile Include="Input\InputStateBase.cs" />
     <Compile Include="Input\InputHandler.cs" />
     <Compile Include="Input\PayActionCost.cs" />
     <Compile Include="Input\PayManaCost.cs" />

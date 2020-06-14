@@ -9,16 +9,27 @@ using Sharpening2020.Mana;
 
 namespace Sharpening2020.Input
 {
-    class PayActionCost : InputBase
+    class PayActionCost : InputStateBase
     {
         public readonly Dictionary<Int32, CommandBase> ActionCommandPairs = new Dictionary<Int32, CommandBase>();
        
         public Activatable MyActivatable;
+        private Int32 activatableIndex;
 
-        public override void Reset()
+        public Int32 ActionPartIndex = 0;
+
+        public PayActionCost(Activatable act)
         {
-            MyActivatable.MyCost.ClearPaid();
+            MyActivatable = act;
+            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(MyActivatable);
         }
+
+        public override void Leave()
+        {
+            MyActivatable.MyCost.PaidActions.Clear();
+        }
+
+        
 
         public override List<GameAction> GetActions()
         {
@@ -27,20 +38,9 @@ namespace Sharpening2020.Input
             GameAction cancel = new GameAction(-2, -2, "Cancel");
             ActionCommandPairs.Add(-2, new CommandRemoveTopInputState(MyPlayer.ID));
 
-            int i = 0;
-
-            foreach(ManaPoint mp in MyPlayer.ManaPool)
-            {
-                foreach(ManaCostPart mcp in MyActivatable.MyCost.ManaParts)
-                {
-                    if(mp.MyColor == mcp.Color)
-                    {
-                        GameAction ga = new GameAction(i++, mp.ID, "Pay " + mp.MyColor + "mana for " + mcp.ToString());
-
-                        ActionCommandPairs.Add(ga.ID, new CommandPayMana(MyPlayer.ID,mp.ID, MyActivatable.MyCost.ManaParts.IndexOf(mcp)));
-                    }
-                }
-            }
+            GameAction ok = new GameAction(-1, -1, "OK");
+            
+            ActionCommandPairs.Add(-1, new CommandPerformActionCost(MyActivatable.Host.ID, activatableIndex, ActionPartIndex));
 
             return res;
         }
@@ -50,20 +50,25 @@ namespace Sharpening2020.Input
             if(a.ID == -2)
             {
                 MyActivatable.MyCost.ClearPaid();
+                //TODO: Cancel out.
             }
 
             MyGame.MyExecutor.Do(ActionCommandPairs[a.ID]);
 
-            if(MyActivatable.MyCost.IsPaid())
+            if(MyActivatable.MyCost.AreActionsPaid())
             {
-                MyGame.PlayActivatable(MyActivatable);
+                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
+                MyGame.MyExecutor.Do(new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex));
             }
-
+            else
+            {
+                MyGame.MyExecutor.Do(new CommandIncrementActionPartIndex(MyPlayer.ID));
+            }
         }
 
         public override object Clone()
         {
-            return new PayManaCost();
+            return new PayActionCost(MyActivatable);
         }
     }
 }
