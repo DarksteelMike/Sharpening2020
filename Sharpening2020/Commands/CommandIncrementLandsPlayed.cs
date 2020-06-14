@@ -14,14 +14,14 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            Player p = (Player)g.GameObjects[PlayerID];
+            Player p = (Player)g.GetGameObjectByID(PlayerID);
 
             p.LandsPlayedThisTurn++;
         }
 
         public override void Undo(Game g)
         {
-            Player p = (Player)g.GameObjects[PlayerID];
+            Player p = (Player)g.GetGameObjectByID(PlayerID);
 
             p.LandsPlayedThisTurn--;
         }

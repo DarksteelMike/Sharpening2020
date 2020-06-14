@@ -26,8 +26,8 @@ namespace Sharpening2020.Commands
             PayManaCost pmc = (PayManaCost)IH.CurrentInputState;
             mp = (ManaPoint)g.GetGameObjectByID(ManaPointID);
 
-            pmc.MyCost.ManaParts[CostIndex].Pay(mp, g);
-            pmc.MyCost.PaidMana.Add(pmc.MyCost.ManaParts[CostIndex]);
+            pmc.MyActivatable.MyCost.ManaParts[CostIndex].Pay(mp, g);
+            pmc.MyActivatable.MyCost.PaidMana.Add(pmc.MyActivatable.MyCost.ManaParts[CostIndex]);
             p.ManaPool.Remove(mp);
             g.GameObjects.Remove(mp);
         }
@@ -41,7 +41,7 @@ namespace Sharpening2020.Commands
             PayManaCost pmc = (PayManaCost)IH.CurrentInputState;
             ManaPoint mp = (ManaPoint)g.GetGameObjectByID(ManaPointID);
 
-            pmc.MyCost.PaidMana.Remove(pmc.MyCost.ManaParts[CostIndex]);
+            pmc.MyActivatable.MyCost.PaidMana.Remove(pmc.MyActivatable.MyCost.ManaParts[CostIndex]);
             p.ManaPool.Add(mp);
             g.GameObjects.Add(mp);
         }

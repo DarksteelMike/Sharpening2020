@@ -33,5 +33,10 @@ namespace Sharpening2020.Cards.Costs.ActionCosts
 
             return ret;
         }
+
+        public override string ToString(Game g)
+        {
+            return "Tap " + Target.Value(g);
+        }
     }
 }

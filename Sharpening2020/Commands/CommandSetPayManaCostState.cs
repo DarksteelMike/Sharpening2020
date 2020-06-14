@@ -22,11 +22,11 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            Card c = (Card)g.GameObjects[CardID];
+            Card c = (Card)g.GetGameObjectByID(CardID);
             Activatable act = c.CurrentCharacteristics.Activatables[ActivatableIndex];
 
             pmc = new PayManaCost();
-            pmc.MyCost = act.MyCost;
+            pmc.MyActivatable = act;
 
             g.InputHandlers[PlayerID].CurrentInputState = pmc;
         }

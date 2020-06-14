@@ -18,7 +18,7 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            Player p = (Player)g.GameObjects[PlayerID];
+            Player p = (Player)g.GetGameObjectByID(PlayerID);
             point = new ManaPoint();
             point.MyColor = Color;
 
@@ -31,7 +31,7 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            Player p = (Player)g.GameObjects[PlayerID];
+            Player p = (Player)g.GetGameObjectByID(PlayerID);
             p.ManaPool.Remove(point);
             g.GameObjects.Remove(point);
             g.NextGameObjectID--;

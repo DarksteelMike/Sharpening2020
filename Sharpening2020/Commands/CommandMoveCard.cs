@@ -20,14 +20,14 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            Card c = (Card)g.GameObjects[CardID];
+            Card c = (Card)g.GetGameObjectByID(CardID);
 
             c.MyZone = Destination;
         }
 
         public override void Undo(Game g)
         {
-            Card c = (Card)g.GameObjects[CardID];
+            Card c = (Card)g.GetGameObjectByID(CardID);
 
             c.MyZone = Origin;
         }

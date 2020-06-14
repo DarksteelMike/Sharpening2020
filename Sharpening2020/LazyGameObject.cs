@@ -20,7 +20,7 @@ namespace Sharpening2020
         }
 
         public T Value(Game g) {
-            return (T)g.GameObjects[ID];
+            return (T)g.GetGameObjectByID(ID);
         }
     }
 }

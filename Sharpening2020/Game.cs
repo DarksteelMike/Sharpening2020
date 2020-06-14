@@ -102,7 +102,7 @@ namespace Sharpening2020
 
         public PhaseHandler MyPhaseHandler = new PhaseHandler();
 
-        public Stack<Spell> SpellStack = new Stack<Spell>();
+        public Stack<StackInstance> SpellStack = new Stack<StackInstance>();
 
         public void RegisterGameObject(GameObject go)
         {
@@ -307,6 +307,17 @@ namespace Sharpening2020
             {
                 ih.Bridge.UpdateView(view);
             }
+        }
+
+        public void PlayActivatable(Activatable act)
+        {
+            if(act is SpecialAction)
+            {
+                act.Resolve(this);
+                return;
+            }
+
+            MyExecutor.Do(new CommandPutOnStack(act.Host.ID, act.Host.Value(this).CurrentCharacteristics.Activatables.IndexOf(act)));
         }
     }
 }

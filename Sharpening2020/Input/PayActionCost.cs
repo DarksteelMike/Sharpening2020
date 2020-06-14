@@ -9,7 +9,7 @@ using Sharpening2020.Mana;
 
 namespace Sharpening2020.Input
 {
-    class PayManaCost : InputBase
+    class PayActionCost : InputBase
     {
         public readonly Dictionary<Int32, CommandBase> ActionCommandPairs = new Dictionary<Int32, CommandBase>();
        

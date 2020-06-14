@@ -13,5 +13,7 @@ namespace Sharpening2020.Cards.Costs.ActionCosts
         public abstract void Pay(Game g);
 
         public abstract object Clone();
+
+        public abstract String ToString(Game g);
     }
 }
