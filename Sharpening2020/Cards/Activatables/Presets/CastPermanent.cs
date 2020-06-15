@@ -25,11 +25,11 @@ namespace Sharpening2020.Cards.Activatables.Presets
             return res;
         }
 
-        public override void Resolve(Game g)
+        public override void Resolve(Game g, StackInstance si)
         {
             ZoneType curZ = Host.Value(g).MyZone;
 
-            CommandBase com = new CommandMoveCard(Host.Value(g).ID, curZ, ZoneType.Battlefield);
+            CommandBase com = new CommandMoveCard(Host.ID, curZ, ZoneType.Battlefield);
 
             g.MyExecutor.Do(com);
         }

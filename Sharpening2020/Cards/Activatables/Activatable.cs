@@ -16,7 +16,7 @@ namespace Sharpening2020.Cards.Activatables
         public Cost MyCost = new Cost();
 
         public abstract Boolean CanActivate(Player act, Game g);
-        public abstract void Resolve(Game g);
+        public abstract void Resolve(Game g, StackInstance si);
 
         public abstract object Clone();
 

@@ -26,9 +26,11 @@ namespace Sharpening2020.Input
                 { return InputList.Count == 0 ? bottomState : InputList.Last(); }
             set
             {
+                CurrentInputState.Leave();
+
                 InputList.Add(value);
 
-                //CurrentInputState.Enter();
+                CurrentInputState.Enter();
 
                 Bridge.SelectActionFromList(CurrentInputState.GetActions());
             }

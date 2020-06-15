@@ -16,9 +16,9 @@ namespace Sharpening2020.Cards.Activatables
             MyActivatable = act;
         }
 
-        public void Resolve()
+        public void Resolve(Game g)
         {
-
+            MyActivatable.Resolve(g, this);
         }
 
         public override object Clone()

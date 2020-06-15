@@ -93,7 +93,7 @@ namespace Sharpening2020
                     }
                     else
                     {
-                        SpellStack.Pop().Resolve();
+                        SpellStack.Pop().Resolve(this);
                     }
 
                     return;
@@ -335,11 +335,11 @@ namespace Sharpening2020
             }
         }
 
-        public void PlayActivatable(Activatable act)
+        public void PlayActivatable(Activatable act, StackInstance si = null)
         {
             if(act is SpecialAction)
             {
-                act.Resolve(this);
+                act.Resolve(this, si);
                 return;
             }
 

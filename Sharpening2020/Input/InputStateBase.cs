@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Sharpening2020.InputBridges;
 using Sharpening2020.Players;
 
 namespace Sharpening2020.Input
@@ -9,6 +10,7 @@ namespace Sharpening2020.Input
     {
         public Player MyPlayer;
         public Game MyGame;
+        public InputBridge MyBridge;
 
         public abstract List<GameAction> GetActions();
 

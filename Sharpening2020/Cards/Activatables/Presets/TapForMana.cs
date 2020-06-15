@@ -32,9 +32,9 @@ namespace Sharpening2020.Cards.Activatables.Presets
             return res;
         }
 
-        public override void Resolve(Game g)
+        public override void Resolve(Game g, StackInstance si)
         {
-            CommandBase com = new CommandAddManaToPool(Activator.ID, Color);
+            g.MyExecutor.Do(new CommandAddManaToPool(Activator.ID, Color));
         }
 
         public override object Clone()

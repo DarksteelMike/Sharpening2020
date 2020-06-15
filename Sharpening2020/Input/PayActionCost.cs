@@ -24,12 +24,16 @@ namespace Sharpening2020.Input
             activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(MyActivatable);
         }
 
-        public override void Leave()
+        public override void Enter()
         {
-            MyActivatable.MyCost.PaidActions.Clear();
-        }
+            if(MyActivatable.MyCost.AreActionsPaid())
+            {
+                MoveToManaPayment();
+                return;
+            }
 
-        
+            PromptAndRequestAction();
+        }
 
         public override List<GameAction> GetActions()
         {
@@ -50,25 +54,41 @@ namespace Sharpening2020.Input
             if(a.ID == -2)
             {
                 MyActivatable.MyCost.ClearPaid();
-                //TODO: Cancel out.
+                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
             }
 
             MyGame.MyExecutor.Do(ActionCommandPairs[a.ID]);
 
             if(MyActivatable.MyCost.AreActionsPaid())
             {
-                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
-                MyGame.MyExecutor.Do(new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex));
+                MoveToManaPayment();
             }
             else
             {
                 MyGame.MyExecutor.Do(new CommandIncrementActionPartIndex(MyPlayer.ID));
+
+                PromptAndRequestAction();
             }
+        }
+
+        private void MoveToManaPayment()
+        {
+            MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
+            MyGame.MyExecutor.Do(new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex));
+        }
+
+        public void PromptAndRequestAction()
+        {
+            MyBridge.Prompt("Perform \"" + MyActivatable.MyCost.ActionParts[activatableIndex].ToString(MyGame) + "\"?");
+            MyBridge.SelectActionFromList(GetActions());
         }
 
         public override object Clone()
         {
-            return new PayActionCost(MyActivatable);
+            PayActionCost pac = new PayActionCost(MyActivatable);
+            pac.ActionPartIndex = this.ActionPartIndex;
+
+            return pac;
         }
     }
 }

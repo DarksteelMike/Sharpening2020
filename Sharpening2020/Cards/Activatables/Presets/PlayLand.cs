@@ -28,7 +28,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
             return res;
         }
 
-        public override void Resolve(Game g)
+        public override void Resolve(Game g, StackInstance si)
         {
             g.MyExecutor.Do(new CommandMoveCard(Host.Value(g).ID, ZoneType.Hand, ZoneType.Battlefield));
             g.MyExecutor.Do(new CommandIncrementLandsPlayed(Activator.ID));
