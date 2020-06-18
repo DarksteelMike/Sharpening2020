@@ -20,9 +20,13 @@ namespace Sharpening2020.Input
             MyActivatable = act;
         }
 
-        public override void Leave()
+        public override void Enter()
         {
-            MyActivatable.MyCost.PaidMana.Clear();
+            if (MyActivatable.MyCost.IsManaPaid())
+            {
+                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
+                MyGame.PlayActivatable(MyActivatable);
+            }
         }
 
         public override List<GameAction> GetActions()
@@ -55,7 +59,7 @@ namespace Sharpening2020.Input
             if(a.ID == -2)
             {
                 MyActivatable.MyCost.ClearPaid();
-                //TODO: Cancel out.
+                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
             }
 
             MyGame.MyExecutor.Do(ActionCommandPairs[a.ID]);

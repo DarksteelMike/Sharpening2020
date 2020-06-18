@@ -8,6 +8,8 @@ namespace Sharpening2020.Cards.Costs
     {
         public ManaColor Color;
 
+        public ManaPoint PaidPoint;
+
         public ManaCostPart(ManaColor col)
         {
             Color = col;
@@ -15,7 +17,7 @@ namespace Sharpening2020.Cards.Costs
 
         public void Pay(ManaPoint mp, Game g)
         {
-
+            PaidPoint = mp;
         }
 
         public object Clone()

@@ -1,3 +1,19 @@
 ﻿MCTS ai pool of possible cards for unknown -> Narrow down to current game format, 
 	narrow down further to cards the player can pay for? Deploy archetype/deck recognition to narrow it down further.
 Headless Mode AI v AI.
+
+TODOS:
+*Combat phases
+*Combat input.
+*Static abilities. (No dependency to start)
+*Update views at correct times.
+*Update views with visibility in mind.
+*More action costs.
+*Announce input step?
+*Fix nonvisible zone order (library, specifically) May have to go back to having Zone objects.
+*More commands.
+*Command groups?
+*Targeting.
+*Winning/Losing.
+*Serializing Commands.
+*Game state scoring.

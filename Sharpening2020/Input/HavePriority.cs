@@ -24,7 +24,7 @@ namespace Sharpening2020.Input
 
                 GameAction a = new GameAction(i++, act.Host.ID, act.ToString(MyGame));
 
-                //Instead of null, I should add an ICommand that starts off the process of activating the activatable.
+                //Instead of null, I should add a Command that starts off the process of activating the activatable.
                 //Whatever that entails.
                 ActionCommandPairs.Add(a.ID, null);
                 ret.Add(a);
