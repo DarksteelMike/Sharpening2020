@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
@@ -28,35 +29,70 @@ namespace Sharpening2020.Views
 
         public readonly IReadOnlyList<CounterView> Counters;
 
-        public CardView(Card crd)
+        public readonly CardView AlternateView;
+
+        public CardView(Card crd) : this(crd, crd.CurrentCharacteristicName, null)
+        {
+            
+        }
+
+        public CardView(Card crd, CharacteristicName cn, CardView ForceAltView)
         {
             ID = crd.ID;
-            Name = crd.CurrentCharacteristics.Name;
-            SuperTypes = crd.CurrentCharacteristics.SuperTypes.AsReadOnly();
-            CardTypes = crd.CurrentCharacteristics.CardTypes.AsReadOnly();
-            SubTypes = crd.CurrentCharacteristics.SubTypes.AsReadOnly();
+            CardCharacteristics chara = crd.MyCharacteristics[cn];
+            Name = chara.Name;
+            SuperTypes = chara.SuperTypes.AsReadOnly();
+            CardTypes = chara.CardTypes.AsReadOnly();
+            SubTypes = chara.SubTypes.AsReadOnly();
 
             String txt = "";
 
-            foreach (Activatable act in crd.CurrentCharacteristics.Activatables)
+            foreach (Activatable act in chara.Activatables)
             {
                 txt += act.ToString() + Environment.NewLine;
             }
 
             Text = txt;
 
-            Power = crd.CurrentCharacteristics.Power;
-            Toughness = crd.CurrentCharacteristics.Toughness;
+            Power = chara.Power;
+            Toughness = chara.Toughness;
             AssignedDamage = crd.AssignedDamage;
 
-            List<CounterView> cts = new List<CounterView>();
+            Counters = crd.MyCounters.Select(x => { return (CounterView)x.GetView(); }).ToList().AsReadOnly();
 
-            foreach(Counter c in crd.MyCounters)
+            if (ForceAltView != null)
             {
-                cts.Add((CounterView)c.GetView());
+                AlternateView = ForceAltView;
+            }
+            else
+            {
+                if(cn == CharacteristicName.Flip || 
+                   cn == CharacteristicName.FaceDown || 
+                   cn == CharacteristicName.Back ||
+                   cn == CharacteristicName.Manifest ||
+                   cn == CharacteristicName.Morph)
+                {
+                    AlternateView = new CardView(crd, CharacteristicName.Front, this);
+                }
+
+                if(cn == CharacteristicName.Front)
+                {
+                    if(crd.MyCharacteristics.ContainsKey(CharacteristicName.Flip))
+                    {
+                        AlternateView = new CardView(crd, CharacteristicName.Flip, this);
+                    }
+                    else if (crd.MyCharacteristics.ContainsKey(CharacteristicName.Back))
+                    {
+                        AlternateView = new CardView(crd, CharacteristicName.Back, this);
+                    }
+                    else
+                    {
+                        AlternateView = null;
+                    }
+                }
             }
 
-            Counters = cts.AsReadOnly();
+            
         }
     }
 }
