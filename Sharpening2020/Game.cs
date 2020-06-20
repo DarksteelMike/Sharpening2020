@@ -11,6 +11,7 @@ using Sharpening2020.InputBridges;
 using Sharpening2020.Phases;
 using Sharpening2020.Players;
 using Sharpening2020.Views;
+using Sharpening2020.Zones;
 
 namespace Sharpening2020
 {
@@ -118,10 +119,56 @@ namespace Sharpening2020
 
         public Stack<StackInstance> SpellStack = new Stack<StackInstance>();
 
+        public Zone StackZone = new Zone(ZoneType.Stack);
+
         public void RegisterGameObject(GameObject go)
         {
             go.ID = NextGameObjectID++;
             GameObjects.Add(go);
+        }
+
+        public ZoneType GetZoneTypeOf(Card c)
+        {
+            return GetZoneOf(c.ID).MyType;
+        }
+
+        public ZoneType GetZoneTypeOf(LazyGameObject<Card> c)
+        {
+            return GetZoneOf(c.ID).MyType;
+        }
+
+        public ZoneType GetZoneTypeOf(Int32 ID)
+        {
+            return GetZoneOf(ID).MyType;
+        }
+
+        public Zone GetZoneOf(Card c)
+        {
+            return GetZoneOf(c.ID);
+        }
+
+        public Zone GetZoneOf(LazyGameObject<Card> c)
+        {
+            return GetZoneOf(c.ID);
+        }
+
+        public Zone GetZoneOf(Int32 ID)
+        {
+            if (StackZone.Contents.Count(x => { return x.ID == ID; }) > 0)
+                return StackZone;
+
+            foreach (Player p in GetPlayers())
+            {
+                foreach (Zone z in p.MyZones.Values)
+                {
+                    if (z.Contents.Count(x => { return x.ID == ID; }) > 0)
+                    {
+                        return z;
+                    }
+                }
+            }
+
+            throw new Exception("Card " + ((Card)GetGameObjectByID(ID)).ToString() + " outside all zones!");
         }
 
         public IEnumerable<Player> GetPlayers()
@@ -136,12 +183,12 @@ namespace Sharpening2020
 
         public IEnumerable<Card> GetCards(ZoneType zt)
         {
-            return GameObjects.Where(x => { if (x is Card) { return ((Card)x).MyZone == zt; } return false; }).Cast<Card>();
+            return GameObjects.Where(x => { if (x is Card) { return GetZoneTypeOf((Card)x) == zt; } return false; }).Cast<Card>();
         }
 
         public IEnumerable<Card> GetCards(ZoneType zt, Player controller)
         {
-            return GameObjects.Where(x => { if (x is Card) { return ((Card)x).MyZone == zt && ((Card)x).Controller.Value(this).Equals(controller); } return false; }).Cast<Card>();
+            return GameObjects.Where(x => { if (x is Card) { return GetZoneTypeOf((Card)x) == zt && ((Card)x).Controller.Value(this).Equals(controller); } return false; }).Cast<Card>();
         }
 
         public IEnumerable<Activatable> GetActivatables()
@@ -189,7 +236,7 @@ namespace Sharpening2020
             //704.5b.If a player attempted to draw a card from a library with no cards in it since the last time state-based actions were checked, that player loses the game.
             //704.5c.If a player has ten or more poison counters, that player loses the game.Ignore this rule in Two - Headed Giant games; see rule 704.5u instead.
             //704.5d.If a token is in a zone other than the battlefield, it ceases to exist.
-            crds = GetCards().Where(x => { return x.IsToken && x.MyZone != ZoneType.Battlefield; });
+            crds = GetCards().Where(x => { return x.IsToken && GetZoneTypeOf((Card)x) != ZoneType.Battlefield; });
             foreach(Card c in crds)
             {
                 MyExecutor.Do(new CommandRemoveGameObjectFromGame(c.ID));
@@ -200,7 +247,7 @@ namespace Sharpening2020
             crds = GetCards(ZoneType.Battlefield).Where(x => { return x.CurrentCharacteristics.CardTypes.Contains("Creature") && x.CurrentCharacteristics.Toughness == 0; });
             foreach(Card c in crds)
             {
-                MyExecutor.Do(new CommandMoveCard(c.ID, ZoneType.Battlefield, ZoneType.Graveyard));
+                MyExecutor.Do(new CommandMoveCard(c.ID, ZoneType.Graveyard));
             }
 
             //704.5g.If a creature has toughness greater than 0, it has damage marked on it, and the total damage marked on it is greater than or equal to its toughness, that creature has been dealt lethal damage and is destroyed.Regeneration can replace this event.
@@ -215,7 +262,7 @@ namespace Sharpening2020
             crds = GetCards(ZoneType.Battlefield).Where(x => { return x.CurrentCharacteristics.CardTypes.Contains("Planeswalker") && x.GetCounterAmount(this, CounterType.Loyalty) == 0; });
             foreach (Card c in crds)
             {
-                MyExecutor.Do(new CommandMoveCard(c.ID, ZoneType.Battlefield, ZoneType.Graveyard));
+                MyExecutor.Do(new CommandMoveCard(c.ID, ZoneType.Graveyard));
             }
             //704.5j.If a player controls two or more legendary permanents with the same name, that player chooses one of them, and the rest are put into their owners' graveyards. This is called the "legend rule."
             //704.5k.If two or more permanents have the supertype world, all except the one that has had the world supertype for the shortest amount of time are put into their owners' graveyards. In the event of a tie for the shortest amount of time, all are put into their owners' graveyards. This is called the "world rule."
@@ -303,7 +350,7 @@ namespace Sharpening2020
                 {
                     Card c = CardCompiler.Compile(s);
                     c.Owner = new LazyGameObject<Player>(newPlayer);
-                    c.MyZone = ZoneType.Library;
+                    newPlayer.MyZones[ZoneType.Library].Contents.Add(new LazyGameObject<Card>(c));
                     c.CurrentCharacteristicName = CharacteristicName.FaceDown;
 
                     RegisterGameObject(c);

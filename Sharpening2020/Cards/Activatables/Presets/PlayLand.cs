@@ -18,7 +18,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
         {
             Boolean res = true;
 
-            res &= Host.Value(g).MyZone == ZoneType.Hand; //Only play from hand.
+            res &= g.GetZoneTypeOf(Host) == ZoneType.Hand; //Only play from hand.
             res &= p.Equals(Host.Value(g).Owner); //Only it's owner can play it.
             res &= p.LandsPlayedThisTurn < 1; //Only play if no other lands have been played this turn.
             res &= g.SpellStack.Count == 0; //Only play if stack is empty.
@@ -30,7 +30,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
 
         public override void Resolve(Game g, StackInstance si)
         {
-            g.MyExecutor.Do(new CommandMoveCard(Host.Value(g).ID, ZoneType.Hand, ZoneType.Battlefield));
+            g.MyExecutor.Do(new CommandMoveCard(Host.ID, ZoneType.Battlefield));
             g.MyExecutor.Do(new CommandIncrementLandsPlayed(Activator.ID));
         }
 

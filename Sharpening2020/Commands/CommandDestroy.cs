@@ -3,7 +3,9 @@ using System.Linq;
 
 using Sharpening2020.Cards;
 using Sharpening2020.Input;
+using Sharpening2020.Players;
 using Sharpening2020.Views;
+using Sharpening2020.Zones;
 
 namespace Sharpening2020.Commands
 {
@@ -20,18 +22,25 @@ namespace Sharpening2020.Commands
         {
             Card c = (Card)g.GetGameObjectByID(CardID);
 
-            zt = c.MyZone;
+            Player owner = c.Owner.Value(g);
 
-            c.MyZone = ZoneType.Graveyard;
+            orig = g.GetZoneOf(CardID);
+            dest = owner.MyZones[ZoneType.Graveyard];
+
+            lgo = orig.Contents.First(x => { return x.ID == CardID; });
+
+            orig.Contents.Remove(lgo);
+            dest.Contents.Add(lgo);
         }
 
-        private ZoneType zt;
+        private LazyGameObject<Card> lgo;
+        private Zone orig;
+        private Zone dest;
 
         public override void Undo(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
-
-            c.MyZone = zt;
+            dest.Contents.Remove(lgo);
+            orig.Contents.Add(lgo);
         }
 
         public override object Clone()

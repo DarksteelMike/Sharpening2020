@@ -23,9 +23,7 @@ namespace Sharpening2020.Cards
         public Boolean IsToken = false;
         public Boolean HasSummoningSickness = false;
         public Int32 AssignedDamage = 0;
-
-        public ZoneType MyZone = ZoneType.Library;
-
+        
         public LazyGameObject<Player> Owner;
         public LazyGameObject<Player> Controller;
 

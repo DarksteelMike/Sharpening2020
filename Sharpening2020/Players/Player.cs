@@ -6,6 +6,7 @@ using Sharpening2020.Cards;
 using Sharpening2020.Mana;
 using Sharpening2020.Phases;
 using Sharpening2020.Views;
+using Sharpening2020.Zones;
 
 namespace Sharpening2020.Players
 {
@@ -18,6 +19,13 @@ namespace Sharpening2020.Players
             Player ret = new Player();
             ret.Life = 20;
 
+            ret.MyZones.Add(ZoneType.Battlefield, new Zone(ZoneType.Battlefield));
+            ret.MyZones.Add(ZoneType.Command, new Zone(ZoneType.Command));
+            ret.MyZones.Add(ZoneType.Exile, new Zone(ZoneType.Exile));
+            ret.MyZones.Add(ZoneType.Graveyard, new Zone(ZoneType.Graveyard));
+            ret.MyZones.Add(ZoneType.Hand, new Zone(ZoneType.Hand));
+            ret.MyZones.Add(ZoneType.Library, new Zone(ZoneType.Library));
+
             return ret;
         }
 
@@ -25,11 +33,13 @@ namespace Sharpening2020.Players
 
         public Int32 LandsPlayedThisTurn = 0;
 
-        public List<LazyGameObject<Counter>> MyCounters = new List<LazyGameObject<Counter>>();
+        public readonly List<LazyGameObject<Counter>> MyCounters = new List<LazyGameObject<Counter>>();
 
-        public List<LazyGameObject<ManaPoint>> ManaPool = new List<LazyGameObject<ManaPoint>>();
+        public readonly List<LazyGameObject<ManaPoint>> ManaPool = new List<LazyGameObject<ManaPoint>>();
 
-        public PhaseHandler MyPhases = new PhaseHandler();
+        public readonly PhaseHandler MyPhases = new PhaseHandler();
+
+        public readonly Dictionary<ZoneType, Zone> MyZones = new Dictionary<ZoneType, Zone>();
 
         public Int32 GetCounterAmount(Game g, CounterType ct)
         {

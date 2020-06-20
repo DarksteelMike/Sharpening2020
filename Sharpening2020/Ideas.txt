@@ -2,7 +2,7 @@
 	narrow down further to cards the player can pay for? Deploy archetype/deck recognition to narrow it down further.
 Headless Mode AI v AI.
 
-TODOS:
+TODOS, in no particular order:
 *Combat phases
 *Combat input.
 *Static abilities. (No dependency to start)
@@ -14,7 +14,6 @@ TODOS:
 *Announce input step?
 *Fix nonvisible zone order (library, specifically) May have to go back to having Zone objects.
 *More commands.
-*Command groups?
 *Targeting.
 *Winning/Losing.
 *Serializing Commands.

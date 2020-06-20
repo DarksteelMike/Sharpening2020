@@ -18,7 +18,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
         {
             Boolean res = true;
 
-            res &= Host.Value(g).MyZone == ZoneType.Hand; //Only cast from hand
+            res &= g.GetZoneTypeOf(Host) == ZoneType.Hand; //Only cast from hand
             res &= p.Equals(Host.Value(g).Owner); //Only it's owner can cast it
             res &= !IsBeingActivated; //This isn't already in the process of being cast.
 
@@ -27,11 +27,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
 
         public override void Resolve(Game g, StackInstance si)
         {
-            ZoneType curZ = Host.Value(g).MyZone;
-
-            CommandBase com = new CommandMoveCard(Host.ID, curZ, ZoneType.Battlefield);
-
-            g.MyExecutor.Do(com);
+            g.MyExecutor.Do(new CommandMoveCard(Host.ID, ZoneType.Battlefield));
         }
 
         public override object Clone()

@@ -112,6 +112,7 @@
     <Compile Include="Views\PlayerView.cs" />
     <Compile Include="Views\StackInstanceView.cs" />
     <Compile Include="Views\ViewObject.cs" />
+    <Compile Include="Zones\Zone.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ideas.txt" />
