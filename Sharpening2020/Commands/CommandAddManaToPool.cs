@@ -26,7 +26,7 @@ namespace Sharpening2020.Commands
 
             g.RegisterGameObject(point);
 
-            p.ManaPool.Add(point);
+            p.ManaPool.Add(new LazyGameObject<ManaPoint>(point));
         }
 
         private ManaPoint point;
@@ -34,7 +34,7 @@ namespace Sharpening2020.Commands
         public override void Undo(Game g)
         {
             Player p = (Player)g.GetGameObjectByID(PlayerID);
-            p.ManaPool.Remove(point);
+            p.ManaPool.RemoveAll(x => { return x.ID == point.ID; });
             g.GameObjects.Remove(point);
             g.NextGameObjectID--;
         }

@@ -11,18 +11,21 @@ namespace Sharpening2020
 
         public Game MyGame;
 
+        public Boolean SuspendViewUpdates = false;
+
         public void Do(CommandBase com)
         {
             UndoStack.Push(com);
-            com.Do(MyGame);
-
-            com.UpdateViews(MyGame);
+            com.Do(MyGame);            
         }
 
         public void Undo()
         {
             CommandBase com = UndoStack.Pop();
             com.Undo(MyGame);
+
+            if (!SuspendViewUpdates)
+                com.UpdateViews(MyGame);
         }
     }
 }

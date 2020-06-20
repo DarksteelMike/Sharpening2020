@@ -14,8 +14,6 @@ namespace Sharpening2020
 
         public Game MyGame;
 
-        public Boolean SuspendViewUpdates = false;
-
         public Boolean Equals(GameObject other)
         {
             if (other == null)

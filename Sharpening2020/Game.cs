@@ -279,6 +279,7 @@ namespace Sharpening2020
 
         public void InitGame(params KeyValuePair<InputBridge,List<String>>[] test)
         {
+            MyExecutor.SuspendViewUpdates = true;
             Random rand = new Random();
             foreach(KeyValuePair<InputBridge,List<String>> kvp in test)
             {
@@ -301,17 +302,17 @@ namespace Sharpening2020
                 foreach(String s in shuf)
                 {
                     Card c = CardCompiler.Compile(s);
-                    c.SuspendViewUpdates = true;
                     c.Owner = new LazyGameObject<Player>(newPlayer);
                     c.MyZone = ZoneType.Library;
                     c.CurrentCharacteristicName = CharacteristicName.FaceDown;
-                    c.SuspendViewUpdates = false;
 
                     RegisterGameObject(c);
                 }
             }
 
-            foreach(GameObject go in GameObjects)
+            MyExecutor.SuspendViewUpdates = false;
+
+            foreach (GameObject go in GameObjects)
             {
                 UpdateView(go.GetView(this));
             }

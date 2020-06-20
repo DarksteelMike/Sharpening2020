@@ -38,8 +38,9 @@ namespace Sharpening2020.Input
 
             int i = 0;
 
-            foreach(ManaPoint mp in MyPlayer.ManaPool)
+            foreach(LazyGameObject<ManaPoint> lmp in MyPlayer.ManaPool)
             {
+                ManaPoint mp = lmp.Value(MyGame);
                 foreach(ManaCostPart mcp in MyActivatable.MyCost.ManaParts)
                 {
                     if(mp.MyColor == mcp.Color)

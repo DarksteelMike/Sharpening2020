@@ -27,7 +27,7 @@ namespace Sharpening2020.Players
 
         public List<LazyGameObject<Counter>> MyCounters = new List<LazyGameObject<Counter>>();
 
-        public List<ManaPoint> ManaPool = new List<ManaPoint>();
+        public List<LazyGameObject<ManaPoint>> ManaPool = new List<LazyGameObject<ManaPoint>>();
 
         public PhaseHandler MyPhases = new PhaseHandler();
 
@@ -61,7 +61,7 @@ namespace Sharpening2020.Players
 
         public override ViewObject GetView(Game g)
         {
-            return new PlayerView(g, ID, Life, MyCounters.Select(x => { return x.Value(g); }).ToList() , ManaPool);
+            return new PlayerView(g, ID, Life, MyCounters.Select(x => { return x.Value(g); }).ToList() , ManaPool.Select(x => { return x.Value(g); }).ToList());
         }
     }
 }

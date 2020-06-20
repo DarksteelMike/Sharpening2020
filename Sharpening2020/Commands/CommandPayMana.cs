@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Sharpening2020;
 using Sharpening2020.Input;
 using Sharpening2020.Mana;
 using Sharpening2020.Players;
@@ -29,7 +30,7 @@ namespace Sharpening2020.Commands
 
             pmc.MyActivatable.MyCost.ManaParts[CostIndex].Pay(mp, g);
             pmc.MyActivatable.MyCost.PaidMana.Add(pmc.MyActivatable.MyCost.ManaParts[CostIndex]);
-            p.ManaPool.Remove(mp);
+            p.ManaPool.RemoveAll(x => { return x.ID == ManaPointID; });
             g.GameObjects.Remove(mp);
         }
 
@@ -40,10 +41,9 @@ namespace Sharpening2020.Commands
         {
             InputHandler IH = g.InputHandlers[PayerID];
             PayManaCost pmc = (PayManaCost)IH.CurrentInputState;
-            ManaPoint mp = (ManaPoint)g.GetGameObjectByID(ManaPointID);
 
             pmc.MyActivatable.MyCost.PaidMana.Remove(pmc.MyActivatable.MyCost.ManaParts[CostIndex]);
-            p.ManaPool.Add(mp);
+            p.ManaPool.Add(new LazyGameObject<ManaPoint>(mp));
             g.GameObjects.Add(mp);
         }
 
