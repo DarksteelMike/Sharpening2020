@@ -30,7 +30,17 @@ namespace Sharpening2020.Commands
                 originalOrder.Add(lgo);
             }
 
-            lib.Shuffle(Seed);
+            Random rng = new Random(Seed);
+
+            int n = lib.Contents.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                LazyGameObject<Card> value = lib.Contents[k];
+                lib.Contents[k] = lib.Contents[n];
+                lib.Contents[n] = value;
+            }
         }
 
         private Zone lib;
