@@ -345,5 +345,10 @@ namespace Sharpening2020
 
             MyExecutor.Do(new CommandPutOnStack(act.Host.ID, act.Host.Value(this).CurrentCharacteristics.Activatables.IndexOf(act)));
         }
+
+        public List<StackInstanceView> GetStackView()
+        {
+            return SpellStack.Select(x => { return (StackInstanceView)x.GetView(); }).ToList();
+        }
     }
 }

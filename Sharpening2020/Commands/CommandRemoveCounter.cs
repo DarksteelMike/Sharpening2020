@@ -2,6 +2,8 @@
 using System.Linq;
 
 using Sharpening2020.Cards;
+using Sharpening2020.Input;
+using Sharpening2020.Views;
 
 namespace Sharpening2020.Commands
 {
@@ -35,6 +37,22 @@ namespace Sharpening2020.Commands
         public override object Clone()
         {
             return new CommandRemoveCounter(SourceID, Type);
+        }
+
+        public override void UpdateViews(Game g)
+        {
+            GameObject go = g.GetGameObjectByID(SourceID);
+            foreach (InputHandler ih in g.InputHandlers.Values)
+            {
+                if(go is Card)
+                {
+                    ih.Bridge.UpdateCardView((CardView)go.GetView());
+                }
+                else
+                {
+                    ih.Bridge.UpdatePlayerView((PlayerView)go.GetView());
+                }
+            }
         }
     }
 }

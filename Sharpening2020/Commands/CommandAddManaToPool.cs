@@ -1,7 +1,9 @@
 ﻿using System;
 
+using Sharpening2020.Input;
 using Sharpening2020.Mana;
 using Sharpening2020.Players;
+using Sharpening2020.Views;
 
 namespace Sharpening2020.Commands
 {
@@ -40,6 +42,14 @@ namespace Sharpening2020.Commands
         public override object Clone()
         {
             return new CommandAddManaToPool(PlayerID, Color);
+        }
+
+        public override void UpdateViews(Game g)
+        {
+            foreach (InputHandler ih in g.InputHandlers.Values)
+            {
+                ih.Bridge.UpdatePlayerView((PlayerView)((Player)g.GetGameObjectByID(this.PlayerID)).GetView());
+            }
         }
     }
 }

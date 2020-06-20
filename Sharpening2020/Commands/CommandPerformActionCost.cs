@@ -3,6 +3,7 @@
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Cards.Costs.ActionCosts;
+using Sharpening2020.Input;
 
 namespace Sharpening2020.Commands
 {
@@ -35,7 +36,7 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            throw new NotImplementedException();
+            return new CommandPerformActionCost(CardID, ActivatableIndex, CostPartIndex);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
+using Sharpening2020.Input;
 
 namespace Sharpening2020.Commands
 {
@@ -39,6 +40,14 @@ namespace Sharpening2020.Commands
         public override object Clone()
         {
             return new CommandPutOnStack(CardID, ActivatableIndex);
+        }
+
+        public override void UpdateViews(Game g)
+        {
+            foreach (InputHandler ih in g.InputHandlers.Values)
+            {
+                ih.Bridge.UpdateStackView(g.GetStackView());
+            }
         }
     }
 }
