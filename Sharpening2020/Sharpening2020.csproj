@@ -75,6 +75,7 @@
     <Compile Include="Commands\CommandSetHavePriorityState.cs" />
     <Compile Include="Commands\CommandSetPayManaCostState.cs" />
     <Compile Include="Commands\CommandSetWaitingForOpponentsState.cs" />
+    <Compile Include="Commands\CommandShuffleLibrary.cs" />
     <Compile Include="Commands\CommandUntap.cs" />
     <Compile Include="Commands\CommandTap.cs" />
     <Compile Include="Commands\CommandBase.cs" />

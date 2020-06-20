@@ -94,7 +94,7 @@ namespace Sharpening2020
                     }
                     else
                     {
-                        SpellStack.Pop().Resolve(this);
+                        SpellStack.Pop().Value(this).Resolve(this);
                     }
 
                     return;
@@ -117,7 +117,7 @@ namespace Sharpening2020
 
         public PhaseHandler MyPhaseHandler = new PhaseHandler();
 
-        public Stack<StackInstance> SpellStack = new Stack<StackInstance>();
+        public Stack<LazyGameObject<StackInstance>> SpellStack = new Stack<LazyGameObject<StackInstance>>();
 
         public Zone StackZone = new Zone(ZoneType.Stack);
 
@@ -298,6 +298,7 @@ namespace Sharpening2020
             ret.MyContinuousEffects = (ContinuousEffectHandler)this.MyContinuousEffects.Clone();
             ret.MyPhaseHandler = (PhaseHandler)this.MyPhaseHandler.Clone();
             ret.NextGameObjectID = this.NextGameObjectID;
+            ret.StackZone = (Zone)this.StackZone.Clone();
             
             foreach(GameObject go in GameObjects)
             {
@@ -306,22 +307,25 @@ namespace Sharpening2020
                 ret.GameObjects.Add(goClone);
             }
 
-            ret.UpdateGameReferences();
+            ret.MyContinuousEffects.MyGame = ret;
+            ret.MyPhaseHandler.MyGame = ret;
+            ret.MyExecutor.MyGame = ret;
+
+            foreach (InputHandler ih in ret.InputHandlers.Values)
+            {
+                ih.MyGame = ret;
+                foreach(InputStateBase isb in ih.InputList)
+                {
+                    isb.MyGame = ret;
+                }
+            }
 
             return ret;
         }
 
         public void UpdateGameReferences()
         {
-            MyContinuousEffects.MyGame = this;
-            MyPhaseHandler.MyGame = this;
-            MyExecutor.MyGame = this;
-
-            foreach (InputHandler ih in InputHandlers.Values)
-            {
-                ih.MyGame = this;
-                ih.CurrentInputState.MyGame = this;
-            }
+            
         }
 
         public void InitGame(params KeyValuePair<InputBridge,List<String>>[] test)
@@ -398,7 +402,7 @@ namespace Sharpening2020
 
         public List<StackInstanceView> GetStackView()
         {
-            return SpellStack.Select(x => { return (StackInstanceView)x.GetView(this); }).ToList();
+            return SpellStack.Select(x => { return (StackInstanceView)x.Value(this).GetView(this); }).ToList();
         }
     }
 }

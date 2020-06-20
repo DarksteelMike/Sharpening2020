@@ -12,7 +12,6 @@ TODOS, in no particular order:
 *Update views with visibility in mind.
 *More action costs.
 *Announce input step?
-*Fix nonvisible zone order (library, specifically) May have to go back to having Zone objects.
 *More commands.
 *Targeting.
 *Winning/Losing.

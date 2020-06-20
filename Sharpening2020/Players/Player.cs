@@ -66,6 +66,11 @@ namespace Sharpening2020.Players
             ret.ID = this.ID;
             ret.Life = this.Life;
 
+            foreach(ZoneType key in MyZones.Keys)
+            {
+                ret.MyZones.Add(key, (Zone)MyZones[key].Clone());
+            }
+
             return ret;
         }
 

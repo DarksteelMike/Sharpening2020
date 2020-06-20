@@ -22,19 +22,18 @@ namespace Sharpening2020.Commands
             Card host = (Card)g.GetGameObjectByID(CardID);
             Activatable act = host.CurrentCharacteristics.Activatables[ActivatableIndex];
 
-            StackInstance si = new StackInstance(act);
+            si = new StackInstance(act);
             g.RegisterGameObject(si);
-
-            siID = si.ID;
-
-            g.SpellStack.Push(si);
+            
+            g.SpellStack.Push(new LazyGameObject<StackInstance>(si));
         }
 
-        private Int32 siID;
+        private StackInstance si;
 
         public override void Undo(Game g)
         {
             g.SpellStack.Pop();
+            g.GameObjects.Remove(si);
         }
 
         public override object Clone()

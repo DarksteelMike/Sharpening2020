@@ -19,6 +19,21 @@ namespace Sharpening2020.Zones
             EnteredThisTurn = new List<LazyGameObject<Card>>();
         }
 
+        public void Shuffle(Int32 Seed)
+        {
+            Random rng = new Random(Seed);
+
+            int n = Contents.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                LazyGameObject<Card> value = Contents[k];
+                Contents[k] = Contents[n];
+                Contents[n] = value;
+            }
+        }
+
         public object Clone()
         {
             Zone ret = new Zone(MyType);
