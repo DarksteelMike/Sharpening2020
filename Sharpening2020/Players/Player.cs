@@ -25,38 +25,30 @@ namespace Sharpening2020.Players
 
         public Int32 LandsPlayedThisTurn = 0;
 
-        public List<Counter> MyCounters = new List<Counter>();
+        public List<LazyGameObject<Counter>> MyCounters = new List<LazyGameObject<Counter>>();
 
         public List<ManaPoint> ManaPool = new List<ManaPoint>();
 
         public PhaseHandler MyPhases = new PhaseHandler();
 
-        public Int32 GetCounterAmount(CounterType ct)
+        public Int32 GetCounterAmount(Game g, CounterType ct)
         {
-            return MyCounters.Where(x => { return x.MyType == ct; }).Count();
-        }
-
-        public void AddCounter(Counter c)
-        {
-            MyCounters.Add(c);
+            return MyCounters.Where(x => { return x.Value(g).MyType == ct; }).Count();
         }
 
         public void RemoveCounter(Counter c)
         {
-            MyCounters.Remove(c);
+            MyCounters.RemoveAll(x => { return x.ID == c.ID; });
         }
 
-        public IEnumerable<Counter> GetAllCounters()
+        public void AddCounter(Counter c)
         {
-            return MyCounters;
+            MyCounters.Add(new LazyGameObject<Counter>(c));
         }
 
-        public void RemoveCounterType(CounterType c)
+        public IEnumerable<Counter> GetAllCounters(Game g)
         {
-            IEnumerable<Counter> cts = MyCounters.Where(x => { return x.MyType == c; });
-            if (cts.Count() == 0)
-                return;
-            MyCounters.Remove(cts.First());
+            return MyCounters.Select(x => { return x.Value(g); });
         }
 
         public override object Clone() {
@@ -67,9 +59,9 @@ namespace Sharpening2020.Players
             return ret;
         }
 
-        public override ViewObject GetView()
+        public override ViewObject GetView(Game g)
         {
-            return new PlayerView(ID, Life, MyCounters, ManaPool);
+            return new PlayerView(g, ID, Life, MyCounters.Select(x => { return x.Value(g); }).ToList() , ManaPool);
         }
     }
 }

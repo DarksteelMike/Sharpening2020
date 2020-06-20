@@ -7,10 +7,9 @@ namespace Sharpening2020
 {
     interface ICanHaveCounters
     {
-        Int32 GetCounterAmount(CounterType ct);
+        Int32 GetCounterAmount(Game g, CounterType ct);
         void RemoveCounter(Counter c);
-        void RemoveCounterType(CounterType ct);
         void AddCounter(Counter c);
-        IEnumerable<Counter> GetAllCounters();
+        IEnumerable<Counter> GetAllCounters(Game g);
     }
 }

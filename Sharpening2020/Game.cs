@@ -212,7 +212,7 @@ namespace Sharpening2020
 
             //704.5h.If a creature has toughness greater than 0, and it's been dealt damage by a source with deathtouch since the last time state-based actions were checked, that creature is destroyed. Regeneration can replace this event.
             //704.5i.If a planeswalker has loyalty 0, it's put into its owner's graveyard.
-            crds = GetCards(ZoneType.Battlefield).Where(x => { return x.CurrentCharacteristics.CardTypes.Contains("Planeswalker") && x.GetCounterAmount(CounterType.Loyalty) == 0; });
+            crds = GetCards(ZoneType.Battlefield).Where(x => { return x.CurrentCharacteristics.CardTypes.Contains("Planeswalker") && x.GetCounterAmount(this, CounterType.Loyalty) == 0; });
             foreach (Card c in crds)
             {
                 MyExecutor.Do(new CommandMoveCard(c.ID, ZoneType.Battlefield, ZoneType.Graveyard));
@@ -223,16 +223,18 @@ namespace Sharpening2020
             //704.5n.If an Equipment or Fortification is attached to an illegal permanent or to a player, it becomes unattached from that permanent or player.It remains on the battlefield.
             //704.5p.If a creature is attached to an object or player, it becomes unattached and remains on the battlefield. Similarly, if a permanent that's neither an Aura, an Equipment, nor a Fortification is attached to an object or player, it becomes unattached and remains on the battlefield.
             //704.5q.If a permanent has both a +1/+1 counter and a -1/-1 counter on it, N +1/+1 and N -1/-1 counters are removed from it, where N is the smaller of the number of +1/+1 and -1/-1 counters on it.
-            crds = GetCards(ZoneType.Battlefield).Where(x => { return x.GetCounterAmount(CounterType.P1P1) > 0 && x.GetCounterAmount(CounterType.M1M1) > 0; });
+            crds = GetCards(ZoneType.Battlefield).Where(x => { return x.GetCounterAmount(this, CounterType.P1P1) > 0 && x.GetCounterAmount(this, CounterType.M1M1) > 0; });
             foreach(Card c in crds)
             {
-                Int32 ToRemove = Math.Min(c.GetCounterAmount(CounterType.P1P1), c.GetCounterAmount(CounterType.M1M1));
+                Int32 ToRemove = Math.Min(c.GetCounterAmount(this, CounterType.P1P1), c.GetCounterAmount(this, CounterType.M1M1));
 
                 for(int i=0; i < ToRemove;i++)
                 {
-                    c.RemoveCounterType(CounterType.P1P1);
-                    c.RemoveCounterType(CounterType.M1M1);
+                    MyExecutor.Do(new CommandRemoveCounter(c.ID, CounterType.P1P1));
+                    MyExecutor.Do(new CommandRemoveCounter(c.ID, CounterType.M1M1));
                 }
+
+
             }
             //704.5r.If a permanent with an ability that says it can't have more than N counters of a certain kind on it has more than N counters of that kind on it, all but N of those counters are removed from it.
             //704.5s.If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number and it isn't the source of a chapter ability that has triggered but not yet left the stack, that Saga's controller sacrifices it. See rule 714, "Saga Cards."
@@ -311,7 +313,7 @@ namespace Sharpening2020
 
             foreach(GameObject go in GameObjects)
             {
-                UpdateView(go.GetView());
+                UpdateView(go.GetView(this));
             }
         }
 
@@ -328,7 +330,7 @@ namespace Sharpening2020
 
         public void UpdateZoneView(ZoneType zt, Int32 PlayerID)
         {
-            List<CardView> list = GetCards(zt, (Player)GetGameObjectByID(PlayerID)).Select<Card,CardView>(x => { return (CardView)x.GetView(); }).ToList();
+            List<CardView> list = GetCards(zt, (Player)GetGameObjectByID(PlayerID)).Select<Card,CardView>(x => { return (CardView)x.GetView(this); }).ToList();
             foreach(InputHandler ih in InputHandlers.Values)
             {
                 ih.Bridge.UpdateZoneView(zt, PlayerID, list);
@@ -348,7 +350,7 @@ namespace Sharpening2020
 
         public List<StackInstanceView> GetStackView()
         {
-            return SpellStack.Select(x => { return (StackInstanceView)x.GetView(); }).ToList();
+            return SpellStack.Select(x => { return (StackInstanceView)x.GetView(this); }).ToList();
         }
     }
 }

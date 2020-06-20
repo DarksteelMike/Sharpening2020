@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Sharpening2020.Cards;
@@ -21,15 +22,20 @@ namespace Sharpening2020.Commands
         public override void Do(Game g)
         {
             ICanHaveCounters ichc = (ICanHaveCounters)g.GetGameObjectByID(SourceID);
-            removedCounter = ichc.GetAllCounters().Where(x => { return x.MyType == Type; }).First();
-
-            ichc.RemoveCounter(removedCounter);
+            removedCounter = ichc.GetAllCounters(g).Where(x => { return x.MyType == Type; }).FirstOrDefault(); //Default is null for reference types
+            if(removedCounter != null)
+            {
+                ichc.RemoveCounter(removedCounter);
+            }
         }
 
         private Counter removedCounter;
 
         public override void Undo(Game g)
         {
+            if (removedCounter == null)
+                return;
+
             ICanHaveCounters ichc = (ICanHaveCounters)g.GetGameObjectByID(SourceID);
             ichc.AddCounter(removedCounter);
         }
@@ -46,11 +52,11 @@ namespace Sharpening2020.Commands
             {
                 if(go is Card)
                 {
-                    ih.Bridge.UpdateCardView((CardView)go.GetView());
+                    ih.Bridge.UpdateCardView((CardView)go.GetView(g));
                 }
                 else
                 {
-                    ih.Bridge.UpdatePlayerView((PlayerView)go.GetView());
+                    ih.Bridge.UpdatePlayerView((PlayerView)go.GetView(g));
                 }
             }
         }

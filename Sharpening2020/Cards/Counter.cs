@@ -12,15 +12,19 @@ namespace Sharpening2020.Cards
     {
         public CounterType MyType;
 
+        public Counter(CounterType ct)
+        {
+            MyType = ct;
+        }
+
         public override object Clone()
         {
-            Counter ret = new Counter();
-            ret.MyType = this.MyType;
+            Counter ret = new Counter(MyType);
 
             return ret;
         }
 
-        public override ViewObject GetView()
+        public override ViewObject GetView(Game g)
         {
             return new CounterView(MyType);
         }

@@ -13,7 +13,7 @@ namespace Sharpening2020.Views
         public readonly IReadOnlyList<CounterView> Counters;
         public readonly IReadOnlyList<ManaPointView> ManaPool;
 
-        public PlayerView(Int32 i, Int32 l, List<Counter> cts, List<ManaPoint> mp)
+        public PlayerView(Game g, Int32 i, Int32 l, List<Counter> cts, List<ManaPoint> mp)
         {
             ID = i;
             Life = l;
@@ -22,14 +22,14 @@ namespace Sharpening2020.Views
 
             foreach(Counter c in cts)
             {
-                counts.Add((CounterView)c.GetView());
+                counts.Add((CounterView)c.GetView(g));
             }
 
             List<ManaPointView> manas = new List<ManaPointView>();
 
             foreach(ManaPoint m in mp)
             {
-                manas.Add((ManaPointView)m.GetView());
+                manas.Add((ManaPointView)m.GetView(g));
             }
 
             ManaPool = manas.AsReadOnly();

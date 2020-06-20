@@ -59,6 +59,7 @@
     <Compile Include="Cards\Counter.cs" />
     <Compile Include="Cards\Static\ContinuousEffect.cs" />
     <Compile Include="Cards\Static\ContinuousEffectHandler.cs" />
+    <Compile Include="Commands\CommandAddCounter.cs" />
     <Compile Include="Commands\CommandAddManaToPool.cs" />
     <Compile Include="Commands\CommandAdvancePhase.cs" />
     <Compile Include="Commands\CommandDestroy.cs" />

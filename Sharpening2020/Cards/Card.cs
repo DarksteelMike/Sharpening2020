@@ -29,39 +29,31 @@ namespace Sharpening2020.Cards
         public LazyGameObject<Player> Owner;
         public LazyGameObject<Player> Controller;
 
-        public List<Counter> MyCounters = new List<Counter>();
+        public List<LazyGameObject<Counter>> MyCounters = new List<LazyGameObject<Counter>>();
 
-        public Int32 GetCounterAmount(CounterType ct)
+        public Int32 GetCounterAmount(Game g, CounterType ct)
         {
-            return MyCounters.Where(x => { return x.MyType == ct; }).Count();
-        }
-
-        public void AddCounter(Counter c)
-        {
-            MyCounters.Add(c);
+            return MyCounters.Where(x => { return x.Value(g).MyType == ct; }).Count();
         }
 
         public void RemoveCounter(Counter c)
         {
-            MyCounters.Remove(c);
+            MyCounters.RemoveAll(x => { return x.ID == c.ID; });
         }
 
-        public void RemoveCounterType(CounterType c)
+        public void AddCounter(Counter c)
         {
-            IEnumerable<Counter> cts = MyCounters.Where(x => { return x.MyType == c; });
-            if (cts.Count() == 0)
-                return;
-            MyCounters.Remove(cts.First());
+            MyCounters.Add(new LazyGameObject<Counter>(c));
         }
 
-        public IEnumerable<Counter> GetAllCounters()
+        public IEnumerable<Counter> GetAllCounters(Game g)
         {
-            return MyCounters;
+            return MyCounters.Select(x => { return x.Value(g); });
         }
 
-        public override ViewObject GetView()
+        public override ViewObject GetView(Game g)
         {
-            return new CardView(this);
+            return new CardView(g, this);
         }
 
         public static void AddUniversalCharacteristics(Card c)
@@ -99,9 +91,9 @@ namespace Sharpening2020.Cards
                 ret.MyCharacteristics.Add(cn,(CardCharacteristics)this.MyCharacteristics[cn].Clone());
             }
 
-            foreach(Counter c in MyCounters)
+            foreach(LazyGameObject<Counter> c in MyCounters)
             {
-                ret.MyCounters.Add((Counter)c.Clone());
+                ret.MyCounters.Add((LazyGameObject<Counter>)c.Clone());
             }
 
             ret.CurrentCharacteristicName = this.CurrentCharacteristicName;

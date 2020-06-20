@@ -14,7 +14,9 @@ namespace Sharpening2020
         public void Do(CommandBase com)
         {
             UndoStack.Push(com);
-            com.Do(MyGame);            
+            com.Do(MyGame);
+
+            com.UpdateViews(MyGame);
         }
 
         public void Undo()

@@ -31,12 +31,12 @@ namespace Sharpening2020.Views
 
         public readonly CardView AlternateView;
 
-        public CardView(Card crd) : this(crd, crd.CurrentCharacteristicName, null)
+        public CardView(Game g, Card crd) : this(g, crd, crd.CurrentCharacteristicName, null)
         {
             
         }
 
-        public CardView(Card crd, CharacteristicName cn, CardView ForceAltView)
+        public CardView(Game g, Card crd, CharacteristicName cn, CardView ForceAltView)
         {
             ID = crd.ID;
             CardCharacteristics chara = crd.MyCharacteristics[cn];
@@ -58,7 +58,7 @@ namespace Sharpening2020.Views
             Toughness = chara.Toughness;
             AssignedDamage = crd.AssignedDamage;
 
-            Counters = crd.MyCounters.Select(x => { return (CounterView)x.GetView(); }).ToList().AsReadOnly();
+            Counters = crd.MyCounters.Select(x => { return (CounterView)x.Value(g).GetView(g); }).ToList().AsReadOnly();
 
             if (ForceAltView != null)
             {
@@ -72,18 +72,18 @@ namespace Sharpening2020.Views
                    cn == CharacteristicName.Manifest ||
                    cn == CharacteristicName.Morph)
                 {
-                    AlternateView = new CardView(crd, CharacteristicName.Front, this);
+                    AlternateView = new CardView(g, crd, CharacteristicName.Front, this);
                 }
 
                 if(cn == CharacteristicName.Front)
                 {
                     if(crd.MyCharacteristics.ContainsKey(CharacteristicName.Flip))
                     {
-                        AlternateView = new CardView(crd, CharacteristicName.Flip, this);
+                        AlternateView = new CardView(g, crd, CharacteristicName.Flip, this);
                     }
                     else if (crd.MyCharacteristics.ContainsKey(CharacteristicName.Back))
                     {
-                        AlternateView = new CardView(crd, CharacteristicName.Back, this);
+                        AlternateView = new CardView(g, crd, CharacteristicName.Back, this);
                     }
                     else
                     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sharpening2020
 {
-    public class LazyGameObject<T> where T : GameObject
+    public class LazyGameObject<T> where T : GameObject, ICloneable
     {
         public readonly Int32 ID;
         public LazyGameObject(GameObject go)
@@ -21,6 +21,11 @@ namespace Sharpening2020
 
         public T Value(Game g) {
             return (T)g.GetGameObjectByID(ID);
+        }
+
+        public object Clone()
+        {
+            return new LazyGameObject<T>(ID);
         }
     }
 }

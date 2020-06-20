@@ -21,7 +21,7 @@ namespace Sharpening2020.Mana
             return ret;
         }
 
-        public override ViewObject GetView()
+        public override ViewObject GetView(Game g)
         {
             return new ManaPointView(ID,MyColor);
         }
