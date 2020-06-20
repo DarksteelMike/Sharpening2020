@@ -24,9 +24,9 @@ namespace Sharpening2020.Input
 
                 GameAction a = new GameAction(i++, act.Host.ID, act.ToString(MyGame));
 
-                //Instead of null, I should add a Command that starts off the process of activating the activatable.
-                //Whatever that entails.
-                ActionCommandPairs.Add(a.ID, null);
+                //Should rather be a CommandSetAnnouncementState, but PayAction is the earliest now implemented step that starts
+                //activating the activatable.
+                ActionCommandPairs.Add(a.ID, new CommandSetPayActionCostState(MyPlayer.ID,act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)));
                 ret.Add(a);
             }
             return ret;

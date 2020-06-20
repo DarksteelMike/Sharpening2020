@@ -9,7 +9,7 @@ namespace Sharpening2020
     public class LazyGameObject<T> where T : GameObject, ICloneable
     {
         public readonly Int32 ID;
-        public LazyGameObject(GameObject go)
+        public LazyGameObject(T go)
         {
             ID = go.ID;
         }
