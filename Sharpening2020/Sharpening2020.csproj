@@ -67,6 +67,8 @@
     <Compile Include="Commands\CommandAddManaToPool.cs" />
     <Compile Include="Commands\CommandAddPowerToughness.cs" />
     <Compile Include="Commands\CommandAdvancePhase.cs" />
+    <Compile Include="Commands\CommandCreateCard.cs" />
+    <Compile Include="Commands\CommandCreatePlayer.cs" />
     <Compile Include="Commands\CommandCreateStaticPumpEffect.cs" />
     <Compile Include="Commands\CommandDestroy.cs" />
     <Compile Include="Commands\CommandIncrementActionPartIndex.cs" />

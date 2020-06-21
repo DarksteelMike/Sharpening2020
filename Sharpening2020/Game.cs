@@ -323,46 +323,35 @@ namespace Sharpening2020
             return ret;
         }
 
-        public void UpdateGameReferences()
+        public void AssociateInputBridge(InputBridge ib, Int32 PlayerID)
         {
-            
+            if(InputHandlers.ContainsKey(PlayerID))
+            {
+                InputHandlers[PlayerID] = new InputHandler(this, new LazyGameObject<Player>(PlayerID), ib);
+            }
+            else
+            {
+                InputHandlers.Add(PlayerID, new InputHandler(this, new LazyGameObject<Player>(PlayerID), ib));
+            }
         }
 
         public void InitGame(params KeyValuePair<InputBridge,List<String>>[] test)
         {
             MyExecutor.SuspendViewUpdates = true;
-            Random rand = new Random();
             foreach(KeyValuePair<InputBridge,List<String>> kvp in test)
             {
-                List<String> unshuf = kvp.Value;
-                List<String> shuf = new List<string>();
-
-                while(unshuf.Count > 0)
-                {
-                    Int32 index = rand.Next(unshuf.Count - 1);
-                    shuf.Add(unshuf[index]);
-                    unshuf.RemoveAt(index);
-                }
-
-                Player newPlayer = new Player();
-
-                RegisterGameObject(newPlayer);
-
-                newPlayer.Build();
+                CommandCreatePlayer ccp = new CommandCreatePlayer();
+                MyExecutor.Do(ccp);
+                Player newPlayer = ccp.CreatedPlayer;
 
                 InputHandlers.Add(newPlayer.ID, new InputHandler(this, new LazyGameObject<Player>(newPlayer), kvp.Key));
 
-                foreach(String s in shuf)
+                foreach(String s in kvp.Value)
                 {
-                    Card c = CardCompiler.Compile(s);
-                    c.Owner = new LazyGameObject<Player>(newPlayer);
-                    newPlayer.MyZones[ZoneType.Library].Contents.Add(new LazyGameObject<Card>(c));
-                    c.CurrentCharacteristicName = CharacteristicName.FaceDown;
-                    
-                    RegisterGameObject(c);
-
-                    c.Build();
+                    MyExecutor.Do(new CommandCreateCard(s, newPlayer.ID));
                 }
+
+                MyExecutor.Do(new CommandShuffleLibrary(newPlayer.ID, (Int32)DateTime.Now.Ticks));
             }
 
             MyExecutor.SuspendViewUpdates = false;
