@@ -9,8 +9,9 @@ namespace Sharpening2020.Cards.Static
     public class ContinuousEffectHandler : ICloneable
     {
         public Game MyGame;
-        public Game LookAhead; //Not used
-        public Dictionary<LayerName, List<ContinuousEffect>> Layers = new Dictionary<LayerName, List<ContinuousEffect>>();
+        //public Game LookAhead; //Not used
+        public readonly Dictionary<LayerName, List<ContinuousEffect>> Layers = new Dictionary<LayerName, List<ContinuousEffect>>();
+        public readonly List<ContinuousEffect> StaticEffects = new List<ContinuousEffect>();
 
         public ContinuousEffectHandler()
         {
@@ -39,9 +40,8 @@ namespace Sharpening2020.Cards.Static
                 Layers[ln].Clear();
             }
 
-            foreach (GameObject go in MyGame.GetCards())
+            foreach (Card c in MyGame.GetCards())
             {
-                Card c = (Card)go;
                 foreach (ContinuousEffect ce in c.CurrentCharacteristics.ContinuousEffects)
                 {
                     if (ce.Applies(MyGame))
@@ -49,7 +49,12 @@ namespace Sharpening2020.Cards.Static
                         Layers[ce.MyLayer].Add(ce);
                     }
                 }
-            }            
+            }
+            
+            foreach(ContinuousEffect ce in StaticEffects)
+            {
+                Layers[ce.MyLayer].Add(ce);
+            }
         }
 
         public void SortContinuousEffects()
@@ -59,7 +64,7 @@ namespace Sharpening2020.Cards.Static
                 List<ContinuousEffect> curLayer = Layers[ln];
 
                 //Establish Dependencies
-                LookAhead = (Game)MyGame.Clone();
+                //LookAhead = (Game)MyGame.Clone();
                 //TODO: Figure out how the fuck this would work. Just sort by timestamp for now.
 
                 curLayer.Sort((ContinuousEffect one, ContinuousEffect other) =>

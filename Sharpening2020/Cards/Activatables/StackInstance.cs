@@ -11,6 +11,8 @@ namespace Sharpening2020.Cards.Activatables
 
         public readonly IReadOnlyList<ManaPoint> ManaPaid;
 
+        public readonly IReadOnlyList<GameObject> Targets;
+
         public StackInstance(Activatable act)
         {
             MyActivatable = act;
@@ -19,6 +21,11 @@ namespace Sharpening2020.Cards.Activatables
             PointsPaid.AddRange(act.MyCost.PaidMana.Select(x => {return x.PaidPoint;}));
 
             ManaPaid = PointsPaid.AsReadOnly();
+
+            List<GameObject> TargetsChosen = new List<GameObject>();
+            TargetsChosen.AddRange(act.MyTargeting.Targeted);
+
+            Targets = TargetsChosen.AsReadOnly();
         }
 
         //Copy constructor

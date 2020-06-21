@@ -46,6 +46,7 @@
     <Compile Include="Cards\Activatables\Activatable.cs" />
     <Compile Include="Cards\Activatables\Presets\CastPermanent.cs" />
     <Compile Include="Cards\Activatables\Presets\PlayLand.cs" />
+    <Compile Include="Cards\Activatables\Presets\PumpSpell.cs" />
     <Compile Include="Cards\Activatables\Presets\TapForMana.cs" />
     <Compile Include="Cards\Activatables\SpecialAction.cs" />
     <Compile Include="Cards\Activatables\Spell.cs" />
@@ -60,9 +61,13 @@
     <Compile Include="Cards\Counter.cs" />
     <Compile Include="Cards\Static\ContinuousEffect.cs" />
     <Compile Include="Cards\Static\ContinuousEffectHandler.cs" />
+    <Compile Include="Cards\Static\Presets\PumpPT.cs" />
+    <Compile Include="Cards\Targets\Targeting.cs" />
     <Compile Include="Commands\CommandAddCounter.cs" />
     <Compile Include="Commands\CommandAddManaToPool.cs" />
+    <Compile Include="Commands\CommandAddPowerToughness.cs" />
     <Compile Include="Commands\CommandAdvancePhase.cs" />
+    <Compile Include="Commands\CommandCreateStaticPumpEffect.cs" />
     <Compile Include="Commands\CommandDestroy.cs" />
     <Compile Include="Commands\CommandIncrementActionPartIndex.cs" />
     <Compile Include="Commands\CommandIncrementLandsPlayed.cs" />

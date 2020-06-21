@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Sharpening2020.Cards.Costs;
+using Sharpening2020.Cards.Targets;
 using Sharpening2020.Players;
 
 namespace Sharpening2020.Cards.Activatables
@@ -14,6 +15,8 @@ namespace Sharpening2020.Cards.Activatables
         public Boolean IsBeingActivated = false;
 
         public Cost MyCost = new Cost();
+
+        public Targeting MyTargeting = new Targeting();
 
         public abstract Boolean CanActivate(Player act, Game g);
         public abstract void Resolve(Game g, StackInstance si);
