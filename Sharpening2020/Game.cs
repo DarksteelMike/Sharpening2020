@@ -327,7 +327,7 @@ namespace Sharpening2020
         {
             if(InputHandlers.ContainsKey(PlayerID))
             {
-                InputHandlers[PlayerID] = new InputHandler(this, new LazyGameObject<Player>(PlayerID), ib);
+                InputHandlers[PlayerID].Bridge = ib;
             }
             else
             {
