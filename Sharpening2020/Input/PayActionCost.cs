@@ -46,6 +46,9 @@ namespace Sharpening2020.Input
             
             ActionCommandPairs.Add(-1, new CommandPerformActionCost(MyActivatable.Host.ID, activatableIndex, ActionPartIndex));
 
+            res.Add(ok);
+            res.Add(cancel);
+
             return res;
         }
 

@@ -36,6 +36,7 @@ namespace Cards.Cards
 
             Activatable cast = new PumpSpell(new LazyGameObject<Card>(this), 3, 3);
 
+            cast.MyTargeting.Description = "Creature";
             cast.MyTargeting.TargetPredicate = targetVal;
             cast.MyTargeting.MinTargets = 1;
             cast.MyTargeting.MaxTargets = 1;

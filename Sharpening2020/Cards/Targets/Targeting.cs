@@ -9,6 +9,7 @@ namespace Sharpening2020.Cards.Targets
     public class Targeting
     {
         public readonly List<GameObject> Targeted = new List<GameObject>();
+        public String Description;
 
         public Func<Game, GameObject, Boolean> TargetPredicate = null;
 
