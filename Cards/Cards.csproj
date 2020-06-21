@@ -41,31 +41,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Cards\Grizzly Bears.cs">
+    <Content Include="Cards\Grizzly Bears.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Cards\Memnite.cs">
+    </Content>
+    <Content Include="Cards\Memnite.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Cards\Swamp.cs">
+    </Content>
+    <Content Include="Cards\Swamp.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Cards\Mountain.cs">
+    </Content>
+    <Content Include="Cards\Mountain.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Cards\Forest.cs">
+    </Content>
+    <Content Include="Cards\Forest.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Cards\Wastes.cs">
+    </Content>
+    <Content Include="Cards\Wastes.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Cards\Island.cs">
+    </Content>
+    <Content Include="Cards\Island.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Cards\Plains.cs">
+    </Content>
+    <Content Include="Cards\Plains.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Compile Include="Cards\Giant Growth.cs" />
+    </Content>
+    <Content Include="Cards\Giant Growth.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

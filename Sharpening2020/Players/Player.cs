@@ -14,19 +14,16 @@ namespace Sharpening2020.Players
     {
         public Player() { }
 
-        public static Player Construct()
+        public void Build()
         {
-            Player ret = new Player();
-            ret.Life = 20;
+            Life = 20;
 
-            ret.MyZones.Add(ZoneType.Battlefield, new Zone(ZoneType.Battlefield));
-            ret.MyZones.Add(ZoneType.Command, new Zone(ZoneType.Command));
-            ret.MyZones.Add(ZoneType.Exile, new Zone(ZoneType.Exile));
-            ret.MyZones.Add(ZoneType.Graveyard, new Zone(ZoneType.Graveyard));
-            ret.MyZones.Add(ZoneType.Hand, new Zone(ZoneType.Hand));
-            ret.MyZones.Add(ZoneType.Library, new Zone(ZoneType.Library));
-
-            return ret;
+            MyZones.Add(ZoneType.Battlefield, new Zone(ZoneType.Battlefield));
+            MyZones.Add(ZoneType.Command, new Zone(ZoneType.Command));
+            MyZones.Add(ZoneType.Exile, new Zone(ZoneType.Exile));
+            MyZones.Add(ZoneType.Graveyard, new Zone(ZoneType.Graveyard));
+            MyZones.Add(ZoneType.Hand, new Zone(ZoneType.Hand));
+            MyZones.Add(ZoneType.Library, new Zone(ZoneType.Library));
         }
 
         public Int32 Life;

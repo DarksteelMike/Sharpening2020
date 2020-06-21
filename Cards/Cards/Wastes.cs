@@ -9,7 +9,7 @@ namespace Cards
 {    
     public class Wastes : Card
     {
-        public Wastes()
+        public override void Build()
         {
             Card.AddUniversalCharacteristics(this);
             CardCharacteristics Front = MyCharacteristics[CharacteristicName.Front];
@@ -23,6 +23,11 @@ namespace Cards
 
             TapForMana tfm = new TapForMana(new LazyGameObject<Card>(this), ManaColor.Colorless);
             Front.Activatables.Add(tfm);
+        }
+
+        public override object Clone()
+        {
+            return base.Clone(new Wastes());
         }
     }
 }

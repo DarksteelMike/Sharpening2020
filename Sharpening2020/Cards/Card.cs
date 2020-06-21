@@ -10,7 +10,7 @@ using Sharpening2020.Views;
 namespace Sharpening2020.Cards
 {
     public enum ZoneType { Command, Library, Hand, Stack, Battlefield, Graveyard, Exile }
-    public class Card : GameObject,ICanHaveCounters, ICloneable
+    public abstract class Card : GameObject,ICanHaveCounters, ICloneable
     {
         public CharacteristicName CurrentCharacteristicName = CharacteristicName.Front;
         public Dictionary<CharacteristicName, CardCharacteristics> MyCharacteristics = new Dictionary<CharacteristicName, CardCharacteristics>();
@@ -78,18 +78,18 @@ namespace Sharpening2020.Cards
             c.MyCharacteristics.Add(CharacteristicName.Manifest, Manifest);
         }
 
-        public override object Clone()
-        {
-            Card ret = new Card();
+        public abstract void Build();
 
+        protected object Clone(Card ret)
+        {
             ret.ID = this.ID;
 
-            foreach(CharacteristicName cn in MyCharacteristics.Keys)
+            foreach (CharacteristicName cn in MyCharacteristics.Keys)
             {
-                ret.MyCharacteristics.Add(cn,(CardCharacteristics)this.MyCharacteristics[cn].Clone());
+                ret.MyCharacteristics.Add(cn, (CardCharacteristics)this.MyCharacteristics[cn].Clone());
             }
 
-            foreach(LazyGameObject<Counter> c in MyCounters)
+            foreach (LazyGameObject<Counter> c in MyCounters)
             {
                 ret.MyCounters.Add((LazyGameObject<Counter>)c.Clone());
             }

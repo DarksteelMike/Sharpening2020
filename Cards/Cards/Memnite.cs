@@ -8,7 +8,7 @@ namespace Cards
 {
     class Memnite : Card
     {
-        public Memnite()
+        public override void Build()
         {
             Card.AddUniversalCharacteristics(this);
             CardCharacteristics Front = MyCharacteristics[CharacteristicName.Front];
@@ -22,6 +22,11 @@ namespace Cards
 
             CastPermanent cp = new CastPermanent(new LazyGameObject<Card>(this));
             Front.Activatables.Add(cp);
+        }
+
+        public override object Clone()
+        {
+            return base.Clone(new Memnite());
         }
     }
 }

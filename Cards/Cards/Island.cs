@@ -9,7 +9,7 @@ namespace Cards
 {    
     public class Island : Card
     {
-        public Island()
+        public override void Build()
         {
             Card.AddUniversalCharacteristics(this);
             CardCharacteristics Front = MyCharacteristics[CharacteristicName.Front];
@@ -24,6 +24,11 @@ namespace Cards
 
             TapForMana tfm = new TapForMana(new LazyGameObject<Card>(this), ManaColor.Blue);
             Front.Activatables.Add(tfm);
+        }
+
+        public override object Clone()
+        {
+            return base.Clone(new Island());
         }
     }
 }

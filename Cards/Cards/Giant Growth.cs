@@ -11,7 +11,7 @@ namespace Cards.Cards
 {
     class Giant_Growth : Card
     {
-        public Giant_Growth()
+        public override void Build()
         {
             Card.AddUniversalCharacteristics(this);
             CardCharacteristics Front = MyCharacteristics[CharacteristicName.Front];
@@ -43,6 +43,11 @@ namespace Cards.Cards
             cast.MyCost.ManaParts.Add(new ManaCostPart(ManaColor.Green));
 
             Front.Activatables.Add(cast);
+        }
+
+        public override object Clone()
+        {
+            return base.Clone(new Giant_Growth());
         }
     }
 }

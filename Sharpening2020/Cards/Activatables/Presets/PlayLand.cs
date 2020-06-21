@@ -9,6 +9,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
     public class PlayLand : SpecialAction,ICloneable
     {
         public PlayLand() { }
+        
         public PlayLand(LazyGameObject<Card> c)
         {
             Host = c;

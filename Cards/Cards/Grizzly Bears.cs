@@ -11,7 +11,7 @@ namespace Cards
 {
     class Grizzly_Bears : Card
     {
-        public Grizzly_Bears()
+        public override void Build()
         {
             Card.AddUniversalCharacteristics(this);
             CardCharacteristics Front = MyCharacteristics[CharacteristicName.Front];
@@ -28,6 +28,11 @@ namespace Cards
             cast.MyCost.ManaParts.Add(new ManaCostPart(ManaColor.Green));
 
             Front.Activatables.Add(cast);
+        }
+
+        public override object Clone()
+        {
+            return base.Clone(new Grizzly_Bears());
         }
     }
 }

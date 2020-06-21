@@ -348,6 +348,8 @@ namespace Sharpening2020
 
                 RegisterGameObject(newPlayer);
 
+                newPlayer.Build();
+
                 InputHandlers.Add(newPlayer.ID, new InputHandler(this, new LazyGameObject<Player>(newPlayer), kvp.Key));
 
                 foreach(String s in shuf)
@@ -356,8 +358,10 @@ namespace Sharpening2020
                     c.Owner = new LazyGameObject<Player>(newPlayer);
                     newPlayer.MyZones[ZoneType.Library].Contents.Add(new LazyGameObject<Card>(c));
                     c.CurrentCharacteristicName = CharacteristicName.FaceDown;
-
+                    
                     RegisterGameObject(c);
+
+                    c.Build();
                 }
             }
 

@@ -9,7 +9,7 @@ namespace Cards
 {    
     public class Swamp : Card
     {
-        public Swamp()
+        public override void Build()
         {
             Card.AddUniversalCharacteristics(this);
             CardCharacteristics Front = MyCharacteristics[CharacteristicName.Front];
@@ -24,6 +24,11 @@ namespace Cards
 
             TapForMana tfm = new TapForMana(new LazyGameObject<Card>(this), ManaColor.Black);
             Front.Activatables.Add(tfm);
+        }
+
+        public override object Clone()
+        {
+            return base.Clone(new Swamp());
         }
     }
 }
