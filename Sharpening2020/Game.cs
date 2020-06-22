@@ -346,19 +346,36 @@ namespace Sharpening2020
 
                 InputHandlers.Add(newPlayer.ID, new InputHandler(this, new LazyGameObject<Player>(newPlayer), kvp.Key));
 
-                foreach(String s in kvp.Value)
+                kvp.Key.Prompt("Test");
+            }
+
+            Int32 i = 0;
+
+            foreach (KeyValuePair<InputBridge, List<String>> kvp in test)
+            {
+                foreach (String s in kvp.Value)
                 {
-                    MyExecutor.Do(new CommandCreateCard(s, newPlayer.ID));
+                    MyExecutor.Do(new CommandCreateCard(s, i));
                 }
 
-                MyExecutor.Do(new CommandShuffleLibrary(newPlayer.ID, (Int32)DateTime.Now.Ticks));
+                MyExecutor.Do(new CommandShuffleLibrary(i++, (Int32)DateTime.Now.Ticks));
             }
 
             MyExecutor.SuspendViewUpdates = false;
 
-            foreach (GameObject go in GameObjects)
+            foreach(Player p in GetPlayers())
             {
-                UpdateView(go.GetView(this));
+                foreach (InputHandler ih in InputHandlers.Values)
+                {
+                    ih.Bridge.UpdatePlayerView((PlayerView)p.GetView(this));
+                }
+                foreach (Zone z in p.MyZones.Values)
+                {
+                    foreach(InputHandler ih in InputHandlers.Values)
+                    {
+                        ih.Bridge.UpdateZoneView(z.MyType, p.ID, z.Contents.Select(x => { return (CardView)x.Value(this).GetView(this); }).ToList());
+                    }
+                }
             }
         }
 

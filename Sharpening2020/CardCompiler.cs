@@ -24,11 +24,14 @@ namespace Sharpening2020
             CSharpCodeProvider provider = new CSharpCodeProvider();
             CompilerParameters parameters = new CompilerParameters();
 
-            parameters.ReferencedAssemblies.Add("Sharpening2020.dll");
+            parameters.ReferencedAssemblies.Add("..\\..\\Sharpening2020.dll");
             parameters.GenerateInMemory = true;
             parameters.GenerateExecutable = false;
+            
 
-            CompilerResults res = provider.CompileAssemblyFromFile(parameters, "Cards" + Path.PathSeparator + name + ".cs");
+            CompilerResults res = provider.CompileAssemblyFromFile(parameters, "Cards" + Path.DirectorySeparatorChar + name + ".cs");
+
+            //AppDomain.CurrentDomain.Load(File.ReadAllBytes(res.PathToAssembly));
 
             return (Card)Activator.CreateInstance(res.CompiledAssembly.GetType(classname));
         }

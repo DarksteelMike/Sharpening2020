@@ -26,6 +26,7 @@ namespace DbgUI
         private void Form1_Load(object sender, EventArgs e)
         {
             ThreadStart ts = new ThreadStart(SetupGame);
+            ts.Invoke();
         }
         
         public void SetupGame()
@@ -48,7 +49,7 @@ namespace DbgUI
 
             InputBridge IB1, IB2;
 
-            IB1 = new RandomPlayerBridge();
+            IB1 = new UIBridge(this);
             IB2 = new RandomPlayerBridge();
 
             Model.InitGame(new KeyValuePair<InputBridge, List<string>>(IB1, Deck1), new KeyValuePair<InputBridge, List<string>>(IB2, Deck2));

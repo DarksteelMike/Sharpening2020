@@ -12,7 +12,7 @@ TODOS, in no particular order:
 *More action costs.
 *Announce input step?
 *More commands.
-*Targeting.
+*Targeting. (Basic done)
 *Winning/Losing.
 *Serializing Commands.
 *Game state scoring.
