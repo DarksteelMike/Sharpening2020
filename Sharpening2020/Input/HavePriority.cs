@@ -10,6 +10,12 @@ namespace Sharpening2020.Input
     class HavePriority : InputStateBase
     {
         Dictionary<Int32, CommandBase> ActionCommandPairs = new Dictionary<Int32, CommandBase>();
+
+        public override void Enter()
+        {
+            MyBridge.Prompt("You have priority.");
+            MyBridge.SelectActionFromList(GetActions());
+        }
         public override List<GameAction> GetActions()
         {
             List<GameAction> ret = new List<GameAction>();
@@ -24,9 +30,9 @@ namespace Sharpening2020.Input
 
                 GameAction a = new GameAction(i++, act.Host.ID, act.ToString(MyGame));
 
-                //Should rather be a CommandSetAnnouncementState, but PayAction is the earliest now implemented step that starts
+                //Should rather be a CommandSetAnnouncementState, but SetTarget is the earliest now implemented step that starts
                 //activating the activatable.
-                ActionCommandPairs.Add(a.ID, new CommandSetPayActionCostState(MyPlayer.ID,act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)));
+                ActionCommandPairs.Add(a.ID, new CommandSetTargetState(MyPlayer.ID,act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)));
                 ret.Add(a);
             }
             return ret;
