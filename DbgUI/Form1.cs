@@ -23,6 +23,88 @@ namespace DbgUI
             InitializeComponent();
         }
 
+        public ListView GetLibrary(Int32 PlayerNum)
+        {
+            if (PlayerNum == 0)
+                return lvLibrary1;
+
+            return lvLibrary2;
+        }
+
+        public ListView GetHand(Int32 PlayerNum)
+        {
+            if (PlayerNum == 0)
+                return lvHand1;
+
+            return lvHand2;
+        }
+
+        public ListView GetBattlefield(Int32 PlayerNum)
+        {
+            if (PlayerNum == 0)
+                return lvBattlefield1;
+
+            return lvBattlefield2;
+        }
+
+        public ListView GetGraveyard(Int32 PlayerNum)
+        {
+            if (PlayerNum == 0)
+                return lvGraveyard1;
+
+            return lvGraveyard2;
+        }
+
+        public ListView GetExile(Int32 PlayerNum)
+        {
+            if (PlayerNum == 0)
+                return lvExile1;
+
+            return lvExile2;
+        }
+
+        public ListView GetCommand(Int32 PlayerNum)
+        {
+            if (PlayerNum == 0)
+                return lvCommand1;
+
+            return lvCommand2;
+        }
+
+        public Label GetLife(Int32 PlayerNum)
+        {
+            if (PlayerNum == 0)
+                return lblLife1;
+
+            return lblLife2;
+        }
+
+        public ComboBox GetCounters(Int32 PlayerNum)
+        {
+            if (PlayerNum == 0)
+                return cbCounters1;
+
+            return cbCounters2;
+        }
+
+        public ComboBox GetManaPool(Int32 PlayerNum)
+        {
+            if (PlayerNum == 0)
+                return cbManaPool1;
+
+            return cbManaPool2;
+        }
+
+        public Label GetPrompt()
+        {
+            return lblPrompt;
+        }
+
+        public ListBox GetStack()
+        {
+            return lbStack;
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             ThreadStart ts = new ThreadStart(SetupGame);

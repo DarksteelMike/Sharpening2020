@@ -71,6 +71,8 @@ namespace Sharpening2020.Cards
             Manifest.Power = 2;
             Manifest.Toughness = 2;
 
+            FaceDown.Name = "Face down card";
+
             c.MyCharacteristics.Add(CharacteristicName.Front, Front);
             c.MyCharacteristics.Add(CharacteristicName.Back, Back);
             c.MyCharacteristics.Add(CharacteristicName.FaceDown, FaceDown);

@@ -23,22 +23,22 @@ namespace Sharpening2020.InputBridges
 
         public override void UpdateCardView(CardView view)
         {
-
+            //Don't care
         }
 
         public override void UpdatePlayerView(PlayerView view)
         {
-            throw new NotImplementedException();
+            //Don't care
         }
 
         public override void UpdateZoneView(ZoneType zt, Int32 PlayerID, List<CardView> views)
         {
-            throw new NotImplementedException();
+            //Don't care
         }
 
         public override void UpdateStackView(List<StackInstanceView> views)
         {
-            throw new NotImplementedException();
+            //Don't care
         }
     }
 }

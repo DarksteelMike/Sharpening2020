@@ -37,47 +37,48 @@
             this.cbManaPool1 = new System.Windows.Forms.ComboBox();
             this.cbManaPool2 = new System.Windows.Forms.ComboBox();
             this.tcArea1 = new System.Windows.Forms.TabControl();
-            this.tpBattlefield = new System.Windows.Forms.TabPage();
-            this.tpGraveyard = new System.Windows.Forms.TabPage();
-            this.tpExile = new System.Windows.Forms.TabPage();
-            this.tpCommand = new System.Windows.Forms.TabPage();
-            this.grpPlayer2 = new System.Windows.Forms.GroupBox();
-            this.grpPlayer1 = new System.Windows.Forms.GroupBox();
-            this.lblUICounters2 = new System.Windows.Forms.Label();
-            this.grpCardDetail = new System.Windows.Forms.GroupBox();
-            this.lblUILife1 = new System.Windows.Forms.Label();
-            this.lblUILife2 = new System.Windows.Forms.Label();
-            this.lblLife2 = new System.Windows.Forms.Label();
-            this.lblLife1 = new System.Windows.Forms.Label();
-            this.lblCounters1 = new System.Windows.Forms.Label();
-            this.lblManapool = new System.Windows.Forms.Label();
-            this.lblUIManapool2 = new System.Windows.Forms.Label();
-            this.cbCounters2 = new System.Windows.Forms.ComboBox();
-            this.cbCounters1 = new System.Windows.Forms.ComboBox();
-            this.lblCardDetailName = new System.Windows.Forms.Label();
-            this.cbCardDetailCounters = new System.Windows.Forms.ComboBox();
-            this.lblUICardDetailCounters = new System.Windows.Forms.Label();
-            this.tbCardDetailText = new System.Windows.Forms.TextBox();
-            this.lblCardDetailID = new System.Windows.Forms.Label();
             this.tpLibrary1 = new System.Windows.Forms.TabPage();
             this.lvLibrary1 = new System.Windows.Forms.ListView();
+            this.tpBattlefield = new System.Windows.Forms.TabPage();
+            this.tpGraveyard = new System.Windows.Forms.TabPage();
             this.lvGraveyard1 = new System.Windows.Forms.ListView();
+            this.tpExile = new System.Windows.Forms.TabPage();
             this.lvExile1 = new System.Windows.Forms.ListView();
+            this.tpCommand = new System.Windows.Forms.TabPage();
             this.lvCommand1 = new System.Windows.Forms.ListView();
+            this.grpPlayer2 = new System.Windows.Forms.GroupBox();
+            this.cbCounters2 = new System.Windows.Forms.ComboBox();
+            this.lblUIManapool2 = new System.Windows.Forms.Label();
+            this.lblLife2 = new System.Windows.Forms.Label();
+            this.lblUILife2 = new System.Windows.Forms.Label();
+            this.lblUICounters2 = new System.Windows.Forms.Label();
+            this.grpPlayer1 = new System.Windows.Forms.GroupBox();
+            this.cbCounters1 = new System.Windows.Forms.ComboBox();
+            this.lblManapool = new System.Windows.Forms.Label();
+            this.lblCounters1 = new System.Windows.Forms.Label();
+            this.lblLife1 = new System.Windows.Forms.Label();
+            this.lblUILife1 = new System.Windows.Forms.Label();
+            this.grpCardDetail = new System.Windows.Forms.GroupBox();
+            this.lblCardDetailID = new System.Windows.Forms.Label();
+            this.tbCardDetailText = new System.Windows.Forms.TextBox();
+            this.cbCardDetailCounters = new System.Windows.Forms.ComboBox();
+            this.lblUICardDetailCounters = new System.Windows.Forms.Label();
+            this.lblCardDetailName = new System.Windows.Forms.Label();
             this.tcArea2 = new System.Windows.Forms.TabControl();
             this.tpLibrary2 = new System.Windows.Forms.TabPage();
             this.lvLibrary2 = new System.Windows.Forms.ListView();
+            this.tpHand2 = new System.Windows.Forms.TabPage();
+            this.lvHand2 = new System.Windows.Forms.ListView();
             this.tpBattlefield2 = new System.Windows.Forms.TabPage();
             this.lvBattlefield2 = new System.Windows.Forms.ListView();
             this.tpGraveyard2 = new System.Windows.Forms.TabPage();
-            this.lvGraveyard = new System.Windows.Forms.ListView();
+            this.lvGraveyard2 = new System.Windows.Forms.ListView();
             this.tpExile2 = new System.Windows.Forms.TabPage();
             this.lvExile2 = new System.Windows.Forms.ListView();
             this.tpCommand2 = new System.Windows.Forms.TabPage();
             this.lvCommand2 = new System.Windows.Forms.ListView();
-            this.tpHand2 = new System.Windows.Forms.TabPage();
-            this.lvHand2 = new System.Windows.Forms.ListView();
             this.tcArea1.SuspendLayout();
+            this.tpLibrary1.SuspendLayout();
             this.tpBattlefield.SuspendLayout();
             this.tpGraveyard.SuspendLayout();
             this.tpExile.SuspendLayout();
@@ -85,14 +86,13 @@
             this.grpPlayer2.SuspendLayout();
             this.grpPlayer1.SuspendLayout();
             this.grpCardDetail.SuspendLayout();
-            this.tpLibrary1.SuspendLayout();
             this.tcArea2.SuspendLayout();
             this.tpLibrary2.SuspendLayout();
+            this.tpHand2.SuspendLayout();
             this.tpBattlefield2.SuspendLayout();
             this.tpGraveyard2.SuspendLayout();
             this.tpExile2.SuspendLayout();
             this.tpCommand2.SuspendLayout();
-            this.tpHand2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbStack
@@ -177,6 +177,25 @@
             this.tcArea1.Size = new System.Drawing.Size(544, 238);
             this.tcArea1.TabIndex = 16;
             // 
+            // tpLibrary1
+            // 
+            this.tpLibrary1.Controls.Add(this.lvLibrary1);
+            this.tpLibrary1.Location = new System.Drawing.Point(4, 22);
+            this.tpLibrary1.Name = "tpLibrary1";
+            this.tpLibrary1.Size = new System.Drawing.Size(536, 212);
+            this.tpLibrary1.TabIndex = 4;
+            this.tpLibrary1.Text = "Library";
+            this.tpLibrary1.UseVisualStyleBackColor = true;
+            // 
+            // lvLibrary1
+            // 
+            this.lvLibrary1.HideSelection = false;
+            this.lvLibrary1.Location = new System.Drawing.Point(3, 3);
+            this.lvLibrary1.Name = "lvLibrary1";
+            this.lvLibrary1.Size = new System.Drawing.Size(529, 206);
+            this.lvLibrary1.TabIndex = 0;
+            this.lvLibrary1.UseCompatibleStateImageBehavior = false;
+            // 
             // tpBattlefield
             // 
             this.tpBattlefield.Controls.Add(this.lvBattlefield1);
@@ -199,6 +218,15 @@
             this.tpGraveyard.Text = "Graveyard";
             this.tpGraveyard.UseVisualStyleBackColor = true;
             // 
+            // lvGraveyard1
+            // 
+            this.lvGraveyard1.HideSelection = false;
+            this.lvGraveyard1.Location = new System.Drawing.Point(0, 0);
+            this.lvGraveyard1.Name = "lvGraveyard1";
+            this.lvGraveyard1.Size = new System.Drawing.Size(536, 209);
+            this.lvGraveyard1.TabIndex = 0;
+            this.lvGraveyard1.UseCompatibleStateImageBehavior = false;
+            // 
             // tpExile
             // 
             this.tpExile.Controls.Add(this.lvExile1);
@@ -209,6 +237,15 @@
             this.tpExile.Text = "Exile";
             this.tpExile.UseVisualStyleBackColor = true;
             // 
+            // lvExile1
+            // 
+            this.lvExile1.HideSelection = false;
+            this.lvExile1.Location = new System.Drawing.Point(0, 0);
+            this.lvExile1.Name = "lvExile1";
+            this.lvExile1.Size = new System.Drawing.Size(533, 212);
+            this.lvExile1.TabIndex = 0;
+            this.lvExile1.UseCompatibleStateImageBehavior = false;
+            // 
             // tpCommand
             // 
             this.tpCommand.Controls.Add(this.lvCommand1);
@@ -218,6 +255,15 @@
             this.tpCommand.TabIndex = 3;
             this.tpCommand.Text = "Command";
             this.tpCommand.UseVisualStyleBackColor = true;
+            // 
+            // lvCommand1
+            // 
+            this.lvCommand1.HideSelection = false;
+            this.lvCommand1.Location = new System.Drawing.Point(3, 0);
+            this.lvCommand1.Name = "lvCommand1";
+            this.lvCommand1.Size = new System.Drawing.Size(530, 209);
+            this.lvCommand1.TabIndex = 0;
+            this.lvCommand1.UseCompatibleStateImageBehavior = false;
             // 
             // grpPlayer2
             // 
@@ -234,6 +280,50 @@
             this.grpPlayer2.TabStop = false;
             this.grpPlayer2.Text = "Player 2";
             // 
+            // cbCounters2
+            // 
+            this.cbCounters2.FormattingEnabled = true;
+            this.cbCounters2.Location = new System.Drawing.Point(70, 48);
+            this.cbCounters2.Name = "cbCounters2";
+            this.cbCounters2.Size = new System.Drawing.Size(92, 21);
+            this.cbCounters2.TabIndex = 20;
+            // 
+            // lblUIManapool2
+            // 
+            this.lblUIManapool2.AutoSize = true;
+            this.lblUIManapool2.Location = new System.Drawing.Point(7, 80);
+            this.lblUIManapool2.Name = "lblUIManapool2";
+            this.lblUIManapool2.Size = new System.Drawing.Size(57, 13);
+            this.lblUIManapool2.TabIndex = 19;
+            this.lblUIManapool2.Text = "Manapool:";
+            // 
+            // lblLife2
+            // 
+            this.lblLife2.AutoSize = true;
+            this.lblLife2.Location = new System.Drawing.Point(40, 22);
+            this.lblLife2.Name = "lblLife2";
+            this.lblLife2.Size = new System.Drawing.Size(13, 13);
+            this.lblLife2.TabIndex = 0;
+            this.lblLife2.Text = "0";
+            // 
+            // lblUILife2
+            // 
+            this.lblUILife2.AutoSize = true;
+            this.lblUILife2.Location = new System.Drawing.Point(7, 22);
+            this.lblUILife2.Name = "lblUILife2";
+            this.lblUILife2.Size = new System.Drawing.Size(27, 13);
+            this.lblUILife2.TabIndex = 16;
+            this.lblUILife2.Text = "Life:";
+            // 
+            // lblUICounters2
+            // 
+            this.lblUICounters2.AutoSize = true;
+            this.lblUICounters2.Location = new System.Drawing.Point(7, 51);
+            this.lblUICounters2.Name = "lblUICounters2";
+            this.lblUICounters2.Size = new System.Drawing.Size(52, 13);
+            this.lblUICounters2.TabIndex = 16;
+            this.lblUICounters2.Text = "Counters:";
+            // 
             // grpPlayer1
             // 
             this.grpPlayer1.Controls.Add(this.cbCounters1);
@@ -249,14 +339,49 @@
             this.grpPlayer1.TabStop = false;
             this.grpPlayer1.Text = "Player 1";
             // 
-            // lblUICounters2
+            // cbCounters1
             // 
-            this.lblUICounters2.AutoSize = true;
-            this.lblUICounters2.Location = new System.Drawing.Point(7, 51);
-            this.lblUICounters2.Name = "lblUICounters2";
-            this.lblUICounters2.Size = new System.Drawing.Size(52, 13);
-            this.lblUICounters2.TabIndex = 16;
-            this.lblUICounters2.Text = "Counters:";
+            this.cbCounters1.FormattingEnabled = true;
+            this.cbCounters1.Location = new System.Drawing.Point(64, 47);
+            this.cbCounters1.Name = "cbCounters1";
+            this.cbCounters1.Size = new System.Drawing.Size(92, 21);
+            this.cbCounters1.TabIndex = 21;
+            // 
+            // lblManapool
+            // 
+            this.lblManapool.AutoSize = true;
+            this.lblManapool.Location = new System.Drawing.Point(6, 86);
+            this.lblManapool.Name = "lblManapool";
+            this.lblManapool.Size = new System.Drawing.Size(57, 13);
+            this.lblManapool.TabIndex = 18;
+            this.lblManapool.Text = "Manapool:";
+            // 
+            // lblCounters1
+            // 
+            this.lblCounters1.AutoSize = true;
+            this.lblCounters1.Location = new System.Drawing.Point(6, 50);
+            this.lblCounters1.Name = "lblCounters1";
+            this.lblCounters1.Size = new System.Drawing.Size(52, 13);
+            this.lblCounters1.TabIndex = 17;
+            this.lblCounters1.Text = "Counters:";
+            // 
+            // lblLife1
+            // 
+            this.lblLife1.AutoSize = true;
+            this.lblLife1.Location = new System.Drawing.Point(39, 22);
+            this.lblLife1.Name = "lblLife1";
+            this.lblLife1.Size = new System.Drawing.Size(13, 13);
+            this.lblLife1.TabIndex = 17;
+            this.lblLife1.Text = "0";
+            // 
+            // lblUILife1
+            // 
+            this.lblUILife1.AutoSize = true;
+            this.lblUILife1.Location = new System.Drawing.Point(6, 22);
+            this.lblUILife1.Name = "lblUILife1";
+            this.lblUILife1.Size = new System.Drawing.Size(27, 13);
+            this.lblUILife1.TabIndex = 15;
+            this.lblUILife1.Text = "Life:";
             // 
             // grpCardDetail
             // 
@@ -272,93 +397,22 @@
             this.grpCardDetail.TabStop = false;
             this.grpCardDetail.Text = "Card Detail";
             // 
-            // lblUILife1
+            // lblCardDetailID
             // 
-            this.lblUILife1.AutoSize = true;
-            this.lblUILife1.Location = new System.Drawing.Point(6, 22);
-            this.lblUILife1.Name = "lblUILife1";
-            this.lblUILife1.Size = new System.Drawing.Size(27, 13);
-            this.lblUILife1.TabIndex = 15;
-            this.lblUILife1.Text = "Life:";
+            this.lblCardDetailID.AutoSize = true;
+            this.lblCardDetailID.Location = new System.Drawing.Point(189, 16);
+            this.lblCardDetailID.Name = "lblCardDetailID";
+            this.lblCardDetailID.Size = new System.Drawing.Size(35, 13);
+            this.lblCardDetailID.TabIndex = 25;
+            this.lblCardDetailID.Text = "label1";
             // 
-            // lblUILife2
+            // tbCardDetailText
             // 
-            this.lblUILife2.AutoSize = true;
-            this.lblUILife2.Location = new System.Drawing.Point(7, 22);
-            this.lblUILife2.Name = "lblUILife2";
-            this.lblUILife2.Size = new System.Drawing.Size(27, 13);
-            this.lblUILife2.TabIndex = 16;
-            this.lblUILife2.Text = "Life:";
-            // 
-            // lblLife2
-            // 
-            this.lblLife2.AutoSize = true;
-            this.lblLife2.Location = new System.Drawing.Point(40, 22);
-            this.lblLife2.Name = "lblLife2";
-            this.lblLife2.Size = new System.Drawing.Size(13, 13);
-            this.lblLife2.TabIndex = 0;
-            this.lblLife2.Text = "0";
-            // 
-            // lblLife1
-            // 
-            this.lblLife1.AutoSize = true;
-            this.lblLife1.Location = new System.Drawing.Point(39, 22);
-            this.lblLife1.Name = "lblLife1";
-            this.lblLife1.Size = new System.Drawing.Size(13, 13);
-            this.lblLife1.TabIndex = 17;
-            this.lblLife1.Text = "0";
-            // 
-            // lblCounters1
-            // 
-            this.lblCounters1.AutoSize = true;
-            this.lblCounters1.Location = new System.Drawing.Point(6, 50);
-            this.lblCounters1.Name = "lblCounters1";
-            this.lblCounters1.Size = new System.Drawing.Size(52, 13);
-            this.lblCounters1.TabIndex = 17;
-            this.lblCounters1.Text = "Counters:";
-            // 
-            // lblManapool
-            // 
-            this.lblManapool.AutoSize = true;
-            this.lblManapool.Location = new System.Drawing.Point(6, 86);
-            this.lblManapool.Name = "lblManapool";
-            this.lblManapool.Size = new System.Drawing.Size(57, 13);
-            this.lblManapool.TabIndex = 18;
-            this.lblManapool.Text = "Manapool:";
-            // 
-            // lblUIManapool2
-            // 
-            this.lblUIManapool2.AutoSize = true;
-            this.lblUIManapool2.Location = new System.Drawing.Point(7, 80);
-            this.lblUIManapool2.Name = "lblUIManapool2";
-            this.lblUIManapool2.Size = new System.Drawing.Size(57, 13);
-            this.lblUIManapool2.TabIndex = 19;
-            this.lblUIManapool2.Text = "Manapool:";
-            // 
-            // cbCounters2
-            // 
-            this.cbCounters2.FormattingEnabled = true;
-            this.cbCounters2.Location = new System.Drawing.Point(70, 48);
-            this.cbCounters2.Name = "cbCounters2";
-            this.cbCounters2.Size = new System.Drawing.Size(92, 21);
-            this.cbCounters2.TabIndex = 20;
-            // 
-            // cbCounters1
-            // 
-            this.cbCounters1.FormattingEnabled = true;
-            this.cbCounters1.Location = new System.Drawing.Point(64, 47);
-            this.cbCounters1.Name = "cbCounters1";
-            this.cbCounters1.Size = new System.Drawing.Size(92, 21);
-            this.cbCounters1.TabIndex = 21;
-            // 
-            // lblCardDetailName
-            // 
-            this.lblCardDetailName.AutoSize = true;
-            this.lblCardDetailName.Location = new System.Drawing.Point(105, 16);
-            this.lblCardDetailName.Name = "lblCardDetailName";
-            this.lblCardDetailName.Size = new System.Drawing.Size(35, 13);
-            this.lblCardDetailName.TabIndex = 0;
-            this.lblCardDetailName.Text = "label2";
+            this.tbCardDetailText.Location = new System.Drawing.Point(9, 59);
+            this.tbCardDetailText.Multiline = true;
+            this.tbCardDetailText.Name = "tbCardDetailText";
+            this.tbCardDetailText.Size = new System.Drawing.Size(215, 254);
+            this.tbCardDetailText.TabIndex = 24;
             // 
             // cbCardDetailCounters
             // 
@@ -377,68 +431,14 @@
             this.lblUICardDetailCounters.TabIndex = 22;
             this.lblUICardDetailCounters.Text = "Counters:";
             // 
-            // tbCardDetailText
+            // lblCardDetailName
             // 
-            this.tbCardDetailText.Location = new System.Drawing.Point(9, 59);
-            this.tbCardDetailText.Multiline = true;
-            this.tbCardDetailText.Name = "tbCardDetailText";
-            this.tbCardDetailText.Size = new System.Drawing.Size(215, 254);
-            this.tbCardDetailText.TabIndex = 24;
-            // 
-            // lblCardDetailID
-            // 
-            this.lblCardDetailID.AutoSize = true;
-            this.lblCardDetailID.Location = new System.Drawing.Point(189, 16);
-            this.lblCardDetailID.Name = "lblCardDetailID";
-            this.lblCardDetailID.Size = new System.Drawing.Size(35, 13);
-            this.lblCardDetailID.TabIndex = 25;
-            this.lblCardDetailID.Text = "label1";
-            // 
-            // tpLibrary1
-            // 
-            this.tpLibrary1.Controls.Add(this.lvLibrary1);
-            this.tpLibrary1.Location = new System.Drawing.Point(4, 22);
-            this.tpLibrary1.Name = "tpLibrary1";
-            this.tpLibrary1.Size = new System.Drawing.Size(536, 212);
-            this.tpLibrary1.TabIndex = 4;
-            this.tpLibrary1.Text = "Library";
-            this.tpLibrary1.UseVisualStyleBackColor = true;
-            // 
-            // lvLibrary1
-            // 
-            this.lvLibrary1.HideSelection = false;
-            this.lvLibrary1.Location = new System.Drawing.Point(3, 3);
-            this.lvLibrary1.Name = "lvLibrary1";
-            this.lvLibrary1.Size = new System.Drawing.Size(529, 206);
-            this.lvLibrary1.TabIndex = 0;
-            this.lvLibrary1.UseCompatibleStateImageBehavior = false;
-            // 
-            // lvGraveyard1
-            // 
-            this.lvGraveyard1.HideSelection = false;
-            this.lvGraveyard1.Location = new System.Drawing.Point(0, 0);
-            this.lvGraveyard1.Name = "lvGraveyard1";
-            this.lvGraveyard1.Size = new System.Drawing.Size(536, 209);
-            this.lvGraveyard1.TabIndex = 0;
-            this.lvGraveyard1.UseCompatibleStateImageBehavior = false;
-            // 
-            // lvExile1
-            // 
-            this.lvExile1.HideSelection = false;
-            this.lvExile1.Location = new System.Drawing.Point(0, 0);
-            this.lvExile1.Name = "lvExile1";
-            this.lvExile1.Size = new System.Drawing.Size(533, 212);
-            this.lvExile1.TabIndex = 0;
-            this.lvExile1.UseCompatibleStateImageBehavior = false;
-            // 
-            // lvCommand1
-            // 
-            this.lvCommand1.HideSelection = false;
-            this.lvCommand1.Location = new System.Drawing.Point(3, 0);
-            this.lvCommand1.Name = "lvCommand1";
-            this.lvCommand1.Size = new System.Drawing.Size(530, 209);
-            this.lvCommand1.TabIndex = 0;
-            this.lvCommand1.UseCompatibleStateImageBehavior = false;
+            this.lblCardDetailName.AutoSize = true;
+            this.lblCardDetailName.Location = new System.Drawing.Point(105, 16);
+            this.lblCardDetailName.Name = "lblCardDetailName";
+            this.lblCardDetailName.Size = new System.Drawing.Size(35, 13);
+            this.lblCardDetailName.TabIndex = 0;
+            this.lblCardDetailName.Text = "label2";
             // 
             // tcArea2
             // 
@@ -473,6 +473,25 @@
             this.lvLibrary2.TabIndex = 0;
             this.lvLibrary2.UseCompatibleStateImageBehavior = false;
             // 
+            // tpHand2
+            // 
+            this.tpHand2.Controls.Add(this.lvHand2);
+            this.tpHand2.Location = new System.Drawing.Point(4, 22);
+            this.tpHand2.Name = "tpHand2";
+            this.tpHand2.Size = new System.Drawing.Size(536, 294);
+            this.tpHand2.TabIndex = 5;
+            this.tpHand2.Text = "Hand";
+            this.tpHand2.UseVisualStyleBackColor = true;
+            // 
+            // lvHand2
+            // 
+            this.lvHand2.HideSelection = false;
+            this.lvHand2.Location = new System.Drawing.Point(4, 3);
+            this.lvHand2.Name = "lvHand2";
+            this.lvHand2.Size = new System.Drawing.Size(529, 288);
+            this.lvHand2.TabIndex = 1;
+            this.lvHand2.UseCompatibleStateImageBehavior = false;
+            // 
             // tpBattlefield2
             // 
             this.tpBattlefield2.Controls.Add(this.lvBattlefield2);
@@ -495,7 +514,7 @@
             // 
             // tpGraveyard2
             // 
-            this.tpGraveyard2.Controls.Add(this.lvGraveyard);
+            this.tpGraveyard2.Controls.Add(this.lvGraveyard2);
             this.tpGraveyard2.Location = new System.Drawing.Point(4, 22);
             this.tpGraveyard2.Name = "tpGraveyard2";
             this.tpGraveyard2.Padding = new System.Windows.Forms.Padding(3);
@@ -504,14 +523,14 @@
             this.tpGraveyard2.Text = "Graveyard";
             this.tpGraveyard2.UseVisualStyleBackColor = true;
             // 
-            // lvGraveyard
+            // lvGraveyard2
             // 
-            this.lvGraveyard.HideSelection = false;
-            this.lvGraveyard.Location = new System.Drawing.Point(0, 0);
-            this.lvGraveyard.Name = "lvGraveyard";
-            this.lvGraveyard.Size = new System.Drawing.Size(536, 292);
-            this.lvGraveyard.TabIndex = 0;
-            this.lvGraveyard.UseCompatibleStateImageBehavior = false;
+            this.lvGraveyard2.HideSelection = false;
+            this.lvGraveyard2.Location = new System.Drawing.Point(0, 0);
+            this.lvGraveyard2.Name = "lvGraveyard2";
+            this.lvGraveyard2.Size = new System.Drawing.Size(536, 292);
+            this.lvGraveyard2.TabIndex = 0;
+            this.lvGraveyard2.UseCompatibleStateImageBehavior = false;
             // 
             // tpExile2
             // 
@@ -551,25 +570,6 @@
             this.lvCommand2.TabIndex = 0;
             this.lvCommand2.UseCompatibleStateImageBehavior = false;
             // 
-            // tpHand2
-            // 
-            this.tpHand2.Controls.Add(this.lvHand2);
-            this.tpHand2.Location = new System.Drawing.Point(4, 22);
-            this.tpHand2.Name = "tpHand2";
-            this.tpHand2.Size = new System.Drawing.Size(536, 294);
-            this.tpHand2.TabIndex = 5;
-            this.tpHand2.Text = "Hand";
-            this.tpHand2.UseVisualStyleBackColor = true;
-            // 
-            // lvHand2
-            // 
-            this.lvHand2.HideSelection = false;
-            this.lvHand2.Location = new System.Drawing.Point(4, 3);
-            this.lvHand2.Name = "lvHand2";
-            this.lvHand2.Size = new System.Drawing.Size(529, 288);
-            this.lvHand2.TabIndex = 1;
-            this.lvHand2.UseCompatibleStateImageBehavior = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -589,6 +589,7 @@
             this.Text = "Sharpening horrible very bad no good \"UI\"";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tcArea1.ResumeLayout(false);
+            this.tpLibrary1.ResumeLayout(false);
             this.tpBattlefield.ResumeLayout(false);
             this.tpGraveyard.ResumeLayout(false);
             this.tpExile.ResumeLayout(false);
@@ -599,14 +600,13 @@
             this.grpPlayer1.PerformLayout();
             this.grpCardDetail.ResumeLayout(false);
             this.grpCardDetail.PerformLayout();
-            this.tpLibrary1.ResumeLayout(false);
             this.tcArea2.ResumeLayout(false);
             this.tpLibrary2.ResumeLayout(false);
+            this.tpHand2.ResumeLayout(false);
             this.tpBattlefield2.ResumeLayout(false);
             this.tpGraveyard2.ResumeLayout(false);
             this.tpExile2.ResumeLayout(false);
             this.tpCommand2.ResumeLayout(false);
-            this.tpHand2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -655,7 +655,7 @@
         private System.Windows.Forms.TabPage tpBattlefield2;
         private System.Windows.Forms.ListView lvBattlefield2;
         private System.Windows.Forms.TabPage tpGraveyard2;
-        private System.Windows.Forms.ListView lvGraveyard;
+        private System.Windows.Forms.ListView lvGraveyard2;
         private System.Windows.Forms.TabPage tpExile2;
         private System.Windows.Forms.ListView lvExile2;
         private System.Windows.Forms.TabPage tpCommand2;

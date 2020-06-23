@@ -373,7 +373,15 @@ namespace Sharpening2020
                 {
                     foreach(InputHandler ih in InputHandlers.Values)
                     {
-                        ih.Bridge.UpdateZoneView(z.MyType, p.ID, z.Contents.Select(x => { return (CardView)x.Value(this).GetView(this); }).ToList());
+                        List<CardView> viewList = new List<CardView>();
+                        foreach(LazyGameObject<Card> lc in z.Contents)
+                        {
+                            Card c = lc.Value(this);
+                            CardView cv = c.GetView(this) as CardView;
+
+                            viewList.Add(cv);
+                        }
+                        ih.Bridge.UpdateZoneView(z.MyType, p.ID, viewList);
                     }
                 }
             }
