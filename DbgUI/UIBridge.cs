@@ -24,7 +24,7 @@ namespace DbgUI
 
         public override void Prompt(String s)
         {
-            FormRef.GetPrompt().Text = s;
+            FormRef.Invoke((MethodInvoker)delegate { FormRef.GetPrompt().Text = s; }) ;
         }
         
 
@@ -50,52 +50,61 @@ namespace DbgUI
 
         public override void UpdatePlayerView(PlayerView view)
         {
-            FormRef.GetLife(view.ID).Text = view.Life.ToString();
-            FormRef.GetCounters(view.ID).Items.Clear();
-            FormRef.GetManaPool(view.ID).Items.Clear();
+            FormRef.Invoke((MethodInvoker)delegate {
+                FormRef.GetLife(view.ID).Text = view.Life.ToString();
+                FormRef.GetCounters(view.ID).Items.Clear();
+                FormRef.GetManaPool(view.ID).Items.Clear();
 
-            foreach (ManaPointView mpv in view.ManaPool)
-            {
-                FormRef.GetManaPool(view.ID).Items.Add(mpv);
-            }
-            foreach (CounterView cv in view.Counters)
-            {
-                FormRef.GetCounters(view.ID).Items.Add(cv);
-            }
+                foreach (ManaPointView mpv in view.ManaPool)
+                {
+                    FormRef.GetManaPool(view.ID).Items.Add(mpv);
+                }
+                foreach (CounterView cv in view.Counters)
+                {
+                    FormRef.GetCounters(view.ID).Items.Add(cv);
+                }
+            });            
         }
 
         public override void UpdateStackView(List<StackInstanceView> views)
         {
-            FormRef.GetStack().Items.Clear();
+            FormRef.Invoke((MethodInvoker)delegate
+            {
+                FormRef.GetStack().Items.Clear();
 
-            FormRef.GetStack().Items.AddRange(views.ToArray());
+                FormRef.GetStack().Items.AddRange(views.ToArray());
+            });
         }
 
         public override void UpdateZoneView(ZoneType zt, Int32 PlayerID, List<CardView> views)
         {
-            //MessageBox.Show("UpdateZoneView: " + zt.ToString() + ", " + PlayerID.ToString());
+            if(zt == ZoneType.Hand)
+                MessageBox.Show("UpdateZoneView: " + zt.ToString() + ", " + PlayerID.ToString());
 
-            ListView Zone = null;
-            switch(zt)
-            {
-                case (ZoneType.Library): Zone = FormRef.GetLibrary(PlayerID); break;
-                case (ZoneType.Hand): Zone = FormRef.GetHand(PlayerID); break;
-                case (ZoneType.Battlefield): Zone = FormRef.GetBattlefield(PlayerID); break;
-                case (ZoneType.Graveyard): Zone = FormRef.GetGraveyard(PlayerID); break;
-                case (ZoneType.Exile): Zone = FormRef.GetExile(PlayerID); break;
-                case (ZoneType.Command): Zone = FormRef.GetCommand(PlayerID); break;
-            }
+            FormRef.Invoke((MethodInvoker)delegate {
+                ListView Zone = null;
+                switch(zt)
+                {
+                    case (ZoneType.Library): Zone = FormRef.GetLibrary(PlayerID); break;
+                    case (ZoneType.Hand): Zone = FormRef.GetHand(PlayerID); break;
+                    case (ZoneType.Battlefield): Zone = FormRef.GetBattlefield(PlayerID); break;
+                    case (ZoneType.Graveyard): Zone = FormRef.GetGraveyard(PlayerID); break;
+                    case (ZoneType.Exile): Zone = FormRef.GetExile(PlayerID); break;
+                    case (ZoneType.Command): Zone = FormRef.GetCommand(PlayerID); break;
+                }
 
-            Zone.Items.Clear();
-            foreach (CardView cv in views)
-            {
-                ListViewItem lvi = new ListViewItem(cv.Name);
-                lvi.Text = cv.Name;
+                Zone.Items.Clear(); 
+            
+                foreach (CardView cv in views)
+                {
+                    ListViewItem lvi = new ListViewItem(cv.Name);
+                    lvi.Text = cv.Name;
 
-                Zone.Items.Add(lvi);
-            }
+                    Zone.Items.Add(lvi);
+                }
 
-            Zone.Update();
+                Zone.Update();
+            });
         }
 
     }

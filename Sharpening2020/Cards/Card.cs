@@ -24,8 +24,24 @@ namespace Sharpening2020.Cards
         public Boolean HasSummoningSickness = false;
         public Int32 AssignedDamage = 0;
         
+        private readonly Stack<LazyGameObject<Player>> controllerStack = new Stack<LazyGameObject<Player>>();
+
         public LazyGameObject<Player> Owner;
-        public LazyGameObject<Player> Controller;
+        public LazyGameObject<Player> Controller
+        {
+            get
+            {
+                if (controllerStack.Count > 0)
+                    return controllerStack.Peek();
+
+                return Owner;
+            }
+
+            set
+            {
+                controllerStack.Push(value);
+            }
+        }
 
         public List<LazyGameObject<Counter>> MyCounters = new List<LazyGameObject<Counter>>();
 

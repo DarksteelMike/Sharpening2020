@@ -30,6 +30,8 @@ namespace Sharpening2020.Players
 
         public Int32 LandsPlayedThisTurn = 0;
 
+        public Int32 CardsDrawnThisTurn = 0;
+
         public readonly List<LazyGameObject<Counter>> MyCounters = new List<LazyGameObject<Counter>>();
 
         public readonly List<LazyGameObject<ManaPoint>> ManaPool = new List<LazyGameObject<ManaPoint>>();

@@ -346,7 +346,7 @@ namespace Sharpening2020
 
                 InputHandlers.Add(newPlayer.ID, new InputHandler(this, new LazyGameObject<Player>(newPlayer), kvp.Key));
 
-                kvp.Key.Prompt("Test");
+                kvp.Key.Prompt("Doodlebugs");
             }
 
             Int32 i = 0;
@@ -362,6 +362,14 @@ namespace Sharpening2020
             }
 
             MyExecutor.SuspendViewUpdates = false;
+
+            foreach(Player p in GetPlayers())
+            {
+                for(int j=0;j<7;j++)
+                {
+                    MyExecutor.Do(new CommandDrawCard(p.ID));
+                }
+            }
 
             foreach(Player p in GetPlayers())
             {
@@ -385,6 +393,9 @@ namespace Sharpening2020
                     }
                 }
             }
+
+            MyExecutor.Do(new CommandSetWaitingForOpponentsState(0));
+            MyExecutor.Do(new CommandSetHavePriorityState(1));
         }
 
         public void UpdateView(ViewObject view)

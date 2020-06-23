@@ -9,6 +9,10 @@ namespace Sharpening2020
     {
         public Stack<CommandBase> UndoStack = new Stack<CommandBase>();
 
+        public delegate void CommandPerformedEvent(CommandBase cb);
+
+        public event CommandPerformedEvent CommandPerformed;
+
         public Game MyGame;
 
         public Boolean SuspendViewUpdates = false;
@@ -16,7 +20,10 @@ namespace Sharpening2020
         public void Do(CommandBase com)
         {
             UndoStack.Push(com);
-            com.Do(MyGame);            
+            com.Do(MyGame);
+
+            if(CommandPerformed != null)
+                CommandPerformed(com);
         }
 
         public void Undo()

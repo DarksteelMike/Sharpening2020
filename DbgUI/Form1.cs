@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Sharpening2020;
+using Sharpening2020.Commands;
 using Sharpening2020.InputBridges;
 
 namespace DbgUI
@@ -21,6 +22,13 @@ namespace DbgUI
         public Form1()
         {
             InitializeComponent();
+            Model.MyExecutor.CommandPerformed += MyExecutor_CommandPerformed;
+        }
+
+        private void MyExecutor_CommandPerformed(CommandBase cb)
+        {
+            this.Invoke((MethodInvoker)delegate { tbCardDetailText.Text += Environment.NewLine + cb.GetType().ToString(); });
+            
         }
 
         public ListView GetLibrary(Int32 PlayerNum)
@@ -108,7 +116,8 @@ namespace DbgUI
         private void Form1_Load(object sender, EventArgs e)
         {
             ThreadStart ts = new ThreadStart(SetupGame);
-            ts.Invoke();
+            Thread t = new Thread(ts);
+            t.Start();
         }
         
         public void SetupGame()

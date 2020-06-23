@@ -115,9 +115,9 @@
             // lvHand1
             // 
             this.lvHand1.HideSelection = false;
-            this.lvHand1.Location = new System.Drawing.Point(220, 582);
+            this.lvHand1.Location = new System.Drawing.Point(235, 582);
             this.lvHand1.Name = "lvHand1";
-            this.lvHand1.Size = new System.Drawing.Size(544, 135);
+            this.lvHand1.Size = new System.Drawing.Size(529, 135);
             this.lvHand1.TabIndex = 8;
             this.lvHand1.UseCompatibleStateImageBehavior = false;
             // 
@@ -171,7 +171,7 @@
             this.tcArea1.Controls.Add(this.tpGraveyard);
             this.tcArea1.Controls.Add(this.tpExile);
             this.tcArea1.Controls.Add(this.tpCommand);
-            this.tcArea1.Location = new System.Drawing.Point(220, 338);
+            this.tcArea1.Location = new System.Drawing.Point(228, 338);
             this.tcArea1.Name = "tcArea1";
             this.tcArea1.SelectedIndex = 0;
             this.tcArea1.Size = new System.Drawing.Size(544, 238);
@@ -332,9 +332,9 @@
             this.grpPlayer1.Controls.Add(this.lblLife1);
             this.grpPlayer1.Controls.Add(this.lblUILife1);
             this.grpPlayer1.Controls.Add(this.cbManaPool1);
-            this.grpPlayer1.Location = new System.Drawing.Point(766, 338);
+            this.grpPlayer1.Location = new System.Drawing.Point(775, 338);
             this.grpPlayer1.Name = "grpPlayer1";
-            this.grpPlayer1.Size = new System.Drawing.Size(230, 288);
+            this.grpPlayer1.Size = new System.Drawing.Size(221, 288);
             this.grpPlayer1.TabIndex = 19;
             this.grpPlayer1.TabStop = false;
             this.grpPlayer1.Text = "Player 1";
@@ -411,6 +411,7 @@
             this.tbCardDetailText.Location = new System.Drawing.Point(9, 59);
             this.tbCardDetailText.Multiline = true;
             this.tbCardDetailText.Name = "tbCardDetailText";
+            this.tbCardDetailText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbCardDetailText.Size = new System.Drawing.Size(215, 254);
             this.tbCardDetailText.TabIndex = 24;
             // 
