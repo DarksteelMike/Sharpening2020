@@ -25,5 +25,10 @@ namespace Cards
             TapForMana tfm = new TapForMana(new LazyGameObject<Card>(this), ManaColor.Green);
             Front.Activatables.Add(tfm);
         }
+
+        public override object Clone()
+        {
+            return base.Clone(new Forest());
+        }
     }
 }
