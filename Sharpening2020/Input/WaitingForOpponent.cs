@@ -14,6 +14,11 @@ namespace Sharpening2020.Input
             return empty;
         }
 
+        public override void Enter()
+        {
+            MyBridge.Prompt("Waiting for opponents.");
+        }
+
         public override void SelectAction(GameAction a)
         {
             //Don't care.

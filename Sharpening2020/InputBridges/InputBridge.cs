@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Sharpening2020.Cards;
 using Sharpening2020.Input;
 using Sharpening2020.Views;
+using Sharpening2020.Zones;
 
 namespace Sharpening2020.InputBridges
 {

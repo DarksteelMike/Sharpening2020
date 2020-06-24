@@ -5,6 +5,7 @@ using Sharpening2020.Cards;
 
 namespace Sharpening2020.Zones
 {
+    public enum ZoneType { Command, Library, Hand, Stack, Battlefield, Graveyard, Exile }
     public class Zone : ICloneable
     {
         public readonly ZoneType MyType;

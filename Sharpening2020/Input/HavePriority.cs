@@ -25,7 +25,7 @@ namespace Sharpening2020.Input
             int i = 0;
             foreach (Activatable act in MyGame.GetActivatables())
             {
-                if (!act.CanActivate(MyPlayer, MyGame))
+                if (!act.CanActivate(MyPlayer.Value(MyGame), MyGame))
                     continue;
 
                 GameAction a = new GameAction(i++, act.Host.ID, act.ToString(MyGame));

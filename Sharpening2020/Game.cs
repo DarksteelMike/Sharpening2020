@@ -61,6 +61,13 @@ namespace Sharpening2020
                 {
                     activePlayerIndex += PlayerCount;
                 }
+
+                foreach(Player p in GetPlayers())
+                {
+                    if (p.ID != ActivePlayer.ID)
+                        MyExecutor.Do(new CommandSetWaitingForOpponentsState(p.ID));
+                }
+                MyExecutor.Do(new CommandSetHavePriorityState(ActivePlayer.ID));
             }
 
         }
@@ -347,8 +354,6 @@ namespace Sharpening2020
                 Player newPlayer = ccp.CreatedPlayer;
 
                 InputHandlers.Add(newPlayer.ID, new InputHandler(this, new LazyGameObject<Player>(newPlayer), kvp.Key));
-
-                kvp.Key.Prompt("Doodlebugs");
             }
 
             Int32 i = 0;
@@ -396,8 +401,8 @@ namespace Sharpening2020
                 }
             }
 
-            MyExecutor.Do(new CommandSetWaitingForOpponentsState(0));
-            MyExecutor.Do(new CommandSetHavePriorityState(1));
+            MyExecutor.Do(new CommandSetWaitingForOpponentsState(1));
+            MyExecutor.Do(new CommandSetHavePriorityState(0));
         }
 
         public void UpdateView(ViewObject view)

@@ -8,6 +8,12 @@ namespace Sharpening2020.Views
 {
     public abstract class ViewObject
     {
-        public Int32 ObjectID;
+        protected Int32 id;
+
+        public Int32 ID
+        {
+            get { return id; }
+        }
+        
     }
 }

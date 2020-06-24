@@ -10,6 +10,7 @@ namespace Sharpening2020.Views
 
         public StackInstanceView(StackInstance si)
         {
+            id = si.ID;
             Text = si.MyActivatable.ToString();
         }
     }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Sharpening2020.Cards;
 using Sharpening2020.Input;
 using Sharpening2020.Views;
+using Sharpening2020.Zones;
 
 namespace Sharpening2020.InputBridges
 {
@@ -13,6 +13,9 @@ namespace Sharpening2020.InputBridges
 
         public override GameAction SelectActionFromList(List<GameAction> actions)
         {
+            if (actions.Count == 0)
+                return null;
+
             return actions[rand.Next(0, actions.Count)];
         }
 

@@ -8,9 +8,10 @@ namespace Sharpening2020.Views
     {
         public readonly CounterType Type;
 
-        public CounterView(CounterType ct)
+        public CounterView(Counter ct)
         {
-            Type = ct;
+            id = ct.ID;
+            Type = ct.MyType;
         }
     }
 }

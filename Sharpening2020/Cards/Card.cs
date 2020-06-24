@@ -9,7 +9,6 @@ using Sharpening2020.Views;
 
 namespace Sharpening2020.Cards
 {
-    public enum ZoneType { Command, Library, Hand, Stack, Battlefield, Graveyard, Exile }
     public abstract class Card : GameObject,ICanHaveCounters, ICloneable
     {
         public CharacteristicName CurrentCharacteristicName = CharacteristicName.Front;

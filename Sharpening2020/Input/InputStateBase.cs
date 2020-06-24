@@ -8,7 +8,7 @@ namespace Sharpening2020.Input
 {
     public abstract class InputStateBase : ICloneable
     {
-        public Player MyPlayer;
+        public LazyGameObject<Player> MyPlayer;
         public Game MyGame;
         public InputBridge MyBridge;
 

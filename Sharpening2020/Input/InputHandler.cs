@@ -30,6 +30,10 @@ namespace Sharpening2020.Input
 
                 InputList.Add(value);
 
+                CurrentInputState.MyGame = MyGame;
+                CurrentInputState.MyBridge = Bridge;
+                CurrentInputState.MyPlayer = AssociatedPlayer;
+
                 CurrentInputState.Enter();
 
                 Bridge.SelectActionFromList(CurrentInputState.GetActions());

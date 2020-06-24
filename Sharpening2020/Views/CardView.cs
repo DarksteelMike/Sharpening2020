@@ -5,13 +5,12 @@ using System.Linq;
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Players;
+using Sharpening2020.Zones;
 
 namespace Sharpening2020.Views
 {
     public class CardView : ViewObject
     {
-        public readonly Int32 ID;
-
         public readonly String Name;
 
         public readonly IReadOnlyList<String> SuperTypes;
@@ -48,7 +47,7 @@ namespace Sharpening2020.Views
                 + " Viewer: " + v.ID);
             }            
 
-            ID = crd.ID;
+            id = crd.ID;
             CardCharacteristics chara;
             ZoneType zone = g.GetZoneTypeOf(crd);
             chara = crd.MyCharacteristics[cn];

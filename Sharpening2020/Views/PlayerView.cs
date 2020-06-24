@@ -9,14 +9,13 @@ namespace Sharpening2020.Views
 {
     public class PlayerView : ViewObject
     {
-        public readonly Int32 ID;
         public readonly Int32 Life;
         public readonly IReadOnlyList<CounterView> Counters;
         public readonly IReadOnlyList<ManaPointView> ManaPool;
 
         public PlayerView(Game g, Player p)
         {
-            ID = p.ID;
+            id = p.ID;
             Life = p.Life;
 
             List<CounterView> counts = new List<CounterView>();

@@ -47,18 +47,23 @@
             this.tpCommand = new System.Windows.Forms.TabPage();
             this.lvCommand1 = new System.Windows.Forms.ListView();
             this.grpPlayer2 = new System.Windows.Forms.GroupBox();
+            this.bSelectManaPoint2 = new System.Windows.Forms.Button();
+            this.bSelectPlayerCounter2 = new System.Windows.Forms.Button();
             this.cbCounters2 = new System.Windows.Forms.ComboBox();
             this.lblUIManapool2 = new System.Windows.Forms.Label();
             this.lblLife2 = new System.Windows.Forms.Label();
             this.lblUILife2 = new System.Windows.Forms.Label();
             this.lblUICounters2 = new System.Windows.Forms.Label();
             this.grpPlayer1 = new System.Windows.Forms.GroupBox();
+            this.bSelectManaPoint1 = new System.Windows.Forms.Button();
+            this.bSelectPlayerCounter1 = new System.Windows.Forms.Button();
             this.cbCounters1 = new System.Windows.Forms.ComboBox();
             this.lblManapool = new System.Windows.Forms.Label();
             this.lblCounters1 = new System.Windows.Forms.Label();
             this.lblLife1 = new System.Windows.Forms.Label();
             this.lblUILife1 = new System.Windows.Forms.Label();
             this.grpCardDetail = new System.Windows.Forms.GroupBox();
+            this.bSelectCardCounter = new System.Windows.Forms.Button();
             this.lblCardDetailID = new System.Windows.Forms.Label();
             this.tbCardDetailText = new System.Windows.Forms.TextBox();
             this.cbCardDetailCounters = new System.Windows.Forms.ComboBox();
@@ -111,6 +116,7 @@
             this.lvBattlefield1.Size = new System.Drawing.Size(533, 209);
             this.lvBattlefield1.TabIndex = 2;
             this.lvBattlefield1.UseCompatibleStateImageBehavior = false;
+            this.lvBattlefield1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // lvHand1
             // 
@@ -120,6 +126,7 @@
             this.lvHand1.Size = new System.Drawing.Size(529, 135);
             this.lvHand1.TabIndex = 8;
             this.lvHand1.UseCompatibleStateImageBehavior = false;
+            this.lvHand1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // bOK
             // 
@@ -129,6 +136,7 @@
             this.bOK.TabIndex = 9;
             this.bOK.Text = "OK";
             this.bOK.UseVisualStyleBackColor = true;
+            this.bOK.Click += new System.EventHandler(this.bOK_Click);
             // 
             // bCancel
             // 
@@ -138,6 +146,7 @@
             this.bCancel.TabIndex = 10;
             this.bCancel.Text = "Cancel";
             this.bCancel.UseVisualStyleBackColor = true;
+            this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
             // lblPrompt
             // 
@@ -195,6 +204,7 @@
             this.lvLibrary1.Size = new System.Drawing.Size(529, 206);
             this.lvLibrary1.TabIndex = 0;
             this.lvLibrary1.UseCompatibleStateImageBehavior = false;
+            this.lvLibrary1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpBattlefield
             // 
@@ -226,6 +236,7 @@
             this.lvGraveyard1.Size = new System.Drawing.Size(536, 209);
             this.lvGraveyard1.TabIndex = 0;
             this.lvGraveyard1.UseCompatibleStateImageBehavior = false;
+            this.lvGraveyard1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpExile
             // 
@@ -245,6 +256,7 @@
             this.lvExile1.Size = new System.Drawing.Size(533, 212);
             this.lvExile1.TabIndex = 0;
             this.lvExile1.UseCompatibleStateImageBehavior = false;
+            this.lvExile1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpCommand
             // 
@@ -264,9 +276,12 @@
             this.lvCommand1.Size = new System.Drawing.Size(530, 209);
             this.lvCommand1.TabIndex = 0;
             this.lvCommand1.UseCompatibleStateImageBehavior = false;
+            this.lvCommand1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // grpPlayer2
             // 
+            this.grpPlayer2.Controls.Add(this.bSelectManaPoint2);
+            this.grpPlayer2.Controls.Add(this.bSelectPlayerCounter2);
             this.grpPlayer2.Controls.Add(this.cbCounters2);
             this.grpPlayer2.Controls.Add(this.lblUIManapool2);
             this.grpPlayer2.Controls.Add(this.lblLife2);
@@ -279,6 +294,26 @@
             this.grpPlayer2.TabIndex = 18;
             this.grpPlayer2.TabStop = false;
             this.grpPlayer2.Text = "Player 2";
+            // 
+            // bSelectManaPoint2
+            // 
+            this.bSelectManaPoint2.Location = new System.Drawing.Point(166, 75);
+            this.bSelectManaPoint2.Name = "bSelectManaPoint2";
+            this.bSelectManaPoint2.Size = new System.Drawing.Size(46, 23);
+            this.bSelectManaPoint2.TabIndex = 21;
+            this.bSelectManaPoint2.Text = "Select";
+            this.bSelectManaPoint2.UseVisualStyleBackColor = true;
+            this.bSelectManaPoint2.Click += new System.EventHandler(this.bSelectManaPoint2_Click);
+            // 
+            // bSelectPlayerCounter2
+            // 
+            this.bSelectPlayerCounter2.Location = new System.Drawing.Point(166, 46);
+            this.bSelectPlayerCounter2.Name = "bSelectPlayerCounter2";
+            this.bSelectPlayerCounter2.Size = new System.Drawing.Size(46, 23);
+            this.bSelectPlayerCounter2.TabIndex = 1;
+            this.bSelectPlayerCounter2.Text = "Select";
+            this.bSelectPlayerCounter2.UseVisualStyleBackColor = true;
+            this.bSelectPlayerCounter2.Click += new System.EventHandler(this.bSelectPlayerCounter2_Click);
             // 
             // cbCounters2
             // 
@@ -326,6 +361,8 @@
             // 
             // grpPlayer1
             // 
+            this.grpPlayer1.Controls.Add(this.bSelectManaPoint1);
+            this.grpPlayer1.Controls.Add(this.bSelectPlayerCounter1);
             this.grpPlayer1.Controls.Add(this.cbCounters1);
             this.grpPlayer1.Controls.Add(this.lblManapool);
             this.grpPlayer1.Controls.Add(this.lblCounters1);
@@ -338,6 +375,26 @@
             this.grpPlayer1.TabIndex = 19;
             this.grpPlayer1.TabStop = false;
             this.grpPlayer1.Text = "Player 1";
+            // 
+            // bSelectManaPoint1
+            // 
+            this.bSelectManaPoint1.Location = new System.Drawing.Point(162, 81);
+            this.bSelectManaPoint1.Name = "bSelectManaPoint1";
+            this.bSelectManaPoint1.Size = new System.Drawing.Size(46, 23);
+            this.bSelectManaPoint1.TabIndex = 23;
+            this.bSelectManaPoint1.Text = "Select";
+            this.bSelectManaPoint1.UseVisualStyleBackColor = true;
+            this.bSelectManaPoint1.Click += new System.EventHandler(this.bSelectManaPoint1_Click);
+            // 
+            // bSelectPlayerCounter1
+            // 
+            this.bSelectPlayerCounter1.Location = new System.Drawing.Point(162, 45);
+            this.bSelectPlayerCounter1.Name = "bSelectPlayerCounter1";
+            this.bSelectPlayerCounter1.Size = new System.Drawing.Size(46, 23);
+            this.bSelectPlayerCounter1.TabIndex = 22;
+            this.bSelectPlayerCounter1.Text = "Select";
+            this.bSelectPlayerCounter1.UseVisualStyleBackColor = true;
+            this.bSelectPlayerCounter1.Click += new System.EventHandler(this.bSelectPlayerCounter1_Click);
             // 
             // cbCounters1
             // 
@@ -385,6 +442,7 @@
             // 
             // grpCardDetail
             // 
+            this.grpCardDetail.Controls.Add(this.bSelectCardCounter);
             this.grpCardDetail.Controls.Add(this.lblCardDetailID);
             this.grpCardDetail.Controls.Add(this.tbCardDetailText);
             this.grpCardDetail.Controls.Add(this.cbCardDetailCounters);
@@ -396,6 +454,16 @@
             this.grpCardDetail.TabIndex = 20;
             this.grpCardDetail.TabStop = false;
             this.grpCardDetail.Text = "Card Detail";
+            // 
+            // bSelectCardCounter
+            // 
+            this.bSelectCardCounter.Location = new System.Drawing.Point(162, 30);
+            this.bSelectCardCounter.Name = "bSelectCardCounter";
+            this.bSelectCardCounter.Size = new System.Drawing.Size(46, 23);
+            this.bSelectCardCounter.TabIndex = 24;
+            this.bSelectCardCounter.Text = "Select";
+            this.bSelectCardCounter.UseVisualStyleBackColor = true;
+            this.bSelectCardCounter.Click += new System.EventHandler(this.bSelectCardCounter_Click);
             // 
             // lblCardDetailID
             // 
@@ -435,7 +503,7 @@
             // lblCardDetailName
             // 
             this.lblCardDetailName.AutoSize = true;
-            this.lblCardDetailName.Location = new System.Drawing.Point(105, 16);
+            this.lblCardDetailName.Location = new System.Drawing.Point(8, 16);
             this.lblCardDetailName.Name = "lblCardDetailName";
             this.lblCardDetailName.Size = new System.Drawing.Size(35, 13);
             this.lblCardDetailName.TabIndex = 0;
@@ -454,6 +522,7 @@
             this.tcArea2.SelectedIndex = 0;
             this.tcArea2.Size = new System.Drawing.Size(544, 320);
             this.tcArea2.TabIndex = 21;
+            this.tcArea2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpLibrary2
             // 
@@ -473,6 +542,7 @@
             this.lvLibrary2.Size = new System.Drawing.Size(529, 288);
             this.lvLibrary2.TabIndex = 0;
             this.lvLibrary2.UseCompatibleStateImageBehavior = false;
+            this.lvLibrary2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpHand2
             // 
@@ -492,6 +562,7 @@
             this.lvHand2.Size = new System.Drawing.Size(529, 288);
             this.lvHand2.TabIndex = 1;
             this.lvHand2.UseCompatibleStateImageBehavior = false;
+            this.lvHand2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpBattlefield2
             // 
@@ -532,6 +603,7 @@
             this.lvGraveyard2.Size = new System.Drawing.Size(536, 292);
             this.lvGraveyard2.TabIndex = 0;
             this.lvGraveyard2.UseCompatibleStateImageBehavior = false;
+            this.lvGraveyard2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpExile2
             // 
@@ -551,6 +623,7 @@
             this.lvExile2.Size = new System.Drawing.Size(533, 291);
             this.lvExile2.TabIndex = 0;
             this.lvExile2.UseCompatibleStateImageBehavior = false;
+            this.lvExile2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpCommand2
             // 
@@ -570,6 +643,7 @@
             this.lvCommand2.Size = new System.Drawing.Size(530, 291);
             this.lvCommand2.TabIndex = 0;
             this.lvCommand2.UseCompatibleStateImageBehavior = false;
+            this.lvCommand2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // Form1
             // 
@@ -664,6 +738,11 @@
         private System.Windows.Forms.ListView lvCommand2;
         private System.Windows.Forms.TabPage tpHand2;
         private System.Windows.Forms.ListView lvHand2;
+        private System.Windows.Forms.Button bSelectManaPoint2;
+        private System.Windows.Forms.Button bSelectPlayerCounter2;
+        private System.Windows.Forms.Button bSelectManaPoint1;
+        private System.Windows.Forms.Button bSelectPlayerCounter1;
+        private System.Windows.Forms.Button bSelectCardCounter;
     }
 }
 

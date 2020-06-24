@@ -22,7 +22,7 @@ namespace Sharpening2020.Cards
 
         public override ViewObject GetView(Game g, Player viewer)
         {
-            return new CounterView(MyType);
+            return new CounterView(this);
         }
     }
 }
