@@ -48,7 +48,7 @@ namespace Sharpening2020.Commands
         {
             foreach (InputHandler ih in g.InputHandlers.Values)
             {
-                ih.Bridge.UpdatePlayerView((PlayerView)((Player)g.GetGameObjectByID(this.PlayerID)).GetView(g));
+                ih.Bridge.UpdatePlayerView((PlayerView)((Player)g.GetGameObjectByID(this.PlayerID)).GetView(g, ih.AssociatedPlayer.Value(g)));
             }
         }
     }

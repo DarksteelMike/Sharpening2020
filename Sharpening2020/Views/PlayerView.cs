@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Sharpening2020.Cards;
 using Sharpening2020.Mana;
+using Sharpening2020.Players;
 
 namespace Sharpening2020.Views
 {
@@ -13,23 +14,23 @@ namespace Sharpening2020.Views
         public readonly IReadOnlyList<CounterView> Counters;
         public readonly IReadOnlyList<ManaPointView> ManaPool;
 
-        public PlayerView(Game g, Int32 i, Int32 l, List<Counter> cts, List<ManaPoint> mp)
+        public PlayerView(Game g, Player p)
         {
-            ID = i;
-            Life = l;
+            ID = p.ID;
+            Life = p.Life;
 
             List<CounterView> counts = new List<CounterView>();
 
-            foreach(Counter c in cts)
+            foreach(LazyGameObject<Counter> c in p.MyCounters)
             {
-                counts.Add((CounterView)c.GetView(g));
+                counts.Add((CounterView)c.Value(g).GetView(g, p));
             }
 
             List<ManaPointView> manas = new List<ManaPointView>();
 
-            foreach(ManaPoint m in mp)
+            foreach(LazyGameObject<ManaPoint> m in p.ManaPool)
             {
-                manas.Add((ManaPointView)m.GetView(g));
+                manas.Add((ManaPointView)m.Value(g).GetView(g, p));
             }
 
             ManaPool = manas.AsReadOnly();

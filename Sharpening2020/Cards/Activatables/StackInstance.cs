@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
 using Sharpening2020.Mana;
+using Sharpening2020.Players;
 using Sharpening2020.Views;
 
 namespace Sharpening2020.Cards.Activatables
@@ -45,7 +47,7 @@ namespace Sharpening2020.Cards.Activatables
             return new StackInstance(this);
         }
 
-        public override ViewObject GetView(Game g)
+        public override ViewObject GetView(Game g, Player viewer)
         {
             return new StackInstanceView(this);
         }

@@ -73,9 +73,9 @@ namespace Sharpening2020.Players
             return ret;
         }
 
-        public override ViewObject GetView(Game g)
+        public override ViewObject GetView(Game g, Player viewer)
         {
-            return new PlayerView(g, ID, Life, MyCounters.Select(x => { return x.Value(g); }).ToList() , ManaPool.Select(x => { return x.Value(g); }).ToList());
+            return new PlayerView(g, this);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Sharpening2020.Commands
             Card c = (Card)g.GetGameObjectByID(CardID);
             foreach (InputHandler ih in g.InputHandlers.Values)
             {
-                ih.Bridge.UpdateCardView((CardView)c.GetView(g));
+                ih.Bridge.UpdateCardView((CardView)c.GetView(g, ih.AssociatedPlayer.Value(g)));
             }
         }
     }

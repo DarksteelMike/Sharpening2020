@@ -588,6 +588,7 @@
             this.Controls.Add(this.lbStack);
             this.Name = "Form1";
             this.Text = "Sharpening horrible very bad no good \"UI\"";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tcArea1.ResumeLayout(false);
             this.tpLibrary1.ResumeLayout(false);

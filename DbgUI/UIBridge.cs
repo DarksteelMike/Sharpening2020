@@ -44,7 +44,6 @@ namespace DbgUI
 
         public override void UpdateCardView(CardView view)
         {
-            MessageBox.Show("Bleh");
 
         }
 
@@ -78,9 +77,6 @@ namespace DbgUI
 
         public override void UpdateZoneView(ZoneType zt, Int32 PlayerID, List<CardView> views)
         {
-            if(zt == ZoneType.Hand)
-                MessageBox.Show("UpdateZoneView: " + zt.ToString() + ", " + PlayerID.ToString());
-
             FormRef.Invoke((MethodInvoker)delegate {
                 ListView Zone = null;
                 switch(zt)
@@ -107,5 +103,12 @@ namespace DbgUI
             });
         }
 
+        public override void DebugAlert(string msg)
+        {
+            FormRef.Invoke((MethodInvoker)delegate
+            {
+                FormRef.GetCardDetailText().Text += msg + "\n=======\n";
+            });
+        }
     }
 }

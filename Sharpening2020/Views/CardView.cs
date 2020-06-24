@@ -4,6 +4,7 @@ using System.Linq;
 
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
+using Sharpening2020.Players;
 
 namespace Sharpening2020.Views
 {
@@ -31,15 +32,31 @@ namespace Sharpening2020.Views
 
         public readonly CardView AlternateView;
 
-        public CardView(Game g, Card crd) : this(g, crd, crd.CurrentCharacteristicName, null)
+        public CardView(Game g, Card crd, Player v) : this(g, crd, v, crd.CurrentCharacteristicName, null)
         {
             
         }
 
-        public CardView(Game g, Card crd, CharacteristicName cn, CardView ForceAltView)
+        public CardView(Game g, Card crd, Player v, CharacteristicName cn, CardView ForceAltView)
         {
+            if(g.DebugFlag)
+            {
+                g.DebugAlert("CardView Constructor:"
+                + "\nID: " + crd.ID
+                + "\nName: " + crd.MyCharacteristics[CharacteristicName.Front].Name
+                + "\nOwner: " + crd.Owner.ID
+                + " Viewer: " + v.ID);
+            }            
+
             ID = crd.ID;
-            CardCharacteristics chara = crd.MyCharacteristics[cn];
+            CardCharacteristics chara;
+            ZoneType zone = g.GetZoneTypeOf(crd);
+            chara = crd.MyCharacteristics[cn];
+            if ((zone == ZoneType.Hand || zone == ZoneType.Library) && !g.DebugFlag)
+            {
+                if(v.ID != crd.Owner.ID)
+                    chara = crd.MyCharacteristics[CharacteristicName.FaceDown];
+            }
             Name = chara.Name;
             SuperTypes = chara.SuperTypes.AsReadOnly();
             CardTypes = chara.CardTypes.AsReadOnly();
@@ -58,7 +75,7 @@ namespace Sharpening2020.Views
             Toughness = chara.Toughness;
             AssignedDamage = crd.AssignedDamage;
 
-            Counters = crd.MyCounters.Select(x => { return (CounterView)x.Value(g).GetView(g); }).ToList().AsReadOnly();
+            Counters = crd.MyCounters.Select(x => { return (CounterView)x.Value(g).GetView(g, v); }).ToList().AsReadOnly();
 
             if (ForceAltView != null)
             {
@@ -72,18 +89,18 @@ namespace Sharpening2020.Views
                    cn == CharacteristicName.Manifest ||
                    cn == CharacteristicName.Morph)
                 {
-                    AlternateView = new CardView(g, crd, CharacteristicName.Front, this);
+                    AlternateView = new CardView(g, crd, v, CharacteristicName.Front, this);
                 }
 
                 if(cn == CharacteristicName.Front)
                 {
                     if(crd.MyCharacteristics.ContainsKey(CharacteristicName.Flip))
                     {
-                        AlternateView = new CardView(g, crd, CharacteristicName.Flip, this);
+                        AlternateView = new CardView(g, crd, v, CharacteristicName.Flip, this);
                     }
                     else if (crd.MyCharacteristics.ContainsKey(CharacteristicName.Back))
                     {
-                        AlternateView = new CardView(g, crd, CharacteristicName.Back, this);
+                        AlternateView = new CardView(g, crd, v, CharacteristicName.Back, this);
                     }
                     else
                     {

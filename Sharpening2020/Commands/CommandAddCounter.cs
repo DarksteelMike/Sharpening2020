@@ -51,11 +51,11 @@ namespace Sharpening2020.Commands
             {
                 if (go is Card)
                 {
-                    ih.Bridge.UpdateCardView((CardView)go.GetView(g));
+                    ih.Bridge.UpdateCardView((CardView)go.GetView(g, ih.AssociatedPlayer.Value(g)));
                 }
                 else
                 {
-                    ih.Bridge.UpdatePlayerView((PlayerView)go.GetView(g));
+                    ih.Bridge.UpdatePlayerView((PlayerView)go.GetView(g, ih.AssociatedPlayer.Value(g)));
                 }
             }
         }

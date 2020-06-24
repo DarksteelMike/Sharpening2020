@@ -64,7 +64,7 @@ namespace Sharpening2020.Commands
         {
             foreach (InputHandler ih in g.InputHandlers.Values)
             {
-                ih.Bridge.UpdateZoneView(ZoneType.Library, PlayerID, g.GetCards(ZoneType.Library).Select(x => { return (CardView)x.GetView(g); }).ToList());
+                ih.Bridge.UpdateZoneView(ZoneType.Library, PlayerID, g.GetCards(ZoneType.Library).Select(x => { return (CardView)x.GetView(g, ih.AssociatedPlayer.Value(g)); }).ToList());
             }
         }
     }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Sharpening2020.Players;
 using Sharpening2020.Views;
 
 namespace Sharpening2020.Mana
@@ -21,7 +23,7 @@ namespace Sharpening2020.Mana
             return ret;
         }
 
-        public override ViewObject GetView(Game g)
+        public override ViewObject GetView(Game g, Player viewer)
         {
             return new ManaPointView(ID,MyColor);
         }

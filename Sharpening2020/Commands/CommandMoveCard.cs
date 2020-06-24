@@ -63,8 +63,8 @@ namespace Sharpening2020.Commands
             Int32 OwnerID = ((Card)g.GetGameObjectByID(CardID)).Owner.ID;
             foreach (InputHandler ih in g.InputHandlers.Values)
             {
-                ih.Bridge.UpdateZoneView(orig.MyType, OwnerID, g.GetCards(ZoneType.Battlefield).Select(x => { return (CardView)x.GetView(g); }).ToList());
-                ih.Bridge.UpdateZoneView(Destination, OwnerID, g.GetCards(ZoneType.Graveyard).Select(x => { return (CardView)x.GetView(g); }).ToList());
+                ih.Bridge.UpdateZoneView(orig.MyType, OwnerID, g.GetCards(ZoneType.Battlefield).Select(x => { return (CardView)x.GetView(g, ih.AssociatedPlayer.Value(g)); }).ToList());
+                ih.Bridge.UpdateZoneView(Destination, OwnerID, g.GetCards(ZoneType.Graveyard).Select(x => { return (CardView)x.GetView(g, ih.AssociatedPlayer.Value(g)); }).ToList());
             }
         }
     }

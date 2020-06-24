@@ -39,6 +39,8 @@ namespace Sharpening2020
 
         private Int32 activePlayerIndex = 0;
 
+        public Boolean DebugFlag = false;
+
         public Int32 ActivePlayerIndex
         {
             get
@@ -363,19 +365,19 @@ namespace Sharpening2020
 
             MyExecutor.SuspendViewUpdates = false;
 
-            foreach(Player p in GetPlayers())
+            foreach (Player p in GetPlayers())
             {
-                for(int j=0;j<7;j++)
+                for (int j = 0; j < 7; j++)
                 {
                     MyExecutor.Do(new CommandDrawCard(p.ID));
                 }
-            }
+            }                
 
             foreach(Player p in GetPlayers())
             {
                 foreach (InputHandler ih in InputHandlers.Values)
                 {
-                    ih.Bridge.UpdatePlayerView((PlayerView)p.GetView(this));
+                    ih.Bridge.UpdatePlayerView((PlayerView)p.GetView(this, p));
                 }
                 foreach (Zone z in p.MyZones.Values)
                 {
@@ -385,7 +387,7 @@ namespace Sharpening2020
                         foreach(LazyGameObject<Card> lc in z.Contents)
                         {
                             Card c = lc.Value(this);
-                            CardView cv = c.GetView(this) as CardView;
+                            CardView cv = c.GetView(this,ih.AssociatedPlayer.Value(this)) as CardView;
 
                             viewList.Add(cv);
                         }
@@ -411,7 +413,8 @@ namespace Sharpening2020
 
         public void UpdateZoneView(ZoneType zt, Int32 PlayerID)
         {
-            List<CardView> list = GetCards(zt, (Player)GetGameObjectByID(PlayerID)).Select<Card,CardView>(x => { return (CardView)x.GetView(this); }).ToList();
+            Player p = (Player)GetGameObjectByID(PlayerID);
+            List<CardView> list = GetCards(zt, (Player)GetGameObjectByID(PlayerID)).Select<Card,CardView>(x => { return (CardView)x.GetView(this, p); }).ToList();
             foreach(InputHandler ih in InputHandlers.Values)
             {
                 ih.Bridge.UpdateZoneView(zt, PlayerID, list);
@@ -431,7 +434,15 @@ namespace Sharpening2020
 
         public List<StackInstanceView> GetStackView()
         {
-            return SpellStack.Select(x => { return (StackInstanceView)x.Value(this).GetView(this); }).ToList();
+            return SpellStack.Select(x => { return (StackInstanceView)x.Value(this).GetView(this,null); }).ToList();
+        }
+
+        public void DebugAlert(String msg)
+        {
+            foreach(InputHandler ih in InputHandlers.Values)
+            {
+                ih.Bridge.DebugAlert(msg);
+            }
         }
     }
 }

@@ -40,5 +40,10 @@ namespace Sharpening2020.InputBridges
         {
             throw new NotImplementedException();
         }
+
+        public override void DebugAlert(string msg)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

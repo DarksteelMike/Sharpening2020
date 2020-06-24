@@ -65,9 +65,9 @@ namespace Sharpening2020.Cards
             return MyCounters.Select(x => { return x.Value(g); });
         }
 
-        public override ViewObject GetView(Game g)
+        public override ViewObject GetView(Game g, Player viewer)
         {
-            return new CardView(g, this);
+            return new CardView(g, this, viewer);
         }
 
         public static void AddUniversalCharacteristics(Card c)

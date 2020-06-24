@@ -20,5 +20,7 @@ namespace Sharpening2020.InputBridges
         public abstract void UpdateZoneView(ZoneType zt, Int32 PlayerID, List<CardView> views);
 
         public abstract void UpdateStackView(List<StackInstanceView> views);
+
+        public abstract void DebugAlert(String msg);
     }
 }

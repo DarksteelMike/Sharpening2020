@@ -40,5 +40,10 @@ namespace Sharpening2020.InputBridges
         {
             //Don't care
         }
+
+        public override void DebugAlert(string msg)
+        {
+            //Don't care
+        }
     }
 }

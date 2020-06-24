@@ -22,13 +22,6 @@ namespace DbgUI
         public Form1()
         {
             InitializeComponent();
-            Model.MyExecutor.CommandPerformed += MyExecutor_CommandPerformed;
-        }
-
-        private void MyExecutor_CommandPerformed(CommandBase cb)
-        {
-            this.Invoke((MethodInvoker)delegate { tbCardDetailText.Text += Environment.NewLine + cb.GetType().ToString(); });
-            
         }
 
         public ListView GetLibrary(Int32 PlayerNum)
@@ -113,11 +106,18 @@ namespace DbgUI
             return lbStack;
         }
 
+        public TextBox GetCardDetailText()
+        {
+            return tbCardDetailText;
+        }
+
+        Thread GameThread;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             ThreadStart ts = new ThreadStart(SetupGame);
-            Thread t = new Thread(ts);
-            t.Start();
+            GameThread = new Thread(ts);
+            GameThread.Start();
         }
         
         public void SetupGame()
@@ -144,6 +144,11 @@ namespace DbgUI
             IB2 = new RandomPlayerBridge();
 
             Model.InitGame(new KeyValuePair<InputBridge, List<string>>(IB1, Deck1), new KeyValuePair<InputBridge, List<string>>(IB2, Deck2));
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            GameThread.Abort();
         }
     }
 }
