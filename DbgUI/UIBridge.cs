@@ -7,6 +7,7 @@ using Sharpening2020.Input;
 using Sharpening2020.InputBridges;
 using Sharpening2020.Views;
 using Sharpening2020.Zones;
+using Sharpening2020.Phases;
 
 namespace DbgUI
 {
@@ -75,6 +76,11 @@ namespace DbgUI
             {
                 FormRef.DebugAlert(msg);
             });
+        }
+
+        public override void UpdatePhase(PhaseType pt)
+        {
+            throw new NotImplementedException();
         }
     }
 }

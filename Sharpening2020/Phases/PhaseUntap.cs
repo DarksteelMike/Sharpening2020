@@ -9,6 +9,7 @@ namespace Sharpening2020.Phases
 {
     class PhaseUntap : PhaseBase
     {
+        public override PhaseType MyType { get { return PhaseType.Untap; } }
         public override void PhaseEffects(Game g)
         {
             foreach (Card c in g.GetCards(ZoneType.Battlefield, g.ActivePlayer).Where(x => x.IsTapped))

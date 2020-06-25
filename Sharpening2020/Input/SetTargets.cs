@@ -44,6 +44,7 @@ namespace Sharpening2020.Input
         public override List<GameAction> GetActions()
         {
             List<GameAction> res = new List<GameAction>();
+            ActionCommandPairs.Clear();
             GameAction cancel = new GameAction(-2, -2, "Cancel");
             ActionCommandPairs.Add(-2, new CommandRemoveTopInputState(MyPlayer.ID));
             res.Add(cancel);

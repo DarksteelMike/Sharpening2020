@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Sharpening2020;
 using Sharpening2020.Input;
 using Sharpening2020.InputBridges;
+using Sharpening2020.Phases;
 using Sharpening2020.Views;
 using Sharpening2020.Zones;
 
@@ -76,15 +77,22 @@ namespace DbgUI
             bOK.Enabled = false;
             bCancel.Enabled = false;
 
-            if (AvailableActions.Where(x => { return x.ID == -1; }).Count() > 0)
-                bOK.Enabled = true;
-            if (AvailableActions.Where(x => { return x.ID == -2; }).Count() > 0)
-                bCancel.Enabled = true;
-
             foreach(GameAction ga in AvailableActions)
             {
+                
+                if(ga.AssociatedGameObjectID == -1)
+                {
+                    bOK.Enabled = true;
+                    continue;
+                 }
+                if (ga.AssociatedGameObjectID == -2)
+                {
+                    bCancel.Enabled = true;
+                    continue;
+                }
+
                 ViewObject vo = ViewMap[ga.AssociatedGameObjectID];
-                if(vo is CardView)
+                if (vo is CardView)
                 {
                     ContextMenuStrip cont;
                     if (ContextMap.ContainsKey(vo.ID))
@@ -130,11 +138,12 @@ namespace DbgUI
 
         public void UpdateCardView(CardView view)
         {
-
+            AddViewToMap(view);
         }
 
         public void UpdatePlayerView(PlayerView view)
         {
+            AddViewToMap(view);
             Label life;
             ComboBox counters, manapool;
 
@@ -167,12 +176,20 @@ namespace DbgUI
 
         public void UpdateStackView(List<StackInstanceView> views)
         {
+            foreach(StackInstanceView siv in views)
+            {
+                AddViewToMap(siv);
+            }
             lbStack.Items.Clear();
             lbStack.Items.AddRange(views.ToArray());
         }
 
         public void UpdateZoneView(ZoneType zt, Int32 PlayerID, List<CardView> views)
         {
+            foreach(CardView cv in views)
+            {
+                AddViewToMap(cv);
+            }
             ListView Zone = GetZoneControl(zt, PlayerID + 1);
 
             Zone.Items.Clear();
@@ -186,6 +203,23 @@ namespace DbgUI
             }
 
             Zone.Update();
+        }
+
+        public void UpdatePhase(PhaseType pt)
+        {
+            this.Text = "Sharpening horrible very bad no good \"UI\" :" + pt.ToString();
+        }
+
+        public void AddViewToMap(ViewObject vo)
+        {
+            if(ViewMap.ContainsKey(vo.ID))
+            {
+                ViewMap[vo.ID] = vo;
+            }
+            else
+            {
+                ViewMap.Add(vo.ID, vo);
+            }
         }
 
         public ListView GetZoneControl(ZoneType z, Int32 Player)

@@ -449,5 +449,13 @@ namespace Sharpening2020
                 ih.Bridge.DebugAlert(msg);
             }
         }
+
+        public void UpdatePhase(PhaseType pt)
+        {
+            foreach (InputHandler ih in InputHandlers.Values)
+            {
+                ih.Bridge.UpdatePhase(pt);
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace Sharpening2020.Phases
 {
     public class PhasePreCombatMain : PhaseBase
     {
+        public override PhaseType MyType { get { return PhaseType.PreCombatMain; } }
         public override void PhaseEffects(Game g)
         {
         }

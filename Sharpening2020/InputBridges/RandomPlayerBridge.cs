@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Sharpening2020.Input;
+using Sharpening2020.Phases;
 using Sharpening2020.Views;
 using Sharpening2020.Zones;
 
@@ -45,6 +46,11 @@ namespace Sharpening2020.InputBridges
         }
 
         public override void DebugAlert(string msg)
+        {
+            //Don't care
+        }
+
+        public override void UpdatePhase(PhaseType pt)
         {
             //Don't care
         }

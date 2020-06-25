@@ -20,6 +20,7 @@ namespace Sharpening2020.Input
         {
             List<GameAction> ret = new List<GameAction>();
             GameAction pass = new GameAction(-1, -1, "Pass priority");
+            ActionCommandPairs.Clear();
             ret.Add(pass);
             ActionCommandPairs.Add(-1, new CommandPassPriority());
             int i = 0;
