@@ -38,15 +38,6 @@ namespace Sharpening2020.Views
 
         public CardView(Game g, Card crd, Player v, CharacteristicName cn, CardView ForceAltView)
         {
-            if(g.DebugFlag)
-            {
-                g.DebugAlert("CardView Constructor:"
-                + "\nID: " + crd.ID
-                + "\nName: " + crd.MyCharacteristics[CharacteristicName.Front].Name
-                + "\nOwner: " + crd.Owner.ID
-                + " Viewer: " + v.ID);
-            }            
-
             id = crd.ID;
             CardCharacteristics chara;
             ZoneType zone = g.GetZoneTypeOf(crd);

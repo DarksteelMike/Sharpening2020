@@ -25,6 +25,8 @@ namespace Sharpening2020.Phases
                 {
                     currentPhaseIndex += AllPhases.Count;
                 }
+
+                MyGame.UpdatePhase();
             }
         }
 

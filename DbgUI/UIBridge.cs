@@ -13,12 +13,11 @@ namespace DbgUI
 {
     class UIBridge : InputBridge
     { 
-        private readonly Form1 FormRef;
+        private readonly MatchForm FormRef;
 
-        public UIBridge(Form1 fr)
+        public UIBridge(MatchForm fr)
         {
             FormRef = fr;
-  
         }
 
         public override void Prompt(String s)
@@ -80,7 +79,10 @@ namespace DbgUI
 
         public override void UpdatePhase(PhaseType pt)
         {
-            throw new NotImplementedException();
+            FormRef.Invoke((MethodInvoker)delegate
+            {
+                FormRef.UpdatePhase(pt);
+            });
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Commands;
 
@@ -36,6 +35,18 @@ namespace Sharpening2020.Input
                 ActionCommandPairs.Add(a.ID, new CommandSetTargetState(MyPlayer.ID,act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)));
                 ret.Add(a);
             }
+
+            if(MyGame.DebugFlag)
+            {
+                MyGame.DebugAlert("HavePriority, will travel\n==========");
+                String msg = "";
+                foreach(GameAction ga in ret)
+                {
+                    msg += "\n" + ga.Description + "\n==========";
+                }
+                MyGame.DebugAlert(msg);
+            }
+
             return ret;
         }
 

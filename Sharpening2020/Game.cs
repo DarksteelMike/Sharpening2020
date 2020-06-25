@@ -368,17 +368,17 @@ namespace Sharpening2020
                 MyExecutor.Do(new CommandShuffleLibrary(i++, (Int32)DateTime.Now.Ticks));
             }
 
-            MyExecutor.SuspendViewUpdates = false;
-
             foreach (Player p in GetPlayers())
             {
                 for (int j = 0; j < 7; j++)
                 {
                     MyExecutor.Do(new CommandDrawCard(p.ID));
                 }
-            }                
+            }
 
-            foreach(Player p in GetPlayers())
+            MyExecutor.SuspendViewUpdates = false;
+
+            foreach (Player p in GetPlayers())
             {
                 foreach (InputHandler ih in InputHandlers.Values)
                 {
@@ -400,6 +400,8 @@ namespace Sharpening2020
                     }
                 }
             }
+
+            UpdatePhase();
 
             MyExecutor.Do(new CommandSetWaitingForOpponentsState(1));
             MyExecutor.Do(new CommandSetHavePriorityState(0));
@@ -450,11 +452,11 @@ namespace Sharpening2020
             }
         }
 
-        public void UpdatePhase(PhaseType pt)
+        public void UpdatePhase()
         {
             foreach (InputHandler ih in InputHandlers.Values)
             {
-                ih.Bridge.UpdatePhase(pt);
+                ih.Bridge.UpdatePhase(MyPhaseHandler.CurrentPhase.MyType);
             }
         }
     }

@@ -13,11 +13,8 @@ using Sharpening2020.Zones;
 
 namespace DbgUI
 {
-    public partial class Form1 : Form
+    public partial class MatchForm : Form
     {
-        Game Model;
-        Thread GameThread;
-        UIBridge MyBridge;
         public GameAction SelectedAction;
         List<GameAction> AvailableActions;
 
@@ -25,49 +22,10 @@ namespace DbgUI
         Dictionary<ListViewItem, Int32> CardMap = new Dictionary<ListViewItem, int>();
         Dictionary<Int32, ContextMenuStrip> ContextMap = new Dictionary<int, ContextMenuStrip>();
 
-        public Form1()
+        public MatchForm()
         {
             InitializeComponent();
-
-            Model = Game.Construct();
-            //Model.DebugFlag = true;
-        }       
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            ThreadStart ts = new ThreadStart(SetupGame);
-            GameThread = new Thread(ts);
-            GameThread.Start();
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            GameThread.Abort();
-        }
-
-        public void SetupGame()
-        {
-            List<String> Deck1 = new List<string>();
-            List<String> Deck2 = new List<string>();
-
-            for(int i=0;i<24;i++)
-            {
-                Deck1.Add("Forest");
-                Deck2.Add("Forest");
-            }
-            for (int i = 0; i < 4; i++)
-            {
-                Deck1.Add("Grizzly Bears");
-                Deck1.Add("Memnite");
-                Deck2.Add("Grizzly Bears");
-                Deck2.Add("Memnite");
-            }           
-
-            MyBridge = new UIBridge(this);
-            InputBridge IB2 = new RandomPlayerBridge();
-
-            Model.InitGame(new KeyValuePair<InputBridge, List<string>>(MyBridge, Deck1), new KeyValuePair<InputBridge, List<string>>(IB2, Deck2));
-        }
+        }      
 
         public void SetupActions(List<GameAction> actions)
         {

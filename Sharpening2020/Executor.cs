@@ -7,7 +7,8 @@ namespace Sharpening2020
 {
     public class Executor
     {
-        public Stack<CommandBase> UndoStack = new Stack<CommandBase>();
+        private readonly Stack<CommandBase> UndoStack = new Stack<CommandBase>();
+        private readonly Stack<CommandBase> RedoStack = new Stack<CommandBase>();
 
         public delegate void CommandPerformedEvent(CommandBase cb);
 
@@ -19,20 +20,38 @@ namespace Sharpening2020
 
         public void Do(CommandBase com)
         {
+            if (MyGame.DebugFlag)
+                MyGame.DebugAlert("Doing " + com.ToString());
+
+
             UndoStack.Push(com);
             com.Do(MyGame);
 
-            if(CommandPerformed != null)
-                CommandPerformed(com);
+            if (!SuspendViewUpdates)
+                com.UpdateViews(MyGame);
+
+            CommandPerformed?.Invoke(com);
         }
 
         public void Undo()
         {
+            if (UndoStack.Count == 0)
+                return;
+
             CommandBase com = UndoStack.Pop();
             com.Undo(MyGame);
+            RedoStack.Push(com);
 
             if (!SuspendViewUpdates)
                 com.UpdateViews(MyGame);
+        }
+
+        public void Redo()
+        {
+            if (RedoStack.Count == 0)
+                return;
+
+            Do(RedoStack.Pop());
         }
     }
 }
