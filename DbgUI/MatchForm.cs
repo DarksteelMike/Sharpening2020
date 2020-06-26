@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 
-using Sharpening2020;
 using Sharpening2020.Input;
-using Sharpening2020.InputBridges;
 using Sharpening2020.Phases;
 using Sharpening2020.Views;
 using Sharpening2020.Zones;
@@ -88,10 +85,7 @@ namespace DbgUI
                         grpPlayer2.ContextMenuStrip = cont;
                     }
                 }
-            }
-
-
-            
+            }            
         }
 
         public void UpdateCardView(CardView view)

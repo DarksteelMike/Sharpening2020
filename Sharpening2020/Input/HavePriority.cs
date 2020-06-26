@@ -13,7 +13,6 @@ namespace Sharpening2020.Input
         public override void Enter()
         {
             MyBridge.Prompt("You have priority.");
-            MyBridge.SelectActionFromList(GetActions());
         }
         public override List<GameAction> GetActions()
         {

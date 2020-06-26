@@ -130,6 +130,7 @@
             // 
             // bOK
             // 
+            this.bOK.Enabled = false;
             this.bOK.Location = new System.Drawing.Point(12, 663);
             this.bOK.Name = "bOK";
             this.bOK.Size = new System.Drawing.Size(92, 54);
@@ -140,6 +141,7 @@
             // 
             // bCancel
             // 
+            this.bCancel.Enabled = false;
             this.bCancel.Location = new System.Drawing.Point(122, 663);
             this.bCancel.Name = "bCancel";
             this.bCancel.Size = new System.Drawing.Size(92, 54);
@@ -645,7 +647,7 @@
             this.lvCommand2.UseCompatibleStateImageBehavior = false;
             this.lvCommand2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
-            // Form1
+            // MatchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -660,7 +662,7 @@
             this.Controls.Add(this.bOK);
             this.Controls.Add(this.lvHand1);
             this.Controls.Add(this.lbStack);
-            this.Name = "Form1";
+            this.Name = "MatchForm";
             this.Text = "Sharpening horrible very bad no good \"UI\"";
             this.tcArea1.ResumeLayout(false);
             this.tpLibrary1.ResumeLayout(false);

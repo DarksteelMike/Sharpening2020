@@ -62,12 +62,7 @@ namespace Sharpening2020
                     activePlayerIndex += PlayerCount;
                 }
 
-                foreach(Player p in GetPlayers())
-                {
-                    if (p.ID != ActivePlayer.ID)
-                        MyExecutor.Do(new CommandSetWaitingForOpponentsState(p.ID));
-                }
-                MyExecutor.Do(new CommandSetHavePriorityState(ActivePlayer.ID));
+                
             }
 
         }
@@ -113,6 +108,13 @@ namespace Sharpening2020
                 {
                     playerWithPriorityIndex += PlayerCount;
                 }
+
+                foreach (Player p in GetPlayers())
+                {
+                    if (p.ID != PlayerWithPriority.ID)
+                        MyExecutor.Do(new CommandSetWaitingForOpponentsState(p.ID));
+                }
+                MyExecutor.Do(new CommandSetHavePriorityState(ActivePlayer.ID));
             }
 
         }
@@ -402,7 +404,7 @@ namespace Sharpening2020
             }
 
             UpdatePhase();
-
+            
             MyExecutor.Do(new CommandSetWaitingForOpponentsState(1));
             MyExecutor.Do(new CommandSetHavePriorityState(0));
         }
