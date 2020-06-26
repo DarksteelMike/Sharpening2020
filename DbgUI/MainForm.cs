@@ -37,7 +37,7 @@ namespace DbgUI
             bridge2 = new UIBridge(mf2);
 
             model = Game.Construct();
-            model.DebugFlag = true;
+            model.DebugFlag = false;
 
             ThreadStart ts = new ThreadStart(SetupGame);
             GameThread = new Thread(ts);

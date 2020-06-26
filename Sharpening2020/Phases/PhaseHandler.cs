@@ -16,10 +16,13 @@ namespace Sharpening2020.Phases
             get { return currentPhaseIndex; }
             set {
                 currentPhaseIndex = value;
-                while(currentPhaseIndex > AllPhases.Count)
+                if(currentPhaseIndex >= AllPhases.Count)
                 {
-                    currentPhaseIndex -= AllPhases.Count;
-                }
+                    while (currentPhaseIndex >= AllPhases.Count)
+                    {
+                        currentPhaseIndex -= AllPhases.Count;
+                    }
+                }                
 
                 while(currentPhaseIndex < 0)
                 {

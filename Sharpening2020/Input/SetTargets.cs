@@ -11,7 +11,6 @@ namespace Sharpening2020.Input
         public SetTargets(Activatable act)
         {
             MyActivatable = act;
-            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(MyActivatable);
         }
 
         public readonly Dictionary<Int32, CommandBase> ActionCommandPairs = new Dictionary<Int32, CommandBase>();
@@ -20,6 +19,8 @@ namespace Sharpening2020.Input
 
         public override void Enter()
         {
+            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(MyActivatable);
+
             if (MyActivatable.MyTargeting.IsFinished())
             {
                 MoveToActionPayment();

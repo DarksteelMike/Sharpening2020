@@ -21,7 +21,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
             Boolean res = true;
 
             res &= g.GetZoneTypeOf(Host) == ZoneType.Hand; //Only play from hand.
-            res &= p.Equals(Host.Value(g).Owner); //Only it's owner can play it.
+            res &= p.ID == Host.Value(g).Owner.ID; //Only it's owner can play it.
             res &= p.LandsPlayedThisTurn < 1; //Only play if no other lands have been played this turn.
             res &= g.SpellStack.Count == 0; //Only play if stack is empty.
             res &= (g.MyPhaseHandler.CurrentPhase is PhasePreCombatMain || g.MyPhaseHandler.CurrentPhase is PhasePostCombatMain); //Only play on main phases.

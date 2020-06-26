@@ -23,8 +23,8 @@ namespace Sharpening2020
         {
             Game ret = new Game();
             ret.MyExecutor.MyGame = ret;
-            ret.MyContinuousEffects = new ContinuousEffectHandler();
-            ret.MyPhaseHandler = new PhaseHandler();
+            ret.MyContinuousEffects.MyGame = ret;
+            ret.MyPhaseHandler.MyGame = ret;
 
             return ret;
         }
@@ -85,23 +85,28 @@ namespace Sharpening2020
             {
                 playerWithPriorityIndex = value;
                 Int32 PlayerCount = GetPlayers().Count();
-                if(playerWithPriorityIndex > PlayerCount)
+                if(playerWithPriorityIndex >= PlayerCount)
                 {
-                    while (playerWithPriorityIndex > PlayerCount)
+                    while (playerWithPriorityIndex >= PlayerCount)
                     {
                         playerWithPriorityIndex -= PlayerCount;
                     }
 
                     if(SpellStack.Count == 0)
                     {
-                        MyExecutor.Do(new CommandAdvancePhase());
+                        if(RepeatPriorityLoop)
+                        {
+                            RepeatPriorityLoop = false;
+                        }
+                        else
+                        {
+                            MyExecutor.Do(new CommandAdvancePhase());
+                        }
                     }
                     else
                     {
-                        SpellStack.Pop().Value(this).Resolve(this);
+                        MyExecutor.Do(new CommandResolveTopOfStack());
                     }
-
-                    return;
                 }                
 
                 while (playerWithPriorityIndex < 0)
@@ -114,17 +119,19 @@ namespace Sharpening2020
                     if (p.ID != PlayerWithPriority.ID)
                         MyExecutor.Do(new CommandSetWaitingForOpponentsState(p.ID));
                 }
-                MyExecutor.Do(new CommandSetHavePriorityState(ActivePlayer.ID));
+                MyExecutor.Do(new CommandSetHavePriorityState(PlayerWithPriority.ID));
             }
 
         }
+
+        public Boolean RepeatPriorityLoop = false;
 
         public Player PlayerWithPriority
         {
             get { return GetPlayers().ElementAt(playerWithPriorityIndex); }
         }
 
-        public ContinuousEffectHandler MyContinuousEffects;
+        public ContinuousEffectHandler MyContinuousEffects = new ContinuousEffectHandler();
 
         public PhaseHandler MyPhaseHandler = new PhaseHandler();
 
@@ -430,8 +437,10 @@ namespace Sharpening2020
             }
         }
 
-        public void PlayActivatable(Activatable act, StackInstance si = null)
+        public void PlayActivatable(Activatable act, Player Activator, StackInstance si = null)
         {
+            RepeatPriorityLoop = true;
+            act.Activator = Activator;
             if(act is SpecialAction)
             {
                 act.Resolve(this, si);

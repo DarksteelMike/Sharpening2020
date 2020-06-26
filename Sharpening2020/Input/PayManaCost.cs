@@ -25,7 +25,7 @@ namespace Sharpening2020.Input
             if (MyActivatable.MyCost.IsManaPaid())
             {
                 MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
-                MyGame.PlayActivatable(MyActivatable);
+                MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
             }
         }
 
@@ -69,7 +69,7 @@ namespace Sharpening2020.Input
             if(MyActivatable.MyCost.IsManaPaid())
             {
                 MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
-                MyGame.PlayActivatable(MyActivatable);
+                MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
             }
 
         }

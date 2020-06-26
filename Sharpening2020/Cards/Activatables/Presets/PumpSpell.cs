@@ -26,7 +26,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
             Boolean res = true;
 
             res &= g.GetZoneTypeOf(Host) == ZoneType.Hand; //Only cast from hand
-            res &= p.Equals(Host.Value(g).Owner); //Only it's owner can cast it
+            res &= p.ID == Host.Value(g).Owner.ID; //Only it's owner can cast it
             res &= !IsBeingActivated; //This isn't already in the process of being cast.
 
             return res;

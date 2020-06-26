@@ -37,7 +37,13 @@ namespace DbgUI
                 Thread.Sleep(100);
             }
 
-            return FormRef.SelectedAction;
+            GameAction sel = FormRef.SelectedAction;
+            FormRef.Invoke((Action<List<GameAction>>)delegate (List<GameAction> act)
+            {
+                FormRef.Reset();
+            }, actions);
+
+            return sel;
         }
 
         public override void UpdateCardView(CardView view)

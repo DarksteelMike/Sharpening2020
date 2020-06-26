@@ -21,12 +21,12 @@ namespace Sharpening2020.Input
         public PayActionCost(Activatable act)
         {
             MyActivatable = act;
-            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(MyActivatable);
         }
 
         public override void Enter()
         {
-            if(MyActivatable.MyCost.AreActionsPaid())
+            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(MyActivatable);
+            if (MyActivatable.MyCost.AreActionsPaid())
             {
                 MoveToManaPayment();
                 return;

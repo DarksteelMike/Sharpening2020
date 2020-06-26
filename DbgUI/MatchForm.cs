@@ -144,6 +144,11 @@ namespace DbgUI
             }
             ListView Zone = GetZoneControl(zt, PlayerID + 1);
 
+            foreach(ListViewItem lvi in Zone.Items)
+            {
+                CardMap.Remove(lvi);
+            }
+
             Zone.Items.Clear();
 
             foreach (CardView cv in views)
@@ -152,6 +157,7 @@ namespace DbgUI
                 lvi.Text = cv.Name;
 
                 Zone.Items.Add(lvi);
+                CardMap.Add(lvi, cv.ID);
             }
 
             Zone.Update();
@@ -198,7 +204,7 @@ namespace DbgUI
                 case (ZoneType.Exile): return lvExile2; break;
                 case (ZoneType.Command): return lvCommand2; break;
             }
-
+#pragma warning restore 0162
             return null;
         }
 
@@ -300,6 +306,15 @@ namespace DbgUI
                     ContextMap[ID].Show(Cursor.Position);
                 }
             }
+        }
+
+        public void Reset()
+        {
+            SelectedAction = null;
+            ContextMap.Clear();
+            AvailableActions.Clear();
+            bOK.Enabled = false;
+            bCancel.Enabled = false;
         }
     }
 }
