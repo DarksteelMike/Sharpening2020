@@ -37,7 +37,7 @@ namespace DbgUI
             bridge2 = new UIBridge(mf2);
 
             model = Game.Construct();
-            model.DebugFlag = false;
+            model.DebugFlag = cbDebug.Checked;
 
             ThreadStart ts = new ThreadStart(SetupGame);
             GameThread = new Thread(ts);
@@ -46,7 +46,7 @@ namespace DbgUI
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            GameThread.Abort();
+            GameThread?.Abort();
         }
 
         public void SetupGame()
