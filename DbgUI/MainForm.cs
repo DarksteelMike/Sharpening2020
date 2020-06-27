@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -26,10 +27,14 @@ namespace DbgUI
         Game model;
         Thread GameThread;
 
+        StreamWriter swLog = null;
+
         private void bNew_Click(object sender, EventArgs e)
         {
-            mf1 = new MatchForm();
-            mf2 = new MatchForm();
+            if(cbDebugMode.SelectedIndex != 0)
+                swLog = File.CreateText(DateTime.Now.Second.ToString() + ".log");
+            mf1 = new MatchForm(swLog);
+            mf2 = new MatchForm(null);
             mf1.Text = "Player 1";
             mf2.Text = "Player 2";
             mf1.Show();
@@ -48,7 +53,14 @@ namespace DbgUI
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            CloseEverything();
+        }
+
+        public void CloseEverything()
+        {
             GameThread?.Abort();
+            swLog?.Flush();
+            swLog?.Close();
         }
 
         public void SetupGame()
@@ -65,8 +77,10 @@ namespace DbgUI
             {
                 Deck1.Add("Grizzly Bears");
                 Deck1.Add("Memnite");
+                Deck1.Add("Giant Growth");
                 Deck2.Add("Grizzly Bears");
                 Deck2.Add("Memnite");
+                Deck2.Add("Giant Growth");
             }
 
             model.InitGame(new KeyValuePair<InputBridge, List<string>>(bridge1, Deck1), new KeyValuePair<InputBridge, List<string>>(bridge2, Deck2));

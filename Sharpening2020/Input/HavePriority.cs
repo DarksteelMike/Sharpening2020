@@ -13,7 +13,10 @@ namespace Sharpening2020.Input
         public override void Enter()
         {
             MyBridge.Prompt("You have priority.");
+
+            SelectAction(MyBridge.SelectActionFromList(GetActions()));
         }
+
         public override List<GameAction> GetActions()
         {
             List<GameAction> ret = new List<GameAction>();
@@ -31,17 +34,18 @@ namespace Sharpening2020.Input
 
                 //Should rather be a CommandSetAnnouncementState, but SetTarget is the earliest now implemented step that starts
                 //activating the activatable.
-                ActionCommandPairs.Add(a.ID, new CommandSetTargetState(MyPlayer.ID,act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)));
+                ActionCommandPairs.Add(a.ID, new CommandGroup(new CommandSetTargetState(MyPlayer.ID,act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)),
+                    new CommandEnterInputState()));
                 ret.Add(a);
             }
 
             if(MyGame.DebugFlag == DebugMode.InputStates)
             {
-                MyGame.DebugAlert("HavePriority, will travel\n==========");
+                MyGame.DebugAlert("HavePriority, will travel");
                 String msg = "";
                 foreach(GameAction ga in ret)
                 {
-                    msg += "\n" + ga.Description + "\n==========";
+                    msg += "" + ga.Description + "\n==========";
                 }
                 MyGame.DebugAlert(msg);
             }

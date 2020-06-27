@@ -6,8 +6,9 @@ using Sharpening2020.Cards.Costs;
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Cards.Activatables.Presets;
 using Sharpening2020.Mana;
+using Sharpening2020.Zones;
 
-namespace Cards.Cards
+namespace Cards
 {
     class Giant_Growth : Card
     {

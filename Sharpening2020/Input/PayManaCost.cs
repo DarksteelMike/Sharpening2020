@@ -20,14 +20,22 @@ namespace Sharpening2020.Input
             MyActivatable = act;
         }
 
-        public override void Enter()
+        public void PromptAndRequestAction()
         {
+            MyBridge.Prompt("Pay \"" + MyActivatable.MyCost.ManaParts.ToString() + "\"?");
+            SelectAction(MyBridge.SelectActionFromList(GetActions()));
+        }
+
+        public override void Enter()
+        {            
             if (MyActivatable.MyCost.IsManaPaid())
             {
-                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
-                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
+                MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID),
+                    new CommandEnterInputState()));
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
             }
+
+            PromptAndRequestAction();
         }
 
         public override List<GameAction> GetActions()
@@ -38,8 +46,8 @@ namespace Sharpening2020.Input
             GameAction cancel = new GameAction(-2, -2, "Cancel");
             ActionCommandPairs.Add(-2, new CommandGroup(
                 new CommandResetCost(MyPlayer.ID),
-                new CommandRemoveTopInputState(MyPlayer.ID),
-                new CommandRemoveTopInputState(MyPlayer.ID)));
+                new CommandRemoveTopInputStates(MyPlayer.ID,2),
+                new CommandEnterInputState()));
 
             int i = 0;
 
@@ -65,17 +73,20 @@ namespace Sharpening2020.Input
             if(a.ID == -2)
             {
                 MyActivatable.MyCost.ClearPaid();
-                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
+                MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID),
+                    new CommandEnterInputState()));
             }
 
             MyGame.MyExecutor.Do(ActionCommandPairs[a.ID]);
 
             if(MyActivatable.MyCost.IsManaPaid())
             {
-                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
-                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
+                MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID, 2),
+                    new CommandEnterInputState()));
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
             }
+
+            PromptAndRequestAction();
 
         }
 

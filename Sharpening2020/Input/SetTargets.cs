@@ -32,14 +32,15 @@ namespace Sharpening2020.Input
 
         private void MoveToActionPayment()
         {
-            MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
-            MyGame.MyExecutor.Do(new CommandSetPayActionCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex));
+            MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID),
+                new CommandSetPayActionCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex),
+                new CommandEnterInputState()));
         }
 
         public void PromptAndRequestAction()
         {
             MyBridge.Prompt("Select target " + MyActivatable.MyTargeting.Description);
-            MyBridge.SelectActionFromList(GetActions());
+            SelectAction(MyBridge.SelectActionFromList(GetActions()));
         }
 
         public override List<GameAction> GetActions()
@@ -47,7 +48,8 @@ namespace Sharpening2020.Input
             List<GameAction> res = new List<GameAction>();
             ActionCommandPairs.Clear();
             GameAction cancel = new GameAction(-2, -2, "Cancel");
-            ActionCommandPairs.Add(-2, new CommandRemoveTopInputState(MyPlayer.ID));
+            ActionCommandPairs.Add(-2, new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID),
+                new CommandEnterInputState()));
             res.Add(cancel);
 
             Int32 i = 0;

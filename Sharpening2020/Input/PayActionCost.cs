@@ -43,7 +43,8 @@ namespace Sharpening2020.Input
             GameAction cancel = new GameAction(-2, -2, "Cancel");
             ActionCommandPairs.Add(-2, new CommandGroup(
                 new CommandResetCost(MyPlayer.ID),
-                new CommandRemoveTopInputState(MyPlayer.ID)));
+                new CommandRemoveTopInputStates(MyPlayer.ID),
+                new CommandEnterInputState()));
 
             GameAction ok = new GameAction(-1, -1, "OK");
             
@@ -73,14 +74,14 @@ namespace Sharpening2020.Input
 
         private void MoveToManaPayment()
         {
-            //MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
-            MyGame.MyExecutor.Do(new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex));
+            MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID),
+                new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex)));
         }
 
         public void PromptAndRequestAction()
         {
             MyBridge.Prompt("Perform \"" + MyActivatable.MyCost.ActionParts[ActionPartIndex].ToString(MyGame) + "\"?");
-            MyBridge.SelectActionFromList(GetActions());
+            SelectAction(MyBridge.SelectActionFromList(GetActions()));
         }
 
         public override object Clone()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -19,9 +20,13 @@ namespace DbgUI
         Dictionary<ListViewItem, Int32> CardMap = new Dictionary<ListViewItem, int>();
         Dictionary<Int32, ContextMenuStrip> ContextMap = new Dictionary<int, ContextMenuStrip>();
 
-        public MatchForm()
+        StreamWriter fsLog;
+
+        public MatchForm(StreamWriter fs)
         {
             InitializeComponent();
+
+            fsLog = fs;
         }      
 
         public void SetupActions(List<GameAction> actions)
@@ -210,7 +215,9 @@ namespace DbgUI
 
         public void DebugAlert(string msg)
         {
-            this.tbCardDetailText.Text += msg + "\n=======\n";
+            fsLog?.Write(msg);
+            fsLog?.WriteLine("");
+            fsLog?.Flush();
         }
 
         public void Prompt(String s)

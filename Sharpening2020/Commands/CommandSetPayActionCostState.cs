@@ -38,7 +38,7 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandSetPayManaCostState(PlayerID, CardID, ActivatableIndex);
+            return new CommandSetPayActionCostState(PlayerID, CardID, ActivatableIndex);
         }
     }
 }

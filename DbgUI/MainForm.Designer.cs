@@ -97,7 +97,7 @@
             this.cbDebugMode.Items.AddRange(new object[] {
             "None",
             "Commands",
-            "Inputstates"});
+            "InputStates"});
             this.cbDebugMode.Location = new System.Drawing.Point(114, 25);
             this.cbDebugMode.Name = "cbDebugMode";
             this.cbDebugMode.Size = new System.Drawing.Size(85, 21);

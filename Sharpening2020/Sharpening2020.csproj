@@ -73,6 +73,7 @@
     <Compile Include="Commands\CommandCreateStaticPumpEffect.cs" />
     <Compile Include="Commands\CommandDestroy.cs" />
     <Compile Include="Commands\CommandDrawCard.cs" />
+    <Compile Include="Commands\CommandEnterInputState.cs" />
     <Compile Include="Commands\CommandGroup.cs" />
     <Compile Include="Commands\CommandIncreaseCardsDrawn.cs" />
     <Compile Include="Commands\CommandIncrementActionPartIndex.cs" />
@@ -83,7 +84,7 @@
     <Compile Include="Commands\CommandPutOnStack.cs" />
     <Compile Include="Commands\CommandRemoveCounter.cs" />
     <Compile Include="Commands\CommandRemoveGameObjectFromGame.cs" />
-    <Compile Include="Commands\CommandRemoveTopInputState.cs" />
+    <Compile Include="Commands\CommandRemoveTopInputStates.cs" />
     <Compile Include="Commands\CommandResetCardsDrawn.cs" />
     <Compile Include="Commands\CommandResetCost.cs" />
     <Compile Include="Commands\CommandResolveTopOfStack.cs" />

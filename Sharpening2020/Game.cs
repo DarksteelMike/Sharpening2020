@@ -118,9 +118,12 @@ namespace Sharpening2020
                 foreach (Player p in GetPlayers())
                 {
                     if (p.ID != PlayerWithPriority.ID)
+                    {
                         MyExecutor.Do(new CommandSetWaitingForOpponentsState(p.ID));
+                    }                    
                 }
-                MyExecutor.Do(new CommandSetHavePriorityState(PlayerWithPriority.ID));
+                MyExecutor.Do(new CommandGroup(new CommandSetHavePriorityState(PlayerWithPriority.ID),
+                    new CommandEnterInputState()));
             }
 
         }
@@ -413,8 +416,8 @@ namespace Sharpening2020
 
             UpdatePhase();
             
-            MyExecutor.Do(new CommandSetWaitingForOpponentsState(1));
-            MyExecutor.Do(new CommandSetHavePriorityState(0));
+            MyExecutor.Do(new CommandGroup(new CommandSetWaitingForOpponentsState(1),
+                new CommandSetHavePriorityState(0)));
         }
 
         public void UpdateView(ViewObject view)
