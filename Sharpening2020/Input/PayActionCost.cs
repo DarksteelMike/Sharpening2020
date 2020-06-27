@@ -57,12 +57,6 @@ namespace Sharpening2020.Input
 
         public override void SelectAction(GameAction a)
         {
-            if(a.ID == -2)
-            {
-                MyActivatable.MyCost.ClearPaid();
-                MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
-            }
-
             MyGame.MyExecutor.Do(ActionCommandPairs[a.ID]);
 
             if(MyActivatable.MyCost.AreActionsPaid())
@@ -79,7 +73,7 @@ namespace Sharpening2020.Input
 
         private void MoveToManaPayment()
         {
-            MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
+            //MyGame.MyExecutor.Do(new CommandRemoveTopInputState(MyPlayer.ID));
             MyGame.MyExecutor.Do(new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex));
         }
 

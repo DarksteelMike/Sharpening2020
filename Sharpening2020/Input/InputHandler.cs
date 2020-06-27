@@ -34,8 +34,6 @@ namespace Sharpening2020.Input
                 CurrentInputState.MyBridge = Bridge;
                 CurrentInputState.MyPlayer = AssociatedPlayer;
 
-                CurrentInputState.Enter();
-
                 if(!(CurrentInputState is WaitingForOpponent))
                     CurrentInputState.SelectAction(Bridge.SelectActionFromList(CurrentInputState.GetActions()));
             }
