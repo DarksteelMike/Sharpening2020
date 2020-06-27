@@ -33,7 +33,8 @@
             this.bLoad = new System.Windows.Forms.Button();
             this.bUndo = new System.Windows.Forms.Button();
             this.bRedo = new System.Windows.Forms.Button();
-            this.cbDebug = new System.Windows.Forms.CheckBox();
+            this.cbDebugMode = new System.Windows.Forms.ComboBox();
+            this.lblUIDebugMode = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bNew
@@ -89,22 +90,35 @@
             this.bRedo.UseVisualStyleBackColor = true;
             this.bRedo.Click += new System.EventHandler(this.bRedo_Click);
             // 
-            // cbDebug
+            // cbDebugMode
             // 
-            this.cbDebug.AutoSize = true;
-            this.cbDebug.Location = new System.Drawing.Point(114, 16);
-            this.cbDebug.Name = "cbDebug";
-            this.cbDebug.Size = new System.Drawing.Size(58, 17);
-            this.cbDebug.TabIndex = 5;
-            this.cbDebug.Text = "Debug";
-            this.cbDebug.UseVisualStyleBackColor = true;
+            this.cbDebugMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDebugMode.FormattingEnabled = true;
+            this.cbDebugMode.Items.AddRange(new object[] {
+            "None",
+            "Commands",
+            "Inputstates"});
+            this.cbDebugMode.Location = new System.Drawing.Point(114, 25);
+            this.cbDebugMode.Name = "cbDebugMode";
+            this.cbDebugMode.Size = new System.Drawing.Size(85, 21);
+            this.cbDebugMode.TabIndex = 5;
+            // 
+            // lblUIDebugMode
+            // 
+            this.lblUIDebugMode.AutoSize = true;
+            this.lblUIDebugMode.Location = new System.Drawing.Point(114, 9);
+            this.lblUIDebugMode.Name = "lblUIDebugMode";
+            this.lblUIDebugMode.Size = new System.Drawing.Size(72, 13);
+            this.lblUIDebugMode.TabIndex = 6;
+            this.lblUIDebugMode.Text = "Debug Mode:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(200, 164);
-            this.Controls.Add(this.cbDebug);
+            this.ClientSize = new System.Drawing.Size(211, 164);
+            this.Controls.Add(this.lblUIDebugMode);
+            this.Controls.Add(this.cbDebugMode);
             this.Controls.Add(this.bRedo);
             this.Controls.Add(this.bUndo);
             this.Controls.Add(this.bLoad);
@@ -125,6 +139,7 @@
         private System.Windows.Forms.Button bLoad;
         private System.Windows.Forms.Button bUndo;
         private System.Windows.Forms.Button bRedo;
-        private System.Windows.Forms.CheckBox cbDebug;
+        private System.Windows.Forms.ComboBox cbDebugMode;
+        private System.Windows.Forms.Label lblUIDebugMode;
     }
 }

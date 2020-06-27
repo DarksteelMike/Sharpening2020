@@ -35,7 +35,7 @@ namespace Sharpening2020.Input
                 ret.Add(a);
             }
 
-            if(MyGame.DebugFlag)
+            if(MyGame.DebugFlag == DebugMode.InputStates)
             {
                 MyGame.DebugAlert("HavePriority, will travel\n==========");
                 String msg = "";

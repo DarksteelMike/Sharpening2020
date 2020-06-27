@@ -15,6 +15,7 @@ using Sharpening2020.Zones;
 
 namespace Sharpening2020
 {
+    public enum DebugMode { None, Commands, InputStates, CardViews }
     public class Game : ICloneable
     {
         public Game() { }
@@ -39,7 +40,7 @@ namespace Sharpening2020
 
         private Int32 activePlayerIndex = 0;
 
-        public Boolean DebugFlag = false;
+        public DebugMode DebugFlag = DebugMode.None;
 
         public Int32 ActivePlayerIndex
         {

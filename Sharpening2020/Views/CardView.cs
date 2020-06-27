@@ -42,7 +42,7 @@ namespace Sharpening2020.Views
             CardCharacteristics chara;
             ZoneType zone = g.GetZoneTypeOf(crd);
             chara = crd.MyCharacteristics[cn];
-            if ((zone == ZoneType.Hand || zone == ZoneType.Library) && !g.DebugFlag)
+            if ((zone == ZoneType.Hand || zone == ZoneType.Library) && g.DebugFlag != DebugMode.CardViews)
             {
                 if(v.ID != crd.Owner.ID)
                     chara = crd.MyCharacteristics[CharacteristicName.FaceDown];

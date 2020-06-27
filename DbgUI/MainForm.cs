@@ -13,6 +13,8 @@ namespace DbgUI
         public MainForm()
         {
             InitializeComponent();
+
+            cbDebugMode.SelectedIndex = 0;
         }
 
         MatchForm mf1;
@@ -37,7 +39,7 @@ namespace DbgUI
             bridge2 = new UIBridge(mf2);
 
             model = Game.Construct();
-            model.DebugFlag = cbDebug.Checked;
+            model.DebugFlag = (DebugMode)Enum.Parse(typeof(DebugMode), cbDebugMode.SelectedItem.ToString());
 
             ThreadStart ts = new ThreadStart(SetupGame);
             GameThread = new Thread(ts);

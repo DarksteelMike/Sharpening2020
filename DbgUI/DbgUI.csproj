@@ -90,6 +90,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Cards\Cards.csproj">
+      <Project>{fbd32236-ccc1-4bd9-a6b2-7f4dc1a259d3}</Project>
+      <Name>Cards</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sharpening2020\Sharpening2020.csproj">
       <Project>{4b879aca-c5cc-4e45-b9f4-54266b4573a6}</Project>
       <Name>Sharpening2020</Name>
