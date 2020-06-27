@@ -41,7 +41,9 @@ namespace Sharpening2020.Input
             ActionCommandPairs.Clear();
 
             GameAction cancel = new GameAction(-2, -2, "Cancel");
-            ActionCommandPairs.Add(-2, new CommandRemoveTopInputState(MyPlayer.ID));
+            ActionCommandPairs.Add(-2, new CommandGroup(
+                new CommandResetCost(MyPlayer.ID),
+                new CommandRemoveTopInputState(MyPlayer.ID)));
 
             GameAction ok = new GameAction(-1, -1, "OK");
             
@@ -83,7 +85,7 @@ namespace Sharpening2020.Input
 
         public void PromptAndRequestAction()
         {
-            MyBridge.Prompt("Perform \"" + MyActivatable.MyCost.ActionParts[activatableIndex].ToString(MyGame) + "\"?");
+            MyBridge.Prompt("Perform \"" + MyActivatable.MyCost.ActionParts[ActionPartIndex].ToString(MyGame) + "\"?");
             MyBridge.SelectActionFromList(GetActions());
         }
 

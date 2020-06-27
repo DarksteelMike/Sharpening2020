@@ -22,6 +22,7 @@ namespace Cards
             Front.Activatables.Add(pl);
 
             TapForMana tfm = new TapForMana(new LazyGameObject<Card>(this), ManaColor.Colorless);
+            tfm.IsManaAbility = true;
             Front.Activatables.Add(tfm);
         }
 

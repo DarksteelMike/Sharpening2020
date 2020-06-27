@@ -446,6 +446,14 @@ namespace Sharpening2020
                 act.Resolve(this, si);
                 return;
             }
+            if(act is Ability)
+            {
+                if(((Ability)act).IsManaAbility)
+                {
+                    act.Resolve(this, si);
+                    return;
+                }
+            }
 
             MyExecutor.Do(new CommandPutOnStack(act.Host.ID, act.Host.Value(this).CurrentCharacteristics.Activatables.IndexOf(act)));
         }

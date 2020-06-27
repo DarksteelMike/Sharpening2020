@@ -25,13 +25,18 @@ namespace Sharpening2020.Commands
             Card c = (Card)g.GetGameObjectByID(CardID);
             Activatable act = c.CurrentCharacteristics.Activatables[ActivatableIndex];
             ActionCostPart acp = act.MyCost.ActionParts[CostPartIndex];
+            act.MyCost.PaidActions.Add(acp);
 
             acp.Pay(g);
         }
 
         public override void Undo(Game g)
         {
-            //No need to undo anything, as the Commands issued by the CostPart's Pay method should already be undone.
+            Card c = (Card)g.GetGameObjectByID(CardID);
+            Activatable act = c.CurrentCharacteristics.Activatables[ActivatableIndex];
+            ActionCostPart acp = act.MyCost.ActionParts[CostPartIndex];
+            act.MyCost.PaidActions.Remove(acp);
+            //No need to undo anything more, as the Commands issued by the CostPart's Pay method should already be undone.
         }
 
         public override object Clone()
