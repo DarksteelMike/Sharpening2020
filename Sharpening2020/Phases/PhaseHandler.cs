@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Sharpening2020.Commands;
+using Sharpening2020.Players;
 
 namespace Sharpening2020.Phases
 {
@@ -27,15 +27,34 @@ namespace Sharpening2020.Phases
                     {
                         currentPhaseIndex -= AllPhases.Count;
                     }
-                }                
+                }
 
-                while(currentPhaseIndex < 0)
+                foreach (Player p in MyGame.GetPlayers())
+                {
+                    if (p.ManaPool.Count != 0)
+                        MyGame.MyExecutor.Do(new CommandClearManaPool(p.ID));
+                }
+
+                while (currentPhaseIndex < 0)
                 {
                     currentPhaseIndex += AllPhases.Count;
                 }
 
                 if (ShouldDoPhaseEffects)
-                    CurrentPhase.PhaseEffects(MyGame);
+                {
+                    CurrentPhase.DoPhaseEffects(MyGame);
+
+                    if(!CurrentPhase.ShouldGivePriority)
+                    {
+                        MyGame.MyExecutor.Do(new CommandAdvancePhase());
+                    }
+                }
+                    
+
+                if(!CurrentPhase.ShouldGivePriority)
+                {
+                    currentPhaseIndex++;
+                }
 
                 MyGame.UpdatePhase();
             }
@@ -59,7 +78,7 @@ namespace Sharpening2020.Phases
 
         public void EnterCurrentPhase()
         {
-            AllPhases[currentPhaseIndex].PhaseEffects(MyGame);
+            AllPhases[currentPhaseIndex].DoPhaseEffects(MyGame);
         }
 
         public void UpdateGameReference(Game NewReference)

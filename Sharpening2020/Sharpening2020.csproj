@@ -68,6 +68,7 @@
     <Compile Include="Commands\CommandAddPowerToughness.cs" />
     <Compile Include="Commands\CommandAddTarget.cs" />
     <Compile Include="Commands\CommandAdvancePhase.cs" />
+    <Compile Include="Commands\CommandClearManaPool.cs" />
     <Compile Include="Commands\CommandCreateCard.cs" />
     <Compile Include="Commands\CommandCreatePlayer.cs" />
     <Compile Include="Commands\CommandCreateStaticPumpEffect.cs" />

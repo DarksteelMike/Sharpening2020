@@ -9,7 +9,7 @@ namespace Sharpening2020.Phases
     public class PhaseEndOfTurn : PhaseBase
     {
         public override PhaseType MyType { get { return PhaseType.EndOfTurn; } }
-        public override void PhaseEffects(Game g)
+        public override void DoPhaseEffects(Game g)
         {
 
         }
