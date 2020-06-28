@@ -53,7 +53,7 @@ namespace Sharpening2020
             {
                 activePlayerIndex = value;
                 Int32 PlayerCount = GetPlayers().Count();
-                while(activePlayerIndex > PlayerCount)
+                while(activePlayerIndex >= PlayerCount)
                 {
                     activePlayerIndex -= PlayerCount;
                 }
@@ -61,9 +61,7 @@ namespace Sharpening2020
                 while(activePlayerIndex < 0)
                 {
                     activePlayerIndex += PlayerCount;
-                }
-
-                
+                }               
             }
 
         }
@@ -86,16 +84,16 @@ namespace Sharpening2020
             {
                 playerWithPriorityIndex = value;
                 Int32 PlayerCount = GetPlayers().Count();
-                if(playerWithPriorityIndex >= PlayerCount)
+                while (playerWithPriorityIndex >= PlayerCount)
                 {
-                    while (playerWithPriorityIndex >= PlayerCount)
-                    {
-                        playerWithPriorityIndex -= PlayerCount;
-                    }
+                    playerWithPriorityIndex -= PlayerCount;
+                }
 
-                    if(SpellStack.Count == 0)
+                if(playerWithPriorityIndex == activePlayerIndex)
+                {
+                    if (SpellStack.Count == 0)
                     {
-                        if(RepeatPriorityLoop)
+                        if (RepeatPriorityLoop)
                         {
                             RepeatPriorityLoop = false;
                         }
@@ -416,8 +414,7 @@ namespace Sharpening2020
 
             UpdatePhase();
             
-            MyExecutor.Do(new CommandGroup(new CommandSetWaitingForOpponentsState(1),
-                new CommandSetHavePriorityState(0),
+            MyExecutor.Do(new CommandGroup(new CommandSetHavePriorityState(ActivePlayer.ID),
                 new CommandEnterInputState()));
         }
 

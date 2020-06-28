@@ -29,6 +29,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
             res &= g.GetZoneTypeOf(Host) == ZoneType.Battlefield; //Only activate on the battlefield
             res &= p.ID == Host.Value(g).Controller.ID; //Only it's controller can activate it
             res &= !IsBeingActivated; //This isn't already in the process of being activated.
+            res &= base.CanActivate(p, g);
 
             return res;
         }

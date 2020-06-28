@@ -14,13 +14,13 @@ namespace DbgUI
     public partial class MatchForm : Form
     {
         public GameAction SelectedAction;
-        List<GameAction> AvailableActions;
+        private List<GameAction> AvailableActions;
 
-        Dictionary<Int32, ViewObject> ViewMap = new Dictionary<int, ViewObject>();
-        Dictionary<ListViewItem, Int32> CardMap = new Dictionary<ListViewItem, int>();
-        Dictionary<Int32, ContextMenuStrip> ContextMap = new Dictionary<int, ContextMenuStrip>();
+        private Dictionary<Int32, ViewObject> ViewMap = new Dictionary<int, ViewObject>();
+        private Dictionary<ListViewItem, Int32> CardMap = new Dictionary<ListViewItem, int>();
+        private Dictionary<Int32, ContextMenuStrip> ContextMap = new Dictionary<int, ContextMenuStrip>();
 
-        StreamWriter fsLog;
+        private StreamWriter fsLog;
 
         public MatchForm(StreamWriter fs)
         {
@@ -95,6 +95,21 @@ namespace DbgUI
 
         public void UpdateCardView(CardView view)
         {
+            foreach(ListViewItem lvi in CardMap.Keys)
+            {
+                if(CardMap[lvi] == view.ID)
+                {
+                    if (view.IsTapped)
+                    {
+                        lvi.Text = "(" + view.Name + ")";
+                    }
+                    else
+                    {
+                        lvi.Text = view.Name;
+                    }
+                    break;
+                }
+            }
             AddViewToMap(view);
         }
 
@@ -158,8 +173,16 @@ namespace DbgUI
 
             foreach (CardView cv in views)
             {
-                ListViewItem lvi = new ListViewItem(cv.Name);
-                lvi.Text = cv.Name;
+                ListViewItem lvi = new ListViewItem();
+                if(cv.IsTapped)
+                {
+                    lvi.Text = "(" + cv.Name + ")";
+                }
+                else
+                {
+                    lvi.Text = cv.Name;
+                }
+                
 
                 Zone.Items.Add(lvi);
                 CardMap.Add(lvi, cv.ID);
@@ -300,6 +323,10 @@ namespace DbgUI
             if (e.Button == MouseButtons.Right)
             {
                 ListViewItem lvi = ((ListView)sender).FocusedItem;
+
+                if (lvi == null)
+                    return;
+
                 if (lvi.Bounds.Contains(e.Location))
                 {                    
                     if (!CardMap.ContainsKey(lvi))

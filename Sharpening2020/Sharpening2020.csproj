@@ -77,6 +77,7 @@
     <Compile Include="Commands\CommandGroup.cs" />
     <Compile Include="Commands\CommandIncreaseCardsDrawn.cs" />
     <Compile Include="Commands\CommandIncrementActionPartIndex.cs" />
+    <Compile Include="Commands\CommandIncrementActivePlayerIndex.cs" />
     <Compile Include="Commands\CommandIncrementLandsPlayed.cs" />
     <Compile Include="Commands\CommandMoveCard.cs" />
     <Compile Include="Commands\CommandPayMana.cs" />
@@ -85,8 +86,9 @@
     <Compile Include="Commands\CommandRemoveCounter.cs" />
     <Compile Include="Commands\CommandRemoveGameObjectFromGame.cs" />
     <Compile Include="Commands\CommandRemoveTopInputStates.cs" />
+    <Compile Include="Commands\CommandResetActionCost.cs" />
     <Compile Include="Commands\CommandResetCardsDrawn.cs" />
-    <Compile Include="Commands\CommandResetCost.cs" />
+    <Compile Include="Commands\CommandResetManaCost.cs" />
     <Compile Include="Commands\CommandResetLandsPlayed.cs" />
     <Compile Include="Commands\CommandResetTargets.cs" />
     <Compile Include="Commands\CommandResolveTopOfStack.cs" />

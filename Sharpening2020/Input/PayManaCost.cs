@@ -38,6 +38,11 @@ namespace Sharpening2020.Input
             PromptAndRequestAction();
         }
 
+        public override void Leave()
+        {
+            MyGame.MyExecutor.Do(new CommandResetManaCost(MyPlayer.ID));
+        }
+
         public override List<GameAction> GetActions()
         {
             List<GameAction> res = new List<GameAction>();
@@ -46,7 +51,7 @@ namespace Sharpening2020.Input
             GameAction cancel = new GameAction(-2, -2, "Cancel");
             res.Add(cancel);
             ActionCommandPairs.Add(-2, new CommandGroup(
-                new CommandResetCost(MyPlayer.ID),
+                new CommandResetManaCost(MyPlayer.ID),
                 new CommandRemoveTopInputStates(MyPlayer.ID,3),
                 new CommandEnterInputState()));
 

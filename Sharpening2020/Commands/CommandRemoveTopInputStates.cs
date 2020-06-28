@@ -34,8 +34,8 @@ namespace Sharpening2020.Commands
             {
                 InputStateBase state = g.InputHandlers[PlayerID].InputList.Last();
                 prevStates.Add(state);
-                g.InputHandlers[PlayerID].InputList.Remove(state);
                 state.Leave();
+                g.InputHandlers[PlayerID].InputList.Remove(state);
             }
             prevStates.Reverse();
         }

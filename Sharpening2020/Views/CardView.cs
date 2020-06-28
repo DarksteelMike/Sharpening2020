@@ -29,14 +29,11 @@ namespace Sharpening2020.Views
 
         public readonly IReadOnlyList<CounterView> Counters;
 
+        public readonly Boolean IsTapped;
+
         public readonly CardView AlternateView;
 
-        public CardView(Game g, Card crd, Player v) : this(g, crd, v, crd.CurrentCharacteristicName, null)
-        {
-            
-        }
-
-        public CardView(Game g, Card crd, Player v, CharacteristicName cn, CardView ForceAltView)
+        public CardView(Game g, Card crd, Player v, CharacteristicName cn, CardView ForceAltView = null)
         {
             id = crd.ID;
             CardCharacteristics chara;
@@ -64,6 +61,7 @@ namespace Sharpening2020.Views
             Power = chara.Power;
             Toughness = chara.Toughness;
             AssignedDamage = crd.AssignedDamage;
+            IsTapped = crd.IsTapped;
 
             Counters = crd.MyCounters.Select(x => { return (CounterView)x.Value(g).GetView(g, v); }).ToList().AsReadOnly();
 

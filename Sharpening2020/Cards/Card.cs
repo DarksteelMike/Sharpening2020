@@ -66,7 +66,7 @@ namespace Sharpening2020.Cards
 
         public override ViewObject GetView(Game g, Player viewer)
         {
-            return new CardView(g, this, viewer);
+            return new CardView(g, this, viewer, CurrentCharacteristicName);
         }
 
         public static void AddUniversalCharacteristics(Card c)

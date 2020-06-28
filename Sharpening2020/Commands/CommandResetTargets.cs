@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Sharpening2020.Input;
 
@@ -15,18 +16,29 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            InputStateBase isb = g.InputHandlers[PlayerID].CurrentInputState;
-            
+            SetTargets st = (SetTargets)g.InputHandlers[PlayerID].CurrentInputState;
+
+            prev = new List<GameObject>();
+            prev.AddRange(st.MyActivatable.MyTargeting.Targeted);
+
+            st.MyActivatable.MyTargeting.Targeted.Clear();
         }
+
+        List<GameObject> prev;
 
         public override void Undo(Game g)
         {
-            throw new NotImplementedException();
+            SetTargets st = (SetTargets)g.InputHandlers[PlayerID].CurrentInputState;
+
+            prev = new List<GameObject>();
+            prev.AddRange(st.MyActivatable.MyTargeting.Targeted);
+
+            st.MyActivatable.MyTargeting.Targeted.Clear();
         }
 
         public override object Clone()
         {
-            throw new NotImplementedException();
+            return new CommandResetTargets(PlayerID);
         }
     }
 }

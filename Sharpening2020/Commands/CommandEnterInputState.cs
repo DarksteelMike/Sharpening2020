@@ -10,7 +10,13 @@ namespace Sharpening2020.Commands
         {
             foreach(InputHandler ih in g.InputHandlers.Values)
             {
-                ih.CurrentInputState.Enter();
+                if(ih.CurrentInputState is WaitingForOpponent)
+                    ih.CurrentInputState.Enter();
+            }
+            foreach (InputHandler ih in g.InputHandlers.Values)
+            {
+                if (!(ih.CurrentInputState is WaitingForOpponent))
+                    ih.CurrentInputState.Enter();
             }
         }
 

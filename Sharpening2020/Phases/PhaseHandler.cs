@@ -15,6 +15,11 @@ namespace Sharpening2020.Phases
         {
             get { return currentPhaseIndex; }
             set {
+                Boolean ShouldDoPhaseEffects = false;
+                if(currentPhaseIndex < value)
+                {
+                    ShouldDoPhaseEffects = true;
+                }
                 currentPhaseIndex = value;
                 if(currentPhaseIndex >= AllPhases.Count)
                 {
@@ -28,6 +33,9 @@ namespace Sharpening2020.Phases
                 {
                     currentPhaseIndex += AllPhases.Count;
                 }
+
+                if (ShouldDoPhaseEffects)
+                    CurrentPhase.PhaseEffects(MyGame);
 
                 MyGame.UpdatePhase();
             }

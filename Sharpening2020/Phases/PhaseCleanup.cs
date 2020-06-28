@@ -13,6 +13,8 @@ namespace Sharpening2020.Phases
                 g.MyExecutor.Do(new CommandGroup(new CommandResetCardsDrawn(p.ID),
                     new CommandResetLandsPlayed(p.ID)));
             }
+
+            g.MyExecutor.Do(new CommandIncrementActivePlayerIndex());
         }
     }
 }
