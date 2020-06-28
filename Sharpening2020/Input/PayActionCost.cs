@@ -75,7 +75,8 @@ namespace Sharpening2020.Input
         private void MoveToManaPayment()
         {
             MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID),
-                new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex)));
+                new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex),
+                new CommandEnterInputState()));
         }
 
         public void PromptAndRequestAction()

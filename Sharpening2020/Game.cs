@@ -417,7 +417,8 @@ namespace Sharpening2020
             UpdatePhase();
             
             MyExecutor.Do(new CommandGroup(new CommandSetWaitingForOpponentsState(1),
-                new CommandSetHavePriorityState(0)));
+                new CommandSetHavePriorityState(0),
+                new CommandEnterInputState()));
         }
 
         public void UpdateView(ViewObject view)

@@ -44,6 +44,7 @@ namespace Sharpening2020.Input
             ActionCommandPairs.Clear();
 
             GameAction cancel = new GameAction(-2, -2, "Cancel");
+            res.Add(cancel);
             ActionCommandPairs.Add(-2, new CommandGroup(
                 new CommandResetCost(MyPlayer.ID),
                 new CommandRemoveTopInputStates(MyPlayer.ID,2),
