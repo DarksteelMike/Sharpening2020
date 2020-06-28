@@ -116,6 +116,7 @@
             this.lvBattlefield1.Size = new System.Drawing.Size(533, 209);
             this.lvBattlefield1.TabIndex = 2;
             this.lvBattlefield1.UseCompatibleStateImageBehavior = false;
+            this.lvBattlefield1.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvBattlefield1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // lvHand1
@@ -126,6 +127,7 @@
             this.lvHand1.Size = new System.Drawing.Size(529, 135);
             this.lvHand1.TabIndex = 8;
             this.lvHand1.UseCompatibleStateImageBehavior = false;
+            this.lvHand1.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvHand1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // bOK
@@ -206,6 +208,7 @@
             this.lvLibrary1.Size = new System.Drawing.Size(529, 206);
             this.lvLibrary1.TabIndex = 0;
             this.lvLibrary1.UseCompatibleStateImageBehavior = false;
+            this.lvLibrary1.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvLibrary1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpBattlefield
@@ -238,6 +241,7 @@
             this.lvGraveyard1.Size = new System.Drawing.Size(536, 209);
             this.lvGraveyard1.TabIndex = 0;
             this.lvGraveyard1.UseCompatibleStateImageBehavior = false;
+            this.lvGraveyard1.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvGraveyard1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpExile
@@ -258,6 +262,7 @@
             this.lvExile1.Size = new System.Drawing.Size(533, 212);
             this.lvExile1.TabIndex = 0;
             this.lvExile1.UseCompatibleStateImageBehavior = false;
+            this.lvExile1.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvExile1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpCommand
@@ -278,6 +283,7 @@
             this.lvCommand1.Size = new System.Drawing.Size(530, 209);
             this.lvCommand1.TabIndex = 0;
             this.lvCommand1.UseCompatibleStateImageBehavior = false;
+            this.lvCommand1.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvCommand1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // grpPlayer2
@@ -544,6 +550,7 @@
             this.lvLibrary2.Size = new System.Drawing.Size(529, 288);
             this.lvLibrary2.TabIndex = 0;
             this.lvLibrary2.UseCompatibleStateImageBehavior = false;
+            this.lvLibrary2.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvLibrary2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpHand2
@@ -564,6 +571,7 @@
             this.lvHand2.Size = new System.Drawing.Size(529, 288);
             this.lvHand2.TabIndex = 1;
             this.lvHand2.UseCompatibleStateImageBehavior = false;
+            this.lvHand2.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvHand2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpBattlefield2
@@ -585,6 +593,7 @@
             this.lvBattlefield2.Size = new System.Drawing.Size(533, 294);
             this.lvBattlefield2.TabIndex = 2;
             this.lvBattlefield2.UseCompatibleStateImageBehavior = false;
+            this.lvBattlefield2.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             // 
             // tpGraveyard2
             // 
@@ -605,6 +614,7 @@
             this.lvGraveyard2.Size = new System.Drawing.Size(536, 292);
             this.lvGraveyard2.TabIndex = 0;
             this.lvGraveyard2.UseCompatibleStateImageBehavior = false;
+            this.lvGraveyard2.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvGraveyard2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpExile2
@@ -625,6 +635,7 @@
             this.lvExile2.Size = new System.Drawing.Size(533, 291);
             this.lvExile2.TabIndex = 0;
             this.lvExile2.UseCompatibleStateImageBehavior = false;
+            this.lvExile2.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvExile2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpCommand2
@@ -645,6 +656,7 @@
             this.lvCommand2.Size = new System.Drawing.Size(530, 291);
             this.lvCommand2.TabIndex = 0;
             this.lvCommand2.UseCompatibleStateImageBehavior = false;
+            this.lvCommand2.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvCommand2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // MatchForm

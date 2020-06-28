@@ -350,5 +350,18 @@ namespace DbgUI
             bOK.Enabled = false;
             bCancel.Enabled = false;
         }
+
+        private void lvZone_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListViewItem lvi = ((ListView)sender).FocusedItem;
+
+            CardView cv = (CardView)ViewMap[CardMap[lvi]];
+
+            lblCardDetailID.Text = cv.ID.ToString();
+            lblCardDetailName.Text = cv.Name.ToString();
+            cbCardDetailCounters.Items.Clear();
+            cbCardDetailCounters.Items.AddRange(cv.Counters.ToArray());
+            tbCardDetailText.Text = cv.Text;
+        }
     }
 }

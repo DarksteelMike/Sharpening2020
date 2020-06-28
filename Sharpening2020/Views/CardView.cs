@@ -53,7 +53,7 @@ namespace Sharpening2020.Views
 
             foreach (Activatable act in chara.Activatables)
             {
-                txt += act.ToString() + Environment.NewLine;
+                txt += act.ToString(g) + Environment.NewLine;
             }
 
             Text = txt;
