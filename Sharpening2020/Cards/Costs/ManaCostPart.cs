@@ -20,6 +20,11 @@ namespace Sharpening2020.Cards.Costs
             PaidPoint = mp;
         }
 
+        public override string ToString()
+        {
+            return "{" + Utilities.ColorToShortenedString(Color) + "}";
+        }
+
         public object Clone()
         {
             ManaCostPart ret = new ManaCostPart(Color);

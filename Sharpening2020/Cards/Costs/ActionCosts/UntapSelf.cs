@@ -41,7 +41,7 @@ namespace Sharpening2020.Cards.Costs.ActionCosts
 
         public override string ToString(Game g)
         {
-            return "Untap " + Target.Value(g);
+            return "{U}";
         }
     }
 }

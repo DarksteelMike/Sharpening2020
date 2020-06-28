@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using Sharpening2020.Cards.Costs;
 using Sharpening2020.Commands;
@@ -41,7 +42,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
 
         public override string ToString(Game g)
         {
-            return "Cast " + Host.Value(g).CurrentCharacteristics.Name + " for " + MyCost.ToString();
+            return "Cast " + Host.Value(g).CurrentCharacteristics.Name + " for " + Utilities.ColorListToShortenedString(MyCost.ManaParts.Select(x => { return x.Color; }));
         }
     }
 }

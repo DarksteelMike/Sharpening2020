@@ -8,7 +8,6 @@ TODOS, in no particular order:
 *Static abilities. (No dependency to start)
 *Triggered abilities.
 *Replacement effects.
-*Update views with visibility in mind.
 *More action costs.
 *Announce input step?
 *More commands.

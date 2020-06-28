@@ -95,6 +95,7 @@
     <Compile Include="Commands\CommandResolveTopOfStack.cs" />
     <Compile Include="Commands\CommandSetCardState.cs" />
     <Compile Include="Commands\CommandSetHavePriorityState.cs" />
+    <Compile Include="Commands\CommandSetIsActivating.cs" />
     <Compile Include="Commands\CommandSetPayActionCostState.cs" />
     <Compile Include="Commands\CommandSetPayManaCostState.cs" />
     <Compile Include="Commands\CommandSetTargetState.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Phases\PhaseUpkeep.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities.cs" />
     <Compile Include="Views\CardView.cs" />
     <Compile Include="Views\CounterView.cs" />
     <Compile Include="Views\ManaPointView.cs" />

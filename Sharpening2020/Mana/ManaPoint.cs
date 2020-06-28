@@ -27,5 +27,10 @@ namespace Sharpening2020.Mana
         {
             return new ManaPointView(ID,MyColor);
         }
+
+        public override string ToString()
+        {
+            return MyColor.ToString();
+        }
     }
 }

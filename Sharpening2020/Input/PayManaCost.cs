@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.Costs;
@@ -15,6 +16,8 @@ namespace Sharpening2020.Input
        
         public Activatable MyActivatable;
 
+        private Int32 activatableIndex;
+
         public PayManaCost(Activatable act)
         {
             MyActivatable = act;
@@ -22,12 +25,13 @@ namespace Sharpening2020.Input
 
         public void PromptAndRequestAction()
         {
-            MyBridge.Prompt("Pay \"" + MyActivatable.MyCost.ManaParts.ToString() + "\"?");
+            MyBridge.Prompt("Pay \"" + Utilities.ColorListToShortenedString(MyActivatable.MyCost.ManaParts.Select(x => { return x.Color; })) + "\"?");
             SelectAction(MyBridge.SelectActionFromList(GetActions()));
         }
 
         public override void Enter()
-        {            
+        {
+            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(MyActivatable);
             if (MyActivatable.MyCost.IsManaPaid())
             {
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
@@ -50,7 +54,7 @@ namespace Sharpening2020.Input
 
             GameAction cancel = new GameAction(-2, -2, "Cancel");
             res.Add(cancel);
-            ActionCommandPairs.Add(-2, new CommandGroup(
+            ActionCommandPairs.Add(-2, new CommandGroup(new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false),
                 new CommandRemoveTopInputStates(MyPlayer.ID,3),
                 new CommandEnterInputState()));
 
@@ -80,7 +84,8 @@ namespace Sharpening2020.Input
             if(MyActivatable.MyCost.IsManaPaid())
             {
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
-                MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID, 3),
+                MyGame.MyExecutor.Do(new CommandGroup(new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false), 
+                    new CommandRemoveTopInputStates(MyPlayer.ID, 3),
                     new CommandEnterInputState()));                
             }
 

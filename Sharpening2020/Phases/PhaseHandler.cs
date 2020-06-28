@@ -49,7 +49,6 @@ namespace Sharpening2020.Phases
                         MyGame.MyExecutor.Do(new CommandAdvancePhase());
                     }
                 }
-                    
 
                 if(!CurrentPhase.ShouldGivePriority)
                 {
