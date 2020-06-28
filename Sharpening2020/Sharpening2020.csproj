@@ -87,6 +87,8 @@
     <Compile Include="Commands\CommandRemoveTopInputStates.cs" />
     <Compile Include="Commands\CommandResetCardsDrawn.cs" />
     <Compile Include="Commands\CommandResetCost.cs" />
+    <Compile Include="Commands\CommandResetLandsPlayed.cs" />
+    <Compile Include="Commands\CommandResetTargets.cs" />
     <Compile Include="Commands\CommandResolveTopOfStack.cs" />
     <Compile Include="Commands\CommandSetCardState.cs" />
     <Compile Include="Commands\CommandSetHavePriorityState.cs" />

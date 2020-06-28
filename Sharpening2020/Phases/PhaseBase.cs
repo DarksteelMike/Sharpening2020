@@ -6,6 +6,6 @@ namespace Sharpening2020.Phases
     public abstract class PhaseBase
     {
         public abstract PhaseType MyType { get; }
-        public abstract void PhaseEffects(Game g);
+        public virtual void PhaseEffects(Game g) { }
     }
 }

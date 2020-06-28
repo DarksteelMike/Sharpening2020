@@ -43,7 +43,7 @@ namespace Sharpening2020.Input
             GameAction cancel = new GameAction(-2, -2, "Cancel");
             ActionCommandPairs.Add(-2, new CommandGroup(
                 new CommandResetCost(MyPlayer.ID),
-                new CommandRemoveTopInputStates(MyPlayer.ID),
+                new CommandRemoveTopInputStates(MyPlayer.ID,2),
                 new CommandEnterInputState()));
 
             GameAction ok = new GameAction(-1, -1, "OK");
@@ -74,8 +74,7 @@ namespace Sharpening2020.Input
 
         private void MoveToManaPayment()
         {
-            MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID),
-                new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex),
+            MyGame.MyExecutor.Do(new CommandGroup(new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex),
                 new CommandEnterInputState()));
         }
 

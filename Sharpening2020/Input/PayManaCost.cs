@@ -30,9 +30,9 @@ namespace Sharpening2020.Input
         {            
             if (MyActivatable.MyCost.IsManaPaid())
             {
-                MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID),
-                    new CommandEnterInputState()));
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
+                MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID,3),
+                    new CommandEnterInputState()));
             }
 
             PromptAndRequestAction();
@@ -47,7 +47,7 @@ namespace Sharpening2020.Input
             res.Add(cancel);
             ActionCommandPairs.Add(-2, new CommandGroup(
                 new CommandResetCost(MyPlayer.ID),
-                new CommandRemoveTopInputStates(MyPlayer.ID,2),
+                new CommandRemoveTopInputStates(MyPlayer.ID,3),
                 new CommandEnterInputState()));
 
             int i = 0;
@@ -71,20 +71,13 @@ namespace Sharpening2020.Input
 
         public override void SelectAction(GameAction a)
         {
-            if(a.ID == -2)
-            {
-                MyActivatable.MyCost.ClearPaid();
-                MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID),
-                    new CommandEnterInputState()));
-            }
-
             MyGame.MyExecutor.Do(ActionCommandPairs[a.ID]);
 
             if(MyActivatable.MyCost.IsManaPaid())
             {
-                MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID, 2),
-                    new CommandEnterInputState()));
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
+                MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID, 3),
+                    new CommandEnterInputState()));                
             }
 
             PromptAndRequestAction();

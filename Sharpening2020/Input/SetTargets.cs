@@ -30,16 +30,20 @@ namespace Sharpening2020.Input
             PromptAndRequestAction();
         }
 
+        public override void Leave()
+        {
+            MyGame.MyExecutor.Do(new CommandResetTargets(MyPlayer.ID));
+        }
+
         private void MoveToActionPayment()
         {
-            MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID),
-                new CommandSetPayActionCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex),
+            MyGame.MyExecutor.Do(new CommandGroup(new CommandSetPayActionCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex),
                 new CommandEnterInputState()));
         }
 
         public void PromptAndRequestAction()
         {
-            MyBridge.Prompt("Select target " + MyActivatable.MyTargeting.Description);
+            MyBridge.Prompt("Select target " + MyActivatable.MyTargeting.Targeted.Count.ToString() + " of " + MyActivatable.MyTargeting.MaxTargets + " " + MyActivatable.MyTargeting.Description);
             SelectAction(MyBridge.SelectActionFromList(GetActions()));
         }
 

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Sharpening2020.Commands;
+using Sharpening2020.Players;
 
 namespace Sharpening2020.Phases
 {
@@ -11,7 +8,11 @@ namespace Sharpening2020.Phases
         public override PhaseType MyType { get { return PhaseType.Cleanup; } }
         public override void PhaseEffects(Game g)
         {
-
+            foreach (Player p in g.GetPlayers())
+            {
+                g.MyExecutor.Do(new CommandGroup(new CommandResetCardsDrawn(p.ID),
+                    new CommandResetLandsPlayed(p.ID)));
+            }
         }
     }
 }
