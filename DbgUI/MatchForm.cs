@@ -38,6 +38,10 @@ namespace DbgUI
             AvailableActions = actions;
             bOK.Enabled = false;
             bCancel.Enabled = false;
+            grpPlayer1.ContextMenu = null;
+            grpPlayer2.ContextMenu = null;
+
+            ContextMap.Clear();
 
             foreach(GameAction ga in AvailableActions)
             {                
@@ -90,6 +94,41 @@ namespace DbgUI
                     {
                         grpPlayer2.ContextMenuStrip = cont;
                     }
+                    ContextMap.Add(vo.ID, cont);
+                }
+                else if(vo is ManaPointView)
+                {
+                    ContextMenuStrip cont;
+                    if (ContextMap.ContainsKey(vo.ID))
+                    {
+                        cont = ContextMap[vo.ID];
+                    }
+                    else
+                    {
+                        cont = new ContextMenuStrip();
+                    }
+                    ToolStripMenuItem tsmi = new ToolStripMenuItem(ga.Description);
+                    tsmi.Click += (o, e) => { SelectedAction = ga; };
+                    cont.Items.Add(tsmi);
+
+                    ContextMap.Add(vo.ID, cont);
+                }
+                else if(vo is CounterView)
+                {
+                    ContextMenuStrip cont;
+                    if (ContextMap.ContainsKey(vo.ID))
+                    {
+                        cont = ContextMap[vo.ID];
+                    }
+                    else
+                    {
+                        cont = new ContextMenuStrip();
+                    }
+                    ToolStripMenuItem tsmi = new ToolStripMenuItem(ga.Description);
+                    tsmi.Click += (o, e) => { SelectedAction = ga; };
+                    cont.Items.Add(tsmi);
+
+                    ContextMap.Add(vo.ID, cont);
                 }
             }            
         }
@@ -256,22 +295,26 @@ namespace DbgUI
                 return;
 
             CounterView cv = (CounterView)cbCounters2.SelectedItem;
-            if(AvailableActions.Where(x => { return x.AssociatedGameObjectID == cv.ID; }).Count() > 0)
-            {
-                SelectedAction = AvailableActions.Where(x => { return x.AssociatedGameObjectID == cv.ID; }).First();
-            }
+
+            if (cv == null)
+                return;
+
+            if(ContextMap.ContainsKey(cv.ID))
+                ContextMap[cv.ID].Show(MousePosition);
         }
 
         private void bSelectManaPoint2_Click(object sender, EventArgs e)
         {
-            if (cbCounters2.Items.Count == 0)
+            if (cbManaPool2.Items.Count == 0)
                 return;
 
             ManaPointView cv = (ManaPointView)cbManaPool2.SelectedItem;
-            if (AvailableActions.Where(x => { return x.AssociatedGameObjectID == cv.ID; }).Count() > 0)
-            {
-                SelectedAction = AvailableActions.Where(x => { return x.AssociatedGameObjectID == cv.ID; }).First();
-            }
+
+            if (cv == null)
+                return;
+
+            if (ContextMap.ContainsKey(cv.ID))
+                ContextMap[cv.ID].Show(MousePosition);
         }
 
         private void bSelectPlayerCounter1_Click(object sender, EventArgs e)
@@ -280,22 +323,26 @@ namespace DbgUI
                 return;
 
             CounterView cv = (CounterView)cbCounters1.SelectedItem;
-            if (AvailableActions.Where(x => { return x.AssociatedGameObjectID == cv.ID; }).Count() > 0)
-            {
-                SelectedAction = AvailableActions.Where(x => { return x.AssociatedGameObjectID == cv.ID; }).First();
-            }
+
+            if (cv == null)
+                return;
+
+            if (ContextMap.ContainsKey(cv.ID))
+                ContextMap[cv.ID].Show(MousePosition);
         }
 
         private void bSelectManaPoint1_Click(object sender, EventArgs e)
         {
-            if (cbCounters1.Items.Count == 0)
+            if (cbManaPool2.Items.Count == 0)
                 return;
 
-            ManaPointView cv = (ManaPointView)cbManaPool1.SelectedItem;
-            if (AvailableActions.Where(x => { return x.AssociatedGameObjectID == cv.ID; }).Count() > 0)
-            {
-                SelectedAction = AvailableActions.Where(x => { return x.AssociatedGameObjectID == cv.ID; }).First();
-            }
+            ManaPointView cv = (ManaPointView)cbManaPool2.SelectedItem;
+
+            if (cv == null)
+                return;
+
+            if (ContextMap.ContainsKey(cv.ID))
+                ContextMap[cv.ID].Show(MousePosition);
         }
 
         private void bSelectCardCounter_Click(object sender, EventArgs e)
@@ -304,10 +351,12 @@ namespace DbgUI
                 return;
 
             CounterView cv = (CounterView)cbCardDetailCounters.SelectedItem;
-            if (AvailableActions.Where(x => { return x.AssociatedGameObjectID == cv.ID; }).Count() > 0)
-            {
-                SelectedAction = AvailableActions.Where(x => { return x.AssociatedGameObjectID == cv.ID; }).First();
-            }
+
+            if (cv == null)
+                return;
+
+            if (ContextMap.ContainsKey(cv.ID))
+                ContextMap[cv.ID].Show(MousePosition);
         }
 
         private void bOK_Click(object sender, EventArgs e)

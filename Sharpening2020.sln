@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cards", "Cards\Cards.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbgUI", "DbgUI\DbgUI.csproj", "{7503C7CE-5392-463E-BD2F-DB0FFA777367}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sharpening2020Tests", "Sharpening2020Tests\Sharpening2020Tests.csproj", "{F4AAC1D7-2DD3-4D04-B75B-A0F1C2AE118E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7503C7CE-5392-463E-BD2F-DB0FFA777367}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7503C7CE-5392-463E-BD2F-DB0FFA777367}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7503C7CE-5392-463E-BD2F-DB0FFA777367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4AAC1D7-2DD3-4D04-B75B-A0F1C2AE118E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4AAC1D7-2DD3-4D04-B75B-A0F1C2AE118E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4AAC1D7-2DD3-4D04-B75B-A0F1C2AE118E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4AAC1D7-2DD3-4D04-B75B-A0F1C2AE118E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
