@@ -21,11 +21,13 @@ namespace DbgUI
         private Dictionary<Int32, ContextMenuStrip> ContextMap = new Dictionary<int, ContextMenuStrip>();
 
         private StreamWriter fsLog;
+        private Int32 MainPlayer;
 
-        public MatchForm(StreamWriter fs)
+        public MatchForm(StreamWriter fs, Int32 mainPlayer)
         {
             InitializeComponent();
 
+            MainPlayer = mainPlayer;
             fsLog = fs;
         }      
 
@@ -38,8 +40,7 @@ namespace DbgUI
             bCancel.Enabled = false;
 
             foreach(GameAction ga in AvailableActions)
-            {
-                
+            {                
                 if(ga.AssociatedGameObjectID == -1)
                 {
                     bOK.Enabled = true;
@@ -81,7 +82,7 @@ namespace DbgUI
                     ToolStripMenuItem tsmi = new ToolStripMenuItem(ga.Description);
                     tsmi.Click += (o, e) => { SelectedAction = ga; };
                     cont.Items.Add(tsmi);
-                    if(vo.ID == 0)
+                    if(vo.ID == MainPlayer)
                     {
                         grpPlayer1.ContextMenuStrip = cont;
                     }
@@ -119,7 +120,7 @@ namespace DbgUI
             Label life;
             ComboBox counters, manapool;
 
-            if(view.ID == 0)
+            if(view.ID == MainPlayer)
             {
                 life = lblLife1;
                 counters = cbCounters1;
@@ -162,7 +163,7 @@ namespace DbgUI
             {
                 AddViewToMap(cv);
             }
-            ListView Zone = GetZoneControl(zt, PlayerID + 1);
+            ListView Zone = GetZoneControl(zt, PlayerID);
 
             foreach(ListViewItem lvi in Zone.Items)
             {
@@ -187,8 +188,6 @@ namespace DbgUI
                 Zone.Items.Add(lvi);
                 CardMap.Add(lvi, cv.ID);
             }
-
-            Zone.Update();
         }
 
         public void UpdatePhase(PhaseType pt)
@@ -210,30 +209,33 @@ namespace DbgUI
 
         public ListView GetZoneControl(ZoneType z, Int32 Player)
         {
-            if(Player == 1)
+            ListView res = null;
+            if(Player == MainPlayer)
             {
-#pragma warning disable 0162
                 switch(z)
                 {
-                    case (ZoneType.Library): return lvLibrary1; break;
-                    case (ZoneType.Hand): return lvHand1; break;
-                    case (ZoneType.Battlefield): return lvBattlefield1; break;
-                    case (ZoneType.Graveyard): return lvGraveyard1; break;
-                    case (ZoneType.Exile): return lvExile1; break;
-                    case (ZoneType.Command): return lvCommand1; break;
+                    case (ZoneType.Library): res = lvLibrary1; break;
+                    case (ZoneType.Hand): res = lvHand1; break;
+                    case (ZoneType.Battlefield): res = lvBattlefield1; break;
+                    case (ZoneType.Graveyard): res = lvGraveyard1; break;
+                    case (ZoneType.Exile): res = lvExile1; break;
+                    case (ZoneType.Command): res = lvCommand1; break;
                 }
             }
-            switch (z)
+            else
             {
-                case (ZoneType.Library): return lvLibrary2; break;
-                case (ZoneType.Hand): return lvHand2; break;
-                case (ZoneType.Battlefield): return lvBattlefield2; break;
-                case (ZoneType.Graveyard): return lvGraveyard2; break;
-                case (ZoneType.Exile): return lvExile2; break;
-                case (ZoneType.Command): return lvCommand2; break;
+                switch (z)
+                {
+                    case (ZoneType.Library): res = lvLibrary2; break;
+                    case (ZoneType.Hand): res = lvHand2; break;
+                    case (ZoneType.Battlefield): res = lvBattlefield2; break;
+                    case (ZoneType.Graveyard): res = lvGraveyard2; break;
+                    case (ZoneType.Exile): res = lvExile2; break;
+                    case (ZoneType.Command): res = lvCommand2; break;
+                }
             }
-#pragma warning restore 0162
-            return null;
+            
+            return res;
         }
 
         public void DebugAlert(string msg)

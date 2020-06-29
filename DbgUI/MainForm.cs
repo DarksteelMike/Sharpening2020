@@ -32,9 +32,9 @@ namespace DbgUI
         private void bNew_Click(object sender, EventArgs e)
         {
             if(cbDebugMode.SelectedIndex != 0)
-                swLog = File.CreateText(DateTime.Now.Second.ToString() + ".log");
-            mf1 = new MatchForm(swLog);
-            mf2 = new MatchForm(null);
+                swLog = File.CreateText(DateTime.Now.Minute.ToString() + "-" + DateTime.Now.Second.ToString() + ".log");
+            mf1 = new MatchForm(swLog,0);
+            mf2 = new MatchForm(null,1);
             mf1.Text = "Player 1";
             mf2.Text = "Player 2";
             mf1.Show();
