@@ -10,6 +10,8 @@ namespace Sharpening2020.Cards.ContinuousEffects
         public readonly Dictionary<LayerName, List<ContinuousEffect>> Layers = new Dictionary<LayerName, List<ContinuousEffect>>();
         public readonly List<ContinuousEffect> StaticEffects = new List<ContinuousEffect>();
 
+        private readonly List<ContinuousEffect> executedEffects = new List<ContinuousEffect>();
+
         public ContinuousEffectHandler()
         {
             foreach (LayerName ln in Enum.GetValues(typeof(LayerName)))
@@ -24,14 +26,7 @@ namespace Sharpening2020.Cards.ContinuousEffects
         }
 
         public void GatherContinuousEffects()
-        {
-            foreach (LayerName ln in Enum.GetValues(typeof(LayerName)))
-            {
-                foreach(ContinuousEffect ce in Layers[ln])
-                {
-                    ce.Undo(MyGame);
-                }
-            }
+        {            
             foreach (LayerName ln in Enum.GetValues(typeof(LayerName)))
             {
                 Layers[ln].Clear();
@@ -75,20 +70,16 @@ namespace Sharpening2020.Cards.ContinuousEffects
 
                         return -1;
                     });
-
-                
             }
         }
 
         public void RunContinuousEffects()
         {
-            foreach (LayerName ln in Enum.GetValues(typeof(LayerName)))
+            foreach (ContinuousEffect ce in executedEffects)
             {
-                foreach (ContinuousEffect ce in Layers[ln])
-                {
-                    ce.Undo(MyGame);
-                }
+                ce.Undo(MyGame);
             }
+            executedEffects.Clear();
 
             GatherContinuousEffects();
             SortContinuousEffects();
@@ -97,7 +88,10 @@ namespace Sharpening2020.Cards.ContinuousEffects
             {
                 foreach(ContinuousEffect ce in Layers[ln])
                 {
+                    executedEffects.Add(ce);
                     ce.Do(MyGame);
+
+                    ce.UpdateViews(MyGame);
                 }
             }
         }

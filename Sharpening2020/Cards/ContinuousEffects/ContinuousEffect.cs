@@ -23,6 +23,8 @@ namespace Sharpening2020.Cards.ContinuousEffects
 
         public abstract void Undo(Game g);
 
+        public abstract void UpdateViews(Game g);
+
         public abstract object Clone();
     }
 }

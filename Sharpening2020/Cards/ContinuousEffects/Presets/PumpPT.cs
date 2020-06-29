@@ -47,6 +47,11 @@ namespace Sharpening2020.Cards.ContinuousEffects.Presets
             MyCommand.Undo(g);
         }
 
+        public override void UpdateViews(Game g)
+        {
+            MyCommand.UpdateViews(g);
+        }
+
         public override object Clone()
         {
             return new PumpPT(this);

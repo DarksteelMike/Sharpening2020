@@ -423,6 +423,10 @@ namespace DbgUI
             {
                 lblPowerToughness.Text = cv.Power.ToString() + "/" + cv.Toughness.ToString();
             }
+            else
+            {
+                lblPowerToughness.Text = "";
+            }
         }
     }
 }

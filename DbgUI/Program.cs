@@ -8,6 +8,7 @@ namespace DbgUI
 {
     static class Program
     {
+        static MainForm frm;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +17,8 @@ namespace DbgUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            frm = new MainForm();
+            Application.Run(frm);
         }
     }
 }

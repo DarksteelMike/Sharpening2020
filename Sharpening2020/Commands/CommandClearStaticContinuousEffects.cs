@@ -13,6 +13,13 @@ namespace Sharpening2020.Commands
 
             prev.AddRange(g.MyContinuousEffects.StaticEffects);
 
+            foreach(ContinuousEffect ce in prev)
+            {
+                ce.Undo(g);
+
+                ce.UpdateViews(g);
+            }
+
             g.MyContinuousEffects.StaticEffects.Clear();
         }
 
@@ -21,6 +28,13 @@ namespace Sharpening2020.Commands
         public override void Undo(Game g)
         {
             g.MyContinuousEffects.StaticEffects.AddRange(prev);
+
+            foreach (ContinuousEffect ce in prev)
+            {
+                ce.Do(g);
+
+                ce.UpdateViews(g);
+            }
         }
 
         public override object Clone()
