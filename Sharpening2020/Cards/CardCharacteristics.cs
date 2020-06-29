@@ -1,4 +1,4 @@
-﻿using Sharpening2020.Cards.Static;
+﻿using Sharpening2020.Cards.ContinuousEffects;
 using System;
 using System.Collections.Generic;
 

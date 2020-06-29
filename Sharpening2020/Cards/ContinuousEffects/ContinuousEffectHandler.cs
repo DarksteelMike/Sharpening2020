@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Sharpening2020.Cards.Static
+namespace Sharpening2020.Cards.ContinuousEffects
 {
     public class ContinuousEffectHandler : ICloneable
     {
@@ -63,9 +60,7 @@ namespace Sharpening2020.Cards.Static
             {
                 List<ContinuousEffect> curLayer = Layers[ln];
 
-                //Establish Dependencies
-                //LookAhead = (Game)MyGame.Clone();
-                //TODO: Figure out how the fuck this would work. Just sort by timestamp for now.
+                //TODO: Figure out how the fuck dependencies would work. Just sort by timestamp for now.
 
                 curLayer.Sort((ContinuousEffect one, ContinuousEffect other) =>
                     {
@@ -87,6 +82,14 @@ namespace Sharpening2020.Cards.Static
 
         public void RunContinuousEffects()
         {
+            foreach (LayerName ln in Enum.GetValues(typeof(LayerName)))
+            {
+                foreach (ContinuousEffect ce in Layers[ln])
+                {
+                    ce.Undo(MyGame);
+                }
+            }
+
             GatherContinuousEffects();
             SortContinuousEffects();
 

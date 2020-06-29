@@ -18,7 +18,7 @@ namespace Sharpening2020.Cards.Activatables
         public StackInstance(Activatable act)
         {
             MyActivatable = act;
-;
+
             List<ManaPoint> PointsPaid = new List<ManaPoint>();
             PointsPaid.AddRange(act.MyCost.PaidMana.Select(x => {return x.PaidPoint;}));
 

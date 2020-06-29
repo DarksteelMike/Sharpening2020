@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
-using Sharpening2020.Cards.Static;
+using Sharpening2020.Cards.ContinuousEffects;
 using Sharpening2020.Commands;
 using Sharpening2020.Input;
 using Sharpening2020.InputBridges;
@@ -15,7 +15,7 @@ using Sharpening2020.Zones;
 
 namespace Sharpening2020
 {
-    public enum DebugMode { None, CardViews, Commands, InputStates, Mana  }
+    public enum DebugMode { None, CardViews, Commands, ContinuousEffects, InputStates, Mana  }
     public class Game : ICloneable
     {
         public Game() { }
@@ -33,6 +33,8 @@ namespace Sharpening2020
         public Executor MyExecutor = new Executor();
   
         public Int32 NextGameObjectID = 0;
+
+        public Int32 NextTimeStamp = 0;
 
         public List<GameObject> GameObjects = new List<GameObject>();
 
@@ -82,6 +84,8 @@ namespace Sharpening2020
 
             set
             {
+                MyContinuousEffects.RunContinuousEffects();
+
                 playerWithPriorityIndex = value;
                 Int32 PlayerCount = GetPlayers().Count();
                 while (playerWithPriorityIndex >= PlayerCount)
@@ -334,10 +338,7 @@ namespace Sharpening2020
             foreach (InputHandler ih in ret.InputHandlers.Values)
             {
                 ih.MyGame = ret;
-                foreach(InputStateBase isb in ih.InputList)
-                {
-                    isb.MyGame = ret;
-                }
+                ih.UpdateGameReferences(ret);
             }
 
             return ret;

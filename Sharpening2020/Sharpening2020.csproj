@@ -59,9 +59,9 @@
     <Compile Include="Cards\Costs\Cost.cs" />
     <Compile Include="Cards\Costs\ManaCostPart.cs" />
     <Compile Include="Cards\Counter.cs" />
-    <Compile Include="Cards\Static\ContinuousEffect.cs" />
-    <Compile Include="Cards\Static\ContinuousEffectHandler.cs" />
-    <Compile Include="Cards\Static\Presets\PumpPT.cs" />
+    <Compile Include="Cards\ContinuousEffects\ContinuousEffect.cs" />
+    <Compile Include="Cards\ContinuousEffects\ContinuousEffectHandler.cs" />
+    <Compile Include="Cards\ContinuousEffects\Presets\PumpPT.cs" />
     <Compile Include="Cards\Targets\Targeting.cs" />
     <Compile Include="Commands\CommandAddCounter.cs" />
     <Compile Include="Commands\CommandAddManaToPool.cs" />
@@ -69,6 +69,7 @@
     <Compile Include="Commands\CommandAddTarget.cs" />
     <Compile Include="Commands\CommandAdvancePhase.cs" />
     <Compile Include="Commands\CommandClearManaPool.cs" />
+    <Compile Include="Commands\CommandClearStaticContinuousEffects.cs" />
     <Compile Include="Commands\CommandCreateCard.cs" />
     <Compile Include="Commands\CommandCreatePlayer.cs" />
     <Compile Include="Commands\CommandCreateStaticPumpEffect.cs" />

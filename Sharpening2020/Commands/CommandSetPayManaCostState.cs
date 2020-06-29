@@ -34,7 +34,7 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            g.InputHandlers[PlayerID].InputList.Remove(pmc);
+            g.InputHandlers[PlayerID].RemoveInputFromList(pmc);
         }
 
         public override object Clone()

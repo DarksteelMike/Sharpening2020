@@ -19,6 +19,9 @@ namespace Sharpening2020.Commands
         {
             Player p = (Player)g.GetGameObjectByID(PlayerID);
 
+            if (p.MyZones[ZoneType.Library].Contents.Count == 0)
+                return; //TEMPORARY
+
             LazyGameObject<Card> TopCard = p.MyZones[ZoneType.Library].Contents[0];
 
             g.MyExecutor.Do(new CommandSetCardState(TopCard.ID, CharacteristicName.Front));

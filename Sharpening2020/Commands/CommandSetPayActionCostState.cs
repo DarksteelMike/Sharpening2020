@@ -33,7 +33,7 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            g.InputHandlers[PlayerID].InputList.Remove(pac);
+            g.InputHandlers[PlayerID].RemoveInputFromList(pac);
         }
 
         public override object Clone()

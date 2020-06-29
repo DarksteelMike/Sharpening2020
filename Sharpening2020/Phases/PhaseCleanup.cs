@@ -15,6 +15,9 @@ namespace Sharpening2020.Phases
                     new CommandResetLandsPlayed(p.ID)));
             }
 
+            if(g.MyContinuousEffects.StaticEffects.Count > 0)
+                g.MyExecutor.Do(new CommandClearStaticContinuousEffects());
+
             g.MyExecutor.Do(new CommandIncrementActivePlayerIndex());
         }
     }

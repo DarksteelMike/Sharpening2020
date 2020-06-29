@@ -72,20 +72,14 @@ namespace DbgUI
             List<String> Deck1 = new List<string>();
             List<String> Deck2 = new List<string>();
 
-            for (int i = 0; i < 24; i++)
-            {
-                Deck1.Add("Forest");
-                Deck2.Add("Forest");
-            }
-            for (int i = 0; i < 4; i++)
-            {
-                Deck1.Add("Grizzly Bears");
-                Deck1.Add("Memnite");
-                Deck1.Add("Giant Growth");
-                Deck2.Add("Grizzly Bears");
-                Deck2.Add("Memnite");
-                Deck2.Add("Giant Growth");
-            }
+            Deck1.Add("Forest");
+            Deck2.Add("Forest");
+            Deck1.Add("Grizzly Bears");
+            Deck1.Add("Memnite");
+            Deck1.Add("Giant Growth");
+            Deck2.Add("Grizzly Bears");
+            Deck2.Add("Memnite");
+            Deck2.Add("Giant Growth");
 
             model.InitGame(new KeyValuePair<InputBridge, List<string>>(bridge1, Deck1), new KeyValuePair<InputBridge, List<string>>(bridge2, Deck2));
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Sharpening2020.Cards.Static.Presets;
+using Sharpening2020.Cards.ContinuousEffects.Presets;
 
 namespace Sharpening2020.Commands
 {
@@ -19,16 +19,12 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            ppt = new PumpPT(CardID, Power, Toughness);
-
-            g.MyContinuousEffects.StaticEffects.Add(ppt);
+            g.MyContinuousEffects.StaticEffects.Add(new PumpPT(CardID, Power, Toughness,g.NextTimeStamp++));
         }
-
-        private PumpPT ppt;
 
         public override void Undo(Game g)
         {
-            g.MyContinuousEffects.StaticEffects.Remove(ppt);
+            g.MyContinuousEffects.StaticEffects.RemoveAt(g.MyContinuousEffects.StaticEffects.Count - 1);
         }
 
         public override object Clone()

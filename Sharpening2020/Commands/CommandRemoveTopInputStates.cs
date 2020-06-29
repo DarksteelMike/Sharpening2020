@@ -22,8 +22,8 @@ namespace Sharpening2020.Commands
             if(g.DebugFlag == DebugMode.InputStates)
             {
                 g.DebugAlert("RemoveTopInputStates(" + PlayerID + "," + Amount + ")\n");
-                g.DebugAlert("InputList Count: " + g.InputHandlers[PlayerID].InputList.Count.ToString() + "\n");
-                foreach (InputStateBase isb in g.InputHandlers[PlayerID].InputList)
+                g.DebugAlert("InputList Count: " + g.InputHandlers[PlayerID].GetInputList().Count.ToString() + "\n");
+                foreach (InputStateBase isb in g.InputHandlers[PlayerID].GetInputList())
                 {
                     g.DebugAlert(isb.ToString() + "\n");
                 }
@@ -32,10 +32,10 @@ namespace Sharpening2020.Commands
             prevStates = new List<InputStateBase>();
             for (Int32 i=0; i < Amount;i++)
             {
-                InputStateBase state = g.InputHandlers[PlayerID].InputList.Last();
+                InputStateBase state = g.InputHandlers[PlayerID].GetInputList().Last();
                 prevStates.Add(state);
                 state.Leave();
-                g.InputHandlers[PlayerID].InputList.Remove(state);
+                g.InputHandlers[PlayerID].RemoveInputFromList(state);
             }
             prevStates.Reverse();
         }
@@ -44,7 +44,7 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            g.InputHandlers[PlayerID].InputList.AddRange(prevStates);
+            g.InputHandlers[PlayerID].GetInputList().AddRange(prevStates);
         }
 
         public override object Clone()

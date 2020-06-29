@@ -16,7 +16,7 @@ namespace Sharpening2020.Input
 
         public Game MyGame;
         
-        public List<InputStateBase> InputList = new List<InputStateBase>();
+        private List<InputStateBase> InputList = new List<InputStateBase>();
 
         private InputStateBase bottomState = new WaitingForOpponent();
 
@@ -26,13 +26,46 @@ namespace Sharpening2020.Input
                 { return InputList.Count == 0 ? bottomState : InputList.Last(); }
             set
             {
-                CurrentInputState.Leave();
+                //CurrentInputState.Leave();
 
-                InputList.Add(value);
+                AddInputState(value);
 
                 CurrentInputState.MyGame = MyGame;
                 CurrentInputState.MyBridge = Bridge;
                 CurrentInputState.MyPlayer = AssociatedPlayer;
+            }
+        }
+
+        public List<InputStateBase> GetInputList()
+        {
+            return InputList;
+        }
+
+        public void AddInputState(InputStateBase ib)
+        {
+            InputList.Add(ib);
+        }
+
+        public void RemoveInputFromList(InputStateBase ib)
+        {
+            InputList.Remove(ib);
+        }
+
+        public InputStateBase GetTopInput()
+        {
+            return InputList.Last();
+        }
+
+        public void RemoveTopInput()
+        {
+            InputList.RemoveAt(InputList.Count - 1);
+        }
+
+        public void UpdateGameReferences(Game g)
+        {
+            foreach(InputStateBase ib in InputList)
+            {
+                ib.MyGame = g;
             }
         }
 

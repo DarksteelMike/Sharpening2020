@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sharpening2020.Cards.Static
+namespace Sharpening2020.Cards.ContinuousEffects
 {
     public enum LayerName { Layer1A, Layer1B, Layer2, Layer3, Layer4, Layer5, Layer6, Layer7A, Layer7B, Layer7C, Layer7D }
     public enum Duration { Permanent, EndOfTurn }

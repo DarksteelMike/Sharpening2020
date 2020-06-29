@@ -11,6 +11,7 @@ namespace Sharpening2020.Commands
 
             resolved.Value(g).Resolve(g);
 
+            g.MyContinuousEffects.RunContinuousEffects();
         }
 
         private LazyGameObject<StackInstance> resolved;

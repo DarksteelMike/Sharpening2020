@@ -1,43 +1,47 @@
 ﻿using System;
 
+using Sharpening2020.Cards;
+using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Input;
-using Sharpening2020.Players;
 
 namespace Sharpening2020.Commands
 {
     class CommandAddTarget : CommandBase
     {
-        public readonly Int32 TargeterID;
-        public readonly Int32 ObjectID;
+        public readonly Int32 CardID;
+        public readonly Int32 ActivatableIndex;
+        public readonly Int32 TargetID;
 
-        public CommandAddTarget(Int32 tid, Int32 oid)
+        public CommandAddTarget(Int32 tid, Int32 aind, Int32 oid)
         {
-            TargeterID = tid;
-            ObjectID = oid;
+            CardID = tid;
+            ActivatableIndex = aind;
+            TargetID = oid;
         }
 
         public override void Do(Game g)
         {
-            InputHandler IH = g.InputHandlers[TargeterID];
-            SetTargets st = (SetTargets)IH.CurrentInputState;
-            go = g.GetGameObjectByID(ObjectID);
+            Card c = (Card)g.GetGameObjectByID(CardID);
+            Activatable act = c.CurrentCharacteristics.Activatables[ActivatableIndex];
 
-            st.MyActivatable.MyTargeting.Targeted.Add(go);
+            go = g.GetGameObjectByID(TargetID);
+
+            act.MyTargeting.Targeted.Add(go);
         }
         
         private GameObject go;
 
         public override void Undo(Game g)
         {
-            InputHandler IH = g.InputHandlers[TargeterID];
-            SetTargets st = (SetTargets)IH.CurrentInputState;
+            Card c = (Card)g.GetGameObjectByID(CardID);
+            Activatable act = c.CurrentCharacteristics.Activatables[ActivatableIndex];
 
-            st.MyActivatable.MyTargeting.Targeted.Remove(go);
+            act.MyTargeting.Targeted.RemoveAt(act.MyTargeting.Targeted.Count - 1);
         }
 
         public override object Clone()
         {
-            return new CommandAddTarget(TargeterID, ObjectID);
+            return new CommandAddTarget(CardID, ActivatableIndex, TargetID);
         }
     }
 }

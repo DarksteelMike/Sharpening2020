@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Sharpening2020.Cards.Activatables;
-using Sharpening2020.Cards.Static;
 using Sharpening2020.Players;
 using Sharpening2020.Views;
 
