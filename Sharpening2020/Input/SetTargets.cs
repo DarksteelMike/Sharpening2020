@@ -63,7 +63,7 @@ namespace Sharpening2020.Input
                 if(MyActivatable.MyTargeting.CanTargetGameObject(MyGame,go) && !MyActivatable.MyTargeting.Targeted.Contains(go))
                 {
                     GameAction ga = new GameAction(i, go.ID, "Target " + go.ToString());
-                    ActionCommandPairs.Add(i,new CommandAddTarget(MyPlayer.ID,go.ID));
+                    ActionCommandPairs.Add(i++,new CommandAddTarget(MyPlayer.ID,go.ID));
                     res.Add(ga);
                 }
             }

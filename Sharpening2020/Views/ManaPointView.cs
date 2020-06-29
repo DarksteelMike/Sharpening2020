@@ -13,5 +13,10 @@ namespace Sharpening2020.Views
             id = i;
             Color = c;
         }
+
+        public override string ToString()
+        {
+            return Color.ToString();
+        }
     }
 }

@@ -82,6 +82,7 @@
             this.lvExile2 = new System.Windows.Forms.ListView();
             this.tpCommand2 = new System.Windows.Forms.TabPage();
             this.lvCommand2 = new System.Windows.Forms.ListView();
+            this.lblPowerToughness = new System.Windows.Forms.Label();
             this.tcArea1.SuspendLayout();
             this.tpLibrary1.SuspendLayout();
             this.tpBattlefield.SuspendLayout();
@@ -163,6 +164,7 @@
             // 
             // cbManaPool1
             // 
+            this.cbManaPool1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbManaPool1.FormattingEnabled = true;
             this.cbManaPool1.Location = new System.Drawing.Point(64, 83);
             this.cbManaPool1.Name = "cbManaPool1";
@@ -171,6 +173,7 @@
             // 
             // cbManaPool2
             // 
+            this.cbManaPool2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbManaPool2.FormattingEnabled = true;
             this.cbManaPool2.Location = new System.Drawing.Point(70, 77);
             this.cbManaPool2.Name = "cbManaPool2";
@@ -325,6 +328,7 @@
             // 
             // cbCounters2
             // 
+            this.cbCounters2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCounters2.FormattingEnabled = true;
             this.cbCounters2.Location = new System.Drawing.Point(70, 48);
             this.cbCounters2.Name = "cbCounters2";
@@ -406,6 +410,7 @@
             // 
             // cbCounters1
             // 
+            this.cbCounters1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCounters1.FormattingEnabled = true;
             this.cbCounters1.Location = new System.Drawing.Point(64, 47);
             this.cbCounters1.Name = "cbCounters1";
@@ -450,6 +455,7 @@
             // 
             // grpCardDetail
             // 
+            this.grpCardDetail.Controls.Add(this.lblPowerToughness);
             this.grpCardDetail.Controls.Add(this.bSelectCardCounter);
             this.grpCardDetail.Controls.Add(this.lblCardDetailID);
             this.grpCardDetail.Controls.Add(this.tbCardDetailText);
@@ -488,11 +494,12 @@
             this.tbCardDetailText.Multiline = true;
             this.tbCardDetailText.Name = "tbCardDetailText";
             this.tbCardDetailText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbCardDetailText.Size = new System.Drawing.Size(215, 254);
+            this.tbCardDetailText.Size = new System.Drawing.Size(215, 229);
             this.tbCardDetailText.TabIndex = 24;
             // 
             // cbCardDetailCounters
             // 
+            this.cbCardDetailCounters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCardDetailCounters.FormattingEnabled = true;
             this.cbCardDetailCounters.Location = new System.Drawing.Point(64, 32);
             this.cbCardDetailCounters.Name = "cbCardDetailCounters";
@@ -659,6 +666,15 @@
             this.lvCommand2.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvCommand2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
+            // lblPowerToughness
+            // 
+            this.lblPowerToughness.AutoSize = true;
+            this.lblPowerToughness.Location = new System.Drawing.Point(173, 294);
+            this.lblPowerToughness.Name = "lblPowerToughness";
+            this.lblPowerToughness.Size = new System.Drawing.Size(35, 13);
+            this.lblPowerToughness.TabIndex = 26;
+            this.lblPowerToughness.Text = "label1";
+            // 
             // MatchForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -755,6 +771,7 @@
         private System.Windows.Forms.Button bSelectManaPoint1;
         private System.Windows.Forms.Button bSelectPlayerCounter1;
         private System.Windows.Forms.Button bSelectCardCounter;
+        private System.Windows.Forms.Label lblPowerToughness;
     }
 }
 

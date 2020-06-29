@@ -25,7 +25,7 @@ namespace Sharpening2020.Input
 
         public void PromptAndRequestAction()
         {
-            MyBridge.Prompt("Pay \"" + Utilities.ColorListToShortenedString(MyActivatable.MyCost.ManaParts.Select(x => { return x.Color; })) + "\"?");
+            MyBridge.Prompt("Pay \"" + Utilities.ColorListToShortenedString(MyActivatable.MyCost.GetUnpaidMana().Select(x => { return x.Color; })) + "\"?");
             SelectAction(MyBridge.SelectActionFromList(GetActions()));
         }
 
@@ -65,9 +65,10 @@ namespace Sharpening2020.Input
                 ManaPoint mp = lmp.Value(MyGame);
                 foreach(ManaCostPart mcp in MyActivatable.MyCost.ManaParts)
                 {
-                    if(mp.MyColor == mcp.Color)
+                    if(mp.MyColor == mcp.Color || mcp.Color == ManaColor.Colorless)
                     {
                         GameAction ga = new GameAction(i++, mp.ID, "Pay " + mp.MyColor + "mana for " + mcp.ToString());
+                        res.Add(ga);
 
                         ActionCommandPairs.Add(ga.ID, new CommandPayMana(MyPlayer.ID,mp.ID, MyActivatable.MyCost.ManaParts.IndexOf(mcp)));
                     }

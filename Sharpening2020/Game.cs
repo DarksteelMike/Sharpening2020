@@ -15,7 +15,7 @@ using Sharpening2020.Zones;
 
 namespace Sharpening2020
 {
-    public enum DebugMode { None, Commands, InputStates, CardViews }
+    public enum DebugMode { None, CardViews, Commands, InputStates, Mana  }
     public class Game : ICloneable
     {
         public Game() { }

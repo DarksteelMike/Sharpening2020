@@ -3,6 +3,7 @@ using System.Linq;
 
 using Sharpening2020.Cards.Costs;
 using Sharpening2020.Commands;
+using Sharpening2020.Phases;
 using Sharpening2020.Players;
 using Sharpening2020.Zones;
 
@@ -20,8 +21,11 @@ namespace Sharpening2020.Cards.Activatables.Presets
         {
             Boolean res = true;
 
-            res &= g.GetZoneTypeOf(Host) == ZoneType.Hand; //Only cast from hand
-            res &= p.ID == Host.Value(g).Owner.ID; //Only it's owner can cast it
+            res &= g.GetZoneTypeOf(Host) == ZoneType.Hand; //Only cast from hand.
+            res &= p.ID == Host.Value(g).Owner.ID; //Only it's owner can cast it.
+            res &= g.MyPhaseHandler.CurrentPhase.MyType == PhaseType.PostCombatMain || g.MyPhaseHandler.CurrentPhase.MyType == PhaseType.PreCombatMain; //Only cast on main phases
+            res &= p.ID == g.ActivePlayer.ID; //Only cast on your turn.
+            res &= g.SpellStack.Count == 0; //Only cast at sorcery speed.
             res &= !IsBeingActivated; //This isn't already in the process of being cast.
 
             return res;

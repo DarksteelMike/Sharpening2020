@@ -38,12 +38,25 @@ namespace Sharpening2020.Cards.Costs
                 PaidActions.Add(acb);
             }
         }
+
         public void SetPaid(ManaCostPart mcb)
         {
             if(ManaParts.Contains(mcb))
             {
                 PaidMana.Add(mcb);
             }
+        }
+
+        public List<ManaCostPart> GetUnpaidMana()
+        {
+            List<ManaCostPart> res = new List<ManaCostPart>();
+            res.AddRange(ManaParts);
+            foreach(ManaCostPart paid in PaidMana)
+            {
+                res.Remove(paid);
+            }
+
+            return res;
         }
 
         public void ClearPaid()

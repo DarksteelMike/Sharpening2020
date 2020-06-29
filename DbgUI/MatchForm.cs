@@ -111,7 +111,10 @@ namespace DbgUI
                     tsmi.Click += (o, e) => { SelectedAction = ga; };
                     cont.Items.Add(tsmi);
 
-                    ContextMap.Add(vo.ID, cont);
+                    if(!ContextMap.ContainsKey(vo.ID))
+                    {
+                        ContextMap.Add(vo.ID, cont);
+                    }
                 }
                 else if(vo is CounterView)
                 {
@@ -179,10 +182,12 @@ namespace DbgUI
             foreach (ManaPointView mpv in view.ManaPool)
             {
                 manapool.Items.Add(mpv);
+                AddViewToMap(mpv);
             }
             foreach (CounterView cv in view.Counters)
             {
                 counters.Items.Add(cv);
+                AddViewToMap(cv);
             }
         }
 
@@ -333,10 +338,10 @@ namespace DbgUI
 
         private void bSelectManaPoint1_Click(object sender, EventArgs e)
         {
-            if (cbManaPool2.Items.Count == 0)
+            if (cbManaPool1.Items.Count == 0)
                 return;
 
-            ManaPointView cv = (ManaPointView)cbManaPool2.SelectedItem;
+            ManaPointView cv = (ManaPointView)cbManaPool1.SelectedItem;
 
             if (cv == null)
                 return;
@@ -413,6 +418,11 @@ namespace DbgUI
             cbCardDetailCounters.Items.Clear();
             cbCardDetailCounters.Items.AddRange(cv.Counters.ToArray());
             tbCardDetailText.Text = cv.Text;
+
+            if(cv.CardTypes.Contains("Creature"))
+            {
+                lblPowerToughness.Text = cv.Power.ToString() + "/" + cv.Toughness.ToString();
+            }
         }
     }
 }

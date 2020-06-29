@@ -15,6 +15,10 @@ namespace DbgUI
         {
             InitializeComponent();
 
+            foreach (String name in Enum.GetNames(typeof(DebugMode)))
+            {
+                cbDebugMode.Items.Add(name);
+            }
             cbDebugMode.SelectedIndex = 0;
         }
 
