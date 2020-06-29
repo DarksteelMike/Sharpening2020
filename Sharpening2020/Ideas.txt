@@ -15,3 +15,11 @@ TODOS, in no particular order:
 *Winning/Losing.
 *Serializing Commands.
 *Game state scoring.
+
+
+Known bugs:
+*Can't target opponent's creature with Giant Growth.
+*CommandClearStaticContinuousEffects does not respect Duration value.
+*Spells being cast are not moved to StackZone.
+*Non-permanent spells are not sent to graveyard.
+*Cannot activate abilities (spells?) more than once.
