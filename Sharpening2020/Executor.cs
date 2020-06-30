@@ -45,6 +45,19 @@ namespace Sharpening2020
                 com.UpdateViews(MyGame);
         }
 
+        public void UndoUntil(Type t)
+        {
+            if (UndoStack.Count == 0)
+                return;
+
+            CommandBase com;
+            do
+            {
+                com = UndoStack.Pop();
+                com.Undo(MyGame);
+            } while (com.GetType() != t && UndoStack.Count > 0);
+        }
+
         public void Redo()
         {
             if (RedoStack.Count == 0)

@@ -81,6 +81,7 @@
     <Compile Include="Commands\CommandIncrementActionPartIndex.cs" />
     <Compile Include="Commands\CommandIncrementActivePlayerIndex.cs" />
     <Compile Include="Commands\CommandIncrementLandsPlayed.cs" />
+    <Compile Include="Commands\CommandMarkerGetPriority.cs" />
     <Compile Include="Commands\CommandMoveCard.cs" />
     <Compile Include="Commands\CommandPayMana.cs" />
     <Compile Include="Commands\CommandPerformActionCost.cs" />
