@@ -18,7 +18,6 @@ TODOS, in no particular order:
 
 
 Known bugs:
-*Can't target opponent's creature with Giant Growth.
 *CommandClearStaticContinuousEffects does not respect Duration value.
 *Spells being cast are not moved to StackZone.
 *Non-permanent spells are not sent to graveyard.

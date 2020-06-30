@@ -46,6 +46,7 @@
     <Compile Include="Cards\Activatables\Activatable.cs" />
     <Compile Include="Cards\Activatables\Presets\CastPermanent.cs" />
     <Compile Include="Cards\Activatables\Presets\PlayLand.cs" />
+    <Compile Include="Cards\Activatables\Presets\PredicatePresets.cs" />
     <Compile Include="Cards\Activatables\Presets\PumpSpell.cs" />
     <Compile Include="Cards\Activatables\Presets\TapForMana.cs" />
     <Compile Include="Cards\Activatables\SpecialAction.cs" />

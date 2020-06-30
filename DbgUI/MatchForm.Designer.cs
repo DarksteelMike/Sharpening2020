@@ -63,6 +63,7 @@
             this.lblLife1 = new System.Windows.Forms.Label();
             this.lblUILife1 = new System.Windows.Forms.Label();
             this.grpCardDetail = new System.Windows.Forms.GroupBox();
+            this.lblPowerToughness = new System.Windows.Forms.Label();
             this.bSelectCardCounter = new System.Windows.Forms.Button();
             this.lblCardDetailID = new System.Windows.Forms.Label();
             this.tbCardDetailText = new System.Windows.Forms.TextBox();
@@ -82,7 +83,6 @@
             this.lvExile2 = new System.Windows.Forms.ListView();
             this.tpCommand2 = new System.Windows.Forms.TabPage();
             this.lvCommand2 = new System.Windows.Forms.ListView();
-            this.lblPowerToughness = new System.Windows.Forms.Label();
             this.tcArea1.SuspendLayout();
             this.tpLibrary1.SuspendLayout();
             this.tpBattlefield.SuspendLayout();
@@ -469,6 +469,15 @@
             this.grpCardDetail.TabStop = false;
             this.grpCardDetail.Text = "Card Detail";
             // 
+            // lblPowerToughness
+            // 
+            this.lblPowerToughness.AutoSize = true;
+            this.lblPowerToughness.Location = new System.Drawing.Point(173, 294);
+            this.lblPowerToughness.Name = "lblPowerToughness";
+            this.lblPowerToughness.Size = new System.Drawing.Size(35, 13);
+            this.lblPowerToughness.TabIndex = 26;
+            this.lblPowerToughness.Text = "label1";
+            // 
             // bSelectCardCounter
             // 
             this.bSelectCardCounter.Location = new System.Drawing.Point(162, 30);
@@ -537,7 +546,6 @@
             this.tcArea2.SelectedIndex = 0;
             this.tcArea2.Size = new System.Drawing.Size(544, 320);
             this.tcArea2.TabIndex = 21;
-            this.tcArea2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpLibrary2
             // 
@@ -601,6 +609,7 @@
             this.lvBattlefield2.TabIndex = 2;
             this.lvBattlefield2.UseCompatibleStateImageBehavior = false;
             this.lvBattlefield2.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
+            this.lvBattlefield2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
             // 
             // tpGraveyard2
             // 
@@ -665,15 +674,6 @@
             this.lvCommand2.UseCompatibleStateImageBehavior = false;
             this.lvCommand2.SelectedIndexChanged += new System.EventHandler(this.lvZone_SelectedIndexChanged);
             this.lvCommand2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvZone_MouseDown);
-            // 
-            // lblPowerToughness
-            // 
-            this.lblPowerToughness.AutoSize = true;
-            this.lblPowerToughness.Location = new System.Drawing.Point(173, 294);
-            this.lblPowerToughness.Name = "lblPowerToughness";
-            this.lblPowerToughness.Size = new System.Drawing.Size(35, 13);
-            this.lblPowerToughness.TabIndex = 26;
-            this.lblPowerToughness.Text = "label1";
             // 
             // MatchForm
             // 

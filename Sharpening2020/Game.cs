@@ -377,7 +377,8 @@ namespace Sharpening2020
                     MyExecutor.Do(new CommandCreateCard(s, i));
                 }
 
-                MyExecutor.Do(new CommandShuffleLibrary(i++, (Int32)DateTime.Now.Ticks));
+                i++;
+                //MyExecutor.Do(new CommandShuffleLibrary(i++, (Int32)DateTime.Now.Ticks));
             }
 
             foreach (Player p in GetPlayers())

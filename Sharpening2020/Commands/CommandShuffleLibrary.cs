@@ -23,7 +23,7 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            lib = ((Player)g.GetGameObjectByID(PlayerID)).MyZones[ZoneType.Library];
+            Zone lib = ((Player)g.GetGameObjectByID(PlayerID)).MyZones[ZoneType.Library];
             originalOrder = new List<LazyGameObject<Card>>();
             foreach (LazyGameObject<Card> lgo in lib.Contents)
             {
@@ -43,11 +43,11 @@ namespace Sharpening2020.Commands
             }
         }
 
-        private Zone lib;
         private List<LazyGameObject<Card>> originalOrder;
 
         public override void Undo(Game g)
         {
+            Zone lib = ((Player)g.GetGameObjectByID(PlayerID)).MyZones[ZoneType.Library];
             lib.Contents.Clear();
             foreach(LazyGameObject<Card> lgo in originalOrder)
             {
