@@ -90,6 +90,11 @@ namespace Sharpening2020
             {
                 MyContinuousEffects.RunContinuousEffects();
 
+                if(playerWithPriorityIndex < value)
+                {
+                    RunStateBasedActions();
+                }
+
                 playerWithPriorityIndex = value;
                 while (playerWithPriorityIndex >= PlayerCount)
                 {
