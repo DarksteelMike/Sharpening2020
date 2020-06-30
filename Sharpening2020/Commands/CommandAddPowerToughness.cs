@@ -6,7 +6,7 @@ using Sharpening2020.Views;
 
 namespace Sharpening2020.Commands
 {
-    class CommandAddPowerToughness : CommandBase
+    public class CommandAddPowerToughness : CommandBase
     {
         public readonly Int32 CardID;
         public readonly Int32 Power;

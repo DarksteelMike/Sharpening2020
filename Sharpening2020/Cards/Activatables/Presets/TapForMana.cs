@@ -1,7 +1,7 @@
 ﻿using System;
 
 using Sharpening2020.Cards.Costs;
-using Sharpening2020.Cards.Costs.ActionCosts;
+using Sharpening2020.Cards.Costs.ActionCosts.Presets;
 using Sharpening2020.Commands;
 using Sharpening2020.Mana;
 using Sharpening2020.Players;

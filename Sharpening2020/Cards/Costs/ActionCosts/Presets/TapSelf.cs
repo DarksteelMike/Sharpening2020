@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Sharpening2020.Commands;
 
-namespace Sharpening2020.Cards.Costs.ActionCosts
+namespace Sharpening2020.Cards.Costs.ActionCosts.Presets
 {
     public class TapSelf : ActionCostPart
     {
@@ -35,7 +31,7 @@ namespace Sharpening2020.Cards.Costs.ActionCosts
 
         public override void Pay(Game g)
         {
-            Commands.CommandTap ct = new Commands.CommandTap(Target.ID);
+            Commands.CommandTap ct = new CommandTap(Target.ID);
 
             g.MyExecutor.Do(ct);
         }

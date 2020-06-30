@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Sharpening2020.Commands;
 
-using Sharpening2020.Commands;
-
-namespace Sharpening2020.Cards.Costs.ActionCosts
+namespace Sharpening2020.Cards.Costs.ActionCosts.Presets
 {
     class UntapSelf : ActionCostPart
     {

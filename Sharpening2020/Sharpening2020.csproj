@@ -53,10 +53,11 @@
     <Compile Include="Cards\Activatables\Spell.cs" />
     <Compile Include="Cards\Activatables\StackInstance.cs" />
     <Compile Include="Cards\Costs\ActionCosts\ActionCostPart.cs" />
-    <Compile Include="Cards\Costs\ActionCosts\TapSelf.cs" />
+    <Compile Include="Cards\Costs\ActionCosts\Presets\SacSelf.cs" />
+    <Compile Include="Cards\Costs\ActionCosts\Presets\TapSelf.cs" />
     <Compile Include="Cards\Card.cs" />
     <Compile Include="Cards\CardCharacteristics.cs" />
-    <Compile Include="Cards\Costs\ActionCosts\UntapSelf.cs" />
+    <Compile Include="Cards\Costs\ActionCosts\Presets\UntapSelf.cs" />
     <Compile Include="Cards\Costs\Cost.cs" />
     <Compile Include="Cards\Costs\ManaCostPart.cs" />
     <Compile Include="Cards\Counter.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Commands\CommandResetLandsPlayed.cs" />
     <Compile Include="Commands\CommandResetTargets.cs" />
     <Compile Include="Commands\CommandResolveTopOfStack.cs" />
+    <Compile Include="Commands\CommandSacrifice.cs" />
     <Compile Include="Commands\CommandSetCardState.cs" />
     <Compile Include="Commands\CommandSetHavePriorityState.cs" />
     <Compile Include="Commands\CommandSetIsActivating.cs" />

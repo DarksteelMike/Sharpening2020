@@ -72,15 +72,16 @@ namespace DbgUI
             List<String> Deck1 = new List<string>();
             List<String> Deck2 = new List<string>();
 
-            Deck1.Add("Forest");
-            Deck2.Add("Forest");
-            Deck1.Add("Grizzly Bears");
-            Deck2.Add("Grizzly Bears");
+            Deck1.Add("Plains");
+            Deck1.Add("Plains");
             Deck1.Add("Memnite");
+            Deck1.Add("Memnite");
+            Deck1.Add("Selfless Cathar");
+
+            Deck2.Add("Forest");
+            Deck2.Add("Grizzly Bears");
             Deck2.Add("Memnite");
-            Deck1.Add("Giant Growth");
             Deck2.Add("Giant Growth");
-            Deck1.Add("Llanowar Elves");
             Deck2.Add("Llanowar Elves");
 
             model.InitGame(new KeyValuePair<InputBridge, List<string>>(bridge1, Deck1), new KeyValuePair<InputBridge, List<string>>(bridge2, Deck2));
