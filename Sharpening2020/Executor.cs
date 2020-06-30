@@ -64,6 +64,9 @@ namespace Sharpening2020
                         KeepGoing = false;
                     }
                 }
+
+                if (!SuspendViewUpdates)
+                    com.UpdateViews(MyGame);
             } while (KeepGoing && UndoStack.Count > 0);
         }
 
