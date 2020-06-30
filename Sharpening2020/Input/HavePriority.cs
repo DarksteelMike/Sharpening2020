@@ -34,7 +34,9 @@ namespace Sharpening2020.Input
 
                 //Should rather be a CommandSetAnnouncementState, but SetTarget is the earliest now implemented step that starts
                 //activating the activatable.
-                ActionCommandPairs.Add(a.ID, new CommandGroup(new CommandSetIsActivating(act.Host.ID,act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act),true),
+                ActionCommandPairs.Add(a.ID, new CommandGroup(
+                    new CommandMarkerStartActivating(),
+                    new CommandSetIsActivating(act.Host.ID,act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act),true),
                     new CommandSetTargetState(MyPlayer.ID,act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)),
                     new CommandEnterInputState()));
                 ret.Add(a);

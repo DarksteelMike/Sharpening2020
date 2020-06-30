@@ -35,7 +35,9 @@ namespace Sharpening2020.Input
             if (MyActivatable.MyCost.IsManaPaid())
             {
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
-                MyGame.MyExecutor.Do(new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID,3),
+                MyGame.MyExecutor.Do(new CommandGroup(
+                    new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false), 
+                    new CommandRemoveTopInputStates(MyPlayer.ID,3),
                     new CommandEnterInputState()));
             }
 
@@ -54,9 +56,7 @@ namespace Sharpening2020.Input
 
             GameAction cancel = new GameAction(-2, -2, "Cancel");
             res.Add(cancel);
-            ActionCommandPairs.Add(-2, new CommandGroup(new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false),
-                new CommandRemoveTopInputStates(MyPlayer.ID,3),
-                new CommandEnterInputState()));
+            ActionCommandPairs.Add(-2, null);
 
             int i = 0;
 
@@ -80,12 +80,19 @@ namespace Sharpening2020.Input
 
         public override void SelectAction(GameAction a)
         {
+            if(a.ID == -2)
+            {
+                MyGame.MyExecutor.UndoUntil(typeof(CommandMarkerStartActivating));
+                MyGame.EnterAllInputStates();
+                return;
+            }
             MyGame.MyExecutor.Do(ActionCommandPairs[a.ID]);
 
             if(MyActivatable.MyCost.IsManaPaid())
             {
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
-                MyGame.MyExecutor.Do(new CommandGroup(new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false), 
+                MyGame.MyExecutor.Do(new CommandGroup(
+                    new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false), 
                     new CommandRemoveTopInputStates(MyPlayer.ID, 3),
                     new CommandEnterInputState()));                
             }

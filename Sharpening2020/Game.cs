@@ -481,5 +481,23 @@ namespace Sharpening2020
                 ih.Bridge.UpdatePhase(MyPhaseHandler.CurrentPhase.MyType);
             }
         }
+
+        public void EnterAllInputStates()
+        {
+            foreach(InputHandler ih in InputHandlers.Values)
+            {
+                if(ih.CurrentInputState is WaitingForOpponent)
+                {
+                    ih.CurrentInputState.Enter();
+                }
+            }
+            foreach (InputHandler ih in InputHandlers.Values)
+            {
+                if (!(ih.CurrentInputState is WaitingForOpponent))
+                {
+                    ih.CurrentInputState.Enter();
+                }
+            }
+        }
     }
 }

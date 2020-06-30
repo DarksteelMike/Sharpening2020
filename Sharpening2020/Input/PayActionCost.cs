@@ -46,8 +46,7 @@ namespace Sharpening2020.Input
             ActionCommandPairs.Clear();
 
             GameAction cancel = new GameAction(-2, -2, "Cancel");
-            ActionCommandPairs.Add(-2, new CommandGroup(new CommandRemoveTopInputStates(MyPlayer.ID,2),
-                new CommandEnterInputState()));
+            ActionCommandPairs.Add(-2, null);
 
             GameAction ok = new GameAction(-1, -1, "OK");
             
@@ -61,6 +60,13 @@ namespace Sharpening2020.Input
 
         public override void SelectAction(GameAction a)
         {
+            if(a.ID == -2)
+            {
+                MyGame.MyExecutor.UndoUntil(typeof(CommandMarkerStartActivating));
+                MyGame.EnterAllInputStates();
+                return;
+            }
+
             MyGame.MyExecutor.Do(ActionCommandPairs[a.ID]);
 
             if(MyActivatable.MyCost.AreActionsPaid())
