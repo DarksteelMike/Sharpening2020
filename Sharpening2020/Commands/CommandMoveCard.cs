@@ -28,7 +28,12 @@ namespace Sharpening2020.Commands
             controller = c.Controller.Value(g);
 
             orig = g.GetZoneOf(CardID);
-            if(Destination != ZoneType.Battlefield && Destination != ZoneType.Exile)
+
+            if(Destination == ZoneType.Stack)
+            {
+                dest = g.StackZone;
+            }
+            else if(Destination != ZoneType.Battlefield && Destination != ZoneType.Exile)
             {
                 dest = owner.MyZones[Destination];
             }

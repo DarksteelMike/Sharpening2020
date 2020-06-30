@@ -209,6 +209,9 @@ namespace DbgUI
             }
             ListView Zone = GetZoneControl(zt, PlayerID);
 
+            if (Zone == null)
+                return;
+
             foreach(ListViewItem lvi in Zone.Items)
             {
                 CardMap.Remove(lvi);

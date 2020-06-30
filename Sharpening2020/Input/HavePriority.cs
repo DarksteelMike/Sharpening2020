@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Commands;
+using Sharpening2020.Zones;
 
 namespace Sharpening2020.Input
 {
@@ -34,11 +35,25 @@ namespace Sharpening2020.Input
 
                 //Should rather be a CommandSetAnnouncementState, but SetTarget is the earliest now implemented step that starts
                 //activating the activatable.
-                ActionCommandPairs.Add(a.ID, new CommandGroup(
+                CommandBase com;
+                if(act is Spell)
+                {
+                    com = new CommandGroup(
                     new CommandMarker(CommandMarkerType.StartActivating),
-                    new CommandSetIsActivating(act.Host.ID,act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act),true),
-                    new CommandSetTargetState(MyPlayer.ID,act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)),
-                    new CommandEnterInputState()));
+                    new CommandMoveCard(act.Host.ID, ZoneType.Stack),
+                    new CommandSetIsActivating(act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act), true),
+                    new CommandSetTargetState(MyPlayer.ID, act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)),
+                    new CommandEnterInputState());
+                }
+                else
+                {
+                    com = new CommandGroup(
+                    new CommandMarker(CommandMarkerType.StartActivating),
+                    new CommandSetIsActivating(act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act), true),
+                    new CommandSetTargetState(MyPlayer.ID, act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)),
+                    new CommandEnterInputState());
+                }
+                ActionCommandPairs.Add(a.ID, com);
                 ret.Add(a);
             }
 

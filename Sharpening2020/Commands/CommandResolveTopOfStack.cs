@@ -1,5 +1,6 @@
 ﻿using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Input;
+using Sharpening2020.Zones;
 
 namespace Sharpening2020.Commands
 {
@@ -10,6 +11,11 @@ namespace Sharpening2020.Commands
             resolved = g.SpellStack.Pop();
 
             resolved.Value(g).Resolve(g);
+
+            if(g.GetZoneTypeOf(resolved.Value(g).MyActivatable.Host) == ZoneType.Stack)
+            {
+                g.MyExecutor.Do(new CommandMoveCard(resolved.Value(g).MyActivatable.Host.ID, ZoneType.Graveyard));
+            }
 
             g.MyContinuousEffects.RunContinuousEffects();
         }
