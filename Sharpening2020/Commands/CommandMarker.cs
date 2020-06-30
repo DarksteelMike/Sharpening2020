@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace Sharpening2020.Commands
 {
-    class CommandMarkerStartActivating : CommandBase
+    public enum CommandMarkerType { StartActivating, GetPriority }
+    class CommandMarker : CommandBase
     {
+        public readonly CommandMarkerType MyType;
+
+        public CommandMarker(CommandMarkerType type)
+        {
+            MyType = type;
+        }
+
         public override void Do(Game g)
         {
         }
@@ -18,7 +26,7 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandMarkerStartActivating();
+            return new CommandMarker(MyType);
         }
     }
 }

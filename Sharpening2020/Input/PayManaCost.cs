@@ -82,7 +82,7 @@ namespace Sharpening2020.Input
         {
             if(a.ID == -2)
             {
-                MyGame.MyExecutor.UndoUntil(typeof(CommandMarkerStartActivating));
+                MyGame.MyExecutor.UndoUntilMarker(CommandMarkerType.StartActivating);
                 MyGame.EnterAllInputStates();
                 return;
             }
