@@ -140,16 +140,22 @@ namespace DbgUI
         {
             foreach(ListViewItem lvi in CardMap.Keys)
             {
+                String prefix = "";
+                String suffix = "";
                 if(CardMap[lvi] == view.ID)
                 {
                     if (view.IsTapped)
                     {
-                        lvi.Text = "(" + view.Name + ")";
+                        prefix = "(" + prefix;
+                        suffix += ")";
                     }
-                    else
+                    if(view.CardTypes.Contains("Creature") && view.HasSummoningSickness)
                     {
-                        lvi.Text = view.Name;
+                        prefix = "{" + prefix;
+                        suffix += "}";
                     }
+
+                    lvi.Text = prefix + view.Name + suffix;
                     break;
                 }
             }
@@ -222,15 +228,21 @@ namespace DbgUI
             foreach (CardView cv in views)
             {
                 ListViewItem lvi = new ListViewItem();
-                if(cv.IsTapped)
+                String prefix = "";
+                String suffix = "";
+                if (cv.IsTapped)
                 {
-                    lvi.Text = "(" + cv.Name + ")";
+                    prefix = "(" + prefix;
+                    suffix += ")";
                 }
-                else
+                if (cv.CardTypes.Contains("Creature") && cv.HasSummoningSickness)
                 {
-                    lvi.Text = cv.Name;
+                    prefix = "{" + prefix;
+                    suffix += "}";
                 }
-                
+
+                lvi.Text = prefix + cv.Name + suffix;
+
 
                 Zone.Items.Add(lvi);
                 CardMap.Add(lvi, cv.ID);

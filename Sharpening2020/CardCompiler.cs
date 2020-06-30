@@ -30,7 +30,7 @@ namespace Sharpening2020
             parameters.GenerateExecutable = false;
             
 
-            CompilerResults res = provider.CompileAssemblyFromFile(parameters, "Cards" + Path.DirectorySeparatorChar + name + ".cs");
+            CompilerResults res = provider.CompileAssemblyFromFile(parameters, "Cards" + Path.DirectorySeparatorChar + name[0] + Path.DirectorySeparatorChar + name + ".cs");
 
             //AppDomain.CurrentDomain.Load(File.ReadAllBytes(res.PathToAssembly));
 

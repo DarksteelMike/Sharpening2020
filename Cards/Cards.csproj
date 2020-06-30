@@ -41,31 +41,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Cards\Grizzly Bears.cs">
+    <Content Include="Cards\G\Grizzly Bears.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Cards\Memnite.cs">
+    <Content Include="Cards\M\Memnite.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Cards\Swamp.cs">
+    <Content Include="Cards\S\Swamp.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Cards\Mountain.cs">
+    <Content Include="Cards\M\Mountain.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Cards\Forest.cs">
+    <Content Include="Cards\F\Forest.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Cards\Wastes.cs">
+    <Content Include="Cards\W\Wastes.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Cards\Island.cs">
+    <Content Include="Cards\I\Island.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Cards\Plains.cs">
+    <Content Include="Cards\P\Plains.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Cards\Giant Growth.cs">
+    <Content Include="Cards\G\Giant Growth.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cards\L\Llanowar Elves.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +78,26 @@
       <Project>{4b879aca-c5cc-4e45-b9f4-54266b4573a6}</Project>
       <Name>Sharpening2020</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Cards\A\" />
+    <Folder Include="Cards\B\" />
+    <Folder Include="Cards\C\" />
+    <Folder Include="Cards\D\" />
+    <Folder Include="Cards\E\" />
+    <Folder Include="Cards\H\" />
+    <Folder Include="Cards\J\" />
+    <Folder Include="Cards\K\" />
+    <Folder Include="Cards\N\" />
+    <Folder Include="Cards\O\" />
+    <Folder Include="Cards\Q\" />
+    <Folder Include="Cards\R\" />
+    <Folder Include="Cards\T\" />
+    <Folder Include="Cards\U\" />
+    <Folder Include="Cards\V\" />
+    <Folder Include="Cards\X\" />
+    <Folder Include="Cards\Y\" />
+    <Folder Include="Cards\Z\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -19,5 +19,3 @@ TODOS, in no particular order:
 
 Known bugs:
 *CommandClearStaticContinuousEffects does not respect Duration value.
-*Spells being cast are not moved to StackZone.
-*Non-permanent spells are not sent to graveyard.

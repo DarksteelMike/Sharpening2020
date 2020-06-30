@@ -31,6 +31,8 @@ namespace Sharpening2020.Views
 
         public readonly Boolean IsTapped;
 
+        public readonly Boolean HasSummoningSickness;
+
         public readonly CardView AlternateView;
 
         public CardView(Game g, Card crd, Player v, CharacteristicName cn, CardView ForceAltView = null)
@@ -62,6 +64,7 @@ namespace Sharpening2020.Views
             Toughness = chara.Toughness;
             AssignedDamage = crd.AssignedDamage;
             IsTapped = crd.IsTapped;
+            HasSummoningSickness = crd.HasSummoningSickness;
 
             Counters = crd.MyCounters.Select(x => { return (CounterView)x.Value(g).GetView(g, v); }).ToList().AsReadOnly();
 

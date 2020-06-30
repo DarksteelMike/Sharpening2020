@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Sharpening2020.Cards;
 using Sharpening2020.Commands;
 using Sharpening2020.Players;
+using Sharpening2020.Zones;
 
 namespace Sharpening2020.Phases
 {
@@ -26,6 +28,14 @@ namespace Sharpening2020.Phases
                     while (currentPhaseIndex >= AllPhases.Count)
                     {
                         currentPhaseIndex -= AllPhases.Count;
+                    }
+
+                    foreach(LazyGameObject<Card> c in MyGame.ActivePlayer.MyZones[ZoneType.Battlefield].Contents)
+                    {
+                        if(c.Value(MyGame).HasSummoningSickness)
+                        {
+                            MyGame.MyExecutor.Do(new CommandSetSummoningSickness(c.ID, false));
+                        }
                     }
                 }
 

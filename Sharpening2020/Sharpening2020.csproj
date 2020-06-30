@@ -101,6 +101,7 @@
     <Compile Include="Commands\CommandSetIsActivating.cs" />
     <Compile Include="Commands\CommandSetPayActionCostState.cs" />
     <Compile Include="Commands\CommandSetPayManaCostState.cs" />
+    <Compile Include="Commands\CommandSetSummoningSickness.cs" />
     <Compile Include="Commands\CommandSetTargetState.cs" />
     <Compile Include="Commands\CommandSetWaitingForOpponentsState.cs" />
     <Compile Include="Commands\CommandShuffleLibrary.cs" />

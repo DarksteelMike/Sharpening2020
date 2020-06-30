@@ -22,7 +22,15 @@ namespace Sharpening2020.Cards.Costs.ActionCosts
 
         public override bool CanBeDone(Game g)
         {
-            return !Target.Value(g).IsTapped;
+            if(Target.Value(g).HasSummoningSickness && Target.Value(g).CurrentCharacteristics.CardTypes.Contains("Creature"))
+            {
+                return false;
+            }
+            if(Target.Value(g).IsTapped)
+            {
+                return false;
+            }
+            return true;
         }
 
         public override void Pay(Game g)

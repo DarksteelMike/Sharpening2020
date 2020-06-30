@@ -42,6 +42,11 @@ namespace Sharpening2020.Commands
                 dest = controller.MyZones[Destination];
             }
 
+            if(Destination == ZoneType.Battlefield)
+            {
+                g.MyExecutor.Do(new CommandSetSummoningSickness(CardID, true));
+            }
+
             lgo = orig.Contents.First(x => { return x.ID == CardID; });
 
             orig.Contents.Remove(lgo);
