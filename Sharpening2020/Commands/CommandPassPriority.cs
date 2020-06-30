@@ -10,11 +10,13 @@ namespace Sharpening2020.Commands
     {
         public override void Do(Game g)
         {
+            g.PlayersPassedInSuccession++;
             g.PlayerWithPriorityIndex++;
         }
 
         public override void Undo(Game g)
         {
+            g.PlayersPassedInSuccession--;
             g.PlayerWithPriorityIndex--;
         }
 

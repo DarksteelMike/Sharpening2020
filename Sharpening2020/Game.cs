@@ -44,6 +44,10 @@ namespace Sharpening2020
 
         public DebugMode DebugFlag = DebugMode.None;
 
+        public Int32 PlayerCount = 0;
+
+        public Int32 PlayersPassedInSuccession = 0;
+
         public Int32 ActivePlayerIndex
         {
             get
@@ -87,24 +91,17 @@ namespace Sharpening2020
                 MyContinuousEffects.RunContinuousEffects();
 
                 playerWithPriorityIndex = value;
-                Int32 PlayerCount = GetPlayers().Count();
                 while (playerWithPriorityIndex >= PlayerCount)
                 {
                     playerWithPriorityIndex -= PlayerCount;
                 }
 
-                if(playerWithPriorityIndex == activePlayerIndex)
+                if(PlayersPassedInSuccession == PlayerCount)
                 {
+                    PlayersPassedInSuccession = 0;
                     if (SpellStack.Count == 0)
                     {
-                        if (RepeatPriorityLoop)
-                        {
-                            RepeatPriorityLoop = false;
-                        }
-                        else
-                        {
-                            MyExecutor.Do(new CommandAdvancePhase());
-                        }
+                        MyExecutor.Do(new CommandAdvancePhase());
                     }
                     else
                     {
@@ -129,8 +126,6 @@ namespace Sharpening2020
             }
 
         }
-
-        public Boolean RepeatPriorityLoop = false;
 
         public Player PlayerWithPriority
         {
@@ -368,6 +363,8 @@ namespace Sharpening2020
                 InputHandlers.Add(newPlayer.ID, new InputHandler(this, new LazyGameObject<Player>(newPlayer), kvp.Key));
             }
 
+            PlayerCount = GetPlayers().Count();
+
             Int32 i = 0;
 
             foreach (KeyValuePair<InputBridge, List<String>> kvp in test)
@@ -443,7 +440,7 @@ namespace Sharpening2020
 
         public void PlayActivatable(Activatable act, Player Activator, StackInstance si = null)
         {
-            RepeatPriorityLoop = true;
+            PlayersPassedInSuccession = 0;
             act.Activator = Activator;
             if(act is SpecialAction)
             {

@@ -43,19 +43,23 @@ namespace Sharpening2020.Phases
                 if (ShouldDoPhaseEffects)
                 {
                     CurrentPhase.DoPhaseEffects(MyGame);
-
-                    if(!CurrentPhase.ShouldGivePriority)
+                    if (!CurrentPhase.ShouldGivePriority)
                     {
                         MyGame.MyExecutor.Do(new CommandAdvancePhase());
                     }
-                }
-
-                if(!CurrentPhase.ShouldGivePriority)
-                {
-                    currentPhaseIndex++;
+                    
                 }
 
                 MyGame.UpdatePhase();
+
+                if (!CurrentPhase.ShouldGivePriority)
+                {
+                    currentPhaseIndex++;
+                }
+                else
+                {
+                    MyGame.PlayerWithPriorityIndex = MyGame.ActivePlayerIndex;
+                }
             }
         }
 
