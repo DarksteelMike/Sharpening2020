@@ -20,7 +20,7 @@ namespace Sharpening2020
 
         public void Do(CommandBase com)
         {
-            if (MyGame.DebugFlag == DebugMode.Commands)
+            if (MyGame.DebugFlag.Contains(DebugMode.Commands))
                 MyGame.DebugAlert("Doing " + com.ToString());
 
             UndoStack.Push(com);

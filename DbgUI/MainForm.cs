@@ -14,12 +14,12 @@ namespace DbgUI
         public MainForm()
         {
             InitializeComponent();
-
-            foreach (String name in Enum.GetNames(typeof(DebugMode)))
-            {
-                cbDebugMode.Items.Add(name);
-            }
-            cbDebugMode.SelectedIndex = 0;
+            
+            DbgCheckboxes.Add(cbDbgCardViews, DebugMode.CardViews);
+            DbgCheckboxes.Add(cbDbgCommands, DebugMode.Commands);
+            DbgCheckboxes.Add(cbDbgContinuousEffects, DebugMode.ContinuousEffects);
+            DbgCheckboxes.Add(cbDbgInputStates, DebugMode.InputStates);
+            DbgCheckboxes.Add(cbDbgMana, DebugMode.Mana);
         }
 
         MatchForm mf1;
@@ -33,9 +33,18 @@ namespace DbgUI
 
         StreamWriter swLog = null;
 
+        Dictionary<CheckBox, DebugMode> DbgCheckboxes = new Dictionary<CheckBox,DebugMode>();
+
         private void bNew_Click(object sender, EventArgs e)
         {
-            if(cbDebugMode.SelectedIndex != 0)
+            List<DebugMode> dbgModes = new List<DebugMode>();
+            foreach(CheckBox cb in DbgCheckboxes.Keys)
+            {
+                if (cb.Checked)
+                    dbgModes.Add(DbgCheckboxes[cb]);
+            }
+
+            if(dbgModes.Count > 0)
                 swLog = File.CreateText(DateTime.Now.Minute.ToString() + "-" + DateTime.Now.Second.ToString() + ".log");
             mf1 = new MatchForm(swLog,0);
             mf2 = new MatchForm(null,1);
@@ -48,7 +57,7 @@ namespace DbgUI
             bridge2 = new UIBridge(mf2);
 
             model = Game.Construct();
-            model.DebugFlag = (DebugMode)Enum.Parse(typeof(DebugMode), cbDebugMode.SelectedItem.ToString());
+            model.DebugFlag = dbgModes;
 
             ThreadStart ts = new ThreadStart(SetupGame);
             GameThread = new Thread(ts);

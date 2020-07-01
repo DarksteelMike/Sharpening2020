@@ -19,7 +19,7 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            if(g.DebugFlag == DebugMode.InputStates)
+            if(g.DebugFlag.Contains(DebugMode.InputStates))
             {
                 g.DebugAlert("RemoveTopInputStates(" + PlayerID + "," + Amount + ")\n");
                 g.DebugAlert("InputList Count: " + g.InputHandlers[PlayerID].GetInputList().Count.ToString() + "\n");
