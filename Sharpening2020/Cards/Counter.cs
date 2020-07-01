@@ -24,5 +24,10 @@ namespace Sharpening2020.Cards
         {
             return new CounterView(this);
         }
+
+        public override string ToString(Game g)
+        {
+            return MyType.ToString();
+        }
     }
 }

@@ -6,18 +6,18 @@ namespace Sharpening2020.Commands
 {
     class CommandSetCardState : CommandBase
     {
-        public readonly Int32 CardID;
+        public readonly LazyGameObject<Card> Card;
         public readonly CharacteristicName NewState;
 
         public CommandSetCardState(Int32 cid, CharacteristicName st)
         {
-            CardID = cid;
+            Card = new LazyGameObject<Card>(cid);
             NewState = st;
         }
 
         public override void Do(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
+            Card c = Card.Value(g);
 
             oldState = c.CurrentCharacteristicName;
             c.CurrentCharacteristicName = NewState;
@@ -27,13 +27,13 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
+            Card c = Card.Value(g);
             c.CurrentCharacteristicName = oldState;
         }
 
         public override object Clone()
         {
-            return new CommandSetCardState(CardID, NewState);
+            return new CommandSetCardState(Card.ID, NewState);
         }
     }
 }

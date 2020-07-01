@@ -12,20 +12,20 @@ namespace Sharpening2020.Commands
     public class CommandMoveCard : CommandBase
     {
         public readonly ZoneType Destination;
-        public readonly Int32 CardID;
+        public readonly LazyGameObject<Card> CardID;
 
         public CommandMoveCard(Int32 cid, ZoneType dest)
         {
-            CardID = cid;
+            CardID = new LazyGameObject<Card>(cid);
             Destination = dest;
         }
 
         public override void Do(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
+            Card c = CardID.Value(g);
 
-            owner = c.Owner.Value(g);
-            controller = c.Controller.Value(g);
+            Player owner = c.Owner.Value(g);
+            Player controller = c.Controller.Value(g);
 
             orig = g.GetZoneOf(CardID);
 
@@ -33,7 +33,7 @@ namespace Sharpening2020.Commands
             {
                 dest = g.StackZone;
             }
-            else if(Destination != ZoneType.Battlefield && Destination != ZoneType.Exile)
+            else if(Destination != ZoneType.Battlefield)
             {
                 dest = owner.MyZones[Destination];
             }
@@ -44,33 +44,29 @@ namespace Sharpening2020.Commands
 
             if(Destination == ZoneType.Battlefield)
             {
-                g.MyExecutor.Do(new CommandSetSummoningSickness(CardID, true));
+                g.MyExecutor.Do(new CommandSetSummoningSickness(CardID.ID, true));
             }
 
-            lgo = orig.Contents.First(x => { return x.ID == CardID; });
-
-            orig.Contents.Remove(lgo);
-            dest.Contents.Add(lgo);
+            orig.Contents.Remove(CardID);
+            dest.Contents.Add(CardID);
         }
-
-        private Player owner, controller;
+        
         private Zone orig, dest;
-        private LazyGameObject<Card> lgo;
 
         public override void Undo(Game g)
         {
-            dest.Contents.Remove(lgo);
-            orig.Contents.Add(lgo);
+            dest.Contents.Remove(CardID);
+            orig.Contents.Add(CardID);
         }
 
         public override object Clone()
         {
-            return new CommandMoveCard(CardID, Destination);
+            return new CommandMoveCard(CardID.ID, Destination);
         }
 
         public override void UpdateViews(Game g)
         {
-            Int32 OwnerID = ((Card)g.GetGameObjectByID(CardID)).Owner.ID;
+            Int32 OwnerID = CardID.Value(g).Owner.ID;
             foreach (InputHandler ih in g.InputHandlers.Values)
             {
                 ih.Bridge.UpdateZoneView(orig.MyType, OwnerID, orig.Contents.Select(x => { return (CardView)x.Value(g).GetView(g, ih.AssociatedPlayer.Value(g)); }).ToList());

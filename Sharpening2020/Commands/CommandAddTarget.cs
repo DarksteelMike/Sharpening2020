@@ -8,23 +8,23 @@ namespace Sharpening2020.Commands
 {
     class CommandAddTarget : CommandBase
     {
-        public readonly Int32 CardID;
+        public readonly LazyGameObject<Card> Card;
         public readonly Int32 ActivatableIndex;
-        public readonly Int32 TargetID;
+        public readonly LazyGameObject<GameObject> Target;
 
         public CommandAddTarget(Int32 tid, Int32 aind, Int32 oid)
         {
-            CardID = tid;
+            Card = new LazyGameObject<Card>(tid);
             ActivatableIndex = aind;
-            TargetID = oid;
+            Target = new LazyGameObject<GameObject>(oid);
         }
 
         public override void Do(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
+            Card c = Card.Value(g);
             Activatable act = c.CurrentCharacteristics.Activatables[ActivatableIndex];
 
-            go = g.GetGameObjectByID(TargetID);
+            go = Target.Value(g);
 
             act.MyTargeting.Targeted.Add(go);
         }
@@ -33,7 +33,7 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
+            Card c = Card.Value(g);
             Activatable act = c.CurrentCharacteristics.Activatables[ActivatableIndex];
 
             act.MyTargeting.Targeted.RemoveAt(act.MyTargeting.Targeted.Count - 1);
@@ -41,7 +41,7 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandAddTarget(CardID, ActivatableIndex, TargetID);
+            return new CommandAddTarget(Card.ID, ActivatableIndex, Target.ID);
         }
     }
 }

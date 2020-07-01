@@ -10,44 +10,47 @@ namespace Sharpening2020.Commands
 {
     class CommandRemoveCounter : CommandBase
     {
-        public readonly Int32 SourceID;
+        public readonly LazyGameObject<GameObject> Source;
         public readonly CounterType Type;
 
         public CommandRemoveCounter(Int32 sid, CounterType ct)
         {
-            SourceID = sid;
+            Source = new LazyGameObject<GameObject>(sid);
             Type = ct;
         }
 
         public override void Do(Game g)
         {
-            ICanHaveCounters ichc = (ICanHaveCounters)g.GetGameObjectByID(SourceID);
-            removedCounter = ichc.GetAllCounters(g).Where(x => { return x.MyType == Type; }).FirstOrDefault(); //Default is null for reference types
-            if(removedCounter != null)
+            ICanHaveCounters ichc = (ICanHaveCounters)Source.Value(g);
+            Counter cnt = ichc.GetAllCounters(g).Where(x => { return x.MyType == Type; }).FirstOrDefault(); //Default is null for reference types
+            if(cnt != null)
             {
-                ichc.RemoveCounter(removedCounter);
+                removedCounter = new LazyGameObject<Counter>(cnt);
+                ichc.RemoveCounter(cnt);
+                g.GameObjects.Remove(cnt);
             }
         }
 
-        private Counter removedCounter;
+        private LazyGameObject<Counter> removedCounter;
 
         public override void Undo(Game g)
         {
             if (removedCounter == null)
                 return;
 
-            ICanHaveCounters ichc = (ICanHaveCounters)g.GetGameObjectByID(SourceID);
-            ichc.AddCounter(removedCounter);
+            ICanHaveCounters ichc = (ICanHaveCounters)Source.Value(g);
+            ichc.AddCounter(removedCounter.Value(g));
+            g.GameObjects.Add(removedCounter.Value(g));
         }
 
         public override object Clone()
         {
-            return new CommandRemoveCounter(SourceID, Type);
+            return new CommandRemoveCounter(Source.ID, Type);
         }
 
         public override void UpdateViews(Game g)
         {
-            GameObject go = g.GetGameObjectByID(SourceID);
+            GameObject go = g.GetGameObjectByID(Source.ID);
             foreach (InputHandler ih in g.InputHandlers.Values)
             {
                 if(go is Card)

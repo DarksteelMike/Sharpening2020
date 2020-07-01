@@ -77,5 +77,10 @@ namespace Sharpening2020.Players
         {
             return new PlayerView(g, this);
         }
+
+        public override string ToString(Game g)
+        {
+            return "Player(" + ID.ToString() + ")";
+        }
     }
 }

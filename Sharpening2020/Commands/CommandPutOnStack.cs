@@ -8,37 +8,37 @@ namespace Sharpening2020.Commands
 {
     class CommandPutOnStack : CommandBase
     {
-        public readonly Int32 CardID;
+        public readonly LazyGameObject<Card> CardID;
         public readonly Int32 ActivatableIndex;
 
         public CommandPutOnStack(Int32 cid, Int32 aind)
         {
-            CardID = cid;
+            CardID = new LazyGameObject<Card>(cid);
             ActivatableIndex = aind;
         }
 
         public override void Do(Game g)
         {
-            Card host = (Card)g.GetGameObjectByID(CardID);
-            Activatable act = host.CurrentCharacteristics.Activatables[ActivatableIndex];
+            Activatable act = CardID.Value(g).CurrentCharacteristics.Activatables[ActivatableIndex];
 
-            si = new StackInstance(act);
+            StackInstance si = new StackInstance(act);
             g.RegisterGameObject(si);
-            
+            siID = si.ID;
+
             g.SpellStack.Push(new LazyGameObject<StackInstance>(si));
         }
 
-        private StackInstance si;
+        private Int32 siID;
 
         public override void Undo(Game g)
         {
             g.SpellStack.Pop();
-            g.GameObjects.Remove(si);
+            g.GameObjects.RemoveAll(x => { return x.ID == siID; });
         }
 
         public override object Clone()
         {
-            return new CommandPutOnStack(CardID, ActivatableIndex);
+            return new CommandPutOnStack(CardID.ID, ActivatableIndex);
         }
 
         public override void UpdateViews(Game g)

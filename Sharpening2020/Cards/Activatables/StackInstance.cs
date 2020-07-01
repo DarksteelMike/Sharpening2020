@@ -35,6 +35,7 @@ namespace Sharpening2020.Cards.Activatables
         {
             this.MyActivatable = other.MyActivatable;
             this.ManaPaid = other.ManaPaid;
+            this.Targets = other.Targets;
         }
 
         public void Resolve(Game g)
@@ -45,6 +46,24 @@ namespace Sharpening2020.Cards.Activatables
         public override object Clone()
         {
             return new StackInstance(this);
+        }
+
+        public override string ToString(Game g)
+        {
+            string res = MyActivatable.ToString(g) + "{Targets: ";
+            foreach(GameObject go in Targets)
+            {
+                res += go.ToString(g) + ",";
+            }
+
+            res = res.Substring(0, res.Length - 1) + "}{ManaPaid: ";
+            foreach (GameObject go in Targets)
+            {
+                res += go.ToString(g) + ",";
+            }
+            res = res.Substring(0, res.Length - 1) + "}";
+
+            return res;
         }
 
         public override ViewObject GetView(Game g, Player viewer)

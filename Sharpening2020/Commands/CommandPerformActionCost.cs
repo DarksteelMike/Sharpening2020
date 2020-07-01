@@ -9,20 +9,20 @@ namespace Sharpening2020.Commands
 {
     class CommandPerformActionCost : CommandBase
     {
-        public readonly Int32 CardID;
+        public readonly LazyGameObject<Card> CardID;
         public readonly Int32 ActivatableIndex;
         public readonly Int32 CostPartIndex;
 
         public CommandPerformActionCost(Int32 cid, Int32 aind, Int32 cpind)
         {
-            CardID = cid;
+            CardID = new LazyGameObject<Card>(cid);
             ActivatableIndex = aind;
             CostPartIndex = cpind;
         }
 
         public override void Do(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
+            Card c = CardID.Value(g);
             Activatable act = c.CurrentCharacteristics.Activatables[ActivatableIndex];
             ActionCostPart acp = act.MyCost.ActionParts[CostPartIndex];
             act.MyCost.PaidActions.Add(acp);
@@ -32,7 +32,7 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
+            Card c = CardID.Value(g);
             Activatable act = c.CurrentCharacteristics.Activatables[ActivatableIndex];
             ActionCostPart acp = act.MyCost.ActionParts[CostPartIndex];
             act.MyCost.PaidActions.Remove(acp);
@@ -41,7 +41,7 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandPerformActionCost(CardID, ActivatableIndex, CostPartIndex);
+            return new CommandPerformActionCost(CardID.ID, ActivatableIndex, CostPartIndex);
         }
     }
 }

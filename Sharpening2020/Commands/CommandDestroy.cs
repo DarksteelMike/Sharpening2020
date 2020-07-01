@@ -11,46 +11,43 @@ namespace Sharpening2020.Commands
 {
     class CommandDestroy : CommandBase
     {
-        public readonly Int32 CardID;
+        public readonly LazyGameObject<Card> CardID;
 
         public CommandDestroy(Int32 cid)
         {
-            CardID = cid;
+            CardID = new LazyGameObject<Card>(cid);
         }
 
         public override void Do(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
+            Card c = CardID.Value(g);
 
             Player owner = c.Owner.Value(g);
 
-            orig = g.GetZoneOf(CardID);
-            dest = owner.MyZones[ZoneType.Graveyard];
+            Zone orig = g.GetZoneOf(CardID);
+            Zone dest = owner.MyZones[ZoneType.Graveyard];
 
-            lgo = orig.Contents.First(x => { return x.ID == CardID; });
-
-            orig.Contents.Remove(lgo);
-            dest.Contents.Add(lgo);
+            orig.Contents.Remove(CardID);
+            dest.Contents.Add(CardID);
         }
-
-        private LazyGameObject<Card> lgo;
-        private Zone orig;
-        private Zone dest;
 
         public override void Undo(Game g)
         {
-            dest.Contents.Remove(lgo);
-            orig.Contents.Add(lgo);
+            Zone orig = g.GetZoneOf(CardID);
+            Zone dest = CardID.Value(g).Owner.Value(g).MyZones[ZoneType.Graveyard];
+
+            dest.Contents.Remove(CardID);
+            orig.Contents.Add(CardID);
         }
 
         public override object Clone()
         {
-            return new CommandDestroy(CardID);
+            return new CommandDestroy(CardID.ID);
         }
 
         public override void UpdateViews(Game g)
         {
-            Int32 OwnerID = ((Card)g.GetGameObjectByID(CardID)).Owner.ID;
+            Int32 OwnerID = CardID.Value(g).Owner.ID;
             foreach (InputHandler ih in g.InputHandlers.Values)
             {
                 ih.Bridge.UpdateZoneView(ZoneType.Battlefield, OwnerID, g.GetCards(ZoneType.Battlefield).Select(x => { return (CardView)x.GetView(g, ih.AssociatedPlayer.Value(g)); }).ToList());

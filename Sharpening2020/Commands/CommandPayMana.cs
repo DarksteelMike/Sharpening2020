@@ -10,36 +10,36 @@ namespace Sharpening2020.Commands
 {
     class CommandPayMana : CommandBase
     {
-        public readonly Int32 PayerID;
-        public readonly Int32 ManaPointID;
+        public readonly LazyGameObject<Player> Payer;
+        public readonly LazyGameObject<ManaPoint> ManaPoint;
         public readonly Int32 CostIndex;
 
         public CommandPayMana(Int32 pid, Int32 mpid, Int32 ci)
         {
-            PayerID = pid;
-            ManaPointID = mpid;
+            Payer = new LazyGameObject<Player>(pid);
+            ManaPoint = new LazyGameObject<ManaPoint>(mpid);
             CostIndex = ci;
         }
 
         public override void Do(Game g)
         {
-            p = (Player)g.GetGameObjectByID(PayerID);
-            InputHandler IH = g.InputHandlers[PayerID];
+            Player p = Payer.Value(g);
+            InputHandler IH = g.InputHandlers[Payer.ID];
             PayManaCost pmc = (PayManaCost)IH.CurrentInputState;
-            mp = (ManaPoint)g.GetGameObjectByID(ManaPointID);
+            mp = ManaPoint.Value(g);
 
             pmc.MyActivatable.MyCost.ManaParts[CostIndex].Pay(mp, g);
             pmc.MyActivatable.MyCost.PaidMana.Add(pmc.MyActivatable.MyCost.ManaParts[CostIndex]);
-            p.ManaPool.RemoveAll(x => { return x.ID == ManaPointID; });
+            p.ManaPool.Remove(ManaPoint);
             g.GameObjects.Remove(mp);
         }
-
-        private Player p;
+        
         private ManaPoint mp;
 
         public override void Undo(Game g)
         {
-            InputHandler IH = g.InputHandlers[PayerID];
+            Player p = Payer.Value(g);
+            InputHandler IH = g.InputHandlers[Payer.ID];
             PayManaCost pmc = (PayManaCost)IH.CurrentInputState;
 
             pmc.MyActivatable.MyCost.PaidMana.Remove(pmc.MyActivatable.MyCost.ManaParts[CostIndex]);
@@ -49,14 +49,14 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandPayMana(PayerID, ManaPointID, CostIndex);
+            return new CommandPayMana(Payer.ID, ManaPoint.ID, CostIndex);
         }
 
         public override void UpdateViews(Game g)
         {
             foreach(InputHandler ih in g.InputHandlers.Values)
             {
-                ih.Bridge.UpdatePlayerView((PlayerView)((Player)g.GetGameObjectByID(this.PayerID)).GetView(g, ih.AssociatedPlayer.Value(g)));
+                ih.Bridge.UpdatePlayerView((PlayerView)((Player)g.GetGameObjectByID(Payer.ID)).GetView(g, ih.AssociatedPlayer.Value(g)));
             }
         }
     }

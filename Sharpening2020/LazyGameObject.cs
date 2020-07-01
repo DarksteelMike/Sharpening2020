@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sharpening2020
 {
-    public class LazyGameObject<T> where T : GameObject, ICloneable
+    public class LazyGameObject<T> : IEquatable<LazyGameObject<T>> where T : GameObject, ICloneable
     {
         public readonly Int32 ID;
         public LazyGameObject(T go)
@@ -26,6 +26,11 @@ namespace Sharpening2020
         public object Clone()
         {
             return new LazyGameObject<T>(ID);
+        }
+
+        public Boolean Equals(LazyGameObject<T> other)
+        {
+            return ID.Equals(other.ID);
         }
     }
 }

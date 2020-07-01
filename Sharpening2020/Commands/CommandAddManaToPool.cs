@@ -9,18 +9,18 @@ namespace Sharpening2020.Commands
 {
     class CommandAddManaToPool : CommandBase
     {
-        public readonly Int32 PlayerID;
+        public readonly LazyGameObject<Player> Player;
         public readonly ManaColor Color;
 
         public CommandAddManaToPool(Int32 pid, ManaColor mc)
         {
-            PlayerID = pid;
+            Player = new LazyGameObject<Player>(pid);
             Color = mc;
         }
 
         public override void Do(Game g)
         {
-            Player p = (Player)g.GetGameObjectByID(PlayerID);
+            Player p = Player.Value(g);
             point = new ManaPoint();
             point.MyColor = Color;
 
@@ -33,7 +33,7 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            Player p = (Player)g.GetGameObjectByID(PlayerID);
+            Player p = Player.Value(g);
             p.ManaPool.RemoveAll(x => { return x.ID == point.ID; });
             g.GameObjects.Remove(point);
             g.NextGameObjectID--;
@@ -41,14 +41,14 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandAddManaToPool(PlayerID, Color);
+            return new CommandAddManaToPool(Player.ID, Color);
         }
 
         public override void UpdateViews(Game g)
         {
             foreach (InputHandler ih in g.InputHandlers.Values)
             {
-                ih.Bridge.UpdatePlayerView((PlayerView)((Player)g.GetGameObjectByID(this.PlayerID)).GetView(g, ih.AssociatedPlayer.Value(g)));
+                ih.Bridge.UpdatePlayerView((PlayerView)Player.Value(g).GetView(g, ih.AssociatedPlayer.Value(g)));
             }
         }
     }

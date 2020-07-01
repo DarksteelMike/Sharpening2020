@@ -8,16 +8,16 @@ namespace Sharpening2020.Commands
 {
     public class CommandTap : CommandBase
     {
-        public readonly Int32 CardID;
+        public readonly LazyGameObject<Card> Card;
 
         public CommandTap(Int32 tgtID)
         {
-            CardID = tgtID;
+            Card = new LazyGameObject<Card>(tgtID);
         }
 
         public override void Do(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
+            Card c = Card.Value(g);
 
             prevTapState = c.IsTapped;
 
@@ -28,19 +28,19 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
+            Card c = Card.Value(g);
 
             c.IsTapped = prevTapState;
         }
 
         public override object Clone()
         {
-            return new CommandTap(CardID);
+            return new CommandTap(Card.ID);
         }
 
         public override void UpdateViews(Game g)
         {
-            Card c = (Card)g.GetGameObjectByID(CardID);
+            Card c = Card.Value(g);
             foreach (InputHandler ih in g.InputHandlers.Values)
             {
                 ih.Bridge.UpdateCardView((CardView)c.GetView(g, ih.AssociatedPlayer.Value(g)));

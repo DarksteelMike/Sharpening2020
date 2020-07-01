@@ -11,18 +11,18 @@ namespace Sharpening2020.Commands
 {
     class CommandClearManaPool : CommandBase
     {
-        public readonly Int32 PlayerID;
+        public readonly LazyGameObject<Player> PlayerID;
 
         public CommandClearManaPool(Int32 pid)
         {
-            PlayerID = pid;
+            PlayerID = new LazyGameObject<Player>(pid);
         }
 
         public override void Do(Game g)
         {
             prevPool = new List<LazyGameObject<ManaPoint>>();
 
-            Player p = (Player)g.GetGameObjectByID(PlayerID);
+            Player p = PlayerID.Value(g);
 
             prevPool.AddRange(p.ManaPool);
 
@@ -33,13 +33,13 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            Player p = (Player)g.GetGameObjectByID(PlayerID);
+            Player p = PlayerID.Value(g);
             p.ManaPool.AddRange(prevPool);
         }
 
         public override object Clone()
         {
-            return new CommandClearManaPool(PlayerID);
+            return new CommandClearManaPool(PlayerID.ID);
         }
     }
 }

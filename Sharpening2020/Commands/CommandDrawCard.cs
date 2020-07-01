@@ -8,16 +8,16 @@ namespace Sharpening2020.Commands
 {
     class CommandDrawCard : CommandBase
     {
-        public readonly Int32 PlayerID;
+        public readonly LazyGameObject<Player> Player;
 
         public CommandDrawCard(Int32 pid)
         {
-            PlayerID = pid;
+            Player = new LazyGameObject<Player>(pid);
         }
 
         public override void Do(Game g)
         {
-            Player p = (Player)g.GetGameObjectByID(PlayerID);
+            Player p = Player.Value(g);
 
             if (p.MyZones[ZoneType.Library].Contents.Count == 0)
                 return; //TEMPORARY
@@ -36,7 +36,7 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandDrawCard(PlayerID);
+            return new CommandDrawCard(Player.ID);
         }
     }
 }

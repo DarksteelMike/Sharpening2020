@@ -5,16 +5,16 @@ namespace Sharpening2020.Commands
 {
     class CommandResetCardsDrawn : CommandBase
     {
-        public readonly Int32 PlayerID;
+        public readonly LazyGameObject<Player> Player;
 
         public CommandResetCardsDrawn(Int32 pid)
         {
-            PlayerID = pid;
+            Player = new LazyGameObject<Player>(pid);
         }
 
         public override void Do(Game g)
         {
-            Player p = (Player)g.GetGameObjectByID(PlayerID);
+            Player p = Player.Value(g);
             prevDrawnNum = p.CardsDrawnThisTurn;
             p.CardsDrawnThisTurn = 0;
         }
@@ -23,13 +23,13 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            Player p = (Player)g.GetGameObjectByID(PlayerID);
+            Player p = Player.Value(g);
             p.CardsDrawnThisTurn = prevDrawnNum;
         }
 
         public override object Clone()
         {
-            return new CommandResetCardsDrawn(PlayerID);
+            return new CommandResetCardsDrawn(Player.ID);
         }
     }
 }

@@ -6,29 +6,25 @@ namespace Sharpening2020.Commands
 {
     class CommandIncrementLandsPlayed : CommandBase
     {
-        public readonly Int32 PlayerID;
+        public readonly LazyGameObject<Player> Player;
         public CommandIncrementLandsPlayed(Int32 pid)
         {
-            PlayerID = pid;
+            Player = new LazyGameObject<Player>(pid);
         }
 
         public override void Do(Game g)
         {
-            Player p = (Player)g.GetGameObjectByID(PlayerID);
-
-            p.LandsPlayedThisTurn++;
+            Player.Value(g).LandsPlayedThisTurn++;
         }
 
         public override void Undo(Game g)
         {
-            Player p = (Player)g.GetGameObjectByID(PlayerID);
-
-            p.LandsPlayedThisTurn--;
+            Player.Value(g).LandsPlayedThisTurn--;
         }
 
         public override object Clone()
         {
-            return new CommandIncrementLandsPlayed(PlayerID);
+            return new CommandIncrementLandsPlayed(Player.ID);
         }
     }
 }

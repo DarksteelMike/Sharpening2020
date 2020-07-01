@@ -10,18 +10,18 @@ namespace Sharpening2020.Commands
 {
     class CommandAddCounter : CommandBase
     {
-        public readonly Int32 TargetID;
+        public readonly LazyGameObject<GameObject> Target;
         public readonly CounterType Type;
 
         public CommandAddCounter(Int32 tid, CounterType ct)
         {
-            TargetID = tid;
+            Target = new LazyGameObject<GameObject>(tid);
             Type = ct;
         }
 
         public override void Do(Game g)
         {
-            ICanHaveCounters ichc = (ICanHaveCounters)g.GetGameObjectByID(TargetID);
+            ICanHaveCounters ichc = (ICanHaveCounters)Target.Value(g);
 
             addedCounter = new Counter(Type);
 
@@ -34,19 +34,19 @@ namespace Sharpening2020.Commands
 
         public override void Undo(Game g)
         {
-            ICanHaveCounters ichc = (ICanHaveCounters)g.GetGameObjectByID(TargetID);
+            ICanHaveCounters ichc = (ICanHaveCounters)Target.Value(g);
             ichc.RemoveCounter(addedCounter);
             g.GameObjects.Remove(addedCounter);
         }
 
         public override object Clone()
         {
-            return new CommandAddCounter(TargetID, Type);
+            return new CommandAddCounter(Target.ID, Type);
         }
 
         public override void UpdateViews(Game g)
         {
-            GameObject go = g.GetGameObjectByID(TargetID);
+            GameObject go = Target.Value(g);
             foreach (InputHandler ih in g.InputHandlers.Values)
             {
                 if (go is Card)

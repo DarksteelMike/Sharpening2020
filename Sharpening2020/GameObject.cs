@@ -23,6 +23,8 @@ namespace Sharpening2020
             return this.ID == other.ID;
         }
 
+        public abstract String ToString(Game g);
+
         public abstract ViewObject GetView(Game g, Player viewer);
 
         public abstract object Clone();

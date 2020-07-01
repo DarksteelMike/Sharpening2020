@@ -115,5 +115,10 @@ namespace Sharpening2020.Cards
 
             return ret;
         }
+
+        public override string ToString(Game g)
+        {
+            return CurrentCharacteristics.Name + "(" + ID + ")";
+        }
     }
 }
