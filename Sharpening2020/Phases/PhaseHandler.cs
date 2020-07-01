@@ -60,6 +60,11 @@ namespace Sharpening2020.Phases
                     
                 }
 
+                if(MyGame.DebugFlag.Contains(DebugMode.Phases))
+                {
+                    MyGame.DebugAlert("Entering phase " + CurrentPhase.MyType.ToString());
+                }
+
                 MyGame.UpdatePhase();
 
                 if (!CurrentPhase.ShouldGivePriority)

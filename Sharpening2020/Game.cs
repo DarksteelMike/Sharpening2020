@@ -15,7 +15,7 @@ using Sharpening2020.Zones;
 
 namespace Sharpening2020
 {
-    public enum DebugMode { CardViews, Commands, ContinuousEffects, InputStates, Mana  }
+    public enum DebugMode { CardViews, Commands, ContinuousEffects, InputStates, Mana, Phases  }
     public class Game : ICloneable
     {
         public Game() { }
@@ -255,6 +255,7 @@ namespace Sharpening2020
 
         public void RunStateBasedActions()
         {
+            return;
             IEnumerable<Card> crds;
             //704.5a.If a player has 0 or less life, that player loses the game.
             //704.5b.If a player attempted to draw a card from a library with no cards in it since the last time state-based actions were checked, that player loses the game.
@@ -268,7 +269,7 @@ namespace Sharpening2020
 
             //704.5e.If a copy of a spell is in a zone other than the stack, it ceases to exist.If a copy of a card is in any zone other than the stack or the battlefield, it ceases to exist.
             //704.5f.If a creature has toughness 0 or less, it's put into its owner's graveyard. Regeneration can't replace this event.
-            crds = GetCards(ZoneType.Battlefield).Where(x => { return x.CurrentCharacteristics.CardTypes.Contains("Creature") && x.CurrentCharacteristics.Toughness == 0; });
+            crds = GetCards(ZoneType.Battlefield).Where(x => { return x.CurrentCharacteristics.CardTypes.Contains("Creature") && x.CurrentCharacteristics.Toughness <= 0; });
             foreach(Card c in crds)
             {
                 MyExecutor.Do(new CommandMoveCard(c.ID, ZoneType.Graveyard));

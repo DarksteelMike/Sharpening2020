@@ -20,6 +20,7 @@ namespace DbgUI
             DbgCheckboxes.Add(cbDbgContinuousEffects, DebugMode.ContinuousEffects);
             DbgCheckboxes.Add(cbDbgInputStates, DebugMode.InputStates);
             DbgCheckboxes.Add(cbDbgMana, DebugMode.Mana);
+            DbgCheckboxes.Add(cbDbgPhases, DebugMode.Phases);
         }
 
         MatchForm mf1;
@@ -45,7 +46,12 @@ namespace DbgUI
             }
 
             if(dbgModes.Count > 0)
-                swLog = File.CreateText(DateTime.Now.Minute.ToString() + "-" + DateTime.Now.Second.ToString() + ".log");
+            {
+                if (File.Exists("Debug.log"))
+                    File.Delete("Debug.log");
+                swLog = File.CreateText("Debug.log");
+            }
+
             mf1 = new MatchForm(swLog,0);
             mf2 = new MatchForm(null,1);
             mf1.Text = "Player 1";

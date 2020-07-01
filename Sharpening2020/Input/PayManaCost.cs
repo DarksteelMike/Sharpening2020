@@ -63,11 +63,11 @@ namespace Sharpening2020.Input
             foreach(LazyGameObject<ManaPoint> lmp in MyPlayer.Value(MyGame).ManaPool)
             {
                 ManaPoint mp = lmp.Value(MyGame);
-                foreach(ManaCostPart mcp in MyActivatable.MyCost.ManaParts)
+                foreach(ManaCostPart mcp in MyActivatable.MyCost.ManaParts.Where(x => { return !MyActivatable.MyCost.PaidMana.Contains(x); }))
                 {
                     if(mp.MyColor == mcp.Color || mcp.Color == ManaColor.Colorless)
                     {
-                        GameAction ga = new GameAction(i++, mp.ID, "Pay " + mp.MyColor + "mana for " + mcp.ToString());
+                        GameAction ga = new GameAction(i++, mp.ID, "Pay " + mp.MyColor + " mana for " + mcp.ToString());
                         res.Add(ga);
 
                         ActionCommandPairs.Add(ga.ID, new CommandPayMana(MyPlayer.ID,mp.ID, MyActivatable.MyCost.ManaParts.IndexOf(mcp)));

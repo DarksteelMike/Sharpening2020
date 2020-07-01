@@ -78,6 +78,7 @@ namespace Sharpening2020.Cards.ContinuousEffects
             foreach (ContinuousEffect ce in executedEffects)
             {
                 ce.Undo(MyGame);
+                ce.UpdateViews(MyGame);
             }
             executedEffects.Clear();
 

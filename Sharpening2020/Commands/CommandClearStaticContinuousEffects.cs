@@ -13,13 +13,6 @@ namespace Sharpening2020.Commands
 
             prev.AddRange(g.MyContinuousEffects.StaticEffects);
 
-            foreach(ContinuousEffect ce in prev)
-            {
-                ce.Undo(g);
-
-                ce.UpdateViews(g);
-            }
-
             g.MyContinuousEffects.StaticEffects.Clear();
         }
 
