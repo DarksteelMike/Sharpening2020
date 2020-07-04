@@ -33,6 +33,8 @@ namespace Sharpening2020.Input
                 CurrentInputState.MyGame = MyGame;
                 CurrentInputState.MyBridge = Bridge;
                 CurrentInputState.MyPlayer = AssociatedPlayer;
+
+                MyGame.DebugAlert(DebugMode.InputStates, "Player " + AssociatedPlayer.ID + ": Added state \"" + value.ToString() + "\"");
             }
         }
 

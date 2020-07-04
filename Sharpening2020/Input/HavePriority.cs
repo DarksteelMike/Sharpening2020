@@ -58,14 +58,6 @@ namespace Sharpening2020.Input
                 ret.Add(a);
             }
 
-            MyGame.DebugAlert(DebugMode.InputStates, "HavePriority, will travel");
-            String msg = "";
-            foreach (GameAction ga in ret)
-            {
-                msg += "" + ga.Description + "\n==========";
-            }
-            MyGame.DebugAlert(DebugMode.InputStates, msg);
-
             return ret;
         }
 
@@ -84,6 +76,11 @@ namespace Sharpening2020.Input
             }
 
             return ret;
+        }
+
+        public override string ToString()
+        {
+            return "HavePriority";
         }
     }
 }

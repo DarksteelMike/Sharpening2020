@@ -93,7 +93,12 @@ namespace Sharpening2020.Input
 
         public override object Clone()
         {
-            throw new NotImplementedException();
+            return new SetTargets(MyActivatable, ActType);
+        }
+
+        public override string ToString()
+        {
+            return "SetTarget for " + MyActivatable.ToString();
         }
     }
 }

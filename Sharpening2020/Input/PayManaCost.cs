@@ -94,7 +94,7 @@ namespace Sharpening2020.Input
             {
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame), Mode);
                 MyGame.MyExecutor.Do(new CommandGroup(
-                    new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false, Mode), 
+                    new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false, Mode),
                     new CommandRemoveTopInputStates(MyPlayer.ID, 3),
                     new CommandEnterInputState()));                
             }
@@ -107,6 +107,11 @@ namespace Sharpening2020.Input
         public override object Clone()
         {
             return new PayManaCost(MyActivatable, Mode);
+        }
+
+        public override string ToString()
+        {
+            return "PayManaCost for " + MyActivatable.ToString();
         }
     }
 }

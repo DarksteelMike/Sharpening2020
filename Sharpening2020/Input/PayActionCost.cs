@@ -104,5 +104,10 @@ namespace Sharpening2020.Input
 
             return pac;
         }
+
+        public override string ToString()
+        {
+            return "PayActionCost for " + MyActivatable.ToString();
+        }
     }
 }

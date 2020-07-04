@@ -23,6 +23,8 @@ namespace Sharpening2020.Input
 
         public abstract object Clone();
 
+        public abstract override String ToString();
+
         public virtual void Enter() { }
 
         public virtual void Leave() { }

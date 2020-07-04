@@ -28,5 +28,10 @@ namespace Sharpening2020.Input
         {
             return new WaitingForOpponent();
         }
+
+        public override string ToString()
+        {
+            return "WaitingForOpponent";
+        }
     }
 }
