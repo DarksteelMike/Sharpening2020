@@ -20,14 +20,15 @@ namespace Sharpening2020
 
         public void Do(CommandBase com)
         {
-            if (MyGame.DebugFlag.Contains(DebugMode.Commands))
-                MyGame.DebugAlert("Doing " + com.ToString(MyGame));
+            MyGame.DebugAlert(DebugMode.Commands, "Doing " + com.ToString(MyGame));
 
             UndoStack.Push(com);
             com.Do(MyGame);
 
             if (!SuspendViewUpdates)
                 com.UpdateViews(MyGame);
+
+            MyGame.MyTriggerHandler.GatherTriggers(com);
 
             CommandPerformed?.Invoke(com);
         }

@@ -15,12 +15,14 @@ namespace Sharpening2020.Input
         public readonly Dictionary<Int32, CommandBase> ActionCommandPairs = new Dictionary<Int32, CommandBase>();
        
         public Activatable MyActivatable;
+        public AbilityType Mode;
 
         private Int32 activatableIndex;
 
-        public PayManaCost(Activatable act)
+        public PayManaCost(Activatable act, AbilityType m)
         {
             MyActivatable = act;
+            Mode = m;
         }
 
         public void PromptAndRequestAction()
@@ -31,12 +33,12 @@ namespace Sharpening2020.Input
 
         public override void Enter()
         {
-            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(MyActivatable);
+            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.IndexOfAbility(MyActivatable, Mode);
             if (MyActivatable.MyCost.IsManaPaid())
             {
-                MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
+                MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame), Mode);
                 MyGame.MyExecutor.Do(new CommandGroup(
-                    new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false), 
+                    new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false, Mode), 
                     new CommandRemoveTopInputStates(MyPlayer.ID,3),
                     new CommandEnterInputState()));
             }
@@ -90,9 +92,9 @@ namespace Sharpening2020.Input
 
             if(MyActivatable.MyCost.IsManaPaid())
             {
-                MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame));
+                MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame), Mode);
                 MyGame.MyExecutor.Do(new CommandGroup(
-                    new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false), 
+                    new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false, Mode), 
                     new CommandRemoveTopInputStates(MyPlayer.ID, 3),
                     new CommandEnterInputState()));                
             }
@@ -103,7 +105,7 @@ namespace Sharpening2020.Input
 
         public override object Clone()
         {
-            return new PayManaCost(MyActivatable);
+            return new PayManaCost(MyActivatable, Mode);
         }
     }
 }

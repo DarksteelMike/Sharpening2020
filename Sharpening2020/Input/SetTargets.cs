@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Commands;
 
@@ -8,18 +9,20 @@ namespace Sharpening2020.Input
 {
     class SetTargets : InputStateBase
     {
-        public SetTargets(Activatable act)
+        public SetTargets(Activatable act, AbilityType m)
         {
             MyActivatable = act;
+            ActType = m;
         }
 
         public readonly Dictionary<Int32, CommandBase> ActionCommandPairs = new Dictionary<Int32, CommandBase>();
         public Activatable MyActivatable;
+        public AbilityType ActType;
         private Int32 activatableIndex;
 
         public override void Enter()
         {
-            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(MyActivatable);
+            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.IndexOfAbility(MyActivatable, ActType);
 
             if (MyActivatable.MyTargeting.IsFinished())
             {
@@ -37,7 +40,7 @@ namespace Sharpening2020.Input
 
         private void MoveToActionPayment()
         {
-            MyGame.MyExecutor.Do(new CommandGroup(new CommandSetPayActionCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex),
+            MyGame.MyExecutor.Do(new CommandGroup(new CommandSetPayActionCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex, ActType),
                 new CommandEnterInputState()));
         }
 

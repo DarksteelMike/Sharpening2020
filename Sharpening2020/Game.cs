@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Cards.ContinuousEffects;
+using Sharpening2020.Cards.Triggers;
 using Sharpening2020.Commands;
 using Sharpening2020.Input;
 using Sharpening2020.InputBridges;
@@ -15,7 +16,7 @@ using Sharpening2020.Zones;
 
 namespace Sharpening2020
 {
-    public enum DebugMode { CardViews, Commands, ContinuousEffects, InputStates, Mana, Phases  }
+    public enum DebugMode { CardViews, Commands, ContinuousEffects, InputStates, Mana, Phases, Triggers  }
     public class Game : ICloneable
     {
         public Game() { }
@@ -26,6 +27,7 @@ namespace Sharpening2020
             ret.MyExecutor.MyGame = ret;
             ret.MyContinuousEffects.MyGame = ret;
             ret.MyPhaseHandler.MyGame = ret;
+            ret.MyTriggerHandler.MyGame = ret;
 
             return ret;
         }
@@ -93,6 +95,7 @@ namespace Sharpening2020
                 if(playerWithPriorityIndex < value)
                 {
                     RunStateBasedActions();
+                    MyTriggerHandler.RunTriggers();
                 }
 
                 playerWithPriorityIndex = value;
@@ -140,6 +143,8 @@ namespace Sharpening2020
         public ContinuousEffectHandler MyContinuousEffects = new ContinuousEffectHandler();
 
         public PhaseHandler MyPhaseHandler = new PhaseHandler();
+
+        public TriggerHandler MyTriggerHandler = new TriggerHandler();
 
         public Stack<LazyGameObject<StackInstance>> SpellStack = new Stack<LazyGameObject<StackInstance>>();
 
@@ -250,12 +255,19 @@ namespace Sharpening2020
 
         public GameObject GetGameObjectByID(Int32 GOID)
         {
-            return GameObjects.Where(x => { return x.ID == GOID; }).First();
+            IEnumerable<GameObject> res = GameObjects.Where(x => { return x.ID == GOID; });
+            if(res.Count() > 0)
+            {
+                return res.First();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void RunStateBasedActions()
         {
-            return;
             IEnumerable<Card> crds;
             //704.5a.If a player has 0 or less life, that player loses the game.
             //704.5b.If a player attempted to draw a card from a library with no cards in it since the last time state-based actions were checked, that player loses the game.
@@ -359,6 +371,7 @@ namespace Sharpening2020
 
         public void InitGame(params KeyValuePair<InputBridge,List<String>>[] test)
         {
+            MyTriggerHandler.SuspendTriggers = true;
             MyExecutor.SuspendViewUpdates = true;
             foreach(KeyValuePair<InputBridge,List<String>> kvp in test)
             {
@@ -392,6 +405,7 @@ namespace Sharpening2020
                 }
             }
 
+            MyTriggerHandler.SuspendTriggers = false;
             MyExecutor.SuspendViewUpdates = false;
 
             foreach (Player p in GetPlayers())
@@ -444,7 +458,7 @@ namespace Sharpening2020
             }
         }
 
-        public void PlayActivatable(Activatable act, Player Activator, StackInstance si = null)
+        public void PlayActivatable(Activatable act, Player Activator, AbilityType Mode, StackInstance si = null)
         {
             PlayersPassedInSuccession = 0;
             act.Activator = Activator;
@@ -462,7 +476,7 @@ namespace Sharpening2020
                 }
             }
 
-            MyExecutor.Do(new CommandPutOnStack(act.Host.ID, act.Host.Value(this).CurrentCharacteristics.Activatables.IndexOf(act)));
+            MyExecutor.Do(new CommandPutOnStack(act.Host.ID, act.Host.Value(this).CurrentCharacteristics.IndexOfAbility(act, Mode),Mode));
         }
 
         public List<StackInstanceView> GetStackView()
@@ -470,11 +484,15 @@ namespace Sharpening2020
             return SpellStack.Select(x => { return (StackInstanceView)x.Value(this).GetView(this,null); }).ToList();
         }
 
-        public void DebugAlert(String msg)
+        public void DebugAlert(DebugMode flag, String msg)
         {
+            if(!this.DebugFlag.Contains(flag))
+            {
+                return;
+            }
             foreach(InputHandler ih in InputHandlers.Values)
             {
-                ih.Bridge.DebugAlert(msg);
+                ih.Bridge.DebugAlert(flag.ToString() + ": " + msg);
             }
         }
 

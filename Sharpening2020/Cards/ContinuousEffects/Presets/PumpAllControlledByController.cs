@@ -33,14 +33,11 @@ namespace Sharpening2020.Cards.ContinuousEffects.Presets
 
         public override void Undo(Game g)
         {
-            if(g.DebugFlag.Contains(DebugMode.ContinuousEffects))
-            {
-                g.DebugAlert("Undoing PumpAllControlledByController");
-            }
+            g.DebugAlert(DebugMode.ContinuousEffects, "Undoing PumpAllControlledByController");
 
             foreach (CommandBase cb in executedCommands)
             {
-                g.DebugAlert("     Undoing " + cb.ToString(g));
+                g.DebugAlert(DebugMode.ContinuousEffects, "     Undoing " + cb.ToString(g));
                 cb.Undo(g);
             }
                 

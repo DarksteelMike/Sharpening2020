@@ -10,16 +10,31 @@ namespace Sharpening2020.Commands
     {
         public readonly LazyGameObject<Card> CardID;
         public readonly Int32 ActivatableIndex;
+        public readonly AbilityType Mode;
 
-        public CommandPutOnStack(Int32 cid, Int32 aind)
+        public CommandPutOnStack(Int32 cid, Int32 aind, AbilityType m)
         {
             CardID = new LazyGameObject<Card>(cid);
             ActivatableIndex = aind;
+            Mode = m;
         }
 
         public override void Do(Game g)
         {
-            Activatable act = CardID.Value(g).CurrentCharacteristics.Activatables[ActivatableIndex];
+            Activatable act = null;
+
+            if (Mode == AbilityType.Activatable)
+            {
+                act = CardID.Value(g).CurrentCharacteristics.Activatables[ActivatableIndex];
+            }
+            else if(Mode == AbilityType.Replacement)
+            {
+
+            }
+            else
+            {
+                act = CardID.Value(g).CurrentCharacteristics.Triggers[ActivatableIndex].myAbility;
+            }
 
             StackInstance si = new StackInstance(act);
             g.RegisterGameObject(si);
@@ -38,7 +53,7 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandPutOnStack(CardID.ID, ActivatableIndex);
+            return new CommandPutOnStack(CardID.ID, ActivatableIndex, Mode);
         }
 
         public override void UpdateViews(Game g)

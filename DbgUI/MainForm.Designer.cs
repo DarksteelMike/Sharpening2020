@@ -40,6 +40,7 @@
             this.cbDbgInputStates = new System.Windows.Forms.CheckBox();
             this.cbDbgMana = new System.Windows.Forms.CheckBox();
             this.cbDbgPhases = new System.Windows.Forms.CheckBox();
+            this.cbDbgTriggers = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // bNew
@@ -164,11 +165,22 @@
             this.cbDbgPhases.Text = "Phases";
             this.cbDbgPhases.UseVisualStyleBackColor = true;
             // 
+            // cbDbgTriggers
+            // 
+            this.cbDbgTriggers.AutoSize = true;
+            this.cbDbgTriggers.Location = new System.Drawing.Point(117, 149);
+            this.cbDbgTriggers.Name = "cbDbgTriggers";
+            this.cbDbgTriggers.Size = new System.Drawing.Size(64, 17);
+            this.cbDbgTriggers.TabIndex = 13;
+            this.cbDbgTriggers.Text = "Triggers";
+            this.cbDbgTriggers.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(228, 164);
+            this.ClientSize = new System.Drawing.Size(228, 174);
+            this.Controls.Add(this.cbDbgTriggers);
             this.Controls.Add(this.cbDbgPhases);
             this.Controls.Add(this.cbDbgMana);
             this.Controls.Add(this.cbDbgInputStates);
@@ -203,5 +215,6 @@
         private System.Windows.Forms.CheckBox cbDbgInputStates;
         private System.Windows.Forms.CheckBox cbDbgMana;
         private System.Windows.Forms.CheckBox cbDbgPhases;
+        private System.Windows.Forms.CheckBox cbDbgTriggers;
     }
 }

@@ -14,18 +14,22 @@ namespace Sharpening2020.Input
         public readonly Dictionary<Int32, CommandBase> ActionCommandPairs = new Dictionary<Int32, CommandBase>();
        
         public Activatable MyActivatable;
+        public AbilityType Mode;
+
         private Int32 activatableIndex;
 
         public Int32 ActionPartIndex = 0;
 
-        public PayActionCost(Activatable act)
+        public PayActionCost(Activatable act, AbilityType m)
         {
             MyActivatable = act;
+            Mode = m;
         }
 
         public override void Enter()
         {
-            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(MyActivatable);
+            activatableIndex = MyActivatable.Host.Value(MyGame).CurrentCharacteristics.IndexOfAbility(MyActivatable, Mode);
+
             if (MyActivatable.MyCost.AreActionsPaid())
             {
                 MoveToManaPayment();
@@ -83,7 +87,7 @@ namespace Sharpening2020.Input
 
         private void MoveToManaPayment()
         {
-            MyGame.MyExecutor.Do(new CommandGroup(new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex),
+            MyGame.MyExecutor.Do(new CommandGroup(new CommandSetPayManaCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex, Mode),
                 new CommandEnterInputState()));
         }
 
@@ -95,7 +99,7 @@ namespace Sharpening2020.Input
 
         public override object Clone()
         {
-            PayActionCost pac = new PayActionCost(MyActivatable);
+            PayActionCost pac = new PayActionCost(MyActivatable,Mode);
             pac.ActionPartIndex = this.ActionPartIndex;
 
             return pac;

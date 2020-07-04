@@ -41,39 +41,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Cards\G\Grizzly Bears.cs">
+    <None Include="Cards\G\Grizzly Bears.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cards\M\Memnite.cs">
+    </None>
+    <None Include="Cards\M\Memnite.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cards\S\Swamp.cs">
+    </None>
+    <None Include="Cards\S\Swamp.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cards\M\Mountain.cs">
+    </None>
+    <None Include="Cards\M\Mountain.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cards\F\Forest.cs">
+    </None>
+    <None Include="Cards\F\Forest.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cards\W\Wastes.cs">
+    </None>
+    <None Include="Cards\W\Wastes.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cards\I\Island.cs">
+    </None>
+    <None Include="Cards\I\Island.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cards\P\Plains.cs">
+    </None>
+    <None Include="Cards\P\Plains.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cards\G\Giant Growth.cs">
+    </None>
+    <None Include="Cards\G\Giant Growth.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cards\L\Llanowar Elves.cs">
+    </None>
+    <None Include="Cards\L\Llanowar Elves.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cards\S\Selfless Cathar.cs">
+    </None>
+    <None Include="Cards\S\Selfless Cathar.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
+    <None Include="Cards\S\Soul Warden.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

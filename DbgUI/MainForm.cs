@@ -21,6 +21,7 @@ namespace DbgUI
             DbgCheckboxes.Add(cbDbgInputStates, DebugMode.InputStates);
             DbgCheckboxes.Add(cbDbgMana, DebugMode.Mana);
             DbgCheckboxes.Add(cbDbgPhases, DebugMode.Phases);
+            DbgCheckboxes.Add(cbDbgTriggers, DebugMode.Triggers);
         }
 
         MatchForm mf1;
@@ -92,6 +93,7 @@ namespace DbgUI
             Deck1.Add("Memnite");
             Deck1.Add("Memnite");
             Deck1.Add("Selfless Cathar");
+            Deck1.Add("Soul Warden");
 
             Deck2.Add("Forest");
             Deck2.Add("Grizzly Bears");

@@ -18,10 +18,6 @@ namespace Cards
 {
     class Selfless_Cathar : Card
     {
-        
-
-        
-
         public override void Build()
         {
             Card.AddUniversalCharacteristics(this);

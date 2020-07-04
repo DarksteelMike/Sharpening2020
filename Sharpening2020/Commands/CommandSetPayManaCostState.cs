@@ -11,21 +11,31 @@ namespace Sharpening2020.Commands
     {
         public readonly Int32 PlayerID;
         public readonly Int32 CardID;
-        public readonly Int32 ActivatableIndex;
+        public readonly Int32 Index;
+        public readonly AbilityType Mode;
 
-        public CommandSetPayManaCostState(Int32 pid, Int32 cid, Int32 index)
+        public CommandSetPayManaCostState(Int32 pid, Int32 cid, Int32 index, AbilityType m)
         {
             PlayerID = pid;
             CardID = cid;
-            ActivatableIndex = index;
+            Index = index;
+            Mode = m;
         }
 
         public override void Do(Game g)
         {
             Card c = (Card)g.GetGameObjectByID(CardID);
-            Activatable act = c.CurrentCharacteristics.Activatables[ActivatableIndex];
+            Activatable act = null;
+            if (Mode == AbilityType.Activatable)
+            {
+                act = c.CurrentCharacteristics.Activatables[Index];
+            }
+            else if (Mode == AbilityType.Trigger)
+            {
+                act = c.CurrentCharacteristics.Triggers[Index].myAbility;
+            }
 
-            pmc = new PayManaCost(act);
+            pmc = new PayManaCost(act, Mode);
 
             g.InputHandlers[PlayerID].CurrentInputState = pmc;
         }
@@ -39,7 +49,7 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandSetPayManaCostState(PlayerID, CardID, ActivatableIndex);
+            return new CommandSetPayManaCostState(PlayerID, CardID, Index, Mode);
         }
     }
 }

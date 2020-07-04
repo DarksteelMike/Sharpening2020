@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Commands;
 using Sharpening2020.Zones;
@@ -41,32 +42,29 @@ namespace Sharpening2020.Input
                     com = new CommandGroup(
                     new CommandMarker(CommandMarkerType.StartActivating),
                     new CommandMoveCard(act.Host.ID, ZoneType.Stack),
-                    new CommandSetIsActivating(act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act), true),
-                    new CommandSetTargetState(MyPlayer.ID, act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)),
+                    new CommandSetIsActivating(act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act), true, AbilityType.Activatable),
+                    new CommandSetTargetState(MyPlayer.ID, act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act), AbilityType.Activatable),
                     new CommandEnterInputState());
                 }
                 else
                 {
                     com = new CommandGroup(
                     new CommandMarker(CommandMarkerType.StartActivating),
-                    new CommandSetIsActivating(act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act), true),
-                    new CommandSetTargetState(MyPlayer.ID, act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act)),
+                    new CommandSetIsActivating(act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act), true, AbilityType.Activatable),
+                    new CommandSetTargetState(MyPlayer.ID, act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act), AbilityType.Activatable),
                     new CommandEnterInputState());
                 }
                 ActionCommandPairs.Add(a.ID, com);
                 ret.Add(a);
             }
 
-            if(MyGame.DebugFlag.Contains(DebugMode.InputStates))
+            MyGame.DebugAlert(DebugMode.InputStates, "HavePriority, will travel");
+            String msg = "";
+            foreach (GameAction ga in ret)
             {
-                MyGame.DebugAlert("HavePriority, will travel");
-                String msg = "";
-                foreach(GameAction ga in ret)
-                {
-                    msg += "" + ga.Description + "\n==========";
-                }
-                MyGame.DebugAlert(msg);
+                msg += "" + ga.Description + "\n==========";
             }
+            MyGame.DebugAlert(DebugMode.InputStates, msg);
 
             return ret;
         }

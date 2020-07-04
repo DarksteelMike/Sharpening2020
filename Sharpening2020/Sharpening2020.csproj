@@ -45,6 +45,7 @@
     <Compile Include="Cards\Activatables\Ability.cs" />
     <Compile Include="Cards\Activatables\Activatable.cs" />
     <Compile Include="Cards\Activatables\Presets\CastPermanent.cs" />
+    <Compile Include="Cards\Activatables\Presets\GainLifeAbility.cs" />
     <Compile Include="Cards\Activatables\Presets\PlayLand.cs" />
     <Compile Include="Cards\Activatables\Presets\PredicatePresets.cs" />
     <Compile Include="Cards\Activatables\Presets\PumpAllControlledByControllerUntilEOT.cs" />
@@ -67,6 +68,8 @@
     <Compile Include="Cards\ContinuousEffects\ContinuousEffectHandler.cs" />
     <Compile Include="Cards\ContinuousEffects\Presets\PumpPT.cs" />
     <Compile Include="Cards\Targets\Targeting.cs" />
+    <Compile Include="Cards\Triggers\Trigger.cs" />
+    <Compile Include="Cards\Triggers\TriggerHandler.cs" />
     <Compile Include="Commands\CommandAddCounter.cs" />
     <Compile Include="Commands\CommandAddManaToPool.cs" />
     <Compile Include="Commands\CommandAddPowerToughness.cs" />
@@ -81,11 +84,13 @@
     <Compile Include="Commands\CommandDestroy.cs" />
     <Compile Include="Commands\CommandDrawCard.cs" />
     <Compile Include="Commands\CommandEnterInputState.cs" />
+    <Compile Include="Commands\CommandGainLife.cs" />
     <Compile Include="Commands\CommandGroup.cs" />
     <Compile Include="Commands\CommandIncreaseCardsDrawn.cs" />
     <Compile Include="Commands\CommandIncrementActionPartIndex.cs" />
     <Compile Include="Commands\CommandIncrementActivePlayerIndex.cs" />
     <Compile Include="Commands\CommandIncrementLandsPlayed.cs" />
+    <Compile Include="Commands\CommandLoseLife.cs" />
     <Compile Include="Commands\CommandMarker.cs" />
     <Compile Include="Commands\CommandMoveCard.cs" />
     <Compile Include="Commands\CommandPayMana.cs" />

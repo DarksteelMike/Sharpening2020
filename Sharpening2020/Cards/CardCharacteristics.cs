@@ -1,12 +1,15 @@
 ﻿using Sharpening2020.Cards.ContinuousEffects;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using Sharpening2020.Cards.Activatables;
+using Sharpening2020.Cards.Triggers;
 
 namespace Sharpening2020.Cards
 {
     public enum CharacteristicName { Front, Back, FaceDown, Morph, Manifest, Flip, Cloned, Alternate }
+    public enum AbilityType { Activatable, Trigger, Replacement }
     public class CardCharacteristics : ICloneable
     {
         public String Name;
@@ -16,9 +19,28 @@ namespace Sharpening2020.Cards
         public Int32 Power;
         public Int32 Toughness;
 
-        public List<Activatable> Activatables = new List<Activatable>();
+        public readonly List<Activatable> Activatables = new List<Activatable>();
+        public readonly List<Trigger> Triggers = new List<Trigger>();
 
         public List<ContinuousEffect> ContinuousEffects = new List<ContinuousEffect>();
+
+        public Int32 IndexOfAbility(Activatable act, AbilityType mode)
+        {
+            if(mode == AbilityType.Trigger)
+            {
+                List<Activatable> trigacts = Triggers.Select((x) => { return (Activatable)x.myAbility; }).ToList();
+                int res = trigacts.IndexOf(act);
+                return res;
+            }
+            else if( mode == AbilityType.Replacement)
+            {
+                return 0;
+            }
+            else
+            {
+                return Activatables.IndexOf(act);
+            }
+        }
 
         public object Clone()
         {

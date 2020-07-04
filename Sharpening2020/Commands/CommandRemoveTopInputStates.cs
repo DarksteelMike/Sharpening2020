@@ -19,14 +19,11 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            if(g.DebugFlag.Contains(DebugMode.InputStates))
+            g.DebugAlert(DebugMode.InputStates, "RemoveTopInputStates(" + PlayerID + "," + Amount + ")\n");
+            g.DebugAlert(DebugMode.InputStates, "InputList Count: " + g.InputHandlers[PlayerID].GetInputList().Count.ToString() + "\n");
+            foreach (InputStateBase isb in g.InputHandlers[PlayerID].GetInputList())
             {
-                g.DebugAlert("RemoveTopInputStates(" + PlayerID + "," + Amount + ")\n");
-                g.DebugAlert("InputList Count: " + g.InputHandlers[PlayerID].GetInputList().Count.ToString() + "\n");
-                foreach (InputStateBase isb in g.InputHandlers[PlayerID].GetInputList())
-                {
-                    g.DebugAlert(isb.ToString() + "\n");
-                }
+                g.DebugAlert(DebugMode.InputStates, isb.ToString() + "\n");
             }
 
             prevStates = new List<InputStateBase>();
