@@ -98,9 +98,10 @@ namespace Sharpening2020.Input
                     new CommandRemoveTopInputStates(MyPlayer.ID, 3),
                     new CommandEnterInputState()));                
             }
-
-            PromptAndRequestAction();
-
+            else
+            {
+                PromptAndRequestAction();
+            }
         }
 
         public override object Clone()

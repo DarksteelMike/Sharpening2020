@@ -18,6 +18,19 @@ namespace Sharpening2020
 
         public Boolean SuspendViewUpdates = false;
 
+        public List<Type> triggerOnCommandTypes = new List<Type>();
+
+        public Executor()
+        {
+            triggerOnCommandTypes.Add(typeof(CommandMoveCard));
+            triggerOnCommandTypes.Add(typeof(CommandGainLife));
+            triggerOnCommandTypes.Add(typeof(CommandLoseLife));
+            triggerOnCommandTypes.Add(typeof(CommandTap));
+            triggerOnCommandTypes.Add(typeof(CommandUntap));
+            triggerOnCommandTypes.Add(typeof(CommandAddCounter));
+            triggerOnCommandTypes.Add(typeof(CommandShuffleLibrary));
+        }
+
         public void Do(CommandBase com)
         {
             MyGame.DebugAlert(DebugMode.Commands, "Doing " + com.ToString(MyGame));
@@ -28,7 +41,10 @@ namespace Sharpening2020
             if (!SuspendViewUpdates)
                 com.UpdateViews(MyGame);
 
-            MyGame.MyTriggerHandler.GatherTriggers(com);
+            if(triggerOnCommandTypes.Contains(com.GetType()))
+            {
+                MyGame.MyTriggerHandler.GatherTriggers(com);
+            }
 
             CommandPerformed?.Invoke(com);
         }

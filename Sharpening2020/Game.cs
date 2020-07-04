@@ -90,21 +90,22 @@ namespace Sharpening2020
 
             set
             {
-                MyContinuousEffects.RunContinuousEffects();
-
-                if(playerWithPriorityIndex < value)
-                {
-                    RunStateBasedActions();
-                    MyTriggerHandler.RunTriggers();
-                }
+                Boolean indexGrew = playerWithPriorityIndex < value;
+                Boolean triggersHaveRun = false;
 
                 playerWithPriorityIndex = value;
+
                 while (playerWithPriorityIndex >= PlayerCount)
                 {
                     playerWithPriorityIndex -= PlayerCount;
                 }
 
-                if(PlayersPassedInSuccession == PlayerCount)
+                while (playerWithPriorityIndex < 0)
+                {
+                    playerWithPriorityIndex += PlayerCount;
+                }
+
+                if (PlayersPassedInSuccession == PlayerCount)
                 {
                     PlayersPassedInSuccession = 0;
                     if (SpellStack.Count == 0)
@@ -113,26 +114,27 @@ namespace Sharpening2020
                     }
                     else
                     {
-                        MyExecutor.Do(new CommandResolveTopOfStack());
+                        triggersHaveRun = MyTriggerHandler.WaitingTriggers.Count > 0;
+                        MyExecutor.Do(new CommandGroup(
+                        new CommandResolveTopOfStack(),
+                        new CommandRunTriggers()));
                     }
-                }                
-
-                while (playerWithPriorityIndex < 0)
-                {
-                    playerWithPriorityIndex += PlayerCount;
                 }
+
+                if (triggersHaveRun)
+                    return;
+
 
                 foreach (Player p in GetPlayers())
                 {
                     if (p.ID != PlayerWithPriority.ID)
                     {
-                        MyExecutor.Do(new CommandSetWaitingForOpponentsState(p.ID));
+                        MyExecutor.Do(new CommandClearInputList(p.ID));
                     }                    
                 }
                 MyExecutor.Do(new CommandGroup(new CommandSetHavePriorityState(PlayerWithPriority.ID),
                     new CommandEnterInputState()));
             }
-
         }
 
         public Player PlayerWithPriority
@@ -486,7 +488,7 @@ namespace Sharpening2020
 
         public void DebugAlert(DebugMode flag, String msg)
         {
-            if(!this.DebugFlag.Contains(flag))
+            if(!DebugFlag.Contains(flag))
             {
                 return;
             }
@@ -501,6 +503,14 @@ namespace Sharpening2020
             foreach (InputHandler ih in InputHandlers.Values)
             {
                 ih.Bridge.UpdatePhase(MyPhaseHandler.CurrentPhase.MyType);
+            }
+        }
+
+        public void UpdateStack()
+        {
+            foreach (InputHandler ih in InputHandlers.Values)
+            {
+                ih.Bridge.UpdateStackView(GetStackView());
             }
         }
 

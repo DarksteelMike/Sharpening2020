@@ -16,7 +16,7 @@ namespace Sharpening2020.Input
 
         public Game MyGame;
         
-        private List<InputStateBase> InputList = new List<InputStateBase>();
+        public List<InputStateBase> InputList = new List<InputStateBase>();
 
         private InputStateBase bottomState = new WaitingForOpponent();
 

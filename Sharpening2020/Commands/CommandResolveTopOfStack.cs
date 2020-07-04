@@ -16,7 +16,6 @@ namespace Sharpening2020.Commands
             {
                 g.MyExecutor.Do(new CommandMoveCard(resolved.Value(g).MyActivatable.Host.ID, ZoneType.Graveyard));
             }
-
             g.MyContinuousEffects.RunContinuousEffects();
         }
 

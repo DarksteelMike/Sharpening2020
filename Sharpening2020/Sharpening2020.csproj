@@ -75,6 +75,7 @@
     <Compile Include="Commands\CommandAddPowerToughness.cs" />
     <Compile Include="Commands\CommandAddTarget.cs" />
     <Compile Include="Commands\CommandAdvancePhase.cs" />
+    <Compile Include="Commands\CommandClearInputList.cs" />
     <Compile Include="Commands\CommandClearManaPool.cs" />
     <Compile Include="Commands\CommandClearStaticContinuousEffects.cs" />
     <Compile Include="Commands\CommandCreateCard.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Commands\CommandResetLandsPlayed.cs" />
     <Compile Include="Commands\CommandResetTargets.cs" />
     <Compile Include="Commands\CommandResolveTopOfStack.cs" />
+    <Compile Include="Commands\CommandRunTriggers.cs" />
     <Compile Include="Commands\CommandSacrifice.cs" />
     <Compile Include="Commands\CommandSetCardState.cs" />
     <Compile Include="Commands\CommandSetHavePriorityState.cs" />
