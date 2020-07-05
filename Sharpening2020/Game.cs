@@ -6,6 +6,7 @@ using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Cards.ContinuousEffects;
 using Sharpening2020.Cards.Triggers;
+using Sharpening2020.Combat;
 using Sharpening2020.Commands;
 using Sharpening2020.Input;
 using Sharpening2020.InputBridges;
@@ -28,6 +29,7 @@ namespace Sharpening2020
             ret.MyContinuousEffects.MyGame = ret;
             ret.MyPhaseHandler.MyGame = ret;
             ret.MyTriggerHandler.MyGame = ret;
+            ret.MyCombatHandler.MyGame = ret;
 
             return ret;
         }
@@ -91,7 +93,6 @@ namespace Sharpening2020
             set
             {
                 Boolean indexGrew = playerWithPriorityIndex < value;
-                Boolean triggersHaveRun = false;
 
                 playerWithPriorityIndex = value;
 
@@ -105,6 +106,12 @@ namespace Sharpening2020
                     playerWithPriorityIndex += PlayerCount;
                 }
 
+                if(indexGrew)
+                {
+                    RunStateBasedActions();
+                    MyContinuousEffects.RunContinuousEffects();
+                }
+
                 if (PlayersPassedInSuccession == PlayerCount)
                 {
                     PlayersPassedInSuccession = 0;
@@ -114,26 +121,26 @@ namespace Sharpening2020
                     }
                     else
                     {
-                        triggersHaveRun = MyTriggerHandler.WaitingTriggers.Count > 0;
-                        MyExecutor.Do(new CommandGroup(
-                        new CommandResolveTopOfStack(),
-                        new CommandRunTriggers()));
+                        MyExecutor.Do(new CommandResolveTopOfStack());
                     }
                 }
 
-                if (triggersHaveRun)
-                    return;
-
-
-                foreach (Player p in GetPlayers())
+                if(MyTriggerHandler.WaitingTriggers.Count > 0)
                 {
-                    if (p.ID != PlayerWithPriority.ID)
-                    {
-                        MyExecutor.Do(new CommandClearInputList(p.ID));
-                    }                    
+                    MyTriggerHandler.RunTriggers();
                 }
-                MyExecutor.Do(new CommandGroup(new CommandSetHavePriorityState(PlayerWithPriority.ID),
-                    new CommandEnterInputState()));
+                else
+                {
+                    foreach (Player p in GetPlayers())
+                    {
+                        if (p.ID != PlayerWithPriority.ID)
+                        {
+                            MyExecutor.Do(new CommandClearInputList(p.ID));
+                        }
+                    }
+                    MyExecutor.Do(new CommandGroup(new CommandSetHavePriorityState(PlayerWithPriority.ID),
+                        new CommandEnterInputState()));
+                }
             }
         }
 
@@ -147,6 +154,8 @@ namespace Sharpening2020
         public PhaseHandler MyPhaseHandler = new PhaseHandler();
 
         public TriggerHandler MyTriggerHandler = new TriggerHandler();
+
+        public CombatHandler MyCombatHandler = new CombatHandler();
 
         public Stack<LazyGameObject<StackInstance>> SpellStack = new Stack<LazyGameObject<StackInstance>>();
 
@@ -314,13 +323,8 @@ namespace Sharpening2020
             {
                 Int32 ToRemove = Math.Min(c.GetCounterAmount(this, CounterType.P1P1), c.GetCounterAmount(this, CounterType.M1M1));
 
-                for(int i=0; i < ToRemove;i++)
-                {
-                    MyExecutor.Do(new CommandRemoveCounter(c.ID, CounterType.P1P1));
-                    MyExecutor.Do(new CommandRemoveCounter(c.ID, CounterType.M1M1));
-                }
-
-
+                MyExecutor.Do(new CommandRemoveCounter(c.ID, CounterType.P1P1, ToRemove));
+                MyExecutor.Do(new CommandRemoveCounter(c.ID, CounterType.M1M1, ToRemove));
             }
             //704.5r.If a permanent with an ability that says it can't have more than N counters of a certain kind on it has more than N counters of that kind on it, all but N of those counters are removed from it.
             //704.5s.If the number of lore counters on a Saga permanent is greater than or equal to its final chapter number and it isn't the source of a chapter ability that has triggered but not yet left the stack, that Saga's controller sacrifices it. See rule 714, "Saga Cards."

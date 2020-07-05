@@ -10,7 +10,7 @@ using Sharpening2020.Zones;
 
 namespace Sharpening2020.Players
 {
-    public class Player : GameObject, ICanHaveCounters, ICloneable
+    public class Player : GameObject, ICanHaveCounters, ICanBeAttacked, ICloneable
     {
         public Player() { }
 

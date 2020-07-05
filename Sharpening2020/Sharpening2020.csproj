@@ -70,11 +70,13 @@
     <Compile Include="Cards\Targets\Targeting.cs" />
     <Compile Include="Cards\Triggers\Trigger.cs" />
     <Compile Include="Cards\Triggers\TriggerHandler.cs" />
+    <Compile Include="Combat\CombatHandler.cs" />
     <Compile Include="Commands\CommandAddCounter.cs" />
     <Compile Include="Commands\CommandAddManaToPool.cs" />
     <Compile Include="Commands\CommandAddPowerToughness.cs" />
     <Compile Include="Commands\CommandAddTarget.cs" />
     <Compile Include="Commands\CommandAdvancePhase.cs" />
+    <Compile Include="Commands\CommandAssignDamage.cs" />
     <Compile Include="Commands\CommandClearInputList.cs" />
     <Compile Include="Commands\CommandClearManaPool.cs" />
     <Compile Include="Commands\CommandClearStaticContinuousEffects.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Commands\CommandCreatePlayer.cs" />
     <Compile Include="Commands\CommandCreatePumpAllControlledByControllerEffect.cs" />
     <Compile Include="Commands\CommandCreateStaticPumpEffect.cs" />
+    <Compile Include="Commands\CommandDealDamage.cs" />
     <Compile Include="Commands\CommandDestroy.cs" />
     <Compile Include="Commands\CommandDrawCard.cs" />
     <Compile Include="Commands\CommandEnterInputState.cs" />
@@ -124,6 +127,7 @@
     <Compile Include="Executor.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="ICanBeAttacked.cs" />
     <Compile Include="ICanHaveCounters.cs" />
     <Compile Include="InputBridges\InputBridge.cs" />
     <Compile Include="InputBridges\NetworkBridge.cs" />

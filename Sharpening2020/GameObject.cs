@@ -11,7 +11,12 @@ namespace Sharpening2020
 {
     public abstract class GameObject : ICloneable,IEquatable<GameObject>
     {
-        public Int32 ID = 0;
+        private Int32 id = 0;
+        public Int32 ID
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
         public Game MyGame;
 

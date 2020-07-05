@@ -12,11 +12,13 @@ namespace Sharpening2020.Commands
     {
         public readonly LazyGameObject<GameObject> Source;
         public readonly CounterType Type;
+        public readonly Int32 Amount;
 
-        public CommandRemoveCounter(Int32 sid, CounterType ct)
+        public CommandRemoveCounter(Int32 sid, CounterType ct, Int32 amt)
         {
             Source = new LazyGameObject<GameObject>(sid);
             Type = ct;
+            Amount = amt;
         }
 
         public override void Do(Game g)
@@ -45,7 +47,7 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandRemoveCounter(Source.ID, Type);
+            return new CommandRemoveCounter(Source.ID, Type, Amount);
         }
 
         public override void UpdateViews(Game g)

@@ -7,7 +7,7 @@ using Sharpening2020.Views;
 
 namespace Sharpening2020.Cards
 {
-    public abstract class Card : GameObject,ICanHaveCounters, ICloneable
+    public abstract class Card : GameObject, ICanHaveCounters, ICanBeAttacked, ICloneable
     {
         public CharacteristicName CurrentCharacteristicName = CharacteristicName.Front;
         public Dictionary<CharacteristicName, CardCharacteristics> MyCharacteristics = new Dictionary<CharacteristicName, CardCharacteristics>();
