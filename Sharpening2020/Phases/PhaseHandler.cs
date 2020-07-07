@@ -86,6 +86,11 @@ namespace Sharpening2020.Phases
             AllPhases.Add(new PhaseUpkeep());
             AllPhases.Add(new PhaseDraw());
             AllPhases.Add(new PhasePreCombatMain());
+            AllPhases.Add(new PhaseBeginCombat());
+            AllPhases.Add(new PhaseAttacking());
+            AllPhases.Add(new PhaseBlocking());
+            AllPhases.Add(new PhaseDamage());
+            AllPhases.Add(new PhaseEndCombat());
             AllPhases.Add(new PhasePostCombatMain());
             AllPhases.Add(new PhaseEndOfTurn());
             AllPhases.Add(new PhaseCleanup());

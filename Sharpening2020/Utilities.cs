@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Sharpening2020.Cards;
 using Sharpening2020.Mana;
 
 namespace Sharpening2020
@@ -32,6 +33,11 @@ namespace Sharpening2020
             }
 
             return res;
+        }
+
+        public static Boolean CanBlockAttacker(Card Blocker, Card Attacker)
+        {
+            return true;
         }
     }
 }

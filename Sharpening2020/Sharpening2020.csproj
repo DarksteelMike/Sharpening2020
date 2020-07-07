@@ -71,6 +71,8 @@
     <Compile Include="Cards\Triggers\Trigger.cs" />
     <Compile Include="Cards\Triggers\TriggerHandler.cs" />
     <Compile Include="Combat\CombatHandler.cs" />
+    <Compile Include="Commands\CommandAddAttacker.cs" />
+    <Compile Include="Commands\CommandAddBlocker.cs" />
     <Compile Include="Commands\CommandAddCounter.cs" />
     <Compile Include="Commands\CommandAddManaToPool.cs" />
     <Compile Include="Commands\CommandAddPowerToughness.cs" />
@@ -100,6 +102,8 @@
     <Compile Include="Commands\CommandPayMana.cs" />
     <Compile Include="Commands\CommandPerformActionCost.cs" />
     <Compile Include="Commands\CommandPutOnStack.cs" />
+    <Compile Include="Commands\CommandRemoveAttacker.cs" />
+    <Compile Include="Commands\CommandRemoveBlocker.cs" />
     <Compile Include="Commands\CommandRemoveCounter.cs" />
     <Compile Include="Commands\CommandRemoveGameObjectFromGame.cs" />
     <Compile Include="Commands\CommandRemoveTopInputStates.cs" />
@@ -111,6 +115,7 @@
     <Compile Include="Commands\CommandResolveTopOfStack.cs" />
     <Compile Include="Commands\CommandRunTriggers.cs" />
     <Compile Include="Commands\CommandSacrifice.cs" />
+    <Compile Include="Commands\CommandSetAttackingState.cs" />
     <Compile Include="Commands\CommandSetCardState.cs" />
     <Compile Include="Commands\CommandSetHavePriorityState.cs" />
     <Compile Include="Commands\CommandSetIsActivating.cs" />
@@ -124,6 +129,7 @@
     <Compile Include="Commands\CommandTap.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandPassPriority.cs" />
+    <Compile Include="Commands\CommandSetBlockingState.cs" />
     <Compile Include="Executor.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameObject.cs" />
@@ -138,14 +144,21 @@
     <Compile Include="Input\InputHandler.cs" />
     <Compile Include="Input\PayActionCost.cs" />
     <Compile Include="Input\PayManaCost.cs" />
+    <Compile Include="Input\SetAttackers.cs" />
+    <Compile Include="Input\SetBlockers.cs" />
     <Compile Include="Input\SetTargets.cs" />
     <Compile Include="Input\WaitingForOpponent.cs" />
     <Compile Include="LazyGameObject.cs" />
     <Compile Include="Mana\ManaPoint.cs" />
+    <Compile Include="Phases\PhaseAttacking.cs" />
+    <Compile Include="Phases\PhaseBeginCombat.cs" />
     <Compile Include="Phases\PhaseBase.cs" />
+    <Compile Include="Phases\PhaseBlocking.cs" />
     <Compile Include="Phases\PhaseCleanup.cs" />
     <Compile Include="Phases\PhaseDraw.cs" />
+    <Compile Include="Phases\PhaseEndCombat.cs" />
     <Compile Include="Phases\PhaseEndOfTurn.cs" />
+    <Compile Include="Phases\PhaseDamage.cs" />
     <Compile Include="Phases\PhaseHandler.cs" />
     <Compile Include="Phases\PhasePostCombatMain.cs" />
     <Compile Include="Phases\PhasePreCombatMain.cs" />
