@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using ProtoBuf;
 
 using Sharpening2020.Cards;
 
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandAssignDamage : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> Target;
+        [ProtoMember(2)]
         public readonly Int32 Amount;
 
         public CommandAssignDamage(Int32 tgt,Int32 amt)

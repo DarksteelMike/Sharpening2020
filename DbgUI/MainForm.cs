@@ -69,6 +69,8 @@ namespace DbgUI
             ThreadStart ts = new ThreadStart(SetupGame);
             GameThread = new Thread(ts);
             GameThread.Start();
+
+            bSave.Enabled = true;
         }
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -106,6 +108,16 @@ namespace DbgUI
 
         private void bSave_Click(object sender, EventArgs e)
         {
+            if(File.Exists("State.sav"))
+            {
+                File.Delete("State.sav");
+            }
+
+            FileStream fs = File.Create("State.sav");
+
+            model.MyExecutor.Save(fs);
+            fs.Flush();
+            fs.Close();
 
         }
 

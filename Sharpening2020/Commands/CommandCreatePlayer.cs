@@ -2,8 +2,11 @@
 
 using Sharpening2020.Players;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandCreatePlayer : CommandBase
     {
         public override void Do(Game g)

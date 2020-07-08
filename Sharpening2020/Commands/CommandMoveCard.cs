@@ -7,11 +7,16 @@ using Sharpening2020.Players;
 using Sharpening2020.Views;
 using Sharpening2020.Zones;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     public class CommandMoveCard : CommandBase
     {
+        [ProtoMember(1)]
         public readonly ZoneType Destination;
+        [ProtoMember(2)]
         public readonly LazyGameObject<Card> CardID;
 
         public CommandMoveCard(Int32 cid, ZoneType dest)

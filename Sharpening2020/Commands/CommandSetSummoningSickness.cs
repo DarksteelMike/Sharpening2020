@@ -4,11 +4,16 @@ using Sharpening2020.Cards;
 using Sharpening2020.Input;
 using Sharpening2020.Views;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandSetSummoningSickness : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> Card;
+        [ProtoMember(2)]
         public readonly Boolean Mode;
 
         public CommandSetSummoningSickness(Int32 cid, Boolean m)

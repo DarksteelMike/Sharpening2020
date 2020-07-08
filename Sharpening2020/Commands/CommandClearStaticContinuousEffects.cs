@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Sharpening2020.Cards.ContinuousEffects;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandClearStaticContinuousEffects : CommandBase
     {
         public override void Do(Game g)

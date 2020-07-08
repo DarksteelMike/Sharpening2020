@@ -1,15 +1,22 @@
 ﻿using System;
 
 using Sharpening2020.Cards;
-using Sharpening2020.Cards.Activatables;
+
+using ProtoBuf;
 
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandSetIsActivating : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> Card;
+        [ProtoMember(2)]
         public readonly Int32 ActivatableIndex;
+        [ProtoMember(3)]
         public readonly Boolean Mode;
+        [ProtoEnum]
+        [ProtoMember(4)]
         public readonly AbilityType AbilityType;
 
         public CommandSetIsActivating(Int32 cid, Int32 aind, Boolean m, AbilityType abt)

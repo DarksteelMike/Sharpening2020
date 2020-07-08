@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using ProtoBuf;
 
 namespace Sharpening2020.Commands
 {
     public enum CommandMarkerType { StartActivating, GetPriority }
+    [ProtoContract]
     class CommandMarker : CommandBase
     {
+        [ProtoEnum]
+        [ProtoMember(1)]
         public readonly CommandMarkerType MyType;
 
         public CommandMarker(CommandMarkerType type)

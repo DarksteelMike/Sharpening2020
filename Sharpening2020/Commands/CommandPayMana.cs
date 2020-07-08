@@ -1,17 +1,22 @@
 ﻿using System;
 
-using Sharpening2020;
 using Sharpening2020.Input;
 using Sharpening2020.Mana;
 using Sharpening2020.Players;
 using Sharpening2020.Views;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandPayMana : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Player> Payer;
+        [ProtoMember(2)]
         public readonly LazyGameObject<ManaPoint> ManaPoint;
+        [ProtoMember(3)]
         public readonly Int32 CostIndex;
 
         public CommandPayMana(Int32 pid, Int32 mpid, Int32 ci)

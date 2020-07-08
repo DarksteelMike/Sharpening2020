@@ -2,10 +2,14 @@
 
 using Sharpening2020.Input;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandIncrementActionPartIndex : CommandBase
     {
+        [ProtoMember(1)]
         public readonly Int32 PlayerID;
 
         public CommandIncrementActionPartIndex(Int32 pid)

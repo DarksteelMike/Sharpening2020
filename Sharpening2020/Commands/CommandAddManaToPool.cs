@@ -5,11 +5,16 @@ using Sharpening2020.Mana;
 using Sharpening2020.Players;
 using Sharpening2020.Views;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandAddManaToPool : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
+        [ProtoMember(2)]
         public readonly ManaColor Color;
 
         public CommandAddManaToPool(Int32 pid, ManaColor mc)

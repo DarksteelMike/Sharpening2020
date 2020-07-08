@@ -2,10 +2,14 @@
 
 using Sharpening2020.Players;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandIncreaseCardsDrawn : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
 
         public CommandIncreaseCardsDrawn(Int32 pid)

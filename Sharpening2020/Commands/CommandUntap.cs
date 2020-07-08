@@ -4,10 +4,14 @@ using Sharpening2020.Cards;
 using Sharpening2020.Input;
 using Sharpening2020.Views;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     public class CommandUntap : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> Card;
 
         public CommandUntap(Int32 tgtID)

@@ -11,6 +11,7 @@ namespace Sharpening2020.Input
 {
     class SetAttackers : InputStateBase
     {
+        public Boolean IsDone = false;
         public Dictionary<GameAction, CommandBase> ActionCommandMap = new Dictionary<GameAction, CommandBase>();
         public override List<GameAction> GetActions()
         {
@@ -18,9 +19,7 @@ namespace Sharpening2020.Input
             ActionCommandMap.Clear();
 
             GameAction done = new GameAction(-1, -1, "Done");
-            ActionCommandMap.Add(done, new CommandGroup(
-                new CommandRemoveTopInputStates(MyPlayer.ID),
-                new CommandAdvancePhase())); //Advance to blocking phase.
+            ActionCommandMap.Add(done, null); //Advance to blocking phase.
             res.Add(done);
 
             int i = 0;
@@ -60,21 +59,24 @@ namespace Sharpening2020.Input
             return res;
         }
 
-        private void PromptAndRequestAction()
+        public void PromptAndRequestAction()
         {
             MyBridge.Prompt("Select attackers.");
-
+            
             SelectAction(MyBridge.SelectActionFromList(GetActions()));     
         }
 
         public override void SelectAction(GameAction a)
         {
-            MyGame.MyExecutor.Do(ActionCommandMap[a]);
-
-            if(a.ID != -1)
+            if (a.ID == -1)
             {
-                PromptAndRequestAction();
+                IsDone = true;
             }
+            else
+            {
+                MyGame.MyExecutor.Do(ActionCommandMap[a]);
+            }
+
         }
 
         public override object Clone()

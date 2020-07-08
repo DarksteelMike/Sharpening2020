@@ -4,10 +4,14 @@ using Sharpening2020.Cards;
 using Sharpening2020.Players;
 using Sharpening2020.Zones;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandDrawCard : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
 
         public CommandDrawCard(Int32 pid)

@@ -3,10 +3,14 @@
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.ContinuousEffects.Presets;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     public class CommandCreatePumpAllControlledByControllerEffect : CommandBase
     {
+        [ProtoMember(1)]
         public readonly Int32 SourceID;
 
         public CommandCreatePumpAllControlledByControllerEffect(Int32 sid)

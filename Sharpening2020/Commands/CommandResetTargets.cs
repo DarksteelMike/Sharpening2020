@@ -3,10 +3,14 @@ using System.Collections.Generic;
 
 using Sharpening2020.Input;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandResetTargets : CommandBase
     {
+        [ProtoMember(1)]
         public Int32 PlayerID;
 
         public CommandResetTargets(Int32 pid)

@@ -4,10 +4,14 @@ using Sharpening2020.Cards;
 using Sharpening2020.Input;
 using Sharpening2020.Views;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     public class CommandTap : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> Card;
 
         public CommandTap(Int32 tgtID)

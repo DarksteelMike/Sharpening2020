@@ -2,11 +2,16 @@
 
 using Sharpening2020.Cards;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandSetCardState : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> Card;
+        [ProtoMember(2)]
         public readonly CharacteristicName NewState;
 
         public CommandSetCardState(Int32 cid, CharacteristicName st)

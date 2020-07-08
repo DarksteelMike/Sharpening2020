@@ -8,11 +8,16 @@ using Sharpening2020.Players;
 using Sharpening2020.Views;
 using Sharpening2020.Zones;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandShuffleLibrary : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
+        [ProtoMember(2)]
         public readonly Int32 Seed;
 
         public CommandShuffleLibrary(Int32 pid, Int32 sd)

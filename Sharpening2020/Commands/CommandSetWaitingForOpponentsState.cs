@@ -1,10 +1,12 @@
 ﻿using System;
 
-using Sharpening2020.Players;
 using Sharpening2020.Input;
+
+using ProtoBuf;
 
 namespace Sharpening2020.Commands
 {
+    [Serializable]
     class CommandSetWaitingForOpponentsState : CommandBase
     {
         public readonly Int32 PlayerID;

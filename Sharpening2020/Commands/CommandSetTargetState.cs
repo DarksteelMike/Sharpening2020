@@ -3,15 +3,21 @@
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Input;
-using Sharpening2020.Players;
+
+using ProtoBuf;
 
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandSetTargetState : CommandBase
     {
+        [ProtoMember(1)]
         public readonly Int32 PlayerID;
+        [ProtoMember(2)]
         public readonly Int32 CardID;
+        [ProtoMember(3)]
         public readonly Int32 Index;
+        [ProtoMember(4)]
         public readonly AbilityType Mode;
 
         public CommandSetTargetState(Int32 pid, Int32 cid, Int32 aind, AbilityType m)

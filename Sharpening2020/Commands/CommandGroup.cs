@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sharpening2020.Commands
 {
+    [Serializable]
     class CommandGroup : CommandBase
     {
         private readonly IReadOnlyList<CommandBase> SubCommands;

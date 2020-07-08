@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using ProtoBuf;
 
 namespace Sharpening2020
 {
-    public class LazyGameObject<T> : IEquatable<LazyGameObject<T>> where T : GameObject, ICloneable
+    [ProtoContract]
+    public class LazyGameObject<T> : IEquatable<LazyGameObject<T>>, ICloneable where T : GameObject
     {
+        [ProtoMember(1)]
         public readonly Int32 ID;
         public LazyGameObject(T go)
         {

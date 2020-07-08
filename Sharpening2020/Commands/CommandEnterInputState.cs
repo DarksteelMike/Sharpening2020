@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Sharpening2020.Input;
 
-using Sharpening2020.Input;
+using ProtoBuf;
 
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandEnterInputState : CommandBase
     {
         public override void Do(Game g)

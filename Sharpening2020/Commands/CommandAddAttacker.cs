@@ -1,14 +1,19 @@
 ﻿using System;
 
 using Sharpening2020.Cards;
-using Sharpening2020.Players;
+
+using ProtoBuf;
 
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     public class CommandAddAttacker : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> Attacker;
+        [ProtoMember(2)]
         public readonly Int32 Defender;
+
         public CommandAddAttacker(Int32 att, Int32 def)
         {
             Attacker = new LazyGameObject<Card>(att);

@@ -4,12 +4,18 @@ using Sharpening2020.Cards;
 using Sharpening2020.Input;
 using Sharpening2020.Views;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     public class CommandAddPowerToughness : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> CardID;
+        [ProtoMember(2)]
         public readonly Int32 Power;
+        [ProtoMember(3)]
         public readonly Int32 Toughness;
 
         public CommandAddPowerToughness(Int32 cid, Int32 p, Int32 t)

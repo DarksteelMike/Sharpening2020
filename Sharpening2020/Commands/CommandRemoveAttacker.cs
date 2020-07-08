@@ -3,10 +3,14 @@ using System.Collections.Generic;
 
 using Sharpening2020.Cards;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandRemoveAttacker : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> Attacker;
 
         public CommandRemoveAttacker(Int32 att)

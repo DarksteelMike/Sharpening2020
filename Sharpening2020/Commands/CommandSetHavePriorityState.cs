@@ -2,11 +2,16 @@
 
 using Sharpening2020.Input;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     public class CommandSetHavePriorityState : CommandBase
     {
+        [ProtoMember(1)]
         public readonly Int32 PlayerID;
+
         public CommandSetHavePriorityState(Int32 pid)
         {
             PlayerID = pid;

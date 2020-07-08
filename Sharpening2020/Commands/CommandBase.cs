@@ -8,6 +8,8 @@ using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Mana;
 using Sharpening2020.Players;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
     public abstract class CommandBase : ICloneable

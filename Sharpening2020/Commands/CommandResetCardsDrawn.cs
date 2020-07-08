@@ -1,10 +1,15 @@
 ﻿using System;
 
 using Sharpening2020.Players;
+
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandResetCardsDrawn : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
 
         public CommandResetCardsDrawn(Int32 pid)

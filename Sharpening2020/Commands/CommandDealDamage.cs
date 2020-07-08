@@ -1,13 +1,17 @@
 ﻿using System;
 
 using Sharpening2020.Cards;
-using Sharpening2020.Players;
+
+using ProtoBuf;
 
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandDealDamage : CommandBase
     {
+        [ProtoMember(1)]
         public readonly Int32 TargetID;
+        [ProtoMember(2)]
         public readonly Int32 Amount;
 
         public CommandDealDamage(Int32 tid, Int32 amt)

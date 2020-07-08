@@ -3,11 +3,16 @@ using System.Collections.Generic;
 
 using Sharpening2020.Cards;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandRemoveBlocker : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> Attacker;
+        [ProtoMember(2)]
         public readonly LazyGameObject<Card> Blocker;
 
         public CommandRemoveBlocker(Int32 att, Int32 blo)

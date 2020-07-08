@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Sharpening2020.Mana;
 using Sharpening2020.Players;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandClearManaPool : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Player> PlayerID;
 
         public CommandClearManaPool(Int32 pid)

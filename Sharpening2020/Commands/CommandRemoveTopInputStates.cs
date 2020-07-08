@@ -4,11 +4,16 @@ using System.Linq;
 
 using Sharpening2020.Input;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandRemoveTopInputStates : CommandBase
     {
+        [ProtoMember(1)]
         public readonly Int32 PlayerID;
+        [ProtoMember(2)]
         public readonly Int32 Amount;
 
         public CommandRemoveTopInputStates(Int32 pid, Int32 amt = 1)

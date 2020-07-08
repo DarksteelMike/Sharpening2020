@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.IO;
+using System.Runtime.Serialization.Formatters;
+using System.Xml.Serialization;
 using Sharpening2020.Commands;
 
 namespace Sharpening2020
@@ -91,8 +93,21 @@ namespace Sharpening2020
         {
             if (RedoStack.Count == 0)
                 return;
-
+            
             Do(RedoStack.Pop());
+        }
+
+        public void Save(FileStream fs)
+        {
+            CommandBase[] coms = UndoStack.ToArray();
+            foreach(CommandBase com in coms)
+            {
+                if(com is CommandGroup)
+                {
+                    continue;
+                }
+                ProtoBuf.Serializer.Serialize(fs, com);
+            }
         }
     }
 }

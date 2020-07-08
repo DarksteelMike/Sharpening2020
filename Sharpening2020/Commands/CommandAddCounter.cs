@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 using Sharpening2020.Cards;
 using Sharpening2020.Input;
 using Sharpening2020.Views;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandAddCounter : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<GameObject> Target;
+        [ProtoMember(2)]
         public readonly CounterType Type;
 
         public CommandAddCounter(Int32 tid, CounterType ct)

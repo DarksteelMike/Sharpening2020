@@ -2,8 +2,11 @@
 using Sharpening2020.Input;
 using Sharpening2020.Zones;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandResolveTopOfStack : CommandBase
     {
         public override void Do(Game g)

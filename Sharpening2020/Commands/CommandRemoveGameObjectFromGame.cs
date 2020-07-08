@@ -3,10 +3,14 @@
 using Sharpening2020.Cards;
 using Sharpening2020.Zones;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandRemoveGameObjectFromGame : CommandBase
     {
+        [ProtoMember(1)]
         public readonly Int32 goID;
 
         public CommandRemoveGameObjectFromGame(Int32 id)

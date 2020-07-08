@@ -4,12 +4,18 @@ using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
 using Sharpening2020.Input;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandPutOnStack : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> CardID;
+        [ProtoMember(2)]
         public readonly Int32 ActivatableIndex;
+        [ProtoMember(3)]
         public readonly AbilityType Mode;
 
         public CommandPutOnStack(Int32 cid, Int32 aind, AbilityType m)

@@ -2,14 +2,19 @@
 
 using Sharpening2020.Cards;
 using Sharpening2020.Cards.Activatables;
-using Sharpening2020.Input;
+
+using ProtoBuf;
 
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandAddTarget : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> Card;
+        [ProtoMember(2)]
         public readonly Int32 ActivatableIndex;
+        [ProtoMember(3)]
         public readonly LazyGameObject<GameObject> Target;
 
         public CommandAddTarget(Int32 tid, Int32 aind, Int32 oid)

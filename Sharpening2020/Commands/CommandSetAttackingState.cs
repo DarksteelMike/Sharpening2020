@@ -3,10 +3,14 @@
 using Sharpening2020.Input;
 using Sharpening2020.Players;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandSetAttackingState : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
 
         public CommandSetAttackingState(Int32 p)

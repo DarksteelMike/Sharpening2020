@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using Sharpening2020.Input;
 using Sharpening2020.Players;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandClearInputList : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
 
         public CommandClearInputList(Int32 pid)

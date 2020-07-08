@@ -4,11 +4,16 @@ using Sharpening2020.Cards;
 using Sharpening2020.Players;
 using Sharpening2020.Zones;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandCreateCard : CommandBase
     {
+        [ProtoMember(1)]
         public String CardName;
+        [ProtoMember(2)]
         public Int32 PlayerID;
 
         public CommandCreateCard(String n, Int32 o)

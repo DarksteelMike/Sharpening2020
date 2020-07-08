@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using Sharpening2020.Cards.Costs.ActionCosts;
 using Sharpening2020.Input;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandResetActionCost : CommandBase
     {
+        [ProtoMember(1)]
         public readonly Int32 PlayerID;
 
         public CommandResetActionCost(Int32 pid)

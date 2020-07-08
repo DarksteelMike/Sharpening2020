@@ -7,10 +7,14 @@ using Sharpening2020.Players;
 using Sharpening2020.Views;
 using Sharpening2020.Zones;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandDestroy : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Card> CardID;
 
         public CommandDestroy(Int32 cid)

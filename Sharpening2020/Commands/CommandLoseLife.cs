@@ -4,11 +4,16 @@ using Sharpening2020.Input;
 using Sharpening2020.Players;
 using Sharpening2020.Views;
 
+using ProtoBuf;
+
 namespace Sharpening2020.Commands
 {
+    [ProtoContract]
     class CommandLoseLife : CommandBase
     {
+        [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
+        [ProtoMember(2)]
         public readonly Int32 Amount;
 
         public CommandLoseLife(Int32 pid, Int32 amount)
