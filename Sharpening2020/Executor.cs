@@ -27,8 +27,7 @@ namespace Sharpening2020
             triggerOnCommandTypes.Add(typeof(CommandMoveCard));
             triggerOnCommandTypes.Add(typeof(CommandGainLife));
             triggerOnCommandTypes.Add(typeof(CommandLoseLife));
-            triggerOnCommandTypes.Add(typeof(CommandTap));
-            triggerOnCommandTypes.Add(typeof(CommandUntap));
+            triggerOnCommandTypes.Add(typeof(CommandSetIsTapped));
             triggerOnCommandTypes.Add(typeof(CommandAddCounter));
             triggerOnCommandTypes.Add(typeof(CommandShuffleLibrary));
         }
@@ -37,7 +36,11 @@ namespace Sharpening2020
         {
             MyGame.DebugAlert(DebugMode.Commands, "Doing " + com.ToString(MyGame));
 
-            UndoStack.Push(com);
+            if(!(com is CommandGroup))
+            {
+                UndoStack.Push(com);
+            }
+
             com.Do(MyGame);
 
             if (!SuspendViewUpdates)
@@ -100,14 +103,20 @@ namespace Sharpening2020
         public void Save(FileStream fs)
         {
             CommandBase[] coms = UndoStack.ToArray();
+
+            ProtoBuf.Serializer.Serialize(fs, coms);
+        }
+
+        public void Load(FileStream fs)
+        {
+            CommandBase[] coms = ProtoBuf.Serializer.Deserialize<CommandBase[]>(fs);
+
             foreach(CommandBase com in coms)
             {
-                if(com is CommandGroup)
-                {
-                    continue;
-                }
-                ProtoBuf.Serializer.Serialize(fs, com);
+                Do(com);
             }
+
+            MyGame.EnterAllInputStates();
         }
     }
 }

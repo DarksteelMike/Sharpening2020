@@ -9,14 +9,17 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
-    public class CommandTap : CommandBase
+    public class CommandSetIsTapped : CommandBase
     {
         [ProtoMember(1)]
         public readonly LazyGameObject<Card> Card;
+        [ProtoMember(2)]
+        public readonly Boolean Mode;
 
-        public CommandTap(Int32 tgtID)
+        public CommandSetIsTapped(Int32 tgtID, Boolean m)
         {
             Card = new LazyGameObject<Card>(tgtID);
+            Mode = m;
         }
 
         public override void Do(Game g)
@@ -25,7 +28,7 @@ namespace Sharpening2020.Commands
 
             prevTapState = c.IsTapped;
 
-            c.IsTapped = true;
+            c.IsTapped = Mode;
         }
 
         private Boolean prevTapState;
@@ -39,7 +42,7 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandTap(Card.ID);
+            return new CommandSetIsTapped(Card.ID, Mode);
         }
 
         public override void UpdateViews(Game g)

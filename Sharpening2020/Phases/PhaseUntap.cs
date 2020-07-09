@@ -15,7 +15,7 @@ namespace Sharpening2020.Phases
         {
             foreach (Card c in g.GetCards(ZoneType.Battlefield, g.ActivePlayer).Where(x => x.IsTapped))
             {
-                g.MyExecutor.Do(new CommandUntap(c.ID));
+                g.MyExecutor.Do(new CommandSetIsTapped(c.ID, false));
             }
         }
     }

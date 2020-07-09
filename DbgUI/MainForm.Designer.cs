@@ -41,6 +41,8 @@
             this.cbDbgMana = new System.Windows.Forms.CheckBox();
             this.cbDbgPhases = new System.Windows.Forms.CheckBox();
             this.cbDbgTriggers = new System.Windows.Forms.CheckBox();
+            this.sfdSaveReplay = new System.Windows.Forms.SaveFileDialog();
+            this.ofdLoadReplay = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // bNew
@@ -175,6 +177,10 @@
             this.cbDbgTriggers.Text = "Triggers";
             this.cbDbgTriggers.UseVisualStyleBackColor = true;
             // 
+            // ofdLoadReplay
+            // 
+            this.ofdLoadReplay.FileName = "openFileDialog1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,5 +222,7 @@
         private System.Windows.Forms.CheckBox cbDbgMana;
         private System.Windows.Forms.CheckBox cbDbgPhases;
         private System.Windows.Forms.CheckBox cbDbgTriggers;
+        private System.Windows.Forms.SaveFileDialog sfdSaveReplay;
+        private System.Windows.Forms.OpenFileDialog ofdLoadReplay;
     }
 }

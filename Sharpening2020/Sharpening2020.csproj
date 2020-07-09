@@ -120,7 +120,6 @@
     <Compile Include="Commands\CommandEnterInputState.cs" />
     <Compile Include="Commands\CommandGainLife.cs" />
     <Compile Include="Commands\CommandGroup.cs" />
-    <Compile Include="Commands\CommandIncreaseCardsDrawn.cs" />
     <Compile Include="Commands\CommandIncrementActionPartIndex.cs" />
     <Compile Include="Commands\CommandIncrementActivePlayerIndex.cs" />
     <Compile Include="Commands\CommandIncrementLandsPlayed.cs" />
@@ -153,7 +152,6 @@
     <Compile Include="Commands\CommandSetTargetState.cs" />
     <Compile Include="Commands\CommandSetWaitingForOpponentsState.cs" />
     <Compile Include="Commands\CommandShuffleLibrary.cs" />
-    <Compile Include="Commands\CommandUntap.cs" />
     <Compile Include="Commands\CommandTap.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandPassPriority.cs" />

@@ -21,7 +21,7 @@ namespace Sharpening2020.Phases
                 {
                     ICanBeAttacked ICBA = ch.AttackerToTargetMap[attacker];
 
-                    g.MyExecutor.Do(new CommandTap(attacker.ID));
+                    g.MyExecutor.Do(new CommandSetIsTapped(attacker.ID, true));
                     g.MyExecutor.Do(new CommandDealDamage(ICBA.ID, attacker.CurrentCharacteristics.Power));
                 }
             }

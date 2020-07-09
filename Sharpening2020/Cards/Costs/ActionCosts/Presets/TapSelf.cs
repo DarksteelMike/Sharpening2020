@@ -31,7 +31,7 @@ namespace Sharpening2020.Cards.Costs.ActionCosts.Presets
 
         public override void Pay(Game g)
         {
-            Commands.CommandTap ct = new CommandTap(Target.ID);
+            Commands.CommandSetIsTapped ct = new CommandSetIsTapped(Target.ID, true);
 
             g.MyExecutor.Do(ct);
         }

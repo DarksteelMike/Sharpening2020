@@ -71,6 +71,7 @@ namespace DbgUI
             GameThread.Start();
 
             bSave.Enabled = true;
+            bLoad.Enabled = false;
         }
         
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -108,22 +109,27 @@ namespace DbgUI
 
         private void bSave_Click(object sender, EventArgs e)
         {
-            if(File.Exists("State.sav"))
+            if(sfdSaveReplay.ShowDialog() == DialogResult.OK)
             {
-                File.Delete("State.sav");
+                MessageBox.Show(sfdSaveReplay.FileName);
+                using(FileStream fs = File.OpenWrite(sfdSaveReplay.FileName)) {
+                    model.MyExecutor.Save(fs);
+                    fs.Close();
+                }
             }
-
-            FileStream fs = File.Create("State.sav");
-
-            model.MyExecutor.Save(fs);
-            fs.Flush();
-            fs.Close();
-
         }
 
         private void bLoad_Click(object sender, EventArgs e)
         {
-
+            model = Game.Construct();
+            if(ofdLoadReplay.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream fs = File.OpenWrite(ofdLoadReplay.FileName))
+                {
+                    model.MyExecutor.Load(fs);
+                    fs.Close();
+                }
+            }
         }
 
         private void bUndo_Click(object sender, EventArgs e)

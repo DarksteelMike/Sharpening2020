@@ -28,14 +28,15 @@ namespace Sharpening2020.Commands
 
             LazyGameObject<Card> TopCard = p.MyZones[ZoneType.Library].Contents[0];
 
+            p.CardsDrawnThisTurn++;
+
             g.MyExecutor.Do(new CommandSetCardState(TopCard.ID, CharacteristicName.Front));
             g.MyExecutor.Do(new CommandMoveCard(TopCard.ID, ZoneType.Hand));
-            g.MyExecutor.Do(new CommandIncreaseCardsDrawn(p.ID));
         }
 
         public override void Undo(Game g)
         {
-            //Commands performed will be undone on their own.
+            Player.Value(g).CardsDrawnThisTurn--;
         }
 
         public override object Clone()

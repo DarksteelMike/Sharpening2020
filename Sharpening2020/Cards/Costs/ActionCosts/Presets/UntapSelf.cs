@@ -23,7 +23,7 @@ namespace Sharpening2020.Cards.Costs.ActionCosts.Presets
 
         public override void Pay(Game g)
         {
-            g.MyExecutor.Do(new CommandUntap(Target.ID));
+            g.MyExecutor.Do(new CommandSetIsTapped(Target.ID, false));
         }
 
         public override object Clone()
