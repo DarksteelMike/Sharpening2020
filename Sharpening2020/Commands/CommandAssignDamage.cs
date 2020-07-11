@@ -14,6 +14,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly Int32 Amount;
 
+        private CommandAssignDamage() { }
+
         public CommandAssignDamage(Int32 tgt,Int32 amt)
         {
             Target = new LazyGameObject<Card>(tgt);

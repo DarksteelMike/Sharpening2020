@@ -14,6 +14,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
 
+        private CommandClearInputList() { }
+
         public CommandClearInputList(Int32 pid)
         {
             Player = new LazyGameObject<Player>(pid);
@@ -21,18 +23,24 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            prev = new List<InputStateBase>();
+            if(g.InputHandlers.ContainsKey(Player.ID))
+            {
+                prev = new List<InputStateBase>();
 
-            prev.AddRange(g.InputHandlers[Player.ID].InputList);
+                prev.AddRange(g.InputHandlers[Player.ID].InputList);
 
-            g.InputHandlers[Player.ID].InputList.Clear();
+                g.InputHandlers[Player.ID].InputList.Clear();
+            }
         }
 
         private List<InputStateBase> prev;
 
         public override void Undo(Game g)
         {
-            g.InputHandlers[Player.ID].InputList.AddRange(prev);
+            if(prev != null)
+            {
+                g.InputHandlers[Player.ID].InputList.AddRange(prev);
+            }
         }
 
         public override object Clone()

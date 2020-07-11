@@ -16,6 +16,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly CounterType Type;
 
+        private CommandAddCounter() { }
+
         public CommandAddCounter(Int32 tid, CounterType ct)
         {
             Target = new LazyGameObject<GameObject>(tid);

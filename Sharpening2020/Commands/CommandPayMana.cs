@@ -19,6 +19,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(3)]
         public readonly Int32 CostIndex;
 
+        private CommandPayMana() { }
+
         public CommandPayMana(Int32 pid, Int32 mpid, Int32 ci)
         {
             Payer = new LazyGameObject<Player>(pid);

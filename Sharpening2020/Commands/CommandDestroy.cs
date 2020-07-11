@@ -17,6 +17,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public readonly LazyGameObject<Card> CardID;
 
+        private CommandDestroy() { }
+
         public CommandDestroy(Int32 cid)
         {
             CardID = new LazyGameObject<Card>(cid);

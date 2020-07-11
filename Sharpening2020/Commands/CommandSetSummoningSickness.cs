@@ -16,6 +16,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly Boolean Mode;
 
+        private CommandSetSummoningSickness() { }
+
         public CommandSetSummoningSickness(Int32 cid, Boolean m)
         {
             Card = new LazyGameObject<Card>(cid);

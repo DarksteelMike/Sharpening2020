@@ -18,6 +18,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(3)]
         public readonly Int32 CostPartIndex;
 
+        private CommandPerformActionCost() { }
+
         public CommandPerformActionCost(Int32 cid, Int32 aind, Int32 cpind)
         {
             CardID = new LazyGameObject<Card>(cid);

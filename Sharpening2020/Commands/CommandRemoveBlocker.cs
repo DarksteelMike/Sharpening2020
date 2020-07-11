@@ -15,6 +15,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly LazyGameObject<Card> Blocker;
 
+        private CommandRemoveBlocker() { }
+
         public CommandRemoveBlocker(Int32 att, Int32 blo)
         {
             Attacker = new LazyGameObject<Card>(att);

@@ -12,6 +12,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public readonly CommandMarkerType MyType;
 
+        private CommandMarker() { }
+
         public CommandMarker(CommandMarkerType type)
         {
             MyType = type;

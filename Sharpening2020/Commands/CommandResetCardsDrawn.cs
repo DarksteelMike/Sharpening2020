@@ -12,6 +12,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
 
+        private CommandResetCardsDrawn() { }
+
         public CommandResetCardsDrawn(Int32 pid)
         {
             Player = new LazyGameObject<Player>(pid);

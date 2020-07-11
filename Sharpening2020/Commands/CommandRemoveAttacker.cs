@@ -12,6 +12,8 @@ namespace Sharpening2020.Commands
     {
         [ProtoMember(1)]
         public readonly LazyGameObject<Card> Attacker;
+        
+        private CommandRemoveAttacker() { }
 
         public CommandRemoveAttacker(Int32 att)
         {

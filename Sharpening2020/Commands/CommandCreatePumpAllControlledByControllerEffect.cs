@@ -13,6 +13,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public readonly Int32 SourceID;
 
+        private CommandCreatePumpAllControlledByControllerEffect() { }
+
         public CommandCreatePumpAllControlledByControllerEffect(Int32 sid)
         {
             SourceID = sid;

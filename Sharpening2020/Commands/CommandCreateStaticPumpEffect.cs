@@ -16,6 +16,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(3)]
         public readonly Int32 Toughness;
 
+        private CommandCreateStaticPumpEffect() { }
+
         public CommandCreateStaticPumpEffect(Int32 cid, Int32 p, Int32 t)
         {
             CardID = cid;

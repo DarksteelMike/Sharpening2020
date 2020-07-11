@@ -12,6 +12,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public readonly Int32 PlayerID;
 
+        private CommandIncrementActionPartIndex() { }
+
         public CommandIncrementActionPartIndex(Int32 pid)
         {
             PlayerID = pid;

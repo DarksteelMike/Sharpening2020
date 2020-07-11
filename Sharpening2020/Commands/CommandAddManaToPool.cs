@@ -17,6 +17,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly ManaColor Color;
 
+        private CommandAddManaToPool() { }
+
         public CommandAddManaToPool(Int32 pid, ManaColor mc)
         {
             Player = new LazyGameObject<Player>(pid);

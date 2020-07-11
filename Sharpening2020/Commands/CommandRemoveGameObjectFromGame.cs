@@ -13,6 +13,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public readonly Int32 goID;
 
+        private CommandRemoveGameObjectFromGame() { }
+
         public CommandRemoveGameObjectFromGame(Int32 id)
         {
             goID = id;

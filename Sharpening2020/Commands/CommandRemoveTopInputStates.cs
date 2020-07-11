@@ -16,6 +16,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly Int32 Amount;
 
+        private CommandRemoveTopInputStates() { }
+
         public CommandRemoveTopInputStates(Int32 pid, Int32 amt = 1)
         {
             PlayerID = pid;

@@ -18,6 +18,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(3)]
         public readonly AbilityType Mode;
 
+        private CommandPutOnStack() { }
+
         public CommandPutOnStack(Int32 cid, Int32 aind, AbilityType m)
         {
             CardID = new LazyGameObject<Card>(cid);

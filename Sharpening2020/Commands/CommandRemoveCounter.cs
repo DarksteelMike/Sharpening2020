@@ -20,6 +20,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(3)]
         public readonly Int32 Amount;
 
+        private CommandRemoveCounter() { }
+
         public CommandRemoveCounter(Int32 sid, CounterType ct, Int32 amt)
         {
             Source = new LazyGameObject<GameObject>(sid);

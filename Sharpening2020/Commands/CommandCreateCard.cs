@@ -16,6 +16,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public Int32 PlayerID;
 
+        private CommandCreateCard() { }
+
         public CommandCreateCard(String n, Int32 o)
         {
             CardName = n;

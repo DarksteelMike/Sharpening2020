@@ -12,6 +12,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public readonly Int32 PlayerID;
 
+        private CommandSetHavePriorityState() { }
+
         public CommandSetHavePriorityState(Int32 pid)
         {
             PlayerID = pid;
@@ -19,15 +21,22 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            prevState = g.InputHandlers[PlayerID].CurrentInputState;
-            g.InputHandlers[PlayerID].CurrentInputState = new HavePriority();
+            if(g.InputHandlers.ContainsKey(PlayerID))
+            {
+                prevState = g.InputHandlers[PlayerID].CurrentInputState;
+                g.InputHandlers[PlayerID].CurrentInputState = new HavePriority();
+            }
         }
 
-        private InputStateBase prevState;
+        private InputStateBase prevState = null;
 
         public override void Undo(Game g)
         {
-            g.InputHandlers[PlayerID].CurrentInputState = prevState;
+            if(prevState != null)
+            {
+
+                g.InputHandlers[PlayerID].CurrentInputState = prevState;
+            }
         }
 
         public override object Clone()

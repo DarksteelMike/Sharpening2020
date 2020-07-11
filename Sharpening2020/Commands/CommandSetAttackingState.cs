@@ -13,6 +13,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
 
+        private CommandSetAttackingState() { }
+
         public CommandSetAttackingState(Int32 p)
         {
             Player = new LazyGameObject<Player>(p);

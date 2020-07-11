@@ -14,6 +14,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly Int32 Defender;
 
+        private CommandAddAttacker() { }
+
         public CommandAddAttacker(Int32 att, Int32 def)
         {
             Attacker = new LazyGameObject<Card>(att);

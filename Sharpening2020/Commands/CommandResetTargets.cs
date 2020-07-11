@@ -13,6 +13,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public Int32 PlayerID;
 
+        private CommandResetTargets() { }
+
         public CommandResetTargets(Int32 pid)
         {
             PlayerID = pid;

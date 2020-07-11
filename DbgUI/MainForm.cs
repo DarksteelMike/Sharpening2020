@@ -37,21 +37,28 @@ namespace DbgUI
 
         Dictionary<CheckBox, DebugMode> DbgCheckboxes = new Dictionary<CheckBox,DebugMode>();
 
-        private void bNew_Click(object sender, EventArgs e)
+        public void SetDebugFlags(Game g)
         {
             List<DebugMode> dbgModes = new List<DebugMode>();
-            foreach(CheckBox cb in DbgCheckboxes.Keys)
+            foreach (CheckBox cb in DbgCheckboxes.Keys)
             {
                 if (cb.Checked)
                     dbgModes.Add(DbgCheckboxes[cb]);
             }
+            g.DebugFlag = dbgModes;
 
-            if(dbgModes.Count > 0)
+            if (dbgModes.Count > 0)
             {
                 if (File.Exists("Debug.log"))
                     File.Delete("Debug.log");
                 swLog = File.CreateText("Debug.log");
             }
+        }
+
+        private void bNew_Click(object sender, EventArgs e)
+        {
+            model = Game.Construct();
+            SetDebugFlags(model);
 
             mf1 = new MatchForm(swLog,0);
             mf2 = new MatchForm(null,1);
@@ -62,9 +69,6 @@ namespace DbgUI
 
             bridge1 = new UIBridge(mf1);
             bridge2 = new UIBridge(mf2);
-
-            model = Game.Construct();
-            model.DebugFlag = dbgModes;
 
             ThreadStart ts = new ThreadStart(SetupGame);
             GameThread = new Thread(ts);
@@ -122,14 +126,35 @@ namespace DbgUI
         private void bLoad_Click(object sender, EventArgs e)
         {
             model = Game.Construct();
-            if(ofdLoadReplay.ShowDialog() == DialogResult.OK)
+            SetDebugFlags(model);
+
+            mf1 = new MatchForm(swLog, 0);
+            mf2 = new MatchForm(null, 1);
+            mf1.Text = "Player 1";
+            mf2.Text = "Player 2";
+            mf1.Show();
+            mf2.Show();
+            
+            bridge1 = new UIBridge(mf1);
+            bridge2 = new UIBridge(mf2);
+            model.AssociateInputBridge(bridge1, 0);
+            model.AssociateInputBridge(bridge2, 1);
+
+            if (ofdLoadReplay.ShowDialog() == DialogResult.OK)
             {
-                using (FileStream fs = File.OpenWrite(ofdLoadReplay.FileName))
+                using (FileStream fs = File.OpenRead(ofdLoadReplay.FileName))
                 {
                     model.MyExecutor.Load(fs);
                     fs.Close();
                 }
             }
+
+
+            model.UpdateAllViews();
+
+            ThreadStart ts = new ThreadStart(model.EnterAllInputStates);
+            GameThread = new Thread(ts);
+            GameThread.Start();
         }
 
         private void bUndo_Click(object sender, EventArgs e)

@@ -11,6 +11,9 @@ namespace Sharpening2020.Commands
     {
         [ProtoMember(1)]
         public readonly LazyGameObject<Player> Player;
+
+        private CommandIncrementLandsPlayed() { }
+
         public CommandIncrementLandsPlayed(Int32 pid)
         {
             Player = new LazyGameObject<Player>(pid);

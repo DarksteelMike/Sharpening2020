@@ -19,6 +19,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly LazyGameObject<Card> CardID;
 
+        private CommandMoveCard() { }
+
         public CommandMoveCard(Int32 cid, ZoneType dest)
         {
             CardID = new LazyGameObject<Card>(cid);

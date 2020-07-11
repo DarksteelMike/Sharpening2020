@@ -17,6 +17,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(3)]
         public readonly LazyGameObject<GameObject> Target;
 
+        private CommandAddTarget() { }
+
         public CommandAddTarget(Int32 tid, Int32 aind, Int32 oid)
         {
             Card = new LazyGameObject<Card>(tid);

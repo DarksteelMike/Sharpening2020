@@ -9,6 +9,9 @@ namespace Sharpening2020
     {
         [ProtoMember(1)]
         public readonly Int32 ID;
+        
+        private LazyGameObject() { }
+
         public LazyGameObject(T go)
         {
             ID = go.ID;

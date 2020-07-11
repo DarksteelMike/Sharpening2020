@@ -12,6 +12,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public readonly Int32 CardID;
 
+        private CommandSacrifice() { }
+
         public CommandSacrifice(Int32 cid)
         {
             CardID = cid;

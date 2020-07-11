@@ -20,6 +20,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly Int32 Seed;
 
+        private CommandShuffleLibrary() { }
+
         public CommandShuffleLibrary(Int32 pid, Int32 sd)
         {
             Player = new LazyGameObject<Player>(pid);

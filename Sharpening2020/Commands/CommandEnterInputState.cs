@@ -9,6 +9,11 @@ namespace Sharpening2020.Commands
     {
         public override void Do(Game g)
         {
+            if(g.MyExecutor.IsLoading)
+            {
+                return;
+            }
+
             foreach(InputHandler ih in g.InputHandlers.Values)
             {
                 if(ih.CurrentInputState is WaitingForOpponent)

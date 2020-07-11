@@ -14,6 +14,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(1)]
         public readonly LazyGameObject<Player> PlayerID;
 
+        private CommandClearManaPool() { }
+
         public CommandClearManaPool(Int32 pid)
         {
             PlayerID = new LazyGameObject<Player>(pid);

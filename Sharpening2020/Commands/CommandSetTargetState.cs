@@ -20,6 +20,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(4)]
         public readonly AbilityType Mode;
 
+        private CommandSetTargetState() { }
+
         public CommandSetTargetState(Int32 pid, Int32 cid, Int32 aind, AbilityType m)
         {
             PlayerID = pid;

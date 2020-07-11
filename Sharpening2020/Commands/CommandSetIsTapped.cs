@@ -16,6 +16,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly Boolean Mode;
 
+        private CommandSetIsTapped() { }
+
         public CommandSetIsTapped(Int32 tgtID, Boolean m)
         {
             Card = new LazyGameObject<Card>(tgtID);

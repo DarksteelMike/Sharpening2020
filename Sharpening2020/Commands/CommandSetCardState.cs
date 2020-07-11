@@ -14,6 +14,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly CharacteristicName NewState;
 
+        private CommandSetCardState() { }
+
         public CommandSetCardState(Int32 cid, CharacteristicName st)
         {
             Card = new LazyGameObject<Card>(cid);

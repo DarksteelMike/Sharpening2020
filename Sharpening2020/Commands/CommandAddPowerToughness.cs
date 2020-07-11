@@ -18,6 +18,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(3)]
         public readonly Int32 Toughness;
 
+        private CommandAddPowerToughness() { }
+
         public CommandAddPowerToughness(Int32 cid, Int32 p, Int32 t)
         {
             CardID = new LazyGameObject<Card>(cid);

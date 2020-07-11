@@ -14,6 +14,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(2)]
         public readonly Int32 Amount;
 
+        private CommandDealDamage() { }
+
         public CommandDealDamage(Int32 tid, Int32 amt)
         {
             TargetID = tid;

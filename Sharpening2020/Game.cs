@@ -414,6 +414,14 @@ namespace Sharpening2020
             MyTriggerHandler.SuspendTriggers = false;
             MyExecutor.SuspendViewUpdates = false;
 
+            UpdateAllViews();
+            
+            MyExecutor.Do(new CommandGroup(new CommandSetHavePriorityState(ActivePlayer.ID),
+                new CommandEnterInputState()));
+        }
+
+        public void UpdateAllViews()
+        {
             foreach (Player p in GetPlayers())
             {
                 foreach (InputHandler ih in InputHandlers.Values)
@@ -422,13 +430,13 @@ namespace Sharpening2020
                 }
                 foreach (Zone z in p.MyZones.Values)
                 {
-                    foreach(InputHandler ih in InputHandlers.Values)
+                    foreach (InputHandler ih in InputHandlers.Values)
                     {
                         List<CardView> viewList = new List<CardView>();
-                        foreach(LazyGameObject<Card> lc in z.Contents)
+                        foreach (LazyGameObject<Card> lc in z.Contents)
                         {
                             Card c = lc.Value(this);
-                            CardView cv = c.GetView(this,ih.AssociatedPlayer.Value(this)) as CardView;
+                            CardView cv = c.GetView(this, ih.AssociatedPlayer.Value(this)) as CardView;
 
                             viewList.Add(cv);
                         }
@@ -438,9 +446,6 @@ namespace Sharpening2020
             }
 
             UpdatePhase();
-            
-            MyExecutor.Do(new CommandGroup(new CommandSetHavePriorityState(ActivePlayer.ID),
-                new CommandEnterInputState()));
         }
 
         public void UpdateView(ViewObject view)
@@ -520,6 +525,11 @@ namespace Sharpening2020
 
         public void EnterAllInputStates()
         {
+            if(MyExecutor.IsLoading)
+            {
+                return;
+            }
+
             foreach(InputHandler ih in InputHandlers.Values)
             {
                 if(ih.CurrentInputState is WaitingForOpponent)

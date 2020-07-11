@@ -19,6 +19,8 @@ namespace Sharpening2020.Commands
         [ProtoMember(4)]
         public readonly AbilityType AbilityType;
 
+        private CommandSetIsActivating() { }
+
         public CommandSetIsActivating(Int32 cid, Int32 aind, Boolean m, AbilityType abt)
         {
             Card = new LazyGameObject<Card>(cid);

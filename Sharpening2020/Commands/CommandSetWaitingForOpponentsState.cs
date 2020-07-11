@@ -11,6 +11,8 @@ namespace Sharpening2020.Commands
     {
         public readonly Int32 PlayerID;
 
+        private CommandSetWaitingForOpponentsState() { }
+
         public CommandSetWaitingForOpponentsState(Int32 pid)
         {
             PlayerID = pid;
