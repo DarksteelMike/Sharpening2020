@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Sharpening2020.Attributes;
 using Sharpening2020.Input;
 using Sharpening2020.Players;
 
@@ -8,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    [AttributeDoNotSaveCommand]
     class CommandSetBlockingState : CommandBase
     {
         [ProtoMember(1)]

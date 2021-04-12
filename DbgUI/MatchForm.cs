@@ -204,7 +204,7 @@ namespace DbgUI
                 AddViewToMap(siv);
             }
             lbStack.Items.Clear();
-            lbStack.Items.AddRange(views.ToArray());
+            lbStack.Items.AddRange(views.Select((x) => { return x.Text; }).ToArray());
         }
 
         public void UpdateZoneView(ZoneType zt, Int32 PlayerID, List<CardView> views)

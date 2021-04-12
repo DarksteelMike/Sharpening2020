@@ -68,7 +68,7 @@ namespace Sharpening2020.Cards.Activatables
 
         public override ViewObject GetView(Game g, Player viewer)
         {
-            return new StackInstanceView(this);
+            return new StackInstanceView(this, g);
         }
 
     }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters;
-using System.Xml.Serialization;
+using Sharpening2020.Attributes;
 using Sharpening2020.Commands;
 
 namespace Sharpening2020
@@ -46,6 +45,10 @@ namespace Sharpening2020
             doNotSaveTypes.Add(typeof(CommandSetPayActionCostState));
             doNotSaveTypes.Add(typeof(CommandSetPayManaCostState));
             doNotSaveTypes.Add(typeof(CommandSetTargetState));
+            doNotSaveTypes.Add(typeof(CommandResetManaCost));
+            doNotSaveTypes.Add(typeof(CommandResetActionCost));
+            doNotSaveTypes.Add(typeof(CommandResetTargets));
+            doNotSaveTypes.Add(typeof(CommandSetIsActivating));
             doNotSaveTypes.Add(typeof(CommandSetWaitingForOpponentsState));
         }
 
@@ -121,28 +124,56 @@ namespace Sharpening2020
         {
             //List<CommandBase> res = new List<CommandBase>();
             CommandBase[] stack = UndoStack.ToArray();
-            /*
+            List<CommandBase> res = new List<CommandBase>();
+            
             foreach(CommandBase com in stack)
             {
+                if(true)//Attribute.GetCustomAttribute(com.GetType(),typeof(AttributeDoNotSaveCommand)) == null)
+                {
+                    res.Add(com);
+                }/*
                 if(!doNotSaveTypes.Contains(com.GetType()))
                 {
                     res.Add(com);
-                }
-            }*/
+                }*/
+            }
+            CommandBase[] arrRes = res.ToArray();
 
-            ProtoBuf.Serializer.Serialize(fs, stack);
+             ProtoBuf.Serializer.Serialize(fs, res); 
         }
 
         public void Load(FileStream fs)
         {
             isLoading = true;
+            SuspendViewUpdates = false;
             CommandBase[] coms = ProtoBuf.Serializer.Deserialize<CommandBase[]>(fs);
             Array.Reverse(coms);
 
             foreach(CommandBase com in coms)
             {
-                Do(com);
+                 Do(com);
             }
+
+            MyGame.EnterAllInputStates();
+
+            isLoading = false;
+        }
+
+        public void Replay(FileStream fs)
+        {
+            isLoading = true;
+            CommandBase[] coms = ProtoBuf.Serializer.Deserialize<CommandBase[]>(fs);
+            Array.Reverse(coms);
+
+            foreach (CommandBase com in coms)
+            {
+                Do(com);
+                
+                System.Threading.Thread.Sleep(250);
+
+            }
+
+            MyGame.EnterAllInputStates();
 
             isLoading = false;
         }

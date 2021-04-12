@@ -50,7 +50,7 @@ namespace Sharpening2020.Input
 
         public override void Leave()
         {
-            MyGame.MyExecutor.Do(new CommandResetManaCost(MyPlayer.ID));
+            //MyGame.MyExecutor.Do(new CommandResetManaCost(MyPlayer.ID));
         }
 
         public override List<GameAction> GetActions()
@@ -97,6 +97,7 @@ namespace Sharpening2020.Input
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame), Mode);
                 MyGame.MyExecutor.Do(new CommandGroup(
                     new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false, Mode),
+                    new CommandResetManaCost(MyPlayer.ID),
                     new CommandRemoveTopInputStates(MyPlayer.ID, 3),
                     new CommandEnterInputState()));                
             }

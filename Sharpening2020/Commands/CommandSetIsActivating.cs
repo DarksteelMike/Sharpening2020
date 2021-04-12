@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Sharpening2020.Attributes;
 using Sharpening2020.Cards;
 
 using ProtoBuf;
@@ -7,6 +8,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    [AttributeDoNotSaveCommand]
     class CommandSetIsActivating : CommandBase
     {
         [ProtoMember(1)]

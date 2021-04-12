@@ -48,7 +48,10 @@ namespace Sharpening2020
 
         public List<DebugMode> DebugFlag = new List<DebugMode>();
 
-        public Int32 PlayerCount = 0;
+        public Int32 PlayerCount
+        {
+            get { return this.GetPlayers().Count(); }
+        }
 
         public Int32 PlayersPassedInSuccession = 0;
 
@@ -117,11 +120,13 @@ namespace Sharpening2020
                     PlayersPassedInSuccession = 0;
                     if (SpellStack.Count == 0)
                     {
-                        MyExecutor.Do(new CommandAdvancePhase());
+                        if(!MyExecutor.IsLoading)
+                            MyExecutor.Do(new CommandAdvancePhase());
                     }
                     else
                     {
-                        MyExecutor.Do(new CommandResolveTopOfStack());
+                        if (!MyExecutor.IsLoading)
+                            MyExecutor.Do(new CommandResolveTopOfStack());
                     }
                 }
 
@@ -387,8 +392,6 @@ namespace Sharpening2020
 
                 InputHandlers.Add(newPlayer.ID, new InputHandler(this, new LazyGameObject<Player>(newPlayer), kvp.Key));
             }
-
-            PlayerCount = GetPlayers().Count();
 
             Int32 i = 0;
 

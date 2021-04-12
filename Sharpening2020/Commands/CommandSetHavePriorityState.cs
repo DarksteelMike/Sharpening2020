@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Sharpening2020.Attributes;
 using Sharpening2020.Input;
 
 using ProtoBuf;
@@ -7,6 +8,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    [AttributeDoNotSaveCommand]
     public class CommandSetHavePriorityState : CommandBase
     {
         [ProtoMember(1)]

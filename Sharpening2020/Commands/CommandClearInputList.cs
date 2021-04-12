@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Sharpening2020.Attributes;
 using Sharpening2020.Input;
 using Sharpening2020.Players;
 
@@ -9,6 +10,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    [AttributeDoNotSaveCommand]
     class CommandClearInputList : CommandBase
     {
         [ProtoMember(1)]

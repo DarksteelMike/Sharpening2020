@@ -35,12 +35,12 @@ namespace Sharpening2020.Input
 
         public override void Leave()
         {
-            MyGame.MyExecutor.Do(new CommandResetTargets(MyPlayer.ID));
         }
 
         private void MoveToActionPayment()
         {
-            MyGame.MyExecutor.Do(new CommandGroup(new CommandSetPayActionCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex, ActType),
+            MyGame.MyExecutor.Do(new CommandGroup(new CommandResetTargets(MyPlayer.ID),
+                new CommandSetPayActionCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex, ActType),
                 new CommandEnterInputState()));
         }
 

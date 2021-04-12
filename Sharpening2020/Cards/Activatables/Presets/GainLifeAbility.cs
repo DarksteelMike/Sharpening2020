@@ -35,7 +35,7 @@ namespace Sharpening2020.Cards.Activatables.Presets
 
         public override string ToString(Game g)
         {
-            throw new NotImplementedException();
+            return DefinedPlayer.Value(g).ToString() + " gains " + Amount.ToString() + " life.";
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Sharpening2020.Attributes;
 using Sharpening2020.Input;
 
 using ProtoBuf;
@@ -8,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    [AttributeDoNotSaveCommand]
     class CommandResetTargets : CommandBase
     {
         [ProtoMember(1)]

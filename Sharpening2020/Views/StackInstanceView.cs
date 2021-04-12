@@ -8,10 +8,10 @@ namespace Sharpening2020.Views
     {
         public readonly String Text;
 
-        public StackInstanceView(StackInstance si)
+        public StackInstanceView(StackInstance si, Game g)
         {
             id = si.ID;
-            Text = si.MyActivatable.ToString();
+            Text = si.MyActivatable.ToString(g);
         }
     }
 }

@@ -38,10 +38,10 @@ namespace DbgUI
             }
 
             GameAction sel = FormRef.SelectedAction;
-            FormRef.Invoke((Action<List<GameAction>>)delegate (List<GameAction> act)
+            FormRef.Invoke((MethodInvoker)delegate 
             {
                 FormRef.Reset();
-            }, actions);
+            });
 
             return sel;
         }

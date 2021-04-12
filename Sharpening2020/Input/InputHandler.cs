@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
 using Sharpening2020.InputBridges;
 using Sharpening2020.Players;

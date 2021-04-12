@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\AttributeDoNotSaveCommand.cs" />
     <Compile Include="CardCompiler.cs" />
     <Compile Include="Cards\Activatables\Ability.cs" />
     <Compile Include="Cards\Activatables\Activatable.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="InputBridges\InputBridge.cs" />
     <Compile Include="InputBridges\NetworkBridge.cs" />
     <Compile Include="InputBridges\RandomPlayerBridge.cs" />
+    <Compile Include="InputNew\GameAction.cs" />
     <Compile Include="Input\GameAction.cs" />
     <Compile Include="Input\HavePriority.cs" />
     <Compile Include="Input\InputStateBase.cs" />

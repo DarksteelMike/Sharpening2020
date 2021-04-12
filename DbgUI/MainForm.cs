@@ -166,5 +166,32 @@ namespace DbgUI
         {
             model.MyExecutor.Redo();
         }
+
+        private void bReplay_Click(object sender, EventArgs e)
+        {
+            model = Game.Construct();
+            SetDebugFlags(model);
+
+            mf1 = new MatchForm(swLog, 0);
+            mf2 = new MatchForm(null, 1);
+            mf1.Text = "Player 1";
+            mf2.Text = "Player 2";
+            mf1.Show();
+            mf2.Show();
+
+            bridge1 = new UIBridge(mf1);
+            bridge2 = new UIBridge(mf2);
+            model.AssociateInputBridge(bridge1, 0);
+            model.AssociateInputBridge(bridge2, 1);
+
+            if (ofdLoadReplay.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream fs = File.OpenRead(ofdLoadReplay.FileName))
+                {
+                    model.MyExecutor.Replay(fs);
+                    fs.Close();
+                }
+            }
+        }
     }
 }

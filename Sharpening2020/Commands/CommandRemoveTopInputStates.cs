@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Sharpening2020.Attributes;
 using Sharpening2020.Input;
 
 using ProtoBuf;
@@ -9,6 +10,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    [AttributeDoNotSaveCommand]
     class CommandRemoveTopInputStates : CommandBase
     {
         [ProtoMember(1)]
