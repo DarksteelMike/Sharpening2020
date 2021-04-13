@@ -165,7 +165,6 @@
     <Compile Include="InputBridges\InputBridge.cs" />
     <Compile Include="InputBridges\NetworkBridge.cs" />
     <Compile Include="InputBridges\RandomPlayerBridge.cs" />
-    <Compile Include="InputNew\GameAction.cs" />
     <Compile Include="Input\GameAction.cs" />
     <Compile Include="Input\HavePriority.cs" />
     <Compile Include="Input\InputStateBase.cs" />
@@ -208,6 +207,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="InputNew\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

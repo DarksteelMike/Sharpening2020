@@ -23,7 +23,7 @@ namespace Sharpening2020.Input
 
         public abstract object Clone();
 
-        public abstract override String ToString();
+        public abstract String ToString(Game g);
 
         public virtual void Enter() { }
 

@@ -99,6 +99,7 @@ namespace Sharpening2020.Input
                     new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false, Mode),
                     new CommandResetManaCost(MyPlayer.ID),
                     new CommandRemoveTopInputStates(MyPlayer.ID, 3),
+                    new CommandSetHavePriorityState(MyPlayer.ID),
                     new CommandEnterInputState()));                
             }
             else
@@ -112,9 +113,9 @@ namespace Sharpening2020.Input
             return new PayManaCost(MyActivatable, Mode);
         }
 
-        public override string ToString()
+        public override string ToString(Game g)
         {
-            return "PayManaCost for " + MyActivatable.ToString();
+            return "PayManaCost for " + MyActivatable.ToString(g);
         }
     }
 }

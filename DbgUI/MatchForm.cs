@@ -170,12 +170,14 @@ namespace DbgUI
 
             if(view.ID == MainPlayer)
             {
+                grpPlayer1.Text = "Player 1 (" + view.ID + ")";
                 life = lblLife1;
                 counters = cbCounters1;
                 manapool = cbManaPool1;
             }
             else
             {
+                grpPlayer2.Text = "Player 1 (" + view.ID + ")";
                 life = lblLife2;
                 counters = cbCounters2;
                 manapool = cbManaPool2;

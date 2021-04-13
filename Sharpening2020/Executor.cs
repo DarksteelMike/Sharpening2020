@@ -66,7 +66,7 @@ namespace Sharpening2020
             if (!SuspendViewUpdates)
                 com.UpdateViews(MyGame);
 
-            if(triggerOnCommandTypes.Contains(com.GetType()))
+            if(triggerOnCommandTypes.Contains(com.GetType()) && !IsLoading)
             {
                 MyGame.MyTriggerHandler.GatherTriggers(com);
             }

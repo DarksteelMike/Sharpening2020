@@ -10,8 +10,6 @@ namespace Cards
     {
         public override void Build()
         {
-            AddUniversalCharacteristics(this);
-
             CardCharacteristics front = MyCharacteristics[CharacteristicName.Front];
 
             front.Name = "Llanowar Elves";

@@ -32,8 +32,8 @@ namespace Sharpening2020.Input
                 CurrentInputState.MyGame = MyGame;
                 CurrentInputState.MyBridge = Bridge;
                 CurrentInputState.MyPlayer = AssociatedPlayer;
-
-                MyGame.DebugAlert(DebugMode.InputStates, "Player " + AssociatedPlayer.ID + ": Added state \"" + value.ToString() + "\"");
+ 
+                MyGame.DebugAlert(DebugMode.InputStates, "Player " + AssociatedPlayer.ID + ": Added state \"" + value.ToString(MyGame) + "\"");
             }
         }
 
@@ -54,7 +54,7 @@ namespace Sharpening2020.Input
 
         public InputStateBase GetTopInput()
         {
-            return InputList.Last();
+            return InputList.Count == 0 ? bottomState : InputList.Last();
         }
 
         public void RemoveTopInput()

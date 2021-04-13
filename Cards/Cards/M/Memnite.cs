@@ -10,7 +10,6 @@ namespace Cards
     {
         public override void Build()
         {
-            Card.AddUniversalCharacteristics(this);
             CardCharacteristics Front = MyCharacteristics[CharacteristicName.Front];
 
             Front.Name = "Memnite";

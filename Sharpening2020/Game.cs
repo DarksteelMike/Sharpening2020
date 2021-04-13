@@ -109,7 +109,7 @@ namespace Sharpening2020
                     playerWithPriorityIndex += PlayerCount;
                 }
 
-                if(indexGrew)
+                if (indexGrew)
                 {
                     RunStateBasedActions();
                     MyContinuousEffects.RunContinuousEffects();
@@ -120,7 +120,7 @@ namespace Sharpening2020
                     PlayersPassedInSuccession = 0;
                     if (SpellStack.Count == 0)
                     {
-                        if(!MyExecutor.IsLoading)
+                        if (!MyExecutor.IsLoading)
                             MyExecutor.Do(new CommandAdvancePhase());
                     }
                     else
@@ -130,9 +130,19 @@ namespace Sharpening2020
                     }
                 }
 
-                if(MyTriggerHandler.WaitingTriggers.Count > 0)
+                if (MyTriggerHandler.WaitingTriggers.Count > 0)
                 {
+                    foreach(InputHandler ih in InputHandlers.Values)
+                    {
+                        if(ih.GetTopInput() is HavePriority)
+                        {
+                            MyExecutor.Do(new CommandRemoveTopInputStates(ih.AssociatedPlayer.ID));
+                        }
+                    }
+                    MyExecutor.Do(new CommandSetHavePriorityState(PlayerWithPriority.ID));
                     MyTriggerHandler.RunTriggers();
+
+
                 }
                 else
                 {
@@ -145,6 +155,7 @@ namespace Sharpening2020
                     }
                     MyExecutor.Do(new CommandGroup(new CommandSetHavePriorityState(PlayerWithPriority.ID),
                         new CommandEnterInputState()));
+
                 }
             }
         }

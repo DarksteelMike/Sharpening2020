@@ -41,9 +41,10 @@ namespace Sharpening2020.Cards.Triggers
         }
 
         public void DoTrigger(Game g)
-        {
+        { 
             if(myAbility != null)
             {
+                g.DebugAlert(DebugMode.Triggers, "Triggering for player ID " + host.Value(g).Controller.ID);
                 CommandBase com = new CommandGroup(
                     new CommandMarker(CommandMarkerType.StartActivating),
                     new CommandSetIsActivating(host.ID, host.Value(g).CurrentCharacteristics.Triggers.IndexOf(this), true, AbilityType.Trigger),

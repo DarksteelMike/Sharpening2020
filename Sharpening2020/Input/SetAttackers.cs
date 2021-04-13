@@ -84,7 +84,7 @@ namespace Sharpening2020.Input
             return new SetAttackers();
         }
 
-        public override string ToString()
+        public override string ToString(Game g)
         {
             return "SetAttackers";
         }

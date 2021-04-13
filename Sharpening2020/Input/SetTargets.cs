@@ -96,9 +96,9 @@ namespace Sharpening2020.Input
             return new SetTargets(MyActivatable, ActType);
         }
 
-        public override string ToString()
+        public override string ToString(Game g)
         {
-            return "SetTarget for " + MyActivatable.ToString();
+            return "SetTarget for " + MyActivatable.ToString(g);
         }
     }
 }

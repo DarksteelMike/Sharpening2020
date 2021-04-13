@@ -91,7 +91,7 @@ namespace Sharpening2020.Input
             return new SetBlockers();
         }
 
-        public override string ToString()
+        public override string ToString(Game g)
         {
             return "SetBlockers";
         }

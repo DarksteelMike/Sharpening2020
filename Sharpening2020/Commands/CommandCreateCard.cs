@@ -32,6 +32,7 @@ namespace Sharpening2020.Commands
 
             c.Owner = new LazyGameObject<Player>(PlayerID);
 
+            Card.AddUniversalCharacteristics(c);
             c.Build();
 
             c.Owner.Value(g).MyZones[ZoneType.Library].Contents.Add(new LazyGameObject<Card>(c));

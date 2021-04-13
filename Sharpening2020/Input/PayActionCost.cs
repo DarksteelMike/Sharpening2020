@@ -105,9 +105,9 @@ namespace Sharpening2020.Input
             return pac;
         }
 
-        public override string ToString()
+        public override string ToString(Game g)
         {
-            return "PayActionCost for " + MyActivatable.ToString();
+            return "PayActionCost for " + MyActivatable.ToString(g);
         }
     }
 }
