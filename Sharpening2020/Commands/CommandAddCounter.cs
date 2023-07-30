@@ -9,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //Adds a specific type of counter to a specific object.
     class CommandAddCounter : CommandBase
     {
         [ProtoMember(1)]

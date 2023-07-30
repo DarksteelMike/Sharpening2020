@@ -7,6 +7,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command removes all static continuous effects from the game.
     class CommandClearStaticContinuousEffects : CommandBase
     {
         public override void Do(Game g)

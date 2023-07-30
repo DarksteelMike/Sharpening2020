@@ -11,6 +11,7 @@ namespace Sharpening2020.Commands
 {
     [ProtoContract]
     [AttributeDoNotSaveCommand]
+    //This command sets a specific player's input state to paying the action cost (such as tapping or sacrificing) of a specific ability of a specific card.
     class CommandSetPayActionCostState : CommandBase
     {
         [ProtoMember(1)]

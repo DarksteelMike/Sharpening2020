@@ -9,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command makes a specific player lose a specific amount of life.
     class CommandLoseLife : CommandBase
     {
         [ProtoMember(1)]

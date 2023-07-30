@@ -13,6 +13,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command shuffles the library of a specific player with a specific random seed.
     class CommandShuffleLibrary : CommandBase
     {
         [ProtoMember(1)]
@@ -31,11 +32,7 @@ namespace Sharpening2020.Commands
         public override void Do(Game g)
         {
             Zone lib = Player.Value(g).MyZones[ZoneType.Library];
-            originalOrder = new List<LazyGameObject<Card>>();
-            foreach (LazyGameObject<Card> lgo in lib.Contents)
-            {
-                originalOrder.Add(lgo);
-            }
+            originalOrder = new List<LazyGameObject<Card>>(lib.Contents);
 
             Random rng = new Random(Seed);
 

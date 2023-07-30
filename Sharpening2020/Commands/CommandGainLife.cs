@@ -9,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command causes a specific player to gain a specific amount of life.
     class CommandGainLife : CommandBase
     {
         [ProtoMember(1)]

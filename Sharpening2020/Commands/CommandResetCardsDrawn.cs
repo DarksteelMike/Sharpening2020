@@ -7,6 +7,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command resets the number of cards a specific player has drawn.
     class CommandResetCardsDrawn : CommandBase
     {
         [ProtoMember(1)]

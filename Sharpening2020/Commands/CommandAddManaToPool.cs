@@ -10,6 +10,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //Adds mana of a specific color to a specific player's mana pool.
     class CommandAddManaToPool : CommandBase
     {
         [ProtoMember(1)]

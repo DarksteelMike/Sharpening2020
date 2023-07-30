@@ -7,6 +7,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command increments the amount of lands a specific player has played.
     class CommandIncrementLandsPlayed : CommandBase
     {
         [ProtoMember(1)]

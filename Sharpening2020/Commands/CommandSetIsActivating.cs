@@ -9,6 +9,7 @@ namespace Sharpening2020.Commands
 {
     [ProtoContract]
     [AttributeDoNotSaveCommand]
+    //This command sets a specific card's specific activatable's state of being activated to true or false.
     class CommandSetIsActivating : CommandBase
     {
         [ProtoMember(1)]

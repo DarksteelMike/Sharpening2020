@@ -10,6 +10,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command uses a specific manapoint in a specific player's mana pool to pay a specific manacostpart.
     class CommandPayMana : CommandBase
     {
         [ProtoMember(1)]

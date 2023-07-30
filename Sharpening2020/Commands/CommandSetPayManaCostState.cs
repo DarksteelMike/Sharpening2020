@@ -11,6 +11,7 @@ namespace Sharpening2020.Commands
 {
     [ProtoContract]
     [AttributeDoNotSaveCommand]
+    //This command sets a specific player's input state to paying the manacost for a specific activatable of a specific card.
     class CommandSetPayManaCostState : CommandBase
     {
         [ProtoMember(1)]

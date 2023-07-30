@@ -3,6 +3,7 @@
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command increments the active player index.
     class CommandIncrementActivePlayerIndex : CommandBase
     {
         public override void Do(Game g)

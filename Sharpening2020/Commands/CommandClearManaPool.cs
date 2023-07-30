@@ -9,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command clears a specific player's mana pool.
     class CommandClearManaPool : CommandBase
     {
         [ProtoMember(1)]

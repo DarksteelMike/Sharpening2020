@@ -9,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command reads in a card script, compiles it and builds an object of the named card, owned by a specific player.
     class CommandCreateCard : CommandBase
     {
         [ProtoMember(1)]

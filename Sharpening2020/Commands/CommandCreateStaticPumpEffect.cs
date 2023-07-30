@@ -7,6 +7,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command creates a continous effect that pumps power and toughness of a specific card by a specific amount.
     class CommandCreateStaticPumpEffect : CommandBase
     {
         [ProtoMember(1)]
@@ -27,7 +28,7 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            g.MyContinuousEffects.StaticEffects.Add(new PumpPT(CardID, Power, Toughness,g.NextTimeStamp++));
+            g.MyContinuousEffects.StaticEffects.Add(new PumpPT(CardID, Power, Toughness, g.NextTimeStamp++));
         }
 
         public override void Undo(Game g)

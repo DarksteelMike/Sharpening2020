@@ -7,6 +7,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command sets the face up side of a specific card to a specific side.
     class CommandSetCardState : CommandBase
     {
         [ProtoMember(1)]

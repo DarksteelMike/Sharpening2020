@@ -9,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command makes a specific player draw a card.
     class CommandDrawCard : CommandBase
     {
         [ProtoMember(1)]
@@ -26,14 +27,14 @@ namespace Sharpening2020.Commands
             Player p = Player.Value(g);
 
             if (p.MyZones[ZoneType.Library].Contents.Count == 0)
-                return; //TEMPORARY
+                return; //TODO: Set a flag to lose the game at next continuous effects check.
 
             LazyGameObject<Card> TopCard = p.MyZones[ZoneType.Library].Contents[0];
 
             p.CardsDrawnThisTurn++;
 
-            g.MyExecutor.Do(new CommandSetCardState(TopCard.ID, CharacteristicName.Front));
-            g.MyExecutor.Do(new CommandMoveCard(TopCard.ID, ZoneType.Hand));
+            g.MyExecutor.Do(new CommandSetCardState(TopCard.ID, CharacteristicName.Front),
+                            new CommandMoveCard(TopCard.ID, ZoneType.Hand));
         }
 
         public override void Undo(Game g)

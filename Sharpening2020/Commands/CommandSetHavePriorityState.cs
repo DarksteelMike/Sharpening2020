@@ -9,6 +9,7 @@ namespace Sharpening2020.Commands
 {
     [ProtoContract]
     [AttributeDoNotSaveCommand]
+    //This command set's a specific player's input state to "Have Priority".
     public class CommandSetHavePriorityState : CommandBase
     {
         [ProtoMember(1)]

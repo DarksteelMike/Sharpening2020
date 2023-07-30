@@ -10,6 +10,7 @@ namespace Sharpening2020.Commands
 {
     [ProtoContract]
     [AttributeDoNotSaveCommand]
+    //This command clears the targets from the currently targeting activatable.
     class CommandResetTargets : CommandBase
     {
         [ProtoMember(1)]

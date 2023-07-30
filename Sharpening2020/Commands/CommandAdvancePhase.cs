@@ -3,6 +3,7 @@
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command advances the game to the next phase/step.
     public class CommandAdvancePhase : CommandBase
     {
         public override void Do(Game g)

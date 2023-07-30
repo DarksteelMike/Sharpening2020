@@ -10,6 +10,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command removes a counter from a card or player.
     class CommandRemoveCounter : CommandBase
     {
         [ProtoMember(1)]

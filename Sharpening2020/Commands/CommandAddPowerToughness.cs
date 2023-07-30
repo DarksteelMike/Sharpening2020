@@ -9,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command adds specific values to a specific card's power and toughness.
     public class CommandAddPowerToughness : CommandBase
     {
         [ProtoMember(1)]

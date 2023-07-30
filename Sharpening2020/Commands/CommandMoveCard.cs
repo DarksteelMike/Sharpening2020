@@ -12,6 +12,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command moves a specific card to a specific zone.
     public class CommandMoveCard : CommandBase
     {
         [ProtoMember(1)]

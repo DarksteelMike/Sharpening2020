@@ -7,6 +7,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command resolves the top of the stack and runs continuous effects.
     class CommandResolveTopOfStack : CommandBase
     {
         public override void Do(Game g)

@@ -11,6 +11,7 @@ namespace Sharpening2020.Commands
 {
     [ProtoContract]
     [AttributeDoNotSaveCommand]
+    //Sets a specific player's input state to targeting for a specific activatable of a specific card.
     class CommandSetTargetState : CommandBase
     {
         [ProtoMember(1)]

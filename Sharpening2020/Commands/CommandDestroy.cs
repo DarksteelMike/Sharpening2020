@@ -12,6 +12,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //For the sake of triggers, this command destroys a card, basically just moving it to the graveyard.
     class CommandDestroy : CommandBase
     {
         [ProtoMember(1)]
@@ -26,24 +27,12 @@ namespace Sharpening2020.Commands
 
         public override void Do(Game g)
         {
-            Card c = CardID.Value(g);
-
-            Player owner = c.Owner.Value(g);
-
-            Zone orig = g.GetZoneOf(CardID);
-            Zone dest = owner.MyZones[ZoneType.Graveyard];
-
-            orig.Contents.Remove(CardID);
-            dest.Contents.Add(CardID);
+            g.MyExecutor.Do(new CommandMoveCard(CardID.ID, ZoneType.Graveyard));
         }
 
         public override void Undo(Game g)
         {
-            Zone orig = g.GetZoneOf(CardID);
-            Zone dest = CardID.Value(g).Owner.Value(g).MyZones[ZoneType.Graveyard];
-
-            dest.Contents.Remove(CardID);
-            orig.Contents.Add(CardID);
+            //No need to undo anything here, as the move will already have been undone.
         }
 
         public override object Clone()

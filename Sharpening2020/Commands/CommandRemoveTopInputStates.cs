@@ -11,6 +11,7 @@ namespace Sharpening2020.Commands
 {
     [ProtoContract]
     [AttributeDoNotSaveCommand]
+    //This command removes the top X input states of a specific player.
     class CommandRemoveTopInputStates : CommandBase
     {
         [ProtoMember(1)]

@@ -7,6 +7,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //For the sake of triggers, this command deals a specific amount of damage to a specific game object in the appropriate way.
     class CommandDealDamage : CommandBase
     {
         [ProtoMember(1)]
@@ -33,6 +34,10 @@ namespace Sharpening2020.Commands
                 if(c.CurrentCharacteristics.CardTypes.Contains("Planeswalker"))
                 {
                     g.MyExecutor.Do(new CommandRemoveCounter(TargetID, CounterType.Loyalty, Amount));
+                }
+                else if(c.CurrentCharacteristics.CardTypes.Contains("Battle"))
+                {
+                    g.MyExecutor.Do(new CommandRemoveCounter(TargetID, CounterType.Defense, Amount));
                 }
                 else
                 {

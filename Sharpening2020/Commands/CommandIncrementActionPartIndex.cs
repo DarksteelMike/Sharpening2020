@@ -7,6 +7,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command increments the index of the action cost part currently being paid.
     class CommandIncrementActionPartIndex : CommandBase
     {
         [ProtoMember(1)]

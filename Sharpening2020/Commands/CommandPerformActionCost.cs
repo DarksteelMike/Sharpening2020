@@ -9,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command performs a specific action cost of a specific activatable of a specific card.
     class CommandPerformActionCost : CommandBase
     {
         [ProtoMember(1)]

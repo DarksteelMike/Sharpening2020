@@ -8,15 +8,11 @@ namespace Sharpening2020.Commands
 {
     [ProtoContract]
     [AttributeDoNotSaveCommand]
+    //This command makes all players Enter() their current input state.
     class CommandEnterInputState : CommandBase
     {
         public override void Do(Game g)
         {
-            if(g.MyExecutor.IsLoading)
-            {
-                return;
-            }
-
             foreach(InputHandler ih in g.InputHandlers.Values)
             {
                 if(ih.CurrentInputState is WaitingForOpponent)

@@ -9,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command puts a specific activatable of a specific card on the stack.
     class CommandPutOnStack : CommandBase
     {
         [ProtoMember(1)]
@@ -37,7 +38,7 @@ namespace Sharpening2020.Commands
             }
             else if(Mode == AbilityType.Replacement)
             {
-
+                //TODO?
             }
             else
             {

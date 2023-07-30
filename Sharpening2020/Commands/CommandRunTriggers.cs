@@ -5,6 +5,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command runs triggers. TODO: Is this even necessary?
     class CommandRunTriggers : CommandBase
     {
         public override void Do(Game g)

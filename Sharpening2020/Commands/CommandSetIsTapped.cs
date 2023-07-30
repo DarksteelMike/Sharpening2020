@@ -9,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command sets a specific card's Tapped state to true or false.
     public class CommandSetIsTapped : CommandBase
     {
         [ProtoMember(1)]

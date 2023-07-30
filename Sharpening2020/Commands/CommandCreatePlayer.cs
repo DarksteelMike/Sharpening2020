@@ -7,6 +7,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command adds a player to the game.
     class CommandCreatePlayer : CommandBase
     {
         public override void Do(Game g)

@@ -8,6 +8,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command adds a specific target to the activatable.
     class CommandAddTarget : CommandBase
     {
         [ProtoMember(1)]

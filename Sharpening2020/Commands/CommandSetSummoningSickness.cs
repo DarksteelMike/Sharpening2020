@@ -9,6 +9,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command sets the summoning sickness of a card to true or false.
     class CommandSetSummoningSickness : CommandBase
     {
         [ProtoMember(1)]

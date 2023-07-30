@@ -7,6 +7,7 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command resets the number of lands a specific player has played.
     class CommandResetLandsPlayed : CommandBase
     {
         [ProtoMember(1)]

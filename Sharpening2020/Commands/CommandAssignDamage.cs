@@ -7,6 +7,7 @@ using Sharpening2020.Cards;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
+    //This command assigns damage to a creature card.
     class CommandAssignDamage : CommandBase
     {
         [ProtoMember(1)]

@@ -9,6 +9,7 @@ namespace Sharpening2020.Commands
 {
     [Serializable]
     [AttributeDoNotSaveCommand]
+    //Sets the input state of a specific player to "Waiting for opponent...".
     class CommandSetWaitingForOpponentsState : CommandBase
     {
         public readonly Int32 PlayerID;

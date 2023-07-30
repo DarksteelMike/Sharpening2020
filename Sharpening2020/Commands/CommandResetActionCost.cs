@@ -11,6 +11,7 @@ namespace Sharpening2020.Commands
 {
     [ProtoContract]
     [AttributeDoNotSaveCommand]
+    //This command resets the paid action costs of the current activatable.
     class CommandResetActionCost : CommandBase
     {
         [ProtoMember(1)]

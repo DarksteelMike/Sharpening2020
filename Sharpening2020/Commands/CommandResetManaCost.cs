@@ -10,7 +10,8 @@ using ProtoBuf;
 namespace Sharpening2020.Commands
 {
     [ProtoContract]
-    [AttributeDoNotSaveCommand]
+    [AttributeDoNotSaveCommand]    
+    //This command clears the targets from the currently targeting activatable.
     class CommandResetManaCost : CommandBase
     {
         [ProtoMember(1)]
