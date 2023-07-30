@@ -128,7 +128,7 @@ namespace Sharpening2020
             
             foreach(CommandBase com in stack)
             {
-                if(true)//Attribute.GetCustomAttribute(com.GetType(),typeof(AttributeDoNotSaveCommand)) == null)
+                if(Attribute.GetCustomAttribute(com.GetType(),typeof(AttributeDoNotSaveCommand)) == null)
                 {
                     res.Add(com);
                 }/*
@@ -168,8 +168,10 @@ namespace Sharpening2020
             foreach (CommandBase com in coms)
             {
                 Do(com);
+
+                com.UpdateViews(MyGame);
                 
-                System.Threading.Thread.Sleep(250);
+                //System.Threading.Thread.Sleep(250);
 
             }
 

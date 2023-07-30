@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using Sharpening2020.Cards;
+using Sharpening2020.Commands;
+using Sharpening2020.Zones;
 
 namespace Sharpening2020.Phases
 {
@@ -11,7 +12,10 @@ namespace Sharpening2020.Phases
         public override PhaseType MyType { get { return PhaseType.Upkeep; } }
         public override void DoPhaseEffects(Game g)
         {
-
+            foreach (Card c in g.GetCards(ZoneType.Battlefield, g.ActivePlayer).Where(x => x.HasSummoningSickness))
+            {
+                g.MyExecutor.Do(new CommandSetSummoningSickness(c.ID, false));
+            }
         }
     }
 }
