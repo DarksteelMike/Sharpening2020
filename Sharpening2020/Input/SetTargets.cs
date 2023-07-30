@@ -39,9 +39,9 @@ namespace Sharpening2020.Input
 
         private void MoveToActionPayment()
         {
-            MyGame.MyExecutor.Do(new CommandGroup(new CommandResetTargets(MyPlayer.ID),
+            MyGame.MyExecutor.Do(new CommandResetTargets(MyPlayer.ID),
                 new CommandSetPayActionCostState(MyPlayer.ID, MyActivatable.Host.ID, activatableIndex, ActType),
-                new CommandEnterInputState()));
+                new CommandEnterInputState());
         }
 
         public void PromptAndRequestAction()

@@ -37,10 +37,9 @@ namespace Sharpening2020.Input
             if (MyActivatable.MyCost.IsManaPaid())
             {
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame), Mode);
-                MyGame.MyExecutor.Do(new CommandGroup(
-                    new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false, Mode), 
-                    new CommandRemoveTopInputStates(MyPlayer.ID,3),
-                    new CommandEnterInputState()));
+                MyGame.MyExecutor.Do(new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false, Mode), 
+                                     new CommandRemoveTopInputStates(MyPlayer.ID,3),
+                                     new CommandEnterInputState());
             }
             else
             {
@@ -95,12 +94,11 @@ namespace Sharpening2020.Input
             if(MyActivatable.MyCost.IsManaPaid())
             {
                 MyGame.PlayActivatable(MyActivatable, MyPlayer.Value(MyGame), Mode);
-                MyGame.MyExecutor.Do(new CommandGroup(
-                    new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false, Mode),
-                    new CommandResetManaCost(MyPlayer.ID),
-                    new CommandRemoveTopInputStates(MyPlayer.ID, 3),
-                    new CommandSetHavePriorityState(MyPlayer.ID),
-                    new CommandEnterInputState()));                
+                MyGame.MyExecutor.Do(new CommandSetIsActivating(MyActivatable.Host.ID, activatableIndex, false, Mode),
+                                     new CommandResetManaCost(MyPlayer.ID),
+                                     new CommandRemoveTopInputStates(MyPlayer.ID, 3),
+                                     new CommandSetHavePriorityState(MyPlayer.ID),
+                                     new CommandEnterInputState());                
             }
             else
             {

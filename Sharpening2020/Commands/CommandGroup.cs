@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace Sharpening2020.Commands
 {
     [Serializable]
-    class CommandGroup : CommandBase
+    class CommandGroup2 : CommandBase
     {
         private readonly IReadOnlyList<CommandBase> SubCommands;
 
-        public CommandGroup(params CommandBase[] coms)
+        public CommandGroup2(params CommandBase[] coms)
         {
             List<CommandBase> subs = new List<CommandBase>();
 
@@ -35,7 +35,7 @@ namespace Sharpening2020.Commands
 
         public override object Clone()
         {
-            return new CommandGroup(SubCommands.Select(x => { return (CommandBase)x.Clone(); }).ToArray());
+            return new CommandGroup2(SubCommands.Select(x => { return (CommandBase)x.Clone(); }).ToArray());
         }
     }
 }

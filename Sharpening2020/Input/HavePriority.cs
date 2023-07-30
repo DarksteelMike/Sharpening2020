@@ -39,7 +39,7 @@ namespace Sharpening2020.Input
                 CommandBase com;
                 if(act is Spell)
                 {
-                    com = new CommandGroup(
+                    com = new CommandGroup2(
                     new CommandMarker(CommandMarkerType.StartActivating),
                     new CommandMoveCard(act.Host.ID, ZoneType.Stack),
                     new CommandSetIsActivating(act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act), true, AbilityType.Activatable),
@@ -48,7 +48,7 @@ namespace Sharpening2020.Input
                 }
                 else
                 {
-                    com = new CommandGroup(
+                    com = new CommandGroup2(
                     new CommandMarker(CommandMarkerType.StartActivating),
                     new CommandSetIsActivating(act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act), true, AbilityType.Activatable),
                     new CommandSetTargetState(MyPlayer.ID, act.Host.ID, act.Host.Value(MyGame).CurrentCharacteristics.Activatables.IndexOf(act), AbilityType.Activatable),

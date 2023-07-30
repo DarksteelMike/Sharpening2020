@@ -153,8 +153,8 @@ namespace Sharpening2020
                             MyExecutor.Do(new CommandClearInputList(p.ID));
                         }
                     }
-                    MyExecutor.Do(new CommandGroup(new CommandSetHavePriorityState(PlayerWithPriority.ID),
-                        new CommandEnterInputState()));
+                    MyExecutor.Do(new CommandSetHavePriorityState(PlayerWithPriority.ID),
+                        new CommandEnterInputState());
 
                 }
             }
@@ -430,8 +430,8 @@ namespace Sharpening2020
 
             UpdateAllViews();
             
-            MyExecutor.Do(new CommandGroup(new CommandSetHavePriorityState(ActivePlayer.ID),
-                new CommandEnterInputState()));
+            MyExecutor.Do(new CommandSetHavePriorityState(ActivePlayer.ID),
+                          new CommandEnterInputState());
         }
 
         public void UpdateAllViews()

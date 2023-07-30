@@ -11,8 +11,8 @@ namespace Sharpening2020.Phases
         {
             foreach (Player p in g.GetPlayers())
             {
-                g.MyExecutor.Do(new CommandGroup(new CommandResetCardsDrawn(p.ID),
-                    new CommandResetLandsPlayed(p.ID)));
+                g.MyExecutor.Do(new CommandResetCardsDrawn(p.ID),
+                    new CommandResetLandsPlayed(p.ID));
             }
 
             if(g.MyContinuousEffects.StaticEffects.Count > 0)

@@ -18,9 +18,8 @@ namespace Sharpening2020.Phases
                 sb.PromptAndRequestAction();
             }
 
-            g.MyExecutor.Do(new CommandGroup(
-                new CommandRemoveTopInputStates(g.ActivePlayer.ID),
-                new CommandAdvancePhase()));
+            g.MyExecutor.Do(new CommandRemoveTopInputStates(g.ActivePlayer.ID),
+                new CommandAdvancePhase());
         }
     }
 }

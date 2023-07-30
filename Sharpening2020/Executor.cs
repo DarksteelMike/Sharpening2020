@@ -52,11 +52,19 @@ namespace Sharpening2020
             doNotSaveTypes.Add(typeof(CommandSetWaitingForOpponentsState));
         }
 
+        public void Do(params CommandBase[] coms)
+        {
+            foreach(CommandBase cb in coms)
+            {
+                Do(cb);
+            }
+        }
+
         public void Do(CommandBase com)
         {
             MyGame.DebugAlert(DebugMode.Commands, "Doing " + com.ToString(MyGame));
 
-            if(!(com is CommandGroup))
+            if(!(com is CommandGroup2))
             {
                 UndoStack.Push(com);
             }
